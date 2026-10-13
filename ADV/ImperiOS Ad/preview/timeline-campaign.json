@@ -1,0 +1,6 @@
+{
+  "fps": 60,
+  "duration": 25.0,
+  "beats": { "hook": 1.9, "s1": 2.5, "s2": 5.2, "s3": 8.5, "s4": 11.9, "s5": 14.7, "s6": 18.2, "logo": 20.5, "cta": 22.4, "end": 25.0 },
+  "note": "Versión de campaña: gancho de 1,9 s (variantes A/B/C) + cuerpo de la v1 + llamada a la acción. Tiempos provisionales sin VO."
+}

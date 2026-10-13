@@ -2,3 +2,6 @@ node_modules
 ADV/ImperiOS Ad/preview/out/audio/premix.wav
 ADV/ImperiOS Ad/preview/out/audio/mix_premaster.wav
 ADV/ImperiOS Ad/preview/out/*_silent.mp4
+ADV/ImperiOS Ad/preview/out/campaign/_*
+ADV/ImperiOS Ad/preview/out/campaign/audio/premix.wav
+ADV/ImperiOS Ad/preview/out/campaign/audio/mix_premaster.wav

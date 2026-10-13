@@ -51,6 +51,8 @@ body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-s
 .slot { border-radius: 14px; background: var(--ink-200); }
 .ring { position: absolute; width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--ink-700); display: grid; place-items: center; }
 #px { position: absolute; background: var(--y); border-radius: 6px; z-index: 50; }
+.hc { font-size: 34px; padding: 22px 34px; display: flex; align-items: center; gap: 14px; color: var(--ink-700); }
+.bdg { display: inline-grid; place-items: center; min-width: 40px; height: 40px; padding: 0 10px; border-radius: 20px; background: var(--ink-950); color: var(--y); font-size: 22px; font-weight: 800; }
 </style>
 </head>
 <body>
@@ -66,6 +68,18 @@ body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-s
     <div class="full grid-d" id="dgrid"></div>
     <div class="abs" id="dglowA" style="width:760px;height:760px;border-radius:50%;background:radial-gradient(circle at 35% 65%, rgba(255,213,0,.30), rgba(255,213,0,.06) 60%, transparent 70%)"></div>
     <div class="full vig-d"></div>
+  </div>
+
+  <!-- GANCHO DE CAMPAÑA (solo si B.hook > 0) -->
+  <div class="scene" id="scH" style="display:none">
+    <div class="abs" id="hTag" style="left:96px;top:420px;transform-origin:0 50%"><span class="tag" style="background:var(--ink-950);color:#fff"><span style="width:12px;height:14px;background:var(--y);border-radius:2px"></span>CRM PARA INMOBILIARIAS</span></div>
+    <div class="kt" id="ktH" style="top:520px;font-size:92px;line-height:1.08"></div>
+    <div class="chip hc" style="left:90px;top:1120px">Portales<span class="bdg">3</span></div>
+    <div class="chip hc" style="left:560px;top:1060px">WhatsApp<span class="bdg">12</span></div>
+    <div class="chip hc" style="left:380px;top:1260px">Excel</div>
+    <div class="chip hc" style="left:120px;top:1400px">Email<span class="bdg">7</span></div>
+    <div class="chip hc" style="left:620px;top:1360px">Llamadas</div>
+    <div class="chip hc" style="left:330px;top:1520px">Web<span class="bdg">+1</span></div>
   </div>
 
   <!-- HOOK -->
@@ -211,6 +225,11 @@ body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-s
   <!-- LOGO -->
   <div class="scene" id="sc7">
     <img id="logo" src="logo-noaccent.svg" class="abs" style="left:150px;top:780px;width:780px" alt="">
+    <div class="abs" id="ctaBtn" style="left:0;right:0;top:1060px;display:none;text-align:center">
+      <span style="position:relative;display:inline-flex;align-items:center;gap:22px;padding:34px 60px;border-radius:999px;background:var(--y);color:var(--ink-950);font-weight:800;font-size:50px;letter-spacing:-.01em;box-shadow:0 20px 50px rgba(255,213,0,.35)">
+        <span id="ctaLbl">Pide tu demo</span><svg id="ctaArr" width="44" height="44" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#0A0A0A" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span id="ctaRing" style="position:absolute;inset:-4px;border-radius:999px;border:3px solid var(--y)"></span></span>
+    </div>
     <div class="abs" id="cta" style="left:0;right:0;top:1150px;text-align:center;font-weight:700;font-size:34px;letter-spacing:.2em;color:var(--ink-700)">IMPERIOS.APP ↗</div>
   </div>
 
@@ -238,6 +257,13 @@ const tf = (el, s) => { el.style.transform = s; };
 
 let B = { hook: 0, s1: 0.6, s2: 3.3, s3: 6.6, s4: 10.0, s5: 12.8, s6: 16.3, logo: 18.6, end: 21.0 };
 window.setBeats = b => { B = Object.assign(B, b); };
+const HOOKS = {
+  A: ['¿Tus', 'leads', 'se', 'pierden', 'entre', 'portales,', 'WhatsApp', 'y', 'Excel?'],
+  B: ['¿Cuántos', 'clientes', 'se', 'te', 'escapan', 'cada', 'mes?'],
+  C: ['Toda', 'tu', 'inmobiliaria,', 'en', 'un', 'solo', 'panel.'],
+};
+let WH = [];
+window.setVariant = v => { const el = document.querySelector('#ktH'); el.innerHTML = ''; WH = words(el, [HOOKS[v].map(w => [w])]); };
 
 // ---------- kinetic type ----------
 function words(el, lines) {
@@ -267,6 +293,7 @@ function exitBlock(el, t, t0, dur = .32) {
 }
 const rectOf = el => { const r = el.getBoundingClientRect(); return { x: r.left, y: r.top, w: r.width, h: r.height }; };
 
+window.setVariant('A');
 const W1 = words($('#kt1'), [[['Tus'], ['contactos'], ['llegan'], ['de'], ['portales,']], [['campañas'], ['y'], ['tu'], ['web.']]]);
 const W2 = words($('#kt2'), [[['Todos'], ['entran'], ['en'], ['un'], ['solo'], ['panel,']], [['y'], ['ves'], ['qué'], ['campaña'], ['funciona.']]]);
 const W3 = words($('#kt3'), [[['zona'], ['·'], ['tipo'], ['·']], [['presupuesto']]]);
@@ -314,18 +341,42 @@ function render(t) {
   const dg = $('#dglowA');
   css(dg, { left: (580 + Math.sin(t * .6) * 40) + 'px', top: (-220 + Math.cos(t * .5) * 30) + 'px' });
 
+  const th = t - B.hook, camp = B.hook > 0;
   // brillo claro (hook + logo)
   const lg = $('#lglow');
-  const lgOn = Math.max(1 - k(t, .7, 1.6), k(t, B.logo + .2, B.logo + 1.0)) * (t > B.s5 ? .7 : 1);
+  const lgOn = Math.max(camp && th < 0 ? 0 : 1 - k(th, .7, 1.6), k(t, B.logo + .2, B.logo + 1.0)) * (t > B.s5 ? .7 : 1);
   css(lg, { left: (40 + Math.sin(t * .4) * 30) + 'px', top: (430 + Math.cos(t * .35) * 30) + 'px', opacity: lgOn });
 
   // ---- HOOK ----
-  const ign = k(t, 0, .9, E.oc);
+  const ign = k(th, 0, .9, E.oc);
   const mask = `radial-gradient(circle at 50% 48%, #000 0, #000 ${ign * 900}px, transparent ${ign * 900 + 500}px)`;
-  css($('#lgrid'), { webkitMaskImage: t < 1.2 ? mask : 'none', maskImage: t < 1.2 ? mask : 'none' });
-  const rp1 = k(t, .32, 1.0, E.oe), rp2 = k(t, .4, 1.2, E.oe);
-  css($('#ring1'), { opacity: (1 - rp1) * (t > .32 ? 1 : 0), transform: `scale(${.3 + rp1 * .9})` });
-  css($('#ring2'), { opacity: (1 - rp2) * (t > .4 ? .9 : 0), transform: `scale(${.3 + rp2 * 1.1})` });
+  const useMask = !camp && th < 1.2;
+  css($('#lgrid'), { webkitMaskImage: useMask ? mask : 'none', maskImage: useMask ? mask : 'none' });
+  const rp1 = k(th, .32, 1.0, E.oe), rp2 = k(th, .4, 1.2, E.oe);
+  css($('#ring1'), { opacity: (1 - rp1) * (th > .32 ? 1 : 0), transform: `scale(${.3 + rp1 * .9})` });
+  css($('#ring2'), { opacity: (1 - rp2) * (th > .4 ? .9 : 0), transform: `scale(${.3 + rp2 * 1.1})` });
+
+  // ---- GANCHO DE CAMPAÑA: del caos al pixel ----
+  const scH = $('#scH');
+  scH.style.display = camp && t < B.hook + .1 ? 'block' : 'none';
+  if (scH.style.display === 'block') {
+    const col = k(t, B.hook - .55, B.hook, E.ic);   // colapso hacia el centro
+    const tg = k(t, 0, .3, E.ob2);
+    css($('#hTag'), { opacity: k(t, 0, .1) * (1 - col), transform: `scale(${.5 + .5 * tg}) translateY(${-col * 40}px)`, filter: col > 0 ? `blur(${col * 10}px)` : 'none' });
+    const n = WH.length;
+    revealWords(WH, t, WH.map((_, i) => .08 + i * (.75 / n)), .3);
+    if (col > 0) exitBlock($('#ktH'), t, B.hook - .55, .5); else css($('#ktH'), { opacity: 1, transform: 'none', filter: 'none' });
+    $$('#scH .hc').forEach((c, i) => {
+      const t0 = .1 + i * .09, p = k(t, t0, t0 + .35, E.ob2);
+      const jx = Math.sin(t * 9 + i * 2.1) * 6 * (1 - col), jy = Math.cos(t * 7 + i * 1.3) * 5 * (1 - col);
+      const r0 = { x: parseFloat(c.style.left) + 120, y: parseFloat(c.style.top) + 40 };
+      const dx = col * (540 - r0.x), dy = col * (960 - r0.y);
+      const rot = ((i % 2 ? 1 : -1) * (4 + i)) * (1 - col);
+      const depth = [0, 2, 4, 1, 3, 5][i];
+      const bl = depth * (1 - col) + col * 10;
+      css(c, { opacity: k(t, t0, t0 + .08) * (1 - col * .9), transform: `translate(${dx + jx}px,${dy + jy}px) rotate(${rot}deg) scale(${(.6 + .4 * p) * (1 - col * .85) * (1 - depth * .03)})`, filter: bl > .2 ? `blur(${bl}px)` : 'none' });
+    });
+  }
 
   // ---- S1 ----
   const s1 = t - B.s1, sc1 = $('#sc1');
@@ -521,13 +572,13 @@ function render(t) {
   // ---- PIXEL: hilo conductor ----
   const px = $('#px');
   const LOGO = { x: 150 + 107 * 780 / 1280, y: 780 + 40 * 780 / 1280, w: 57 * 780 / 1280, h: 64 * 780 / 1280 };
-  if (t < 1.0) {
-    // cae, rebota, late y vuela al punto de «Portales»
-    const fall = k(t, 0, .34, E.ic);
-    const y = lerp(-140, 926, fall);
-    const sq = t > .34 ? Math.sin(clamp((t - .34) / .22) * Math.PI) : 0;
-    const beat = 1 + .25 * Math.sin(clamp((t - .5) / .2) * Math.PI) * (t > .5 ? 1 : 0);
-    const fly = k(t, .62, .98, E.ioc);
+  if (th >= 0 && th < 1.0) {
+    // cae (o nace del caos en la versión de campaña), rebota, late y vuela al punto de «Portales»
+    const fall = k(th, 0, .34, E.ic);
+    const y = camp ? 926 : lerp(-140, 926, fall);
+    const sq = th > .34 ? Math.sin(clamp((th - .34) / .22) * Math.PI) : 0;
+    const beat = (1 + .25 * Math.sin(clamp((th - .5) / .2) * Math.PI) * (th > .5 ? 1 : 0)) * (camp ? k(th, 0, .3, E.ob2) : 1);
+    const fly = k(th, .62, .98, E.ioc);
     const dot = rectOf($('#dPor'));
     const x0 = 510, w0 = 60, h0 = 68;
     const x = lerp(x0, dot.x, fly), yy = lerp(y, dot.y, fly), w = lerp(w0, dot.w, fly), h = lerp(h0, dot.h, fly);
@@ -546,13 +597,16 @@ function render(t) {
     const out = k(t, B.s5 - .2, B.s5 + .3, E.ic);
     css(px, { display: 'block', left: (n.x + 30) + 'px', top: (n.y + 30) + 'px', width: '60px', height: '68px', transform: `scale(${1 - out * .1})`, boxShadow: 'none', opacity: 1 - out, filter: out > 0 ? `blur(${out * 10}px)` : 'none' });
   } else if (t >= B.logo - .05) {
-    // el subrayado se convierte en la «i» del logo
+    // el subrayado se convierte en la «i» del logo (siguiendo la transformación de la escena del logo)
+    const T = logoT(t), O = { x: 540, y: 864 };
+    const L0 = LOGO;
+    const LOGOt = { x: O.x + (L0.x - O.x) * T.s, y: O.y + (L0.y - O.y) * T.s + T.dy, w: L0.w * T.s, h: L0.h * T.s };
     const u0 = rectOf(W6[1]);
     const from = { x: u0.x, y: u0.y + u0.h - 4, w: u0.w, h: 8 };
     const p = k(t, B.logo - .05, B.logo + .55, E.ioc);
     const land = t > B.logo + .55 ? 1 + .18 * Math.sin(clamp((t - B.logo - .55) / .22) * Math.PI) : 1;
     ul.style.opacity = 0;
-    css(px, { display: 'block', left: lerp(from.x, LOGO.x, p) + 'px', top: lerp(from.y, LOGO.y, p) - Math.sin(p * Math.PI) * 120 + 'px', width: lerp(from.w, LOGO.w, p) + 'px', height: lerp(from.h, LOGO.h, p) + 'px',
+    css(px, { display: 'block', left: lerp(from.x, LOGOt.x, p) + 'px', top: lerp(from.y, LOGOt.y, p) - Math.sin(p * Math.PI) * 120 + 'px', width: lerp(from.w, LOGOt.w, p) + 'px', height: lerp(from.h, LOGOt.h, p) + 'px',
       borderRadius: lerp(4, 0, p) + 'px', transform: `scale(${land})`, transformOrigin: '50% 50%', boxShadow: `0 0 ${30 * Math.sin(p * Math.PI)}px rgba(255,213,0,.6)`, opacity: 1, filter: 'none' });
   } else { px.style.display = 'none'; $('#dPor').style.opacity = 1; }
 
@@ -563,11 +617,29 @@ function render(t) {
     const lp = k(s7, .25, .85, E.oc);
     css($('#logo'), { opacity: lp, filter: lp < 1 ? `blur(${(1 - lp) * 12}px)` : 'none', transform: `scale(${1.06 - .06 * lp})`, clipPath: `inset(0 ${(1 - k(s7, .25, .9, E.ioc)) * 100}% 0 0)` });
     const cp = k(s7, .95, 1.35, E.oc);
-    css($('#cta'), { opacity: cp, transform: `translateY(${(1 - cp) * 24}px)`, letterSpacing: (.3 - .1 * cp) + 'em' });
-    tf(sc7, `scale(${1 + .015 * clamp(s7 / 2.4)})`);
+    const T = logoT(t);
+    const up = B.cta ? k(t, B.cta, B.cta + .6, E.ioc) : 0;
+    css($('#cta'), { opacity: cp, transform: `translateY(${(1 - cp) * 24 + up * 330}px)`, letterSpacing: (.3 - .1 * cp) + 'em' });
+    tf(sc7, `translateY(${T.dy}px) scale(${T.s})`);
+    sc7.style.transformOrigin = '540px 864px';
+    // botón de llamada a la acción (contrarresta la transformación de la escena)
+    const cb = $('#ctaBtn');
+    cb.style.display = B.cta ? 'block' : 'none';
+    if (B.cta) {
+      const bp = k(t, B.cta + .3, B.cta + .75, E.ob2);
+      const pulse = t > B.cta + 1.1 ? (t - B.cta - 1.1) % 1.2 / 1.2 : 0;
+      css(cb, { opacity: k(t, B.cta + .3, B.cta + .4), transform: `translateY(${-T.dy + (1 - bp) * 60}px) scale(${(.7 + .3 * bp) / T.s})` });
+      css($('#ctaRing'), { opacity: pulse > 0 ? (1 - pulse) * .9 : 0, transform: `scale(${1 + pulse * .25})` });
+      css($('#ctaArr'), { transform: `translateX(${Math.max(0, Math.sin((t - B.cta) * 5)) * 8 * bp}px)` });
+    }
   }
   // ocultar escenas no activas del hook
-  $('#sc0').style.display = t < 1.3 ? 'block' : 'none';
+  $('#sc0').style.display = th >= 0 && th < 1.3 ? 'block' : 'none';
+}
+function logoT(t) {
+  const s7 = t - B.logo;
+  const up = B.cta ? k(t, B.cta, B.cta + .6, E.ioc) : 0;
+  return { s: (1 + .015 * clamp(s7 / 2.4)) * (1 - up * .12), dy: -up * 230 };
 }
 window.render = render;
 window.ready = document.fonts.ready.then(() => new Promise(r => { const i = $('#logo'); if (i.complete) r(); else i.onload = r; }));

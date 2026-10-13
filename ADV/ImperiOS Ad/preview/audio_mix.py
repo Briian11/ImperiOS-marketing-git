@@ -6,6 +6,7 @@ Escribe stems (music.wav, sfx.wav) y mix_premaster.wav. El máster a -14 LUFS / 
 Sin VO todavía: cuando llegue, la música se automatiza ≥15 dB por debajo mientras habla.
 """
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -15,7 +16,7 @@ from scipy.signal import butter, sosfilt, sosfilt_zi
 
 SR = 48000
 HERE = Path(__file__).resolve().parent
-TL = json.loads((HERE / "timeline.json").read_text())
+TL = json.loads((HERE / os.environ.get("TL", "timeline.json")).read_text())
 B = TL["beats"]
 DUR = TL["duration"]
 N = int(DUR * SR)
@@ -200,12 +201,31 @@ def hp(x, f):
 
 def cues():
     s1, s2, s3, s4, s5, s6, lg = (B[k] for k in ("s1", "s2", "s3", "s4", "s5", "s6", "logo"))
+    h = B.get("hook", 0.0)
+    if h > 0:
+        # gancho de campaña: caos de notificaciones que colapsa en el pixel
+        hook = [
+            (0.00, "pop_dock_01", -12, -.5, 0),
+            (0.05, "whoosh_short_02", -15, 0, 300),
+            (0.20, "glitch_wake", -17, .3, 0),
+            *[(.1 + i * .09, ["click_ui_01", "pop_dock_02", "click_ui_02", "pop_dock_03", "click_ui_03", "pop_dock_01"][i], -17, [-.7, .6, -.1, -.6, .7, .1][i], 0) for i in range(6)],
+            (h - 1.1, "riser_grid", -15, 0, 300),
+            (h - .6, "suck_reverse", -12, 0, 200),
+            (h - .5, "whoosh_long_02", -16, 0, 250),
+            (h + .00, "hit_soft_03", -8, 0, 0),
+            (h + .00, "shimmer_glow", -16, 0, 600),
+            (h + .52, "pop_dock_01", -14, 0, 0),
+        ]
+    else:
+        hook = [
+            (0.00, "shimmer_glow", -16, 0, 600),
+            (0.30, "whoosh_short_03", -14, 0, 300),
+            (0.34, "hit_soft_03", -8, 0, 0),
+            (0.52, "pop_dock_01", -14, 0, 0),
+        ]
     c = [
         # (tiempo, sfx, ganancia dB, pan -1..1, hpf Hz)
-        (0.00, "shimmer_glow", -16, 0, 600),
-        (0.30, "whoosh_short_03", -14, 0, 300),
-        (0.34, "hit_soft_03", -8, 0, 0),
-        (0.52, "pop_dock_01", -14, 0, 0),
+        *hook,
         (s1 + .02, "whoosh_short_03", -16, 0, 300),
         (s1 + .00, "whoosh_short_02", -13, .1, 300),
         (s1 + .10, "whoosh_long_01", -17, -.6, 300),
@@ -283,6 +303,15 @@ def cues():
         (lg + .55, "logo_sting", -8, 0, 0),
         (lg + .95, "click_ui_01", -15, 0, 0),
     ]
+    if "cta" in B:
+        ct = B["cta"]
+        c += [
+            (ct - .05, "whoosh_short_04", -14, 0, 300),
+            (ct + .35, "pop_dock_02", -9, 0, 0),
+            (ct + .35, "logo_sting", -15, 0, 0),
+            (ct + .40, "shimmer_glow", -15, 0, 600),
+            (ct + 1.10, "click_ui_02", -17, 0, 0),
+        ]
     return c
 
 
