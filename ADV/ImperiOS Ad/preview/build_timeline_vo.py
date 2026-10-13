@@ -9,6 +9,9 @@ import sys
 
 words_path, OFF, out = sys.argv[1], float(sys.argv[2]), sys.argv[3]
 W = [(w, s + OFF, e + OFF) for w, s, e in json.load(open(words_path))]
+# el gancho puede tener cualquier número de palabras: el cuerpo empieza en «Con» («Con Imperios, …»)
+H = next(i for i, (w, _, _) in enumerate(W) if w == "Con")
+D = H - 9   # desplazamiento de índices respecto a la toma original (gancho de 9 palabras)
 
 
 def at(i):
@@ -16,16 +19,16 @@ def at(i):
 
 
 B = {}
-B["hook"] = round(W[9][1] - 0.1, 3)        # el pixel nace justo antes de «Con Imperios»
+B["hook"] = round(W[9 + D][1] - 0.1, 3)        # el pixel nace justo antes de «Con Imperios»
 B["s1"] = round(B["hook"] + 0.6, 3)        # chips de origen durante «Con Imperios»
-B["s2"] = round(W[11][1] + 0.08, 3)        # «todos entran en un solo panel»
-B["s3"] = round(W[22][1] - 0.13, 3)        # «La inteligencia artificial…»
-B["s4"] = round(W[33][1] - 0.13, 3)        # «Y cuando hay match…»
-B["s5"] = round(W[44][1] - 0.13, 3)        # «Visitas…»
-B["s6"] = round(W[53][1] - 0.13, 3)        # «Imperios.»
-B["logo"] = round(W[59][2] + 0.03, 3)      # tras «fin.»
-B["cta"] = round(W[62][1] + 0.33, 3)       # «demo» → botón
-B["end"] = round(W[62][2] + 2.4, 2)
+B["s2"] = round(W[11 + D][1] + 0.08, 3)        # «todos entran en un solo panel»
+B["s3"] = round(W[22 + D][1] - 0.13, 3)        # «La inteligencia artificial…»
+B["s4"] = round(W[33 + D][1] - 0.13, 3)        # «Y cuando hay match…»
+B["s5"] = round(W[44 + D][1] - 0.13, 3)        # «Visitas…»
+B["s6"] = round(W[53 + D][1] - 0.13, 3)        # «Imperios.»
+B["logo"] = round(W[59 + D][2] + 0.03, 3)      # tras «fin.»
+B["cta"] = round(W[62 + D][1] + 0.33, 3)       # «demo» → botón
+B["end"] = round(W[62 + D][2] + 2.4, 2)
 
 
 def rel(idx, scene):
@@ -33,14 +36,14 @@ def rel(idx, scene):
 
 
 wt = {
-    "ktH": [round(at(i), 3) for i in range(0, 9)],
-    "kt2": rel([11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21], "s2"),
-    "kt3": [round(at(26) - B["s3"], 3), round((at(26) + at(27)) / 2 - B["s3"], 3), round(at(27) - B["s3"], 3),
-            round((at(27) + at(29)) / 2 - B["s3"], 3), round(at(29) - B["s3"], 3)],
-    "kt3b": rel([30, 31, 32], "s3"),
-    "kt4": rel([37, 38, 39, 40, 41, 42, 43], "s4"),
-    "kt5": rel([44, 45, 46, 47, 49, 50, 51, 52], "s5"),   # en pantalla: «…agentes, desde la misma agenda.»
-    "kt6": rel([54, 55, 56, 57, 58, 59], "s6"),
+    "ktH": [round(at(i), 3) for i in range(0, H)],
+    "kt2": rel([i + D for i in [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]], "s2"),
+    "kt3": [round(at(26 + D) - B["s3"], 3), round((at(26 + D) + at(27 + D)) / 2 - B["s3"], 3), round(at(27 + D) - B["s3"], 3),
+            round((at(27 + D) + at(29 + D)) / 2 - B["s3"], 3), round(at(29 + D) - B["s3"], 3)],
+    "kt3b": rel([i + D for i in [30, 31, 32]], "s3"),
+    "kt4": rel([i + D for i in [37, 38, 39, 40, 41, 42, 43]], "s4"),
+    "kt5": rel([i + D for i in [44, 45, 46, 47, 49, 50, 51, 52]], "s5"),   # en pantalla: «…agentes, desde la misma agenda.»
+    "kt6": rel([i + D for i in [54, 55, 56, 57, 58, 59]], "s6"),
 }
 B["wt"] = wt
 B["hideKt1"] = True

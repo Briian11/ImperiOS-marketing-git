@@ -9,3 +9,4 @@
 | VO campaña (`vo/campana-toma-1.mp3`, `vo/campana-toma-2.mp3`) | ElevenLabs, voz «Cristina – Premium Spanish Female» (1CeqBeXMOqCleeQjfYfO), modelo eleven_v4, 13/10/2026, 796 créditos | Plan ElevenLabs del cliente |
 | Tiempos de palabra (`vo/campana-toma-1.words.json`) | ElevenLabs Scribe v1 sobre la toma 1 | Plan ElevenLabs del cliente |
 | VO alternativa (`vo/gala-toma-1.mp3`, `vo/gala-toma-2.mp3`) | ElevenLabs, voz «Gala – Fresh, Energetic & Spontaneous» (Wi5NZQRxyOb3Jx4r0hrI), modelo eleven_v4, 13/10/2026, 796 créditos | Plan ElevenLabs del cliente |
+| Ganchos B y C (`vo/gancho-B-toma-1.mp3`, `vo/gancho-C-toma-1/2.mp3`) | ElevenLabs, voz Cristina, eleven_v4, 13/10/2026, ~160 créditos (una toma de B falló por aviso de la cuenta) | Plan ElevenLabs del cliente |
