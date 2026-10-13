@@ -332,17 +332,76 @@ def place():
     return bus * fade[:, None]
 
 
+def load_vo(path, offset):
+    """VO preprocesada (wav 48k mono) colocada en su offset."""
+    sr, x = wavfile.read(path)
+    assert sr == SR
+    x = x.astype(np.float64)
+    if x.ndim == 2:
+        x = x.mean(axis=1)
+    v = np.zeros(N)
+    i0 = int(offset * SR)
+    n = min(len(x), N - i0)
+    v[i0:i0 + n] = x[:n]
+    return v
+
+
+def speech_gate(v):
+    """1 mientras hay voz (envolvente RMS con ataque rápido y suelta de 250 ms)."""
+    win = int(.02 * SR)
+    rms = np.sqrt(np.convolve(v ** 2, np.ones(win) / win, mode="same"))
+    on = (rms > 10 ** (-45 / 20) * max(np.max(np.abs(v)), 1e-9) / 0.5).astype(float)
+    # suaviza: ataque 40 ms, suelta 250 ms (seguidor de envolvente)
+    g = np.zeros_like(on)
+    a, r = np.exp(-1 / (.04 * SR)), np.exp(-1 / (.25 * SR))
+    acc = 0.0
+    for i in range(0, len(on), 64):
+        tgt = on[i]
+        coef = a if tgt > acc else r
+        acc = tgt + (acc - tgt) * coef ** 64
+        g[i:i + 64] = acc
+    return g
+
+
 def main(out):
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     mus = music()
     fx = place()
     mus *= 10 ** (-3 / 20)
-    mix = mus + fx
+    vo_path = os.environ.get("VO")
+    if vo_path:
+        vo = load_vo(vo_path, float(os.environ.get("VO_OFFSET", "0")))
+        g = speech_gate(vo)
+        # la VO manda: ducking dinámico para que la música quede ≥15 dB (objetivo 18) bajo la voz
+        # en cada ventana de 400 ms con voz; SFX -4 dB mientras habla
+        w = int(.4 * SR)
+        smooth = lambda x: np.sqrt(np.convolve(x ** 2, np.ones(w) / w, mode="same"))
+        rv, rm = smooth(vo), smooth(mus.mean(axis=1))
+        from scipy.ndimage import minimum_filter1d, uniform_filter1d
+        sp_on = (rv > np.max(rv) * 10 ** (-24 / 20)).astype(float)
+        need = np.clip(rv * 10 ** (-20 / 20) / np.maximum(rm, 1e-9), 0.02, 1.0)
+        need = np.where(sp_on > 0, need, 1.0)
+        need = minimum_filter1d(need, int(.3 * SR))          # se adelanta y sostiene el ducking
+        need = uniform_filter1d(need, int(.12 * SR))         # sin escalones
+        duck = need
+        mus *= duck[:, None]
+        fx *= (1 - np.maximum(g, uniform_filter1d(sp_on, int(.12 * SR))) * (1 - 10 ** (-4 / 20)))[:, None]
+        sp = rv > np.max(rv) * 10 ** (-20 / 20)
+        d = 20 * np.log10(rv[sp] / np.maximum(smooth(mus.mean(axis=1))[sp], 1e-9))
+        print(f"VO vs música con voz: mediana {np.median(d):.1f} dB, percentil 5 {np.percentile(d, 5):.1f} dB")
+        vo_st = np.stack([vo, vo], axis=1)
+        mix = mus + fx + vo_st
+    else:
+        mix = mus + fx
     pk = np.max(np.abs(mix))
     print(f"pico premaster {20 * np.log10(pk):.1f} dBFS")
-    for name, x in (("music.wav", mus), ("sfx.wav", fx), ("mix_premaster.wav", mix)):
-        wavfile.write(out / name, SR, (x / max(pk, 1e-9) * .5).astype(np.float32) if name == "mix_premaster.wav" else (x * .5 / max(pk, 1e-9)).astype(np.float32))
+    # todos los stems con la misma escala que la mezcla (suman exactamente el premaster)
+    stems = [("music.wav", mus), ("sfx.wav", fx), ("mix_premaster.wav", mix)]
+    if vo_path:
+        stems.append(("vo.wav", vo_st))
+    for name, x in stems:
+        wavfile.write(out / name, SR, (x * .5 / max(pk, 1e-9)).astype(np.float32))
     print("stems ->", out)
 
 

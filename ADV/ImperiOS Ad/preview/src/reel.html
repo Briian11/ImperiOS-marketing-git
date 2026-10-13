@@ -299,7 +299,17 @@ const W2 = words($('#kt2'), [[['Todos'], ['entran'], ['en'], ['un'], ['solo'], [
 const W3 = words($('#kt3'), [[['zona'], ['·'], ['tipo'], ['·']], [['presupuesto']]]);
 const W3b = words($('#kt3b'), [[['con'], ['tu'], ['cartera.']]]);
 const W4 = words($('#kt4'), [[['Reactivas'], ['al'], ['cliente'], ['con']], [['una'], ['oportunidad'], ['real.']]]);
-const W5 = words($('#kt5'), [[['Visitas,'], ['recordatorios'], ['y']], [['agentes,'], ['en'], ['la'], ['misma'], ['agenda.']]]);
+const W5 = words($('#kt5'), [[['Visitas,'], ['recordatorios'], ['y']], [['agentes,'], ['desde'], ['la'], ['misma'], ['agenda.']]]);
+// tiempos de palabra por bloque (relativos al inicio de su escena); B.wt los sustituye cuando hay VO
+const DEF = {
+  kt1: [.1, .25, .45, .6, .75, 1.35, 1.75, 1.85, 1.95],
+  kt2: [.3, .42, .54, .66, .78, .9, 1.7, 1.82, 1.94, 2.06, 2.2],
+  kt3: [.95, 1.15, 1.35, 1.55, 1.75], kt3b: [2.2, 2.32, 2.44],
+  kt4: [.35, .5, .62, .8, 1.0, 1.15, 1.45],
+  kt5: [.3, .6, .95, 1.1, 1.45, 1.57, 1.69, 1.85],
+  kt6: [.45, .7, 1.2, 1.35, 1.55, 1.7],
+};
+const WT = key => (B.wt && B.wt[key]) || DEF[key];
 const W6 = words($('#kt6'), [[['Todo'], ['conectado.']], [['De', 'it'], ['principio', 'it'], ['a', 'it'], ['fin.', 'it']]]);
 W6.filter(w => w.classList.contains('it')).forEach(w => { w.style.fontStyle = 'italic'; w.style.fontWeight = 500; });
 // En S3 el estado de color de las palabras se controla aparte
@@ -360,12 +370,12 @@ function render(t) {
   const scH = $('#scH');
   scH.style.display = camp && t < B.hook + .1 ? 'block' : 'none';
   if (scH.style.display === 'block') {
-    const col = k(t, B.hook - .55, B.hook, E.ic);   // colapso hacia el centro
+    const hc = B.hookCol || .55, col = k(t, B.hook - hc, B.hook, E.ic);   // colapso hacia el centro
     const tg = k(t, 0, .3, E.ob2);
     css($('#hTag'), { opacity: k(t, 0, .1) * (1 - col), transform: `scale(${.5 + .5 * tg}) translateY(${-col * 40}px)`, filter: col > 0 ? `blur(${col * 10}px)` : 'none' });
     const n = WH.length;
-    revealWords(WH, t, WH.map((_, i) => .08 + i * (.75 / n)), .3);
-    if (col > 0) exitBlock($('#ktH'), t, B.hook - .55, .5); else css($('#ktH'), { opacity: 1, transform: 'none', filter: 'none' });
+    revealWords(WH, t, (B.wt && B.wt.ktH) || WH.map((_, i) => .08 + i * (.75 / n)), .3);
+    if (col > 0) exitBlock($('#ktH'), t, B.hook - hc, hc * .9); else css($('#ktH'), { opacity: 1, transform: 'none', filter: 'none' });
     $$('#scH .hc').forEach((c, i) => {
       const t0 = .1 + i * .09, p = k(t, t0, t0 + .35, E.ob2);
       const jx = Math.sin(t * 9 + i * 2.1) * 6 * (1 - col), jy = Math.cos(t * 7 + i * 1.3) * 5 * (1 - col);
@@ -416,8 +426,9 @@ function render(t) {
     });
     const ap = k(s1, .75, 1.05, E.ob);
     css($('#arrow1'), { opacity: ap * (1 - suck), transform: `translateY(${(1 - ap) * -30 + Math.sin(s1 * 5) * 4}px)` });
-    revealWords(W1, s1, [.1, .25, .45, .6, .75, 1.35, 1.75, 1.85, 1.95]);
+    revealWords(W1, s1, WT('kt1'));
     exitBlock($('#kt1'), t, B.s2 - .05);
+    if (B.hideKt1) $('#kt1').style.opacity = 0;
   }
 
   // ---- S2 ----
@@ -448,7 +459,7 @@ function render(t) {
     css(cv, { strokeDasharray: L, strokeDashoffset: L * (1 - k(s2, 1.8, 2.8, E.ioc)) });
     const dp = k(s2, 2.7, 3.0, E.ob2);
     $('#cdot').setAttribute('r', 10 * dp); $('#cdotG').setAttribute('r', 24 * dp * (1 + .15 * Math.sin(s2 * 8)));
-    revealWords(W2, s2, [.3, .42, .54, .66, .78, .9, 1.7, 1.82, 1.94, 2.06, 2.2]);
+    revealWords(W2, s2, WT('kt2'));
   }
 
   // ---- S3 ----
@@ -460,27 +471,28 @@ function render(t) {
     css($('#hud3'), { opacity: hp * (1 - k(t, B.s4 - .1, B.s4 + .15)), transform: `translateY(${(1 - hp) * 20}px)` });
     const tg = k(s3, .3, .65, E.ob2);
     css($('#tagM'), { opacity: k(s3, .3, .4) * (1 - k(t, B.s4 - .1, B.s4 + .2)), transform: `scale(${.4 + .6 * tg})` });
-    revealWords(W3, s3, [.9, 1.1, 1.3, 1.5, 1.7]);
+    const [tz, , tt, , tp] = WT('kt3');
+    revealWords(W3, s3, WT('kt3'));
     // palabra activa en blanco, las demás atenuadas
-    const act = s3 < 1.3 ? 0 : s3 < 1.7 ? 2 : 4;
+    const act = s3 < tt ? 0 : s3 < tp ? 2 : 4;
     W3.forEach((w, i) => { w.style.color = (i === act) ? '#fff' : 'var(--ink-600)'; });
-    revealWords(W3b, s3, [2.2, 2.32, 2.44]);
+    revealWords(W3b, s3, WT('kt3b'));
     const ex = k(t, B.s4 - .25, B.s4 + .15, E.ic);
     [$('#kt3'), $('#kt3b'), $('#ringLbl')].forEach(el => { if (ex > 0) exitBlock(el, t, B.s4 - .25); else css(el, { transform: 'none', filter: 'none', opacity: 1 }); });
     if (ex === 0) css($('#ringLbl'), { opacity: k(s3, 1.0, 1.4) });
     const pr = k(s3, .45, 1.1, E.oc);
     css($('#prop'), { opacity: pr * (1 - ex), transform: `perspective(1600px) translateY(${(1 - pr) * 180 - ex * 260}px) rotateX(${(1 - pr) * 24}deg) scale(${1 - ex * .1})`, filter: (pr < 1 || ex > 0) ? `blur(${(1 - pr) * 10 + ex * 12}px)` : 'none' });
     $$('#mapLines path').forEach((p, i) => { const L = 900; css(p, { strokeDasharray: L, strokeDashoffset: L * (1 - k(s3, .7 + i * .05, 1.5 + i * .05, E.ioc)) }); });
-    const pin = k(s3, .95, 1.35, E.ob2);
-    $('#pin').setAttribute('transform', `translate(0 ${(1 - pin) * -90})`); $('#pin').style.opacity = k(s3, .95, 1.05);
-    const halo = k(s3, 1.25, 1.9, E.oe);
+    const pin = k(s3, tz, tz + .4, E.ob2);
+    $('#pin').setAttribute('transform', `translate(0 ${(1 - pin) * -90})`); $('#pin').style.opacity = k(s3, tz, tz + .1);
+    const halo = k(s3, tz + .3, tz + .95, E.oe);
     $('#pinHalo1').setAttribute('r', 70 * halo); $('#pinHalo2').setAttribute('r', 34 * halo);
     const chipPop = (el, t0) => { const p = k(s3, t0, t0 + .4, E.ob2); const fl = 1 - k(s3, t0 + .2, t0 + 1.0); css(el, { transform: `scale(${.6 + .4 * p})`, opacity: k(s3, t0, t0 + .1), borderColor: `rgba(255,213,0,${fl})` }); };
-    chipPop($('#chZona'), .95); chipPop($('#chTipo'), 1.35); chipPop($('#chPre'), 1.75);
-    css($('#range'), { transform: `scaleX(${k(s3, 1.75, 2.2, E.oc)})` });
-    const kn = k(s3, 1.85, 2.45, E.ob);
-    css($('#knob'), { left: (kn * 52) + '%', opacity: k(s3, 1.85, 1.95), boxShadow: `0 0 ${20 + 30 * k(s3, 2.3, 2.6)}px rgba(255,213,0,.75)` });
-    [[$('#r1'), .95], [$('#r2'), 1.35], [$('#r3'), 1.75]].forEach(([el, tl]) => {
+    chipPop($('#chZona'), tz); chipPop($('#chTipo'), tt); chipPop($('#chPre'), tp);
+    css($('#range'), { transform: `scaleX(${k(s3, tp, tp + .45, E.oc)})` });
+    const kn = k(s3, tp + .1, tp + .7, E.ob);
+    css($('#knob'), { left: (kn * 52) + '%', opacity: k(s3, tp + .1, tp + .2), boxShadow: `0 0 ${20 + 30 * k(s3, tp + .55, tp + .85)}px rgba(255,213,0,.75)` });
+    [[$('#r1'), tz], [$('#r2'), tt], [$('#r3'), tp]].forEach(([el, tl]) => {
       const p = k(s3, tl - .45, tl, E.ob);
       const lock = s3 > tl;
       css(el, { opacity: k(s3, .6, .9) * (1 - ex), transform: `rotate(${(1 - p) * 220}deg) translateY(${ex * -80}px)`, borderColor: lock ? 'var(--y)' : 'var(--ink-700)', filter: (p < 1 && p > 0) ? `blur(${(1 - p) * 3}px)` : 'none' });
@@ -516,7 +528,7 @@ function render(t) {
     css($('#btn'), { transform: `scale(${bp * press})`, opacity: k(s4, 1.5, 1.6) });
     const rip = k(s4, 2.05, 2.6, E.oe);
     css($('#ripple'), { transform: `scale(${1 + rip * .6})`, opacity: s4 > 2.05 ? (1 - rip) : 0 });
-    revealWords(W4, s4, [.35, .5, .62, .8, 1.0, 1.15, 1.45]);
+    revealWords(W4, s4, WT('kt4'));
   }
 
   // ---- S5 ----
@@ -541,7 +553,7 @@ function render(t) {
     const r = k(s5, 2.0, 2.4, E.ob2), a = k(s5, 2.3, 2.7, E.ob2);
     css($('#chRem'), { opacity: k(s5, 2.0, 2.1) * (1 - bgOut), transform: `scale(${.6 + .4 * r}) translateY(${(1 - r) * 30}px)` });
     css($('#chAg'), { opacity: k(s5, 2.3, 2.4) * (1 - bgOut), transform: `scale(${.6 + .4 * a}) translateY(${(1 - a) * 30}px)` });
-    revealWords(W5, s5, [.3, .6, .95, 1.1, 1.45, 1.57, 1.69, 1.85]);
+    revealWords(W5, s5, WT('kt5'));
     if (bgOut > 0) exitBlock($('#kt5'), t, B.s6 - .15);
   }
 
@@ -551,19 +563,19 @@ function render(t) {
   if (sc6.style.display === 'block') {
     const hp = k(s6, .1, .45);
     css($('#hud6'), { opacity: hp * (1 - k(t, B.logo - .1, B.logo + .2)), transform: `translateY(${(1 - hp) * 20}px)` });
-    revealWords(W6, s6, [.45, .7, 1.2, 1.35, 1.55, 1.7], .45);
+    revealWords(W6, s6, WT('kt6'), .45);
     const ex = k(t, B.logo - .05, B.logo + .3, E.ic);
     if (ex > 0) W6.forEach(w => css(w, { opacity: 1 - ex, filter: `blur(${ex * 12}px)`, transform: `translateY(${-ex * 50}px)` }));
   }
 
   // ---- underline por escena ----
   const ul = $('#ul');
-  if (t >= B.s1 && t < B.s2) underlineTo(t - B.s1, [[.75, W1[4]], [1.35, W1[5]], [1.95, W1[8]]].map(([a, b]) => [a, b]));
-  else if (t >= B.s2 && t < B.s3 - .2) underlineTo(t - B.s2, [[.9, W2[5]], [2.2, W2[10]]]);
-  else if (t >= B.s3 && t < B.s4 - .2) underlineTo(t - B.s3, [[.9, W3[0]], [1.3, W3[2]], [1.7, W3[4]]]);
-  else if (t >= B.s4 && t < B.s5 - .2) underlineTo(t - B.s4, [[1.45, W4[6]]]);
-  else if (t >= B.s5 && t < B.s6 - .15) underlineTo(t - B.s5, [[1.85, W5[7]]]);
-  else if (t >= B.s6 + .9 && t < B.logo) underlineTo(t - B.s6, [[.95, W6[1]]]);
+  if (t >= B.s1 && t < B.s2) { if (!B.hideKt1) underlineTo(t - B.s1, [[WT('kt1')[4], W1[4]], [WT('kt1')[5], W1[5]], [WT('kt1')[8], W1[8]]]); else ul.style.opacity = 0; }
+  else if (t >= B.s2 && t < B.s3 - .2) underlineTo(t - B.s2, [[WT('kt2')[5], W2[5]], [WT('kt2')[10], W2[10]]]);
+  else if (t >= B.s3 && t < B.s4 - .2) underlineTo(t - B.s3, [[WT('kt3')[0], W3[0]], [WT('kt3')[2], W3[2]], [WT('kt3')[4], W3[4]]]);
+  else if (t >= B.s4 && t < B.s5 - .2) underlineTo(t - B.s4, [[WT('kt4')[6], W4[6]]]);
+  else if (t >= B.s5 && t < B.s6 - .15) underlineTo(t - B.s5, [[WT('kt5')[7], W5[7]]]);
+  else if (t >= B.s6 + WT('kt6')[1] && t < B.logo) underlineTo(t - B.s6, [[WT('kt6')[1] + .25, W6[1]]]);
   else if (t < B.logo) ul.style.opacity = 0;
   // fade del underline al salir de cada bloque
   const exits = [B.s2, B.s3 - .2, B.s4 - .2, B.s5 - .2, B.s6 - .15];
