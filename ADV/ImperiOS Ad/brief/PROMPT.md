@@ -1,6 +1,6 @@
-# ImperiOS — Spec Ad v6 · Brief (PASO 1 · revisión 4)
+# ImperiOS — Spec Ad v6 · Brief (PASO 1 · revisión 5)
 
-> Estado: **BORRADOR r4, pendiente de tu OK.** No se ha construido el vídeo ni se han gastado créditos. Los SFX originales ya están generados (`assets_in/sfx/`).
+> Estado: **BORRADOR r5, pendiente de tu OK.** No se ha construido el vídeo ni se han gastado créditos. Los SFX originales ya están generados (`assets_in/sfx/`).
 > Referencia de estilo: el spec ad «Shopify — First Sale» de tu vídeo `video-demostracion-saas_1.mp4`, analizado en la sección 10 (contact sheet en `brief/ref/`).
 > Fuente de marca: `assets_in/brand-kit/`. Datos de producto: tus respuestas del 13/10/2026.
 
@@ -10,7 +10,7 @@
 
 | # | Tema | Decisión |
 |---|---|---|
-| 1 | Estética | **Fusión, ajustada a la referencia:** escenario **oscuro `#0A0A0A` con un brillo `#FFD500` difuso** durante casi todo el anuncio, igual que el verde de Shopify. El **blanco cálido `#FAF8F4`** aparece en el cierre: el punto amarillo lo inunda todo y el logo negro del kit aterriza sobre claro, como pide el kit. Tipografía: **Manrope** en todo. |
+| 1 | Estética | **Marca ImperiOS primero, referencia después.** La superficie es la de imperios.app: fondo claro `#F5F5F5` con la cuadrícula de 40 px, tarjetas `#FAFAFA` con borde fino y paneles oscuros `#0A0A0A` (patrón «alternar claro y oscuro» del kit). De la referencia tomo **solo la gramática de movimiento**: UI que flota en 3D, foco por filas, contadores, kinetic type palabra a palabra y transiciones por transformación. El amarillo `#FFD500` va **solo en detalles** (punto, subrayado, chip, línea de match, CTA), nunca en grandes bloques. Tipografía: Manrope. |
 | 2 | Amarillo | **`#FFD500`** en todo, el mismo de la «i» del logo. Interacción: `#E6C000`. |
 | 3 | Formato | **Reel 9:16, 1080×1920 a 60 fps** como maestro y como preview. 16:9 solo si lo pides después. |
 | 4 | End card | **Sin end card.** El anuncio termina en el logo, y el último acorde suena ~1,5 s sobre él. |
@@ -54,21 +54,20 @@ Frases completas y claras para altavoz de móvil. Son 52 palabras, a ~2,8 palabr
 
 ## 3. Beat sheet (9:16 · 60 fps)
 
-Los tiempos son provisionales: cuando tenga la toma elegida, **re-temporizo la imagen a la voz**.
+Los tiempos son provisionales: cuando tenga la toma elegida, **re-temporizo la imagen a la voz**. Cada beat lleva la etiqueta de sección del kit (`01 · CAPTACIÓN`, `02 · PANEL`…) en Manrope 700 con tracking amplio, y el contador `01 / 06`.
 
-| Tiempo | Beat | Imagen / motion | Movimiento propio (no copiado de la referencia) |
-|---|---|---|---|
-| 0.00–0.60 | Hook | Negro. El brillo amarillo «respira» desde abajo y un cuadrado amarillo (la «i» del logo) late una vez en el centro. | **Pixel heartbeat**: el cuadrado de la «i» es el hilo conductor del anuncio |
-| 0.60–3.30 | 1 · Captación | Tres píldoras de origen (Portales, Campañas, Web) flotan a distintas profundidades. La que nombra la voz se enfoca. De cada una salen mini tarjetas de lead que viajan hacia el centro con motion blur. | **Depth-pull**: cada fuente pasa de desenfocada a nítida, sincronizada con la palabra |
-| 3.30–6.60 | 2 · Lista + campañas | Las tarjetas aterrizan como filas en una lista «Leads» inclinada en 3D (iniciales, chip de origen, «Piso · Chamberí · 350–400 k€», estado «Nuevo»). Llega una tarjeta «Campañas» con una curva que se dibuja y un contador de leads por campaña. | **Stack-land** (las filas caen apiladas y se asientan) + **curve draw** con brillo en la punta |
-| 6.60–10.00 | 3 · Match con IA | Kinetic type, palabra a palabra: «zona · tipo · presupuesto», con la palabra que suena en amarillo. Cada palabra se convierte en una «llave» que gira como un dial y encaja en la tarjeta de inmueble abstracta. | **Combination-dial** |
-| 10.00–12.80 | 4 · Reactivar | El cuadrado amarillo se estira hasta formar la notificación «Match · 3 clientes encajan con Ático en Chamberí». La fila de un lead dormido (gris) se ilumina y un botón «Reactivar» se pulsa con un micro-rebote. | **Pixel-stretch notification** + **wake pulse** |
-| 12.80–16.30 | 5 · Operativa | Una agenda semanal se ensambla en 3D. Los bloques de visita caen en sus huecos, aparecen chips de recordatorio con campana y avatares de agentes con su insignia de rol. La cámara orbita 10°. | **Calendar cascade** + **orbit reveal** |
-| 16.30–18.60 | 6 · Titular | Todo se desenfoca. Kinetic type «Todo conectado.» (700) / «De principio a fin.» (500 cursiva), palabra a palabra, con subrayado amarillo bajo «conectado». | **Underline sweep** |
-| 18.60–19.40 | Logo | El cuadrado amarillo crece y el escenario pasa a **blanco cálido**. Se forma el icono iM y luego el wordmark horizontal del kit. | **Pixel-flood** a blanco |
-| 19.40–21.00 | Cola | Logo quieto sobre blanco cálido, con una deriva amarilla muy suave. El acorde final suena hasta el final. | — |
+| Tiempo | Beat | Escenario | Imagen / motion | Movimiento propio |
+|---|---|---|---|---|
+| 0.00–0.60 | Hook | Claro `#F5F5F5` | La cuadrícula de 40 px aparece con una onda desde el centro. El cuadrado amarillo de la «i» del logo cae y late una vez. | **Pixel heartbeat**: el cuadrado de la «i» es el hilo conductor |
+| 0.60–3.30 | 1 · Captación | Claro | Tres chips de origen del kit (Portales, Campañas, Web) flotan a distintas profundidades. El que nombra la voz se enfoca. De cada uno salen mini tarjetas de lead hacia el centro, con la flecha amarilla del kit. | **Depth-pull** sincronizado con la palabra |
+| 3.30–6.60 | 2 · Un solo panel + campañas | Claro, con panel oscuro | Las tarjetas aterrizan como filas en el **panel oscuro del kit** («Un panel para todo el equipo», con el punto amarillo). Al lado entra una tarjeta clara «Campañas» con una curva que se dibuja y un contador de leads por campaña. | **Stack-land** + **curve draw** |
+| 6.60–10.00 | 3 · Match con IA | **Oscuro** (beat de alternancia) | El panel crece hasta llenar el plano. Etiqueta amarilla del kit «MATCH CON IA». Kinetic type «zona · tipo · presupuesto», con la palabra que suena subrayada en amarillo. Cada palabra gira como un dial y encaja en una tarjeta de inmueble abstracta (pin sobre mapa de líneas, icono de tipo, barra de presupuesto). | **Combination-dial** |
+| 10.00–12.80 | 4 · Reactivar | Oscuro | El cuadrado amarillo se estira hasta formar la notificación «Match · 3 clientes encajan con Ático en Chamberí». La fila de un lead dormido se enciende y un botón «Reactivar» (amarillo `#FFD500`, hover `#E6C000`) se pulsa con un micro-rebote. | **Pixel-stretch notification** + **wake pulse** |
+| 12.80–16.30 | 5 · Operativa | Oscuro → claro | El escenario vuelve a claro con un barrido. Una agenda semanal en tarjeta clara se ensambla en 3D: los bloques de visita caen en sus huecos, aparecen chips de recordatorio y avatares de agentes con su insignia de rol. Órbita de cámara de 10°. | **Calendar cascade** + **orbit reveal** |
+| 16.30–18.60 | 6 · Titular | Claro | Titular de la landing, palabra a palabra: «Todo conectado.» (700, `#0A0A0A`) / «De principio a fin.» (500 cursiva). Debajo, la línea amarilla del kit. | **Underline sweep** |
+| 18.60–21.00 | Logo + CTA | Claro | El cuadrado amarillo vuela a su sitio como la «i» y completa el **logo horizontal del kit**. Debajo aparece `IMPERIOS.APP ↗`. Último acorde. | **Pixel-home**: la «i» vuelve a su sitio en el logo |
 
-**Capa permanente:** brillo `#FFD500` difuso a la deriva (como el verde de la referencia), grano fino, desenfoque de profundidad en todo lo que no habla, motion blur fuerte en cada movimiento y un dolly lento continuo, para que el plano nunca quede quieto.
+**Capa permanente:** cuadrícula de 40 px con deriva lenta, sombras suaves y profundidad de campo en lo que no habla, motion blur fuerte en cada movimiento y un dolly lento continuo. En el beat oscuro, el círculo amarillo tenue de las plantillas del kit deriva en una esquina.
 **Zona segura Reels:** el contenido clave queda dentro de 1080×1420 centrado.
 
 ---
@@ -93,7 +92,7 @@ Los tiempos son provisionales: cuando tenga la toma elegida, **re-temporizo la i
 | Cada aterrizaje | `hit_soft_01–03` |
 | Pixel heartbeat (hook) | `riser_grid` + `shimmer_glow` + `hit_soft_03` |
 | Depth-pull / stack-land / curve draw | `whoosh_long_01/02` + `suck_reverse` + `hit_soft_01/02` + `ticks_granular_curve` |
-| Pixel-flood a blanco | `whoosh_low_wipe` |
+| Barrido oscuro → claro / pixel-home | `whoosh_low_wipe` |
 | Combination-dial | `click_mech_dial_1–3` (pitch ascendente) |
 | Pixel-stretch notification + wake pulse | `glitch_wake` + `shimmer_glow` + `hit_metal_01/02` |
 | Reactivar (botón) + chips de agenda | `click_ui_01–03` + `pop_dock_01–03`, en estéreo izq./dcha./centro |
@@ -129,12 +128,28 @@ Analizada fotograma a fotograma desde tu grabación (`brief/ref/referencia-shopi
 
 | Rasgo de la referencia | Cómo lo aplico en ImperiOS |
 |---|---|
-| Escenario casi negro con **un único brillo verde** de marca, difuso, desde abajo o el centro | Negro `#0A0A0A` + brillo `#FFD500` |
+| Escenario casi negro con **un único brillo verde** de marca, difuso, desde abajo o el centro | **No se copia.** ImperiOS es claro (`#F5F5F5`), con un único beat oscuro y el amarillo solo en detalles |
 | **Logo al principio** (icono → wordmark) y al final | Solo al final. Al principio va el cuadrado de la «i» como semilla |
 | **UI recreada flotando en 3D** (lista de productos, Live View con tarjetas y contadores) | Lista de leads, tarjeta de campañas, tarjeta de inmueble, agenda |
 | **Rack focus por filas**: una fila nítida y elevada, el resto desenfocado | Depth-pull en las fuentes y foco en la fila del lead que se reactiva |
 | Contadores que suben ($0.00 → valor) y tarjetas que entran escalonadas | Contador de leads por campaña y bloques de agenda en cascada |
 | **Kinetic type centrado, pequeño, palabra a palabra**, con la palabra clave en color y subrayada | Mismo principio con Manrope 700/500 y amarillo |
 | Pastilla con contorno brillante → **notificación** («Order #1001») | La notificación nace del cuadrado amarillo (pixel-stretch), no de una pastilla |
-| Punto de luz → icono → wordmark, y fundido a negro | Punto → **inundación a blanco cálido** → icono → wordmark |
+| Punto de luz → icono → wordmark, y fundido a negro | El cuadrado amarillo vuelve a su sitio como la «i» del logo horizontal, más `IMPERIOS.APP ↗` |
 | Ritmo: ~20 s, un plano nuevo cada 1,5–3 s y casi sin cortes secos (todo es transformación) | Igual: transiciones por transformación, sin cortes secos |
+
+## 11. Branding ImperiOS aplicado (fuente: kit generado desde la landing de imperios.app)
+
+| Elemento de la web / kit | Uso en el anuncio |
+|---|---|
+| Fondo `#F5F5F5` + cuadrícula sutil de 40 px | Escenario base |
+| Tarjetas `#FAFAFA` con borde fino, radios 10–24 px | Tarjetas de campañas, inmueble y agenda |
+| Panel oscuro `#0A0A0A` / `#1C1C1C`, texto blanco | Panel de leads y beat del Match con IA |
+| Amarillo `#FFD500` solo en detalles | Punto, flecha, subrayado, etiqueta «MATCH CON IA», botón «Reactivar», CTA |
+| Manrope 700 en titulares, 500 cursiva para el énfasis, −0.035em | Todo el kinetic type |
+| Etiquetas en mayúsculas con tracking amplio + numeración `01 / 06` | Etiqueta de sección y contador por beat |
+| Titular de Producto «Todo conectado. / De principio a fin.» | Cierre |
+| Logo horizontal del kit sobre claro (sin deformar) | Logo final |
+| `IMPERIOS.APP ↗` | CTA final |
+
+**No he podido abrir imperios.app desde esta sesión** (la red del entorno lo bloquea). El branding sale del kit, que según su README se generó desde la landing real (`src/styles/global.css` y `public/logo-imperios*`). Si en la web hay algo más que deba aparecer (ilustraciones, iconos, otra sección o un CTA distinto), mándame capturas o añade `imperios.app` a *Allowed domains* junto con `api.elevenlabs.io`.
