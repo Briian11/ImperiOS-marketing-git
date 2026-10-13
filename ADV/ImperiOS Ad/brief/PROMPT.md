@@ -1,6 +1,7 @@
-# ImperiOS — Spec Ad v6 · Brief (PASO 1 · revisión 2)
+# ImperiOS — Spec Ad v6 · Brief (PASO 1 · revisión 3)
 
-> Estado: **BORRADOR r2, pendiente de tu OK.** No se ha construido nada, no se ha descargado nada y no se han gastado créditos.
+> Estado: **BORRADOR r3, pendiente de tu OK.** No se ha construido el vídeo ni se han gastado créditos. Los SFX originales ya están generados (`assets_in/sfx/`).
+> Referencia de estilo: https://www.instagram.com/reel/Dd9g2AbR9P_/ (no se puede abrir desde la sesión en la nube; ver sección 9).
 > Fuente de marca: `assets_in/brand-kit/`. Datos de producto: tus respuestas del 13/10/2026.
 
 ---
@@ -15,8 +16,10 @@
 | 4 | End card | **Sin end card.** El anuncio termina en el logo, y el último acorde suena ~1,5 s sobre él. |
 | 5 | Voz | Española, la más natural. Candidata: **Cristina — Premium Spanish Female (PVC)**, la que ya usaste. |
 | 6 | Producto | Datos confirmados por ti (sección 2). Sin capturas del CRM real; la UI es abstracta y está hecha con los componentes del kit. |
-| 7 | VO | Ver la **pregunta abierta** al final: tus tomas son del guion v5. |
+| 7 | VO | **Guion nuevo** grabado con Cristina por ElevenLabs. Las tomas v5 quedan solo como referencia de timbre. |
 | 8 | v5 | Queda como referencia de seguridad. Los movimientos de abajo son nuevos. |
+| 9 | SFX | **Originales, sintetizados en código** (sustituye a la regla «solo de mi biblioteca»). 29 efectos en `assets_in/sfx/`. |
+| 10 | Fotos | **Ninguna foto de interior.** La tarjeta de inmueble es UI abstracta: pin de zona en un mapa de líneas, icono de tipo y barra de presupuesto. Sin fotos de stock. |
 
 ---
 
@@ -55,7 +58,7 @@ Los tiempos son provisionales: cuando elijas la toma, **re-temporizo la imagen a
 | 0.00–0.40 | Hook | Blanco | La cuadrícula de 40 px del kit se enciende en onda radial. Un punto `#FFD500` cae y rebota una vez. | **Grid ignition** |
 | 0.40–3.30 | 1 · Captación | Blanco | Tres chips de origen entran desde 3 bordes con overshoot y estela. Kinetic type con máscara vertical por palabra. | **Edge-slingshot** |
 | 3.30–6.60 | 2 · Panel + campañas | Blanco → panel negro | Campo magnético: los chips se convierten en tarjetas de lead dentro de un panel que se despliega desde una línea. Del chip «Campañas» sale una curva de rendimiento que se dibuja y brilla. | **Magnetic funnel** + **line-to-panel unfold** + **curve draw** |
-| 6.60–10.00 | 3 · Match con IA | **Negro** | Un wipe circular pasa el escenario a negro. Tres «llaves» (Zona, Tipo, Presupuesto) giran como un dial y encajan en una tarjeta de inmueble. | **Combination-dial** |
+| 6.60–10.00 | 3 · Match con IA | **Negro** | Un wipe circular pasa el escenario a negro. Tres «llaves» (Zona, Tipo, Presupuesto) giran como un dial y encajan en una tarjeta de inmueble abstracta (pin en un mapa de líneas, icono de tipo, barra de presupuesto; sin foto). | **Combination-dial** |
 | 10.00–12.80 | 4 · Reactivar | Negro | La tarjeta del cliente, que estaba gris y dormida, se ilumina en amarillo y una línea Bézier la une al inmueble, con partículas. «Reactivar» con tracking-in. | **Wake pulse** + **bezier snap** |
 | 12.80–16.30 | 5 · Operativa | Negro → blanco | La cámara se aleja: los módulos Visitas, Recordatorios y Agentes se acoplan al panel, que rota 8° y encaja. Una agenda compartida se rellena en cascada. | **Dock & lock** + **calendar cascade** |
 | 16.30–19.00 | 6 · Cierre | Blanco | Todo colapsa a un punto `#FFD500` que se abre en iris y revela el titular (700 / 500 cursiva, −0.035em) y el logo del kit. | **Dot-iris reveal** |
@@ -78,20 +81,20 @@ Los tiempos son provisionales: cuando elijas la toma, **re-temporizo la imagen a
 - **≥15 dB por debajo de la VO** mientras habla, con automatización por palabra y sin limitador sobre la voz.
 - Silencio de ~300 ms antes de «Imperios» → acorde final abierto que suena sobre el logo.
 
-## 6. Plan de SFX (solo de tu biblioteca FOUR Editors)
+## 6. Plan de SFX (originales, sintetizados en código · `assets_in/sfx/INDEX.md`)
 
 | Momento | Categoría |
 |---|---|
-| Cada palabra/título | whoosh corto (HPF 300 Hz, por debajo de la voz) |
-| Cada aterrizaje | hit suave / thud de UI |
-| Grid ignition | riser corto + shimmer |
-| Magnetic funnel / curve draw | swoosh doble + tick granular |
-| Wipe a negro | whoosh grave + sub |
-| Combination-dial | 3 clicks mecánicos con pitch ascendente |
-| Wake pulse + bezier snap | glitch fino + hit metálico |
-| Dock & lock ×3 | click + pop, en estéreo izq./dcha./centro |
-| Calendar cascade | ticks de UI rápidos |
-| Dot-iris + logo | sub-drop + sting de logo |
+| Cada palabra/título | `whoosh_short_01–04` (HPF 300 Hz, por debajo de la voz) |
+| Cada aterrizaje | `hit_soft_01–03` |
+| Grid ignition | `riser_grid` + `shimmer_glow` |
+| Magnetic funnel / curve draw | `whoosh_long_01/02` + `suck_reverse` + `ticks_granular_curve` |
+| Wipe a negro | `whoosh_low_wipe` |
+| Combination-dial | `click_mech_dial_1–3` (pitch ascendente) |
+| Wake pulse + bezier snap | `glitch_wake` + `shimmer_glow` + `hit_metal_01/02` |
+| Dock & lock ×3 | `pop_dock_01–03` + `click_ui_01–03`, en estéreo izq./dcha./centro |
+| Calendar cascade | `ticks_granular_calendar` |
+| Dot-iris + logo | `sub_drop` + `logo_sting` (acorde de Re mayor, mismo tono que la música) |
 
 Master a **−14 LUFS / −1 dBTP**.
 
@@ -101,12 +104,18 @@ Master a **−14 LUFS / −1 dBTP**.
 |---|---|---|---|
 | Logo, Manrope, componentes UI | Kit de marca | ImperiOS / SIL OFL 1.1 | ✅ en `assets_in/brand-kit/` |
 | Tomas VO v5 (Cristina ×2) | Tus descargas de ElevenLabs | Tu plan | ✅ en `assets_in/vo/` (solo referencia) |
-| 1 foto de interior para la tarjeta de inmueble (beat 3–4) | Unsplash/Pexels, **opcional** | Unsplash/Pexels License | ⏳ te enseño los enlaces antes |
-| SFX FOUR Editors | Tu SSD | Tu licencia | ⏳ **falta**: ~40 archivos en `assets_in/sfx/` |
-| VO nueva | ElevenLabs | Tu plan | ⏳ ver pregunta abierta |
+| SFX (29) | Sintetizados en código, `tools/sfx_synth.py` | Originales | ✅ en `assets_in/sfx/` |
+| VO nueva (Cristina, 2 tomas) | ElevenLabs | Tu plan | ⏳ **bloqueada**: ver sección 9 |
 
 ## 8. Entregables
 
 1. PREVIEW v1 9:16 + contact sheet → iteramos.
 2. Final 9:16 1080×1920 a 60 fps (H.264 alta calidad + ProRes 422 HQ), stems (VO / música / SFX) y README.
 3. Solo si lo pides: proyecto completo de DaVinci Resolve.
+
+## 9. Bloqueos de la sesión en la nube
+
+- **ElevenLabs:** la política de red del entorno bloquea `api.elevenlabs.io` y no hay clave configurada. Hay dos formas de desbloquearlo:
+  - **A.** Añadir `api.elevenlabs.io` a *Allowed domains* y la clave como variable de entorno `ELEVENLABS_API_KEY`, en la configuración del entorno. Después hay que abrir una sesión nueva para que tome los cambios.
+  - **B.** Generarlo tú en ElevenLabs con el texto de `brief/VO_SCRIPT.txt`: voz Cristina, multilingual v2, stability 0.50, similarity 0.75, speed 1.00, 2 tomas. Después subes los mp3.
+- **Reel de referencia:** `www.instagram.com` también está bloqueado y requiere sesión. Descarga el vídeo y súbelo aquí para que pueda analizar ritmo, transiciones y tipografía.
