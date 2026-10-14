@@ -18,3 +18,9 @@ ADV/ImperiOS Ad/preview/package-lock.json
 ADV/ImperiOS Ad/capture/out/
 ADV/ImperiOS Ad/capture/node_modules/
 ADV/ImperiOS Ad/capture/package-lock.json
+# HyperFrames (versión «producto real»)
+ADV/ImperiOS Ad/hyperframes/node_modules/
+ADV/ImperiOS Ad/hyperframes/package-lock.json
+ADV/ImperiOS Ad/hyperframes/.hyperframes/
+ADV/ImperiOS Ad/hyperframes/assets/audio/
+ADV/ImperiOS Ad/hyperframes/renders/render.log

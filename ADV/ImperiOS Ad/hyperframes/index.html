@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>ImperiOS — producto real</title>
+    <script src="node_modules/gsap/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Manrope";
+        src: url("assets/brand/manrope.woff2") format("woff2");
+        font-weight: 200 800;
+        font-display: block;
+      }
+      :root {
+        --ink-950: #0a0a0a;
+        --ink-900: #1c1c1c;
+        --ink-700: #4a4a4a;
+        --ink-600: #727272;
+        --ink-500: #b0b0b0;
+        --ink-200: #ebebeb;
+        --ink-100: #f5f5f5;
+        --y: #ffd500;
+      }
+      body {
+        margin: 0;
+        background: var(--ink-100);
+        font-family: "Manrope", sans-serif;
+        color: var(--ink-950);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--ink-100);
+      }
+      .scene {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+      .in {
+        position: absolute;
+        inset: 0;
+      }
+      .abs {
+        position: absolute;
+      }
+      .card {
+        position: absolute;
+        background: #fff;
+        border-radius: 28px;
+        box-shadow: 0 30px 80px rgba(10, 10, 10, 0.12), 0 2px 8px rgba(10, 10, 10, 0.06);
+        overflow: hidden;
+      }
+      .crop {
+        position: absolute;
+        overflow: hidden;
+      }
+      .crop img {
+        position: absolute;
+        display: block;
+      }
+      .ring {
+        position: absolute;
+        border: 5px solid var(--y);
+        border-radius: 18px;
+        box-shadow: 0 0 0 10px rgba(255, 213, 0, 0.18);
+      }
+      .label {
+        position: absolute;
+        top: 104px;
+        left: 80px;
+        right: 80px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        color: var(--ink-600);
+      }
+      .label b {
+        color: var(--ink-950);
+      }
+      .dark .label,
+      .dark .label b {
+        color: #fff;
+      }
+      .cap {
+        position: absolute;
+        left: 80px;
+        width: 920px;
+        font-size: 62px;
+        line-height: 1.14;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      .w {
+        display: inline-block;
+        position: relative;
+        margin-right: 0.24em;
+      }
+      .w .ul {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -0.04em;
+        height: 0.1em;
+        background: var(--y);
+        transform-origin: left center;
+        border-radius: 4px;
+      }
+      .pill {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 18px 28px;
+        border-radius: 999px;
+        background: #fff;
+        font-size: 30px;
+        font-weight: 700;
+        box-shadow: 0 14px 40px rgba(10, 10, 10, 0.1);
+        white-space: nowrap;
+      }
+      .dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--ink-950);
+      }
+      .chk {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--y);
+        display: grid;
+        place-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1920" data-duration="28.2" data-fps="60">
+      <!-- Mezcla final ya masterizada (VO Cristina toma 1 + música + SFX; −14 LUFS / −1 dBTP) -->
+      <audio id="mix" src="assets/audio/master.wav" data-start="0" data-duration="28.2" data-track-index="9"></audio>
+
+      <!-- GANCHO -->
+      <section id="sH" class="clip scene" data-start="0" data-duration="3.86" data-track-index="0">
+        <div class="in" id="sH-in">
+          <div class="pill" id="hook-tag" style="left: 80px; top: 420px; background: var(--ink-950); color: #fff; font-size: 24px; letter-spacing: 0.16em; padding: 14px 24px">CRM PARA INMOBILIARIAS</div>
+          <div class="cap" id="cap-hook" style="top: 520px; font-size: 96px; line-height: 1.06"></div>
+          <div class="pill chip" style="left: 110px; top: 1080px"><span class="dot"></span>Portales</div>
+          <div class="pill chip" style="left: 600px; top: 1010px"><span class="dot"></span>WhatsApp</div>
+          <div class="pill chip" style="left: 430px; top: 1230px">Excel</div>
+          <div class="pill chip" style="left: 120px; top: 1390px"><span class="dot"></span>Email</div>
+          <div class="pill chip" style="left: 660px; top: 1340px">Llamadas</div>
+          <div class="pill chip" style="left: 430px; top: 1540px"><span class="dot"></span>Web</div>
+        </div>
+      </section>
+
+      <!-- 01 · UN SOLO PANEL — Contactos (nombres + fuente, sin emails) -->
+      <section id="s1" class="clip scene" data-start="3.86" data-duration="2.86" data-track-index="0">
+        <div class="in" id="s1-in">
+          <div class="label"><span><b>01</b> · UN SOLO PANEL</span><span>01 / 06</span></div>
+          <div class="card" id="s1-card" style="left: 60px; top: 230px; width: 960px; height: 937px">
+            <img src="assets/plates/leads-title.png" class="abs" style="left: 24px; top: 24px; width: 406px" alt="" />
+            <div id="s1-table" class="abs" style="left: 24px; top: 153px; width: 912px; height: 760px"></div>
+            <div class="ring" id="s1-ring" style="left: 400px; top: 147px; width: 168px; height: 772px"></div>
+          </div>
+          <div class="cap" id="cap-1" style="top: 1300px"></div>
+        </div>
+      </section>
+
+      <!-- 02 · CAMPAÑAS — Métricas por procedencia + coste por lead en Marketing -->
+      <section id="s2" class="clip scene" data-start="6.72" data-duration="1.83" data-track-index="0">
+        <div class="in" id="s2-in">
+          <div class="label"><span><b>02</b> · CAMPAÑAS</span><span>02 / 06</span></div>
+          <div class="card" style="left: 60px; top: 230px; width: 960px; height: 354px">
+            <img id="s2-chart" src="assets/plates/metrics-chart.png" class="abs" style="left: 0; top: 0; width: 960px; transform-origin: 69% 72%" alt="" />
+          </div>
+          <div class="card" style="left: 60px; top: 620px; width: 960px; height: 159px">
+            <img src="assets/plates/mkt-kpis.png" class="abs" style="left: 0; top: 0; width: 960px" alt="" />
+          </div>
+          <div class="card" id="s2-zoom" style="left: 296px; top: 850px; width: 488px; height: 332px">
+            <div class="crop" style="inset: 0">
+              <img src="assets/plates/mkt-kpis.png" style="left: -1029px; top: 0; width: 2003px" alt="" />
+            </div>
+          </div>
+          <div class="ring" id="s2-ring" style="left: 286px; top: 840px; width: 498px; height: 342px; border-radius: 34px"></div>
+          <div class="cap" id="cap-2" style="top: 1300px"></div>
+        </div>
+      </section>
+
+      <!-- 03 · MATCH CON IA — Coincidencias -->
+      <section id="s3" class="clip scene dark" data-start="8.55" data-duration="4.4" data-track-index="0">
+        <div class="abs" id="s3-bg" style="inset: 0; background: var(--ink-950)"></div>
+        <div class="abs" id="s3-glow" style="left: 640px; top: -260px; width: 760px; height: 760px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 213, 0, 0.32), rgba(255, 213, 0, 0) 68%)"></div>
+        <div class="in" id="s3-in">
+          <div class="label"><span><b>03</b> · MATCH CON IA</span><span>03 / 06</span></div>
+          <div class="card" id="s3-head" style="left: 60px; top: 220px; width: 960px; height: 211px">
+            <img src="assets/plates/match-title.png" class="abs" style="left: 24px; top: 24px; width: 603px" alt="" />
+            <img src="assets/plates/match-tabs.png" class="abs" style="left: 24px; top: 129px; width: 912px" alt="" />
+          </div>
+          <div class="card" id="s3-card" style="left: 102px; top: 480px; width: 876px; height: 585px">
+            <img src="assets/plates/card-top.png" class="abs" style="left: 0; top: 0; width: 876px" alt="" />
+            <img src="assets/plates/card-prop.png" class="abs" style="left: 0; top: 305px; width: 876px" alt="" />
+            <div class="ring" id="s3-score" style="left: 32px; top: 149px; width: 130px; height: 130px; border-radius: 50%"></div>
+          </div>
+          <div class="pill crit" style="left: 102px; top: 1110px; background: var(--ink-900); color: #fff"><span class="chk"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10" stroke="#0A0A0A" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg></span>Zona</div>
+          <div class="pill crit" style="left: 362px; top: 1110px; background: var(--ink-900); color: #fff"><span class="chk"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10" stroke="#0A0A0A" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg></span>Tipo</div>
+          <div class="pill crit" style="left: 610px; top: 1110px; background: var(--ink-900); color: #fff"><span class="chk"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10" stroke="#0A0A0A" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg></span>Presupuesto</div>
+          <div class="cap" id="cap-3" style="top: 1300px; color: #fff"></div>
+        </div>
+      </section>
+
+      <!-- 04 · REACTIVAR — Aviso de coincidencia + tarjeta notificada -->
+      <section id="s4" class="clip scene" data-start="12.95" data-duration="4.0" data-track-index="0">
+        <div class="in" id="s4-in">
+          <div class="label"><span><b>04</b> · REACTIVAR</span><span>04 / 06</span></div>
+          <div class="card" id="s4-bell" style="left: 878px; top: 170px; width: 142px; height: 120px; border-radius: 28px">
+            <img src="assets/plates/bell.png" class="abs" style="left: 16px; top: 6px; width: 109px" alt="" />
+          </div>
+          <div class="card" id="s4-notif" style="left: 60px; top: 320px; width: 960px; height: 205px; border-radius: 24px">
+            <img src="assets/plates/notif-head.png" class="abs" style="left: 34px; top: 22px; width: 826px" alt="" />
+            <div class="abs" style="left: 24px; right: 24px; top: 124px; height: 2px; background: var(--ink-200)"></div>
+            <img src="assets/plates/notif-match.png" class="abs" style="left: 34px; top: 136px; width: 813px" alt="" />
+            <div class="abs" id="s4-hl" style="left: 24px; top: 130px; width: 912px; height: 68px; border-radius: 14px; background: rgba(255, 213, 0, 0.45); mix-blend-mode: multiply; transform-origin: left center"></div>
+            <div class="abs" id="s4-bar" style="left: 24px; top: 130px; width: 8px; height: 68px; border-radius: 4px; background: var(--y)"></div>
+          </div>
+          <div class="card" id="s4-card" style="left: 120px; top: 570px; width: 840px; height: 852px">
+            <img src="assets/plates/card-top.png" class="abs" style="left: 0; top: 0; width: 840px" alt="" />
+            <div class="abs" style="left: 38px; top: 300px; width: 70px; height: 70px; border-radius: 50%; background: var(--ink-100); display: grid; place-items: center; font-size: 24px; font-weight: 700; color: var(--ink-700)">RD</div>
+            <img src="assets/plates/card-name.png" class="abs" style="left: 121px; top: 313px; width: 675px" alt="" />
+            <img src="assets/plates/card-prop.png" class="abs" style="left: 0; top: 390px; width: 840px" alt="" />
+            <img src="assets/plates/card-cta.png" class="abs" style="left: 0; top: 658px; width: 840px" alt="" />
+            <div class="ring" id="s4-badge" style="left: 610px; top: 168px; width: 200px; height: 74px; border-radius: 40px"></div>
+            <div class="ring" id="s4-sent" style="left: 26px; top: 558px; width: 788px; height: 82px"></div>
+          </div>
+          <div class="cap" id="cap-4" style="top: 1470px"></div>
+        </div>
+      </section>
+
+      <!-- 05 · AGENDA — Calendario del equipo -->
+      <section id="s5" class="clip scene" data-start="16.95" data-duration="4.6" data-track-index="0">
+        <div class="in" id="s5-in">
+          <div class="label"><span><b>05</b> · AGENDA</span><span>05 / 06</span></div>
+          <div class="card" id="s5-card" style="left: 60px; top: 230px; width: 960px; height: 677px">
+            <div id="s5-cal" class="abs" style="left: 0; top: 0; width: 960px; height: 677px; transform-origin: 438px 335px">
+              <img src="assets/plates/calendar.png" class="abs" style="left: 0; top: 0; width: 960px" alt="" />
+              <div class="ring" id="s5-today" style="left: 417px; top: 314px; width: 34px; height: 34px; border-width: 3px; border-radius: 50%; box-shadow: 0 0 0 5px rgba(255, 213, 0, 0.25)"></div>
+            </div>
+          </div>
+          <div class="pill" id="s5-rem" style="left: 60px; top: 960px">
+            <svg width="34" height="34" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 20a2 2 0 0 0 4 0" fill="none" stroke="#0A0A0A" stroke-width="2" stroke-linejoin="round" /><circle cx="18" cy="6" r="3.5" fill="#FFD500" /></svg>Recordatorio enviado
+          </div>
+          <div class="pill" id="s5-team" style="left: 560px; top: 960px; gap: 0">
+            <span style="width: 54px; height: 54px; border-radius: 50%; background: var(--ink-950); color: #fff; display: grid; place-items: center; font-size: 20px">AD</span>
+            <span style="width: 54px; height: 54px; border-radius: 50%; background: var(--ink-700); color: #fff; display: grid; place-items: center; font-size: 20px; margin-left: -12px">BD</span>
+            <span style="width: 54px; height: 54px; border-radius: 50%; background: var(--y); display: grid; place-items: center; font-size: 20px; margin-left: -12px">CD</span>
+            <span style="margin-left: 18px">3 agentes</span>
+          </div>
+          <div class="cap" id="cap-5" style="top: 1300px"></div>
+        </div>
+      </section>
+
+      <!-- 06 · IMPERIOS — Todo conectado -->
+      <section id="s6" class="clip scene" data-start="21.55" data-duration="3.4" data-track-index="0">
+        <div class="in" id="s6-in">
+          <div class="label"><span><b>06</b> · IMPERIOS</span><span>06 / 06</span></div>
+          <svg class="abs" id="s6-lines" style="left: 0; top: 0" width="1080" height="1200" viewBox="0 0 1080 1200">
+            <path class="ln" d="M300 420 H780" stroke="#FFD500" stroke-width="6" fill="none" stroke-linecap="round" />
+            <path class="ln" d="M780 420 V780" stroke="#FFD500" stroke-width="6" fill="none" stroke-linecap="round" />
+            <path class="ln" d="M780 780 H300" stroke="#FFD500" stroke-width="6" fill="none" stroke-linecap="round" />
+            <path class="ln" d="M300 780 V420" stroke="#FFD500" stroke-width="6" fill="none" stroke-linecap="round" />
+          </svg>
+          <div class="card tile" style="left: 80px; top: 270px; width: 440px; height: 300px"><img src="assets/plates/leads-source.png" class="abs" style="left: 0; top: 0; width: 440px" alt="" /></div>
+          <div class="card tile" style="left: 560px; top: 270px; width: 440px; height: 300px"><img src="assets/plates/metrics-chart.png" class="abs" style="left: -60px; top: -80px; width: 900px" alt="" /></div>
+          <div class="card tile" style="left: 80px; top: 630px; width: 440px; height: 300px"><img src="assets/plates/card-top.png" class="abs" style="left: -20px; top: -10px; width: 600px" alt="" /></div>
+          <div class="card tile" style="left: 560px; top: 630px; width: 440px; height: 300px"><img src="assets/plates/calendar.png" class="abs" style="left: -280px; top: -260px; width: 1000px" alt="" /></div>
+          <div class="abs" id="s6-hub" style="left: 500px; top: 560px; width: 80px; height: 80px; border-radius: 50%; background: var(--ink-950); display: grid; place-items: center; box-shadow: 0 0 0 10px rgba(255, 213, 0, 0.35)"><span style="width: 26px; height: 26px; border-radius: 50%; background: var(--y)"></span></div>
+          <div class="cap" id="cap-6" style="top: 1180px; font-size: 92px; line-height: 1.08"></div>
+        </div>
+      </section>
+
+      <!-- CIERRE — logo + llamada a la acción -->
+      <section id="s7" class="clip scene" data-start="24.95" data-duration="3.25" data-track-index="0">
+        <div class="abs" id="s7-glow" style="left: 90px; top: 380px; width: 900px; height: 900px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 213, 0, 0.3), rgba(255, 213, 0, 0) 66%)"></div>
+        <div class="in" id="s7-in">
+          <img id="s7-logo" src="assets/brand/logo.svg" class="abs" style="left: 160px; top: 700px; width: 760px" alt="ImperiOS" />
+          <div class="abs" id="s7-cta" style="left: 0; right: 0; top: 1090px; display: flex; justify-content: center">
+            <div style="display: flex; align-items: center; gap: 18px; padding: 30px 54px; border-radius: 999px; background: var(--y); font-size: 50px; font-weight: 800; box-shadow: 0 20px 50px rgba(255, 213, 0, 0.35)">
+              Pide tu demo
+              <svg width="46" height="46" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#0A0A0A" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </div>
+          </div>
+          <div class="abs" id="s7-url" style="left: 0; right: 0; top: 1268px; text-align: center; font-size: 32px; font-weight: 700; letter-spacing: 0.2em; color: var(--ink-700)">IMPERIOS.APP ↗</div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      // Tiempos de palabra de la VO (campana-toma-1.words.json) + desfase de 0,2 s con el que va colocada en la mezcla.
+      const WORDS = [["¿Tus",0.2],["leads",0.44],["se",0.72],["pierden",0.84],["entre",1.28],["portales,",1.48],["WhatsApp",2.56],["y",2.92],["Excel?",3.08],["Con",3.96],["Imperios,",4.2],["todos",4.92],["entran",5.32],["en",5.64],["un",5.8],["solo",5.92],["panel,",6.2],["y",6.8],["ves",6.96],["qué",7.16],["campaña",7.32],["funciona.",7.72],["La",8.68],["inteligencia",8.76],["artificial",9.32],["cruza",9.92],["zona,",10.36],["tipo",11.0],["y",11.2],["presupuesto",11.36],["con",11.96],["tu",12.12],["cartera.",12.24],["Y",13.08],["cuando",13.2],["hay",13.48],["match,",13.72],["reactivas",14.2],["al",14.72],["cliente",14.84],["con",15.32],["una",15.48],["oportunidad",15.6],["real.",16.28],["Visitas,",17.08],["recordatorios",17.8],["y",18.56],["agentes,",18.8],["coordinados",19.44],["desde",20.04],["la",20.28],["misma",20.44],["agenda.",20.76],["Imperios.",21.68],["Todo",22.6],["conectado,",22.84],["de",23.6],["principio",23.72],["a",24.25],["fin.",24.36]];
+      const KEY = new Set(["panel,", "campaña", "zona,", "tipo", "presupuesto", "real.", "agenda.", "conectado,", "fin."]);
+      // Escenas: [id, inicio, fin]
+      const SC = { sH: [0, 3.86], s1: [3.86, 6.72], s2: [6.72, 8.55], s3: [8.55, 12.95], s4: [12.95, 16.95], s5: [16.95, 21.55], s6: [21.55, 24.95], s7: [24.95, 28.2] };
+
+      const tl = gsap.timeline({ paused: true });
+      const E = "power3.out";
+
+      // Subtítulo cinético: cada palabra entra en su instante de la VO; las palabras clave llevan subrayado amarillo.
+      function caption(el, from, to, words) {
+        el.innerHTML = "";
+        words.forEach(([txt, t]) => {
+          const w = document.createElement("span");
+          w.className = "w";
+          w.textContent = txt;
+          el.appendChild(w);
+          tl.fromTo(w, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.28, ease: E }, t - 0.04);
+          if (KEY.has(txt)) {
+            const u = document.createElement("span");
+            u.className = "ul";
+            w.appendChild(u);
+            tl.fromTo(u, { scaleX: 0 }, { scaleX: 1, duration: 0.35, ease: "power2.inOut" }, t + 0.18);
+          }
+        });
+      }
+      const range = (a, b) => WORDS.filter(([, t]) => t >= a && t < b);
+
+      // Entrada y salida de cada escena (sobre el contenedor interior, nunca sobre el .clip)
+      function sceneIO(id, inDur = 0.38, outDur = 0.22) {
+        const [a, b] = SC[id];
+        tl.fromTo(`#${id}-in`, { opacity: 0, y: 70 }, { opacity: 1, y: 0, duration: inDur, ease: E }, a);
+        if (id !== "s7") tl.to(`#${id}-in`, { opacity: 0, y: -50, duration: outDur, ease: "power2.in" }, b - outDur);
+      }
+
+      // GANCHO
+      caption(document.getElementById("cap-hook"), 0, 3.86, range(0, 3.86));
+      tl.fromTo("#hook-tag", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: E }, 0.05);
+      gsap.utils.toArray(".chip").forEach((c, i) => {
+        tl.fromTo(c, { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2)" }, 0.5 + i * 0.32);
+        tl.to(c, { y: i % 2 ? -26 : 22, rotation: i % 2 ? -4 : 3, duration: 1.1, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0.8 + i * 0.05);
+      });
+      tl.to(".chip", { x: (i) => [430, -50, 100, 420, -150, 100][i], y: (i) => [-60, 10, -230, -380, -330, -540][i], scale: 0.2, opacity: 0, duration: 0.42, ease: "power3.in", stagger: 0.03 }, 3.38);
+      tl.to("#sH-in", { opacity: 0, duration: 0.18 }, 3.68);
+
+      // 01 · Contactos: filas de la tabla real entrando una a una
+      sceneIO("s1");
+      const s = 912 / 1029; // escala de las placas a 2x dentro de la tarjeta
+      const table = document.getElementById("s1-table");
+      const rowTop = [0, 75];
+      for (let i = 1; i < 8; i++) rowTop.push(75 + i * 97.9);
+      rowTop.push(857);
+      for (let r = 0; r < 9; r++) {
+        const top = rowTop[r], h = rowTop[r + 1] - top;
+        const row = document.createElement("div");
+        row.className = "crop";
+        row.style.cssText = `left:0;top:${top * s}px;width:912px;height:${h * s + 0.5}px`;
+        row.innerHTML = `<img src="assets/plates/leads-names.png" style="left:0;top:${-top * s}px;width:${430 * s}px"><img src="assets/plates/leads-source.png" style="left:${430 * s}px;top:${-top * s}px;width:${599 * s}px">`;
+        table.appendChild(row);
+        tl.fromTo(row, { opacity: 0, x: r ? 80 : 0 }, { opacity: 1, x: 0, duration: 0.34, ease: E }, 4.0 + r * 0.11);
+      }
+      tl.fromTo("#s1-ring", { opacity: 0, scaleY: 0.2 }, { opacity: 1, scaleY: 1, duration: 0.42, ease: E }, 5.5);
+      caption(document.getElementById("cap-1"), 0, 0, range(3.86, 6.72));
+
+      // 02 · Campañas: zoom a la gráfica por procedencia y foco en el coste por lead
+      sceneIO("s2", 0.3, 0.2);
+      tl.fromTo("#s2-chart", { scale: 1 }, { scale: 1.45, duration: 1.6, ease: "power2.inOut" }, 6.8);
+      tl.fromTo("#s2-zoom", { opacity: 0, scale: 0.6, y: -120 }, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "back.out(1.4)" }, 7.3);
+      tl.fromTo("#s2-ring", { opacity: 0, scale: 1.1 }, { opacity: 1, scale: 1, duration: 0.3, ease: E }, 7.75);
+      caption(document.getElementById("cap-2"), 0, 0, range(6.72, 8.55));
+
+      // 03 · Match con IA (escenario oscuro con barrido circular)
+      tl.fromTo("#s3-bg", { clipPath: "circle(0% at 50% 45%)" }, { clipPath: "circle(120% at 50% 45%)", duration: 0.5, ease: "power2.inOut" }, 8.55);
+      tl.fromTo("#s3-glow", { opacity: 0 }, { opacity: 1, duration: 0.8 }, 8.8);
+      sceneIO("s3", 0.42);
+      tl.fromTo("#s3-card", { opacity: 0, y: 80, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: E }, 9.4);
+      gsap.utils.toArray(".crit").forEach((c, i) => {
+        tl.fromTo(c, { opacity: 0, y: 30, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, duration: 0.36, ease: "back.out(2)" }, [10.36, 11.0, 11.36][i]);
+      });
+      tl.fromTo("#s3-score", { opacity: 0, scale: 1.5 }, { opacity: 1, scale: 1, duration: 0.4, ease: E }, 12.2);
+      tl.to("#s3-bg", { opacity: 0, duration: 0.25 }, 12.7);
+      tl.to("#s3-glow", { opacity: 0, duration: 0.25 }, 12.7);
+      caption(document.getElementById("cap-3"), 0, 0, range(8.55, 12.95));
+
+      // 04 · Reactivar: campana, aviso de coincidencia y tarjeta ya notificada
+      sceneIO("s4");
+      tl.fromTo("#s4-bell", { rotation: 0 }, { rotation: 14, duration: 0.08, yoyo: true, repeat: 5, ease: "sine.inOut", transformOrigin: "50% 0%" }, 13.1);
+      tl.fromTo("#s4-notif", { opacity: 0, y: -60 }, { opacity: 1, y: 0, duration: 0.42, ease: E }, 13.3);
+      tl.fromTo("#s4-hl", { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power2.out" }, 13.75);
+      tl.fromTo("#s4-bar", { scaleY: 0 }, { scaleY: 1, duration: 0.3, ease: "power2.out" }, 13.75);
+      tl.fromTo("#s4-card", { opacity: 0, y: 90 }, { opacity: 1, y: 0, duration: 0.45, ease: E }, 14.05);
+      tl.fromTo("#s4-badge", { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, duration: 0.35, ease: E }, 14.45);
+      tl.fromTo("#s4-sent", { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: 0.35, ease: E }, 15.65);
+      caption(document.getElementById("cap-4"), 0, 0, range(12.95, 16.95));
+
+      // 05 · Agenda: acercamiento a la semana de hoy y capas propias de recordatorio y agentes
+      sceneIO("s5");
+      tl.fromTo("#s5-cal", { scale: 1 }, { scale: 1.9, duration: 2.0, ease: "power2.inOut" }, 17.3);
+      tl.fromTo("#s5-today", { opacity: 0, scale: 2.2 }, { opacity: 1, scale: 1, duration: 0.4, ease: E }, 17.9);
+      tl.fromTo("#s5-rem", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.36, ease: "back.out(1.8)" }, 17.85);
+      tl.fromTo("#s5-team", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.36, ease: "back.out(1.8)" }, 18.85);
+      tl.to("#s5-cal", { scale: 1.3, duration: 1.2, ease: "power2.inOut" }, 19.6);
+      caption(document.getElementById("cap-5"), 0, 0, range(16.95, 21.55));
+
+      // 06 · Todo conectado: las cuatro piezas del producto unidas
+      sceneIO("s6", 0.3);
+      tl.fromTo(".tile", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.42, ease: "back.out(1.5)", stagger: 0.12 }, 21.7);
+      document.querySelectorAll("#s6-lines .ln").forEach((p, i) => {
+        const L = p.getTotalLength();
+        p.style.strokeDasharray = L;
+        tl.fromTo(p, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: 0.35, ease: "power2.inOut" }, 22.84 + i * 0.16);
+      });
+      tl.fromTo("#s6-hub", { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.2)" }, 22.84);
+      tl.to("#s6-hub", { scale: 1.15, duration: 0.3, yoyo: true, repeat: 3, ease: "sine.inOut" }, 23.3);
+      caption(document.getElementById("cap-6"), 0, 0, range(21.55, 24.95));
+
+      // CIERRE
+      tl.fromTo("#s7-in", { opacity: 0 }, { opacity: 1, duration: 0.2 }, 24.95);
+      tl.fromTo("#s7-glow", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 1.0, ease: E }, 24.95);
+      tl.fromTo("#s7-logo", { opacity: 0, scale: 0.86, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: E }, 25.0);
+      tl.fromTo("#s7-cta", { opacity: 0, y: 50, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 25.3);
+      tl.fromTo("#s7-url", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 25.9);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

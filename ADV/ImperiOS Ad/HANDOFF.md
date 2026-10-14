@@ -66,3 +66,10 @@ Pasos:
 - Login con la cuenta demo OK. Rutas reales (ya en `screens.json`): `/contacts`, `/metrics`, `/marketing`, `/matches`, `/calendar`; aviso de match = campana de notificaciones (`header [data-slot="dropdown-menu-trigger"]`).
 - En `capture/out/` (no versionado): 6 capturas `@2x` (2880×1800) + página completa, 6 vídeos mp4 (1440×900, 60 fps; el vídeo de Playwright no graba a 2x) y `capturas-contact-sheet.jpg`.
 - El email de la cuenta sale tapado en capturas y vídeos. A revisar antes de usar: nombre «Brian» en el pie del menú, botón flotante de ajustes (engranaje) a la derecha, aviso rojo «La conexión con Meta ha dejado de funcionar» en Marketing, notificaciones «Error en IDEALISTA» y textos de prueba («prueba test», «TEST-00x», «Piso de prueba…») y la columna de emails `@demo.ficticio`.
+
+### Versión «producto real» en HyperFrames (15/10/2026)
+
+- Decisión del usuario sobre lo sensible de las capturas: **recortes y zoom en la composición** (sin volver a capturar).
+- Proyecto en `hyperframes/`: `index.html` (composición), `tools/make_plates.py` (recortes), `assets/plates/` (placas), `BRIEF-PRODUCTO-REAL.md` (escenas y criterios), `build.sh` (check + render + contact sheet + loudness).
+- Reutiliza el máster de audio de la campaña con voz (Cristina, toma 1); los cortes caen en los mismos tiempos, así que los SFX siguen sincronizados.
+- CTA «Pide tu demo» por defecto, aún sin confirmar.
