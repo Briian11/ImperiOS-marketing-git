@@ -60,3 +60,9 @@ Pasos:
   ```
   El login se hace en un contexto sin vídeo; la sesión se guarda en `/tmp` (fuera del repo) y las credenciales se redactan en los logs. Cualquier elemento que muestre el email de la cuenta sale tapado (magenta) en las capturas; para tapar más cosas, añadir selectores en `"mask"`.
   `capture/out/` está en `.gitignore`: **las capturas no se suben hasta que el usuario las revise** (paso 2).
+
+### Capturas hechas (14/10/2026) — pendientes de revisión del usuario
+
+- Login con la cuenta demo OK. Rutas reales (ya en `screens.json`): `/contacts`, `/metrics`, `/marketing`, `/matches`, `/calendar`; aviso de match = campana de notificaciones (`header [data-slot="dropdown-menu-trigger"]`).
+- En `capture/out/` (no versionado): 6 capturas `@2x` (2880×1800) + página completa, 6 vídeos mp4 (1440×900, 60 fps; el vídeo de Playwright no graba a 2x) y `capturas-contact-sheet.jpg`.
+- El email de la cuenta sale tapado en capturas y vídeos. A revisar antes de usar: nombre «Brian» en el pie del menú, botón flotante de ajustes (engranaje) a la derecha, aviso rojo «La conexión con Meta ha dejado de funcionar» en Marketing, notificaciones «Error en IDEALISTA» y textos de prueba («prueba test», «TEST-00x», «Piso de prueba…») y la columna de emails `@demo.ficticio`.

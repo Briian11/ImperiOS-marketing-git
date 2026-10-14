@@ -105,6 +105,21 @@ function masks(page) {
   return [page.getByText(EMAIL, { exact: false }), ...(CFG.mask || []).map((s) => page.locator(s))];
 }
 
+// En vídeo no hay `mask`: se tapa en la propia página cualquier elemento cuyo texto contenga el email (y los selectores de "mask").
+async function maskInPage(ctx) {
+  await ctx.addInitScript(({ email, sels }) => {
+    const paint = () => {
+      const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      for (let n; (n = w.nextNode());) if (n.nodeValue.includes(email)) {
+        const el = n.parentElement; el.style.setProperty('background', '#FF00FF', 'important'); el.style.setProperty('color', 'transparent', 'important');
+      }
+      for (const s of sels) document.querySelectorAll(s).forEach((el) => el.style.setProperty('visibility', 'hidden', 'important'));
+    };
+    const start = () => { paint(); new MutationObserver(paint).observe(document.body, { subtree: true, childList: true, characterData: true }); };
+    document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', start) : start();
+  }, { email: EMAIL, sels: CFG.mask || [] });
+}
+
 async function navLinks(page) {
   return page.evaluate(() => {
     const seen = new Set();
@@ -123,7 +138,9 @@ async function goToScreen(page, home, s) {
     await settle(page);
     let clicked = false;
     for (const label of s.nav || []) {
-      const l = page.getByRole('link', { name: label, exact: false }).or(page.getByRole('button', { name: label, exact: false })).first();
+      const l = page.getByRole('link', { name: label, exact: true })
+        .or(page.getByRole('button', { name: label, exact: true }))
+        .or(page.locator('aside, nav, [data-sidebar]').getByText(label, { exact: true })).first();
       if (await l.isVisible().catch(() => false)) { await l.click(); clicked = label; break; }
     }
     if (!clicked) return false;
@@ -167,6 +184,7 @@ try {
     } else {
       for (const s of screens) {
         if (!(await goToScreen(page, home, s))) { log(`  ${s.id}: sin entrada de menú (${(s.nav || []).join(' / ')}); pon "path" en screens.json`); continue; }
+        await runSteps(page, s.before);
         await page.screenshot({ path: path.join(OUT, `${s.id}@2x.png`), mask: masks(page) });
         await page.screenshot({ path: path.join(OUT, `${s.id}-full@2x.png`), fullPage: true, mask: masks(page) });
         fs.writeFileSync(path.join(OUT, `${s.id}.json`), JSON.stringify({ id: s.id, beat: s.beat, path: new URL(page.url()).pathname }, null, 2));
@@ -177,14 +195,16 @@ try {
   }
 
   if (mode === 'record') {
-    const size = { width: CFG.viewport.width * CFG.deviceScaleFactor, height: CFG.viewport.height * CFG.deviceScaleFactor };
+    // El vídeo de Playwright graba a 1x (no respeta deviceScaleFactor): se graba al tamaño CSS de la ventana.
+    const size = { ...CFG.viewport };
     for (const s of screens) {
       const dir = path.join(OUT, '_video', s.id);
       fs.rmSync(dir, { recursive: true, force: true });
       const ctx = await browser.newContext(ctxOpts({ storageState: STATE, recordVideo: { dir, size } }));
+      await maskInPage(ctx);
       const page = await ctx.newPage();
       const ok = await goToScreen(page, home, s);
-      if (ok) await runSteps(page, s.record);
+      if (ok) await runSteps(page, [...(s.before || []), ...(s.record || [])]);
       const video = page.video();
       await ctx.close();
       if (!ok) { log(`  ${s.id}: sin entrada de menú; no se graba`); continue; }
