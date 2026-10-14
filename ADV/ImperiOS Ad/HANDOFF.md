@@ -73,3 +73,5 @@ Pasos:
 - Proyecto en `hyperframes/`: `index.html` (composición), `tools/make_plates.py` (recortes), `assets/plates/` (placas), `BRIEF-PRODUCTO-REAL.md` (escenas y criterios), `build.sh` (check + render + contact sheet + loudness).
 - Reutiliza el máster de audio de la campaña con voz (Cristina, toma 1); los cortes caen en los mismos tiempos, así que los SFX siguen sincronizados.
 - CTA «Pide tu demo» por defecto, aún sin confirmar.
+- **Preview v1 renderizada**: `hyperframes/renders/imperios-producto-real-v1_9x16.mp4` (1080×1920, 60 fps, 28,2 s, −14,0 LUFS, pico real −1,6 dBTP) + `contact-sheet-producto-real-v1.png`. `hyperframes check`: 0 errores, 0 avisos, contraste AA 44/44. Render en 1 min 27 s (beginframe, software GPU).
+- Siguiente: feedback del usuario sobre la v1 → ajustes → render final con `--quality delivery`; confirmar CTA; si se quieren, versiones con ganchos B/C (`campana-B/C-compuesta.mp3`).
