@@ -14,3 +14,7 @@ ADV/ImperiOS Ad/preview/out/campaign-vo-*/vo_proc.wav
 ADV/ImperiOS Ad/preview/out/campaign-vo-*/audio/premix.wav
 ADV/ImperiOS Ad/preview/out/campaign-vo-*/audio/mix_premaster.wav
 ADV/ImperiOS Ad/preview/package-lock.json
+# Capturas del CRM: no se suben hasta que el usuario las revise (pueden contener datos sensibles)
+ADV/ImperiOS Ad/capture/out/
+ADV/ImperiOS Ad/capture/node_modules/
+ADV/ImperiOS Ad/capture/package-lock.json

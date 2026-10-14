@@ -1,0 +1,62 @@
+{
+  "viewport": { "width": 1440, "height": 900 },
+  "deviceScaleFactor": 2,
+  "locale": "es-ES",
+  "timezoneId": "Europe/Madrid",
+  "mask": [],
+  "screens": [
+    {
+      "id": "01-leads",
+      "beat": "Con Imperios, todos entran en un solo panel",
+      "what": "Bandeja de leads con su origen (portal, campaña, web)",
+      "nav": ["Leads", "Contactos", "Clientes", "Bandeja"],
+      "path": null,
+      "record": [
+        { "do": "wait", "ms": 800 },
+        { "do": "scroll", "y": 400 },
+        { "do": "wait", "ms": 800 },
+        { "do": "scroll", "y": -400 }
+      ]
+    },
+    {
+      "id": "02-campanas",
+      "beat": "y ves qué campaña funciona",
+      "what": "Panel de campañas / estadísticas por origen",
+      "nav": ["Campañas", "Estadísticas", "Informes", "Marketing", "Dashboard", "Panel"],
+      "path": null,
+      "record": [
+        { "do": "wait", "ms": 1500 }
+      ]
+    },
+    {
+      "id": "03-match",
+      "beat": "La inteligencia artificial cruza zona, tipo y presupuesto con tu cartera",
+      "what": "Match con IA: cliente ↔ inmueble",
+      "nav": ["Match", "Cruces", "Coincidencias", "IA"],
+      "path": null,
+      "record": [
+        { "do": "wait", "ms": 1500 }
+      ]
+    },
+    {
+      "id": "04-aviso-match",
+      "beat": "Y cuando hay match, reactivas al cliente con una oportunidad real",
+      "what": "Aviso de match + acción de reactivar",
+      "nav": ["Notificaciones", "Avisos", "Alertas", "Oportunidades"],
+      "path": null,
+      "record": [
+        { "do": "wait", "ms": 1500 }
+      ]
+    },
+    {
+      "id": "05-agenda",
+      "beat": "Visitas, recordatorios y agentes, coordinados desde la misma agenda",
+      "what": "Agenda compartida con agentes",
+      "nav": ["Agenda", "Calendario", "Visitas", "Agentes", "Equipo"],
+      "path": null,
+      "record": [
+        { "do": "wait", "ms": 1500 }
+      ]
+    }
+  ]
+}

@@ -43,3 +43,19 @@ Pasos:
 3. Brief de la versión «producto real»: pantallas reales como base (zoom/foco/resaltado amarillo animados encima) + nuestras animaciones propias para gancho, transiciones y CTA.
 4. Portar escenas a HyperFrames (composición HTML con `data-*` + GSAP), reutilizar VO (`assets_in/vo/campana-toma-1.mp3`, tiempos en `campana-toma-1.words.json`), SFX y música; mantener −14 LUFS / −1 dBTP y música ≥15 dB bajo la voz.
 5. CTA pendiente de confirmar por el usuario (por defecto «Pide tu demo»).
+
+### Estado de la siguiente fase (14/10/2026)
+
+- Variables `IMPERIOS_DEMO_URL`, `IMPERIOS_DEMO_EMAIL` e `IMPERIOS_DEMO_PASSWORD`: **definidas**.
+- Red: **bloqueada**. El proxy de la sesión devuelve `403` al conectar con `prueba.imperios.app` (también con `imperios.app`). Hay que añadir el host en *Allowed domains* del entorno y **abrir una sesión nueva** (la lista se aplica al arrancar el contenedor).
+- HyperFrames clonado en `/home/user/heygen-com/hyperframes` (commit `9c11715`).
+- Script de captura listo: `capture/capture.mjs` + `capture/screens.json` (probado contra un login simulado en local, no contra el CRM):
+  ```bash
+  cd "ADV/ImperiOS Ad/capture" && npm install
+  node capture.mjs explore     # login + mapa del menú → out/explore.json + out/00-home@2x.png
+  # ajustar "nav" o "path" de cada pantalla en screens.json según explore.json
+  node capture.mjs shots       # out/<id>@2x.png (2880×1800) + <id>-full@2x.png
+  node capture.mjs record      # out/<id>.mp4 (2880×1800, 60 fps)
+  ```
+  El login se hace en un contexto sin vídeo; la sesión se guarda en `/tmp` (fuera del repo) y las credenciales se redactan en los logs. Cualquier elemento que muestre el email de la cuenta sale tapado (magenta) en las capturas; para tapar más cosas, añadir selectores en `"mask"`.
+  `capture/out/` está en `.gitignore`: **las capturas no se suben hasta que el usuario las revise** (paso 2).

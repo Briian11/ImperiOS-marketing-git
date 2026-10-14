@@ -1,0 +1,9 @@
+{
+  "name": "imperios-crm-capture",
+  "private": true,
+  "description": "Capturas a 2x y grabación de interacciones de la cuenta demo del CRM (Playwright, login por variables de entorno)",
+  "type": "module",
+  "dependencies": {
+    "playwright-core": "1.56.1"
+  }
+}
