@@ -48,6 +48,7 @@ Pasos:
 
 - Variables `IMPERIOS_DEMO_URL`, `IMPERIOS_DEMO_EMAIL` e `IMPERIOS_DEMO_PASSWORD`: **definidas**.
 - Red: **bloqueada**. El proxy de la sesión devuelve `403` al conectar con `prueba.imperios.app` (también con `imperios.app`). Hay que añadir el host en *Allowed domains* del entorno y **abrir una sesión nueva** (la lista se aplica al arrancar el contenedor).
+- Actualización: con `prueba.imperios.app` permitido la web carga, pero el login falla porque el navegador no llega al backend: hay que permitir también `cjwjlogivrkjrfagrwzz.supabase.co` y `api.imperios.app` (y `imperios.app` por si acaso). Las peticiones a `*.google.com` / `gvt1.com` son ruido de Chromium y no hacen falta.
 - HyperFrames clonado en `/home/user/heygen-com/hyperframes` (commit `9c11715`).
 - Script de captura listo: `capture/capture.mjs` + `capture/screens.json` (probado contra un login simulado en local, no contra el CRM):
   ```bash
