@@ -24,3 +24,5 @@ ADV/ImperiOS Ad/hyperframes/package-lock.json
 ADV/ImperiOS Ad/hyperframes/.hyperframes/
 ADV/ImperiOS Ad/hyperframes/assets/audio/
 ADV/ImperiOS Ad/hyperframes/renders/render.log
+ADV/ImperiOS Ad/hyperframes/renders/work-*/
+ADV/ImperiOS Ad/hyperframes/renders/.*hf-transaction*/
