@@ -20,3 +20,26 @@ Estado a 13/10/2026:
 ## Documentación
 
 Proceso completo, reproducible y reutilizable en `docs/GUIA-PRODUCCION-REELS-SAAS.md` (en la raíz del repo).
+
+## Siguiente fase — versión con el producto real en HyperFrames (14/10/2026)
+
+Decisiones ya tomadas:
+- Voz: **Cristina** (`1CeqBeXMOqCleeQjfYfO`), toma 1 + ganchos B/C. Gala queda como alternativa guardada.
+- Motor nuevo: **HyperFrames** (`github.com/heygen-com/hyperframes`, Apache 2.0, npm `hyperframes`, v0.8.158 verificada).
+  Clonar en lectura: `GIT_LFS_SKIP_SMUDGE=1 git clone --depth 1 https://github.com/heygen-com/hyperframes /home/user/heygen-com/hyperframes`
+  Skill de referencia: `skills/product-launch-video/SKILL.md` (su `capture` no hace login → usar script propio de Playwright).
+- Imágenes reales del CRM desde la **cuenta demo con datos simulados** (nunca datos de clientes reales).
+
+Entorno (configurado por el usuario; verificar al empezar sin imprimir valores):
+- Variables: `IMPERIOS_DEMO_URL` (login), `IMPERIOS_DEMO_EMAIL`, `IMPERIOS_DEMO_PASSWORD`.
+- Dominio del CRM añadido en *Allowed domains*.
+- Comprobación: `for v in IMPERIOS_DEMO_URL IMPERIOS_DEMO_EMAIL IMPERIOS_DEMO_PASSWORD; do [ -n "${!v}" ] && echo "$v ok"; done` y `curl -o /dev/null -w "%{http_code}" "$IMPERIOS_DEMO_URL"`.
+
+Pasos:
+1. Script Playwright de captura (login con las variables; nunca escribirlas en el repo ni en logs): capturas a 2x de cada pantalla
+   y grabación de interacciones clave. Pantallas propuestas por beat del guion:
+   bandeja de leads con origen · panel de campañas/estadísticas · Match con IA (cliente ↔ inmueble) · aviso de match + reactivar · agenda compartida + agentes.
+2. **Enseñar las capturas al usuario antes de usarlas** (revisar que no salga nada sensible).
+3. Brief de la versión «producto real»: pantallas reales como base (zoom/foco/resaltado amarillo animados encima) + nuestras animaciones propias para gancho, transiciones y CTA.
+4. Portar escenas a HyperFrames (composición HTML con `data-*` + GSAP), reutilizar VO (`assets_in/vo/campana-toma-1.mp3`, tiempos en `campana-toma-1.words.json`), SFX y música; mantener −14 LUFS / −1 dBTP y música ≥15 dB bajo la voz.
+5. CTA pendiente de confirmar por el usuario (por defecto «Pide tu demo»).
