@@ -16,3 +16,7 @@ Estado a 13/10/2026:
 - Mezcla: `VO=… VO_OFFSET=0.2 TL=timeline-campaign-vo.json python3 audio_mix.py out/campaign-vo/audio` + `./master_vo.sh out/campaign-vo/audio` (ducking dinámico: música ~22 dB bajo la voz; −14 LUFS / −1,4 dBTP).
 - Render: `./build_campaign_vo.sh`.
 - Pendiente: VO de los ganchos B y C, y confirmar la llamada a la acción.
+
+## Documentación
+
+Proceso completo, reproducible y reutilizable en `docs/GUIA-PRODUCCION-REELS-SAAS.md` (en la raíz del repo).

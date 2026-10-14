@@ -1,6 +1,7 @@
 // Uso:
 //   node render.js stills <out_dir> t1 t2 ...       -> PNG de instantes concretos
-//   node render.js video <out.mp4> [sub=3]          -> vídeo 60 fps con motion blur por submuestreo
+//   node render.js video <out.mp4> [sub=3] [t0] [t1] -> vídeo 60 fps con motion blur por submuestreo
+// Variables de entorno: TL (timeline json), VARIANT (gancho A/B/C), CHROMIUM_PATH (binario de Chromium/Chrome)
 const { chromium } = require(process.env.PW || 'playwright-core');
 const { spawn } = require('child_process');
 const fs = require('fs'), path = require('path');
@@ -8,7 +9,8 @@ const TL = JSON.parse(fs.readFileSync(path.join(__dirname, process.env.TL || 'ti
 const VARIANT = process.env.VARIANT || 'A';
 (async () => {
   const [mode, out, ...rest] = process.argv.slice(2);
-  const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args: ['--disable-gpu-vsync'] });
+  const exe = process.env.CHROMIUM_PATH || (fs.existsSync('/opt/pw-browsers/chromium-1194/chrome-linux/chrome') ? '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' : undefined);
+  const b = await chromium.launch({ executablePath: exe, args: ['--disable-gpu-vsync'] });
   const p = await b.newPage({ viewport: { width: 1080, height: 1920 } });
   await p.goto('file://' + path.join(__dirname, 'src/reel.html'));
   await p.evaluate(async ([beats, v]) => { await window.ready; window.setBeats(beats); window.setVariant(v); }, [TL.beats, VARIANT]);

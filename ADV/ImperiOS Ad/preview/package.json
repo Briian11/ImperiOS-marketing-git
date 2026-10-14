@@ -1,0 +1,8 @@
+{
+  "name": "imperios-reel-renderer",
+  "private": true,
+  "description": "Render frame a frame del reel (HTML/CSS/JS) con Chromium headless + ffmpeg",
+  "dependencies": {
+    "playwright-core": "1.56.1"
+  }
+}
