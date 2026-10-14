@@ -72,8 +72,12 @@ async function login(browser) {
     await page.screenshot({ path: path.join(OUT, '_login-no-form.png') });
     die('No encuentro el formulario de login (ver out/_login-no-form.png)');
   }
-  await user.fill(EMAIL);
-  await pass.fill(PASS);
+  // Tecleo real (no fill): los formularios con React pueden ignorar un valor puesto antes de hidratar.
+  await page.waitForTimeout(1000);
+  await user.click();
+  await user.pressSequentially(EMAIL, { delay: 30 });
+  await pass.click();
+  await pass.pressSequentially(PASS, { delay: 30 });
   const submit = await firstVisible(page, [
     'button[type="submit"]', 'input[type="submit"]',
     'button:has-text("Entrar")', 'button:has-text("Iniciar")', 'button:has-text("Acceder")',
@@ -83,8 +87,9 @@ async function login(browser) {
   try {
     await page.waitForFunction(() => !document.querySelector('input[type="password"]'), null, { timeout: 30000 });
   } catch {
-    await page.screenshot({ path: path.join(OUT, '_login-failed.png') });
-    die('El login no ha terminado (ver out/_login-failed.png; la captura no muestra la contraseña)');
+    await page.screenshot({ path: path.join(OUT, '_login-failed.png'), mask: [page.locator('input')] });
+    const msg = await page.locator('[role="alert"], .error, .text-red-500, .text-destructive').first().innerText().catch(() => '');
+    die(`El login no ha terminado${msg ? ` («${msg.trim()}»)` : ''} (ver out/_login-failed.png, con los campos tapados)`);
   }
   await settle(page);
   const home = page.url();
