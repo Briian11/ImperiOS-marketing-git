@@ -10,3 +10,7 @@
 | Tiempos de palabra (`vo/campana-toma-1.words.json`) | ElevenLabs Scribe v1 sobre la toma 1 | Plan ElevenLabs del cliente |
 | VO alternativa (`vo/gala-toma-1.mp3`, `vo/gala-toma-2.mp3`) | ElevenLabs, voz «Gala – Fresh, Energetic & Spontaneous» (Wi5NZQRxyOb3Jx4r0hrI), modelo eleven_v4, 13/10/2026, 796 créditos | Plan ElevenLabs del cliente |
 | Ganchos B y C (`vo/gancho-B-toma-1.mp3`, `vo/gancho-C-toma-1/2.mp3`) | ElevenLabs, voz Cristina, eleven_v4, 13/10/2026, ~160 créditos (una toma de B falló por aviso de la cuenta) | Plan ElevenLabs del cliente |
+| VO campaña v4 (`vo/v4-largo-toma-1/2.mp3`, `vo/v4-corto-toma-1.mp3`) | ElevenLabs, voz Cristina (1CeqBeXMOqCleeQjfYfO), eleven_v4, 17/10/2026, 1.240 créditos (la 2.ª toma del corto falló por límite de concurrencia) | Plan ElevenLabs del cliente |
+| Gancho B v4 (`vo/v4-gancho-B-toma-1/2.mp3`) | ElevenLabs, voz Cristina, eleven_v4, 17/10/2026, 118 créditos | Plan ElevenLabs del cliente |
+| Gancho C v4 | No generado: ElevenLabs bloqueó la cuenta gratuita («Unusual activity… Free Tier access has been disabled») | — |
+| Tiempos de palabra v4 (`vo/v4-*.words.json`) | ElevenLabs Scribe v1 (0 créditos); el gancho A reutiliza los de `campana-toma-1` | Plan ElevenLabs del cliente |

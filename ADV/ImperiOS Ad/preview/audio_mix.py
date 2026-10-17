@@ -57,7 +57,8 @@ def saw(f, n, phase=0.0):
 # ---------- armonía ----------
 BEAT = 0.6                     # 100 BPM
 BAR = 4 * BEAT
-T0 = B["s1"]                   # el primer compás arranca con la captación
+V4 = bool(B.get("wt", {}).get("src"))   # campaña v4 (build_timeline_v4.py)
+T0 = B.get("s0", B["s1"])      # el primer compás arranca con la captación (v4 larga: con «lo centralizas…»)
 # acordes (notas MIDI) por compás; Re mayor / Si menor
 CHORDS = [
     ("D", [50, 57, 62, 66, 69]),
@@ -72,9 +73,14 @@ CHORDS = [
 FINAL = [38, 50, 57, 62, 64, 66, 69, 76]   # Re add9 abierto
 
 
+def chord_idx(b):
+    # v4 dura más de 8 compases: repite el ciclo; las versiones anteriores sostienen el último acorde
+    return b % len(CHORDS) if V4 else min(b, len(CHORDS) - 1)
+
+
 def chord_at(t):
     i = int((t - T0) // BAR)
-    return CHORDS[int(np.clip(i, 0, len(CHORDS) - 1))]
+    return CHORDS[chord_idx(max(i, 0))]
 
 
 def music():
@@ -89,7 +95,7 @@ def music():
     nbars = int(np.ceil((end_music - T0) / BAR))
     for b in range(nbars):
         s0 = T0 + b * BAR
-        name, notes = CHORDS[min(b, len(CHORDS) - 1)]
+        name, notes = CHORDS[chord_idx(b)]
         dur = min(BAR, end_music - s0) + .6
         i0, n = int(s0 * SR), int(dur * SR)
         if i0 >= N:
@@ -144,7 +150,7 @@ def music():
         s0 = T0 + b * BAR
         if s0 + BAR < groove_on or s0 > groove_off:
             continue
-        _, notes = CHORDS[min(b, len(CHORDS) - 1)]
+        _, notes = CHORDS[chord_idx(b)]
         i0 = int(max(s0, groove_on) * SR)
         n = min(int(min(BAR, groove_off - max(s0, groove_on)) * SR), N - i0)
         if n <= 0:
@@ -202,6 +208,8 @@ def hp(x, f):
 def cues():
     s1, s2, s3, s4, s5, s6, lg = (B[k] for k in ("s1", "s2", "s3", "s4", "s5", "s6", "logo"))
     h = B.get("hook", 0.0)
+    if V4:
+        return cues_v4()
     if h > 0:
         # gancho de campaña: caos de notificaciones que colapsa en el pixel
         hook = [
@@ -312,6 +320,90 @@ def cues():
             (ct + .40, "shimmer_glow", -15, 0, 600),
             (ct + 1.10, "click_ui_02", -17, 0, 0),
         ]
+    return c
+
+
+def hook_cues(h):
+    """Gancho de campaña: caos de notificaciones que colapsa en el pixel."""
+    return [
+        (0.00, "pop_dock_01", -12, -.5, 0),
+        (0.05, "whoosh_short_02", -15, 0, 300),
+        (0.20, "glitch_wake", -17, .3, 0),
+        *[(.1 + i * .09, ["click_ui_01", "pop_dock_02", "click_ui_02", "pop_dock_03", "click_ui_03", "pop_dock_01"][i], -17, [-.7, .6, -.1, -.6, .7, .1][i], 0) for i in range(6)],
+        (h - 1.1, "riser_grid", -15, 0, 300),
+        (h - .6, "suck_reverse", -12, 0, 200),
+        (h - .5, "whoosh_long_02", -16, 0, 250),
+        (h + .00, "hit_soft_03", -8, 0, 0),
+        (h + .00, "shimmer_glow", -16, 0, 600),
+        (h + .52, "pop_dock_01", -14, 0, 0),
+    ]
+
+
+def cues_v4():
+    """Cues de la campaña v4, atadas a las mismas palabras que la imagen (B.wt)."""
+    s1, s2, s3, s4, s5, s6, lg, h = (B[k] for k in ("s1", "s2", "s3", "s4", "s5", "s6", "logo", "hook"))
+    wt, skip = B["wt"], B.get("skip", [])
+    c = hook_cues(h)
+    if "s0" in B:
+        s0 = B["s0"]
+        # latido del pixel (cada 1,2 s) y golpe en «todo»
+        c += [(h + .5 + i * 1.2, "hit_soft_01", -19, 0, 0) for i in range(int((s1 - h - .5) / 1.2) + 1)]
+        c += [(s0 + wt["kt0"][0] - .05, "whoosh_short_03", -17, 0, 400), (s0 + wt["kt0"][3], "hit_soft_02", -12, 0, 0),
+              (s0 + wt["kt0"][3] + .05, "shimmer_glow", -18, 0, 600)]
+    # S1: entran las 4 fuentes; cada una suena al nombrarla y su lead vuela al montón
+    c += [(s1 + .00, "whoosh_short_02", -13, .1, 300), (s1 + .10, "whoosh_long_01", -17, -.6, 300), (s1 + .20, "whoosh_short_01", -15, .6, 300)]
+    pans = [-.4, .5, -.5, .4]
+    for i, f in enumerate(wt["src"]):
+        c += [(s1 + f, f"click_ui_0{1 + i % 3}", -15, pans[i], 0),
+              (s1 + f + .25, ["whoosh_short_04", "whoosh_short_02", "whoosh_short_01", "whoosh_short_03"][i], -19, pans[i] * .6, 400),
+              (s1 + f + .95, "hit_soft_02" if i % 2 else "hit_soft_01", -18, 0, 0)]
+    c += [(s1 + wt["src"][3] + .5, "shimmer_glow", -17, 0, 600), (s1 + wt["kt1"][6], "pop_dock_03", -17, 0, 0)]
+    if "s2" not in skip:
+        w2 = wt["kt2"]
+        c0 = max(.7, w2[1] - .25)
+        c += [(s2 - .05, "suck_reverse", -12, 0, 200), (s2 + .10, "whoosh_long_02", -15, 0, 250), (s2 + .58, "hit_soft_03", -9, 0, 0),
+              *[(s2 + .5 + i * .09 + .3, f"click_ui_0{1 + i % 3}", -20, (i - 2) * .15, 0) for i in range(5)],
+              (s2 + 1.32, "pop_dock_02", -12, .45, 0),
+              (s2 + c0 - .05, "whoosh_long_01", -15, .7, 300), (s2 + c0 + .55, "hit_soft_01", -12, .4, 0),
+              (s2 + c0 + .45, "ticks_granular_curve", -18, .4, 0),
+              (s2 + w2[1] + .45, "pop_dock_03", -12, .5, 0), (s2 + w2[3] + .1, "pop_dock_01", -12, .5, 0)]
+    else:
+        c += [(s3 - .55, "suck_reverse", -12, 0, 200)]
+    # transición a oscuro + S3 match
+    m3 = wt["m3"]
+    c += [(s3 - .32, "whoosh_low_wipe", -9, 0, 0),
+          (s3 + .30, "pop_dock_01", -12, -.6, 0), (s3 + .55, "whoosh_long_02", -17, 0, 300), (s3 + .70, "ticks_granular_curve", -20, 0, 0),
+          (s3 + m3[0], "hit_soft_02", -11, 0, 0),
+          (s3 + m3[0], "click_mech_dial_1", -11, -.7, 0), (s3 + m3[1], "click_mech_dial_2", -11, -.5, 0), (s3 + m3[2], "click_mech_dial_3", -11, -.3, 0),
+          (s3 + m3[0], "whoosh_short_01", -18, 0, 400), (s3 + m3[1], "whoosh_short_03", -18, 0, 400), (s3 + m3[2], "whoosh_short_02", -18, 0, 400),
+          (s3 + m3[2] + .65, "hit_metal_02", -15, .1, 0)]
+    # S4: notificación → móvil → las propiedades salen al chat → «enviado»
+    e1, e2, e3 = (max(x, m) for x, m in zip(wt.get("s4ev", [1.0, 1.6, 2.2]), [1.0, 1.4, 1.8]))
+    c += [(s4 - .25, "whoosh_short_04", -14, 0, 300), (s4 + .05, "glitch_wake", -14, -.5, 0), (s4 + .28, "whoosh_short_01", -12, .2, 300),
+          (s4 + .60, "click_ui_03", -14, .3, 0), (s4 + .35, "whoosh_long_01", -17, 0, 300), (s4 + .75, "pop_dock_01", -15, -.3, 0),
+          (s4 + e1 - .05, "whoosh_short_02", -14, .3, 300), (s4 + e1 + .2, "pop_dock_02", -11, .35, 0),
+          (s4 + e2 - .05, "whoosh_short_03", -15, .3, 300), (s4 + e2 + .2, "pop_dock_03", -12, .35, 0),
+          (s4 + e3, "shimmer_glow", -13, .3, 500), (s4 + e3 + .05, "click_mech_dial_2", -12, .4, 0), (s4 + e3 + .05, "hit_soft_02", -12, .3, 0)]
+    if "s5" not in skip:
+        ea, er = wt["s5ev"]
+        c += [(s5 - .2, "whoosh_low_wipe", -10, .3, 0),
+              (s5 + .20, "whoosh_long_02", -14, 0, 250),
+              (s5 + .70, "pop_dock_01", -15, .4, 0), (s5 + .80, "pop_dock_02", -15, .5, 0), (s5 + .90, "pop_dock_03", -15, .6, 0),
+              (s5 + .90, "ticks_granular_calendar", -19, 0, 0),
+              *[(s5 + .95 + i * .14 + .3, "hit_soft_01" if i % 2 else "hit_soft_02", -15, (i - 2) * .2, 0) for i in range(5)],
+              (s5 + ea, "pop_dock_03", -12, .4, 0), (s5 + er, "pop_dock_02", -12, -.45, 0),
+              (s5 + .30, "whoosh_short_03", -19, 0, 400), (s5 + 1.10, "whoosh_short_01", -20, 0, 400)]
+    if "s6" not in skip:
+        c += [(s6 - .15, "whoosh_long_01", -15, 0, 300), (s6 + wt["kt6"][1] - .25, "whoosh_short_03", -14, 0, 300),
+              (s6 + wt["kt6"][1] + .02, "hit_soft_03", -10, 0, 0), (s6 + wt["kt6"][1] + .25, "shimmer_glow", -16, 0, 600),
+              (s6 + wt["kt6"][2] - .05, "whoosh_short_02", -15, 0, 300)]
+    else:
+        c += [(lg - .2, "whoosh_low_wipe", -10, .3, 0)]
+    c += [(lg - .05, "whoosh_short_04", -11, 0, 300), (lg + .25, "riser_grid", -18, 0, 300), (lg + .55, "sub_drop", -9, 0, 0),
+          (lg + .55, "logo_sting", -8, 0, 0), (lg + .95, "click_ui_01", -15, 0, 0)]
+    ct = B["cta"]
+    c += [(ct - .05, "whoosh_short_04", -14, 0, 300), (ct + .35, "pop_dock_02", -9, 0, 0), (ct + .35, "logo_sting", -15, 0, 0),
+          (ct + .40, "shimmer_glow", -15, 0, 600), (ct + 1.10, "click_ui_02", -17, 0, 0)]
     return c
 
 

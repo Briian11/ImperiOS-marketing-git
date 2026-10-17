@@ -31,3 +31,29 @@ Las tres de 25 s comparten el cuerpo; solo cambia el primer 1,9 s. Así el test 
 **Titular:** CRM para inmobiliarias · **Descripción:** Pide tu demo · **Botón:** Solicitar información / Más información
 
 Sin cifras de resultados ni testimonios hasta tener fuente y aprobación.
+
+---
+
+# Campaña v4 — 3 ganchos × 2 duraciones (voz Cristina)
+
+Mismo estilo recreado (sin pantallas reales del CRM), sin subtítulos aparte: el texto cinético ya sigue a la voz.
+Motor: `preview/src/reel-v4.html` · timelines: `preview/build_timeline_v4.py` · build: `preview/build_v4.sh <largo|corto> <A|B|C>`.
+
+| Pieza | Gancho | Duración | Archivo |
+|---|---|---|---|
+| Largo A | ¿Tus leads se pierden entre portales, WhatsApp y Excel? | ~35,5 s | `preview/out/v4/imperios-v4-largo-ganchoA_9x16.mp4` |
+| Largo B | ¿Cuántos clientes se le escapan cada mes a tu inmobiliaria? | ~35,3 s | `preview/out/v4/imperios-v4-largo-ganchoB_9x16.mp4` |
+| Corto A | (A) | ~18,7 s | `preview/out/v4/imperios-v4-corto-ganchoA_9x16.mp4` |
+| Corto B | (B) | ~18,4 s | `preview/out/v4/imperios-v4-corto-ganchoB_9x16.mp4` |
+| Largo C / Corto C | ¿Cansado de usar diferentes herramientas para gestionar tu inmobiliaria? | — | Pendiente: falta la voz del gancho C (ElevenLabs bloqueó la cuenta gratuita) |
+
+Escenas del largo: gancho → «Lo centralizas absolutamente todo» (pixel late) → 4 fuentes (portales, web, campañas, WhatsApp) →
+panel + ranking «qué campañas y propiedades te traen más clientes» → match con IA → chat: la IA envía las propiedades al cliente
+(«Enviado automáticamente») → agenda con recordatorio automático y agentes → «Todo conectado. De principio a fin.» → logo + «Pide tu demo».
+El corto: gancho → 4 fuentes → match → chat → logo + «Pide tu demo».
+
+La voz va a atempo 1,07 (sin cambio de tono) para acercar las piezas a 15/30 s. Aun así el guion corto dura ~18 s y el largo ~35 s:
+para bajar de ahí hay que recortar texto (p. ej. quitar «Imperios.» antes de «Pide tu demo» en el corto, o «coordinados desde la misma agenda» en el largo).
+
+Para el gancho C, cuando haya voz: guardar la toma como `assets_in/vo/v4-gancho-C-toma-1.mp3`, transcribirla a
+`v4-gancho-C-toma-1.words.json` y ejecutar `build_timeline_v4.py` + `build_v4.sh` con C (el texto C ya está en el motor).

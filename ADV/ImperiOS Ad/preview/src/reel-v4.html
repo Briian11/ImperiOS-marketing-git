@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>ImperiOS Reel v4</title>
+<style>
+@font-face { font-family: "Manrope"; src: url("manrope-latin-variable.woff2") format("woff2"); font-weight: 200 800; }
+:root {
+  --ink-950:#0A0A0A; --ink-900:#1C1C1C; --ink-800:#333; --ink-700:#4A4A4A; --ink-600:#727272;
+  --ink-500:#B0B0B0; --ink-400:#C0C0C0; --ink-300:#D4D4D4; --ink-200:#EBEBEB; --ink-100:#F5F5F5; --ink-50:#FAFAFA;
+  --y:#FFD500;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ink-100); }
+body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-smoothing: antialiased; }
+#stage { position: absolute; inset: 0; overflow: hidden; background: var(--ink-100); }
+.abs { position: absolute; }
+.full { position: absolute; inset: 0; }
+.grid-l { background-image: linear-gradient(to right, rgba(10,10,10,.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(10,10,10,.055) 1px, transparent 1px); background-size: 40px 40px; }
+.grid-d { background-image: linear-gradient(to right, rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.045) 1px, transparent 1px); background-size: 40px 40px; }
+.vig-l { background: radial-gradient(ellipse at 50% 45%, transparent 38%, rgba(245,245,245,.96) 82%); }
+.vig-d { background: radial-gradient(ellipse at 50% 45%, transparent 38%, rgba(10,10,10,.96) 82%); }
+#dark { background: var(--ink-950); }
+.scene { position: absolute; inset: 0; transform-origin: 50% 45%; }
+.hud { position: absolute; top: 290px; left: 96px; right: 96px; display: flex; justify-content: space-between;
+  font-weight: 700; font-size: 26px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-600); }
+.hud b { font-weight: 700; color: var(--ink-950); }
+.on-dark .hud { color: var(--ink-400); } .on-dark .hud b { color: var(--y); } .on-dark .hud .num { color: var(--ink-600); }
+.kt { position: absolute; left: 96px; right: 96px; font-weight: 700; letter-spacing: -.035em; line-height: 1.16; }
+.kt .w { display: inline-block; white-space: pre; will-change: transform, opacity, filter; }
+.kt em { font-weight: 500; font-style: italic; }
+.uline { position: absolute; height: 8px; border-radius: 4px; background: var(--y); transform-origin: 0 50%; }
+.card { position: absolute; background: var(--ink-50); border: 1.5px solid var(--ink-200); border-radius: 24px;
+  box-shadow: 0 30px 80px rgba(10,10,10,.10), 0 4px 14px rgba(10,10,10,.05); }
+.panel { background: var(--ink-950); border: 1.5px solid var(--ink-800); border-radius: 28px; color: #fff; box-shadow: 0 40px 100px rgba(10,10,10,.30); }
+.chip { position: absolute; padding: 26px 44px; border-radius: 18px; background: var(--ink-50); border: 1.5px solid var(--ink-200);
+  font-weight: 700; font-size: 40px; box-shadow: 0 20px 50px rgba(10,10,10,.08); white-space: nowrap; transform-origin: 50% 50%; }
+.dot { display: inline-block; width: 16px; height: 16px; border-radius: 50%; background: var(--y); margin-right: 18px; vertical-align: middle; }
+.tag { display: inline-flex; align-items: center; gap: 14px; padding: 14px 26px; background: var(--y); color: var(--ink-950);
+  border-radius: 999px; font-weight: 800; font-size: 24px; letter-spacing: .14em; }
+.av { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 24px; flex: none; }
+.row { display: flex; align-items: center; gap: 24px; padding: 26px 30px; border-radius: 18px; }
+.meta { font-size: 22px; color: var(--ink-400); font-weight: 500; margin-top: 4px; }
+.src { margin-left: auto; font-size: 20px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 10px 16px; border-radius: 10px; background: var(--ink-800); color: var(--ink-400); }
+.mini { position: absolute; width: 250px; height: 80px; border-radius: 14px; background: var(--ink-50); border: 1.5px solid var(--ink-200);
+  box-shadow: 0 16px 40px rgba(10,10,10,.10); display: flex; align-items: center; gap: 14px; padding: 0 18px; }
+.mini i { display: block; width: 40px; height: 40px; border-radius: 50%; background: var(--ink-200); }
+.mini b { display: block; height: 12px; border-radius: 6px; background: var(--ink-300); }
+.blk { border-radius: 14px; background: var(--ink-950); color: #fff; padding: 16px; font-size: 20px; font-weight: 700; }
+.blk span { font-weight: 500; color: var(--ink-400); }
+.slot { border-radius: 14px; background: var(--ink-200); }
+.ring { position: absolute; width: 110px; height: 110px; border-radius: 50%; border: 3px solid var(--ink-700); display: grid; place-items: center; }
+#px { position: absolute; background: var(--y); border-radius: 6px; z-index: 50; }
+.hc { font-size: 34px; padding: 22px 34px; display: flex; align-items: center; gap: 14px; color: var(--ink-700); }
+.bdg { display: inline-grid; place-items: center; min-width: 40px; height: 40px; padding: 0 10px; border-radius: 20px; background: var(--ink-950); color: var(--y); font-size: 22px; font-weight: 800; }
+.rk { margin-top: 20px; }
+.rkT { font-size: 16px; font-weight: 800; letter-spacing: .12em; padding: 6px 10px; border-radius: 8px; background: var(--ink-950); color: #fff; }
+.rkB { height: 100%; border-radius: 6px; background: var(--ink-950); transform-origin: 0 50%; }
+.bub { position: relative; box-shadow: 0 16px 40px rgba(0,0,0,.35); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <!-- light stage -->
+  <div class="full" id="lightbg">
+    <div class="full grid-l" id="lgrid"></div>
+    <div class="abs" id="lglow" style="width:1000px;height:1000px;border-radius:50%;background:radial-gradient(circle, rgba(255,213,0,.20), rgba(255,213,0,0) 65%);"></div>
+    <div class="full vig-l"></div>
+  </div>
+  <!-- dark stage (clip-path animated) -->
+  <div class="full" id="dark">
+    <div class="full grid-d" id="dgrid"></div>
+    <div class="abs" id="dglowA" style="width:760px;height:760px;border-radius:50%;background:radial-gradient(circle at 35% 65%, rgba(255,213,0,.30), rgba(255,213,0,.06) 60%, transparent 70%)"></div>
+    <div class="full vig-d"></div>
+  </div>
+
+  <!-- GANCHO DE CAMPAÑA (solo si B.hook > 0) -->
+  <div class="scene" id="scH" style="display:none">
+    <div class="abs" id="hTag" style="left:96px;top:420px;transform-origin:0 50%"><span class="tag" style="background:var(--ink-950);color:#fff"><span style="width:12px;height:14px;background:var(--y);border-radius:2px"></span>CRM PARA INMOBILIARIAS</span></div>
+    <div class="kt" id="ktH" style="top:520px;font-size:92px;line-height:1.08"></div>
+    <div class="chip hc" style="left:90px;top:1120px">Portales<span class="bdg">3</span></div>
+    <div class="chip hc" style="left:560px;top:1060px">WhatsApp<span class="bdg">12</span></div>
+    <div class="chip hc" style="left:380px;top:1260px">Excel</div>
+    <div class="chip hc" style="left:120px;top:1400px">Email<span class="bdg">7</span></div>
+    <div class="chip hc" style="left:620px;top:1360px">Llamadas</div>
+    <div class="chip hc" style="left:330px;top:1520px">Web<span class="bdg">+1</span></div>
+  </div>
+
+  <!-- HOOK -->
+  <div class="scene" id="sc0">
+    <div class="abs" id="ring1" style="width:300px;height:300px;border-radius:50%;border:2px solid rgba(255,213,0,.5);left:390px;top:810px"></div>
+    <div class="abs" id="ring2" style="width:520px;height:520px;border-radius:50%;border:1.5px solid rgba(255,213,0,.22);left:280px;top:700px"></div>
+  </div>
+
+  <!-- S0 «Con ImperiOS, lo centralizas absolutamente todo» (solo versión larga) -->
+  <div class="scene" id="scC" style="display:none">
+    <div class="kt" id="kt0" style="top:520px;font-size:100px"></div>
+  </div>
+
+  <!-- S1 CAPTACIÓN: 4 fuentes -->
+  <div class="scene" id="sc1">
+    <div class="hud" id="hud1"><span><b>01</b> · Captación</span><span class="num">01 / 06</span></div>
+    <div class="mini" id="m1"><i></i><div style="flex:1"><b style="width:80%"></b><b style="width:50%;margin-top:10px"></b></div></div>
+    <div class="mini" id="m2"><i></i><div style="flex:1"><b style="width:70%"></b><b style="width:45%;margin-top:10px"></b></div></div>
+    <div class="mini" id="m3"><i></i><div style="flex:1"><b style="width:85%"></b><b style="width:40%;margin-top:10px"></b></div></div>
+    <div class="mini" id="m4"><i></i><div style="flex:1"><b style="width:75%"></b><b style="width:55%;margin-top:10px"></b></div></div>
+    <div class="chip" id="cPor" style="left:100px;top:500px"><span class="dot" id="dPor"></span>Portales</div>
+    <div class="chip" id="cWeb" style="left:700px;top:540px"><span class="dot" id="dWeb"></span>Web</div>
+    <div class="chip" id="cCam" style="left:140px;top:730px"><span class="dot" id="dCam"></span>Campañas</div>
+    <div class="chip" id="cWa" style="left:590px;top:770px"><span class="dot" id="dWa"></span>WhatsApp</div>
+    <svg class="abs" id="arrow1" style="left:520px;top:990px" width="40" height="70" viewBox="0 0 40 70"><path d="M20 2v60M6 48l14 14 14-14" stroke="#FFD500" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="kt" id="kt1" style="top:1380px;font-size:76px"></div>
+  </div>
+
+  <!-- S2 PANEL -->
+  <div class="scene" id="sc2">
+    <div class="hud" id="hud2"><span><b>02</b> · Rendimiento</span><span class="num">02 / 06</span></div>
+    <div class="abs" style="left:80px;top:420px;width:920px;perspective:1800px">
+      <div class="panel" id="panel" style="position:relative;padding:44px 36px;transform-origin:50% 30%">
+        <div id="plabel" style="display:flex;align-items:center;gap:16px;font-weight:800;font-size:24px;letter-spacing:.16em;color:var(--y);margin:0 10px 28px">
+          <span style="width:14px;height:14px;border-radius:50%;background:var(--y)"></span>LEADS · TODO EL EQUIPO</div>
+        <div class="row" data-b="7"><div class="av" style="background:var(--ink-800)">LG</div><div><div style="font-size:30px;font-weight:700">Piso · Retiro</div><div class="meta">2 hab · 280–320 k€</div></div><span class="src">WhatsApp</span></div>
+        <div class="row" data-b="0" id="rowAM" style="background:var(--ink-900);border:1.5px solid var(--ink-700);margin:10px 0;box-shadow:0 20px 50px rgba(0,0,0,.5)">
+          <div class="av" style="background:var(--y);color:var(--ink-950)">AM</div><div><div style="font-size:32px;font-weight:700">Ático · Chamberí</div><div class="meta">3 hab · 350–400 k€</div></div><span class="src" style="color:#fff">Portal</span><span id="tagNuevo" style="margin-left:14px;font-size:20px;font-weight:800;letter-spacing:.1em;color:var(--ink-950);background:var(--y);padding:10px 14px;border-radius:10px">NUEVO</span></div>
+        <div class="row" data-b="3"><div class="av" style="background:var(--ink-800)">JR</div><div><div style="font-size:30px;font-weight:700">Chalet · Pozuelo</div><div class="meta">4 hab · 650–720 k€</div></div><span class="src">Campaña</span></div>
+        <div class="row" data-b="7"><div class="av" style="background:var(--ink-800)">SP</div><div><div style="font-size:30px;font-weight:700">Piso · Salamanca</div><div class="meta">2 hab · 450–500 k€</div></div><span class="src">Portal</span></div>
+        <div class="row" data-b="12"><div class="av" style="background:var(--ink-800)">CN</div><div><div style="font-size:30px;font-weight:700">Estudio · Malasaña</div><div class="meta">1 hab · 190–220 k€</div></div><span class="src">Web</span></div>
+      </div>
+    </div>
+    <div class="card" id="camp" style="left:430px;top:1080px;width:580px;padding:30px 34px 28px">
+      <div style="font-weight:700;font-size:20px;letter-spacing:.16em;color:var(--ink-600)">QUÉ TE TRAE MÁS CLIENTES</div>
+      <div class="rk"><div style="display:flex;align-items:center;gap:12px"><span class="rkT">CAMPAÑA</span><span style="font-size:27px;font-weight:700">Primavera</span><span class="rkN" data-n="24" style="margin-left:auto;font-size:30px;font-weight:800">0</span></div>
+        <div style="height:12px;border-radius:6px;background:var(--ink-200);margin-top:12px"><div class="rkB" data-w="1"></div></div></div>
+      <div class="rk"><div style="display:flex;align-items:center;gap:12px"><span class="rkT">PROPIEDAD</span><span style="font-size:27px;font-weight:700">Ático · Chamberí</span><span class="rkN" data-n="17" style="margin-left:auto;font-size:30px;font-weight:800">0</span></div>
+        <div style="height:12px;border-radius:6px;background:var(--ink-200);margin-top:12px"><div class="rkB" data-w=".71"></div></div></div>
+      <div class="rk"><div style="display:flex;align-items:center;gap:12px"><span class="rkT">PROPIEDAD</span><span style="font-size:27px;font-weight:700">Piso · Retiro</span><span class="rkN" data-n="11" style="margin-left:auto;font-size:30px;font-weight:800">0</span></div>
+        <div style="height:12px;border-radius:6px;background:var(--ink-200);margin-top:12px"><div class="rkB" data-w=".46"></div></div></div>
+    </div>
+    <div class="kt" id="kt2" style="top:1500px;font-size:60px"></div>
+  </div>
+
+  <!-- S3 MATCH -->
+  <div class="scene on-dark" id="sc3">
+    <div class="hud" id="hud3"><span><b>03</b> · Match con IA</span><span class="num">03 / 06</span></div>
+    <div class="abs" id="tagM" style="left:96px;top:420px;transform-origin:0 50%"><span class="tag"><span style="width:12px;height:12px;background:var(--ink-950);border-radius:2px"></span>MATCH CON IA</span></div>
+    <div class="kt" id="kt3" style="top:500px;font-size:72px;color:#fff"></div>
+    <div class="abs panel" id="prop" style="left:150px;top:860px;width:780px;padding:36px;background:var(--ink-900);border-color:var(--ink-800)">
+      <svg width="708" height="340" viewBox="0 0 708 340" style="border-radius:18px;background:#141414;display:block">
+        <g stroke="#2A2A2A" stroke-width="3" fill="none" id="mapLines">
+          <path d="M0 80 L260 60 L420 120 L708 90"/><path d="M0 230 L180 210 L380 260 L708 220"/><path d="M120 0 L160 340"/><path d="M330 0 L300 340"/><path d="M540 0 L590 340"/><path d="M420 120 L560 200 L708 300"/>
+          <path d="M0 150 C200 140 300 180 708 160" stroke="#3A3A3A" stroke-width="7"/>
+        </g>
+        <circle id="pinHalo1" cx="372" cy="168" r="70" fill="rgba(255,213,0,.10)"/><circle id="pinHalo2" cx="372" cy="168" r="34" fill="rgba(255,213,0,.25)"/>
+        <g id="pin"><path d="M372 196 C356 172 346 160 346 146 a26 26 0 0 1 52 0 c0 14 -10 26 -26 50z" fill="#FFD500"/><circle cx="372" cy="146" r="9" fill="#0A0A0A"/></g>
+      </svg>
+      <div style="display:flex;gap:18px;margin-top:30px;align-items:center">
+        <div id="chTipo" style="display:flex;align-items:center;gap:14px;padding:18px 24px;border-radius:14px;background:var(--ink-800);font-weight:700;font-size:28px;border:2px solid transparent"><svg width="34" height="34" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v9H3z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>Ático</div>
+        <div id="chZona" style="padding:18px 24px;border-radius:14px;background:var(--ink-800);font-weight:700;font-size:28px;border:2px solid transparent">Chamberí</div>
+        <div id="chPre" style="padding:18px 24px;border-radius:14px;background:var(--ink-800);font-weight:700;font-size:28px;border:2px solid transparent">385 k€</div>
+      </div>
+      <div style="margin-top:28px;font-size:20px;font-weight:700;letter-spacing:.14em;color:var(--ink-400)">PRESUPUESTO DEL CLIENTE</div>
+      <div style="position:relative;height:14px;border-radius:7px;background:var(--ink-800);margin-top:16px">
+        <div id="range" style="position:absolute;left:38%;width:30%;top:0;bottom:0;border-radius:7px;background:rgba(255,213,0,.35);transform-origin:0 50%"></div>
+        <div id="knob" style="position:absolute;left:52%;top:-9px;width:32px;height:32px;margin-left:-16px;border-radius:50%;background:var(--y);box-shadow:0 0 30px rgba(255,213,0,.7)"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-top:14px;font-size:22px;color:var(--ink-500);font-weight:600"><span style="margin-left:34%">350 k€</span><span style="margin-right:28%">400 k€</span></div>
+    </div>
+    <div class="ring" id="r1" style="left:96px;top:1560px"><svg width="40" height="40" viewBox="0 0 24 24"><path class="chk" d="M5 12l5 5 9-10" stroke="#FFD500" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="22" stroke-dashoffset="22"/></svg></div>
+    <div class="ring" id="r2" style="left:228px;top:1560px"><svg width="40" height="40" viewBox="0 0 24 24"><path class="chk" d="M5 12l5 5 9-10" stroke="#FFD500" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="22" stroke-dashoffset="22"/></svg></div>
+    <div class="ring" id="r3" style="left:360px;top:1560px"><svg width="40" height="40" viewBox="0 0 24 24"><path class="chk" d="M5 12l5 5 9-10" stroke="#FFD500" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="22" stroke-dashoffset="22"/></svg></div>
+    <div class="abs" id="ringLbl" style="left:500px;top:1592px;font-size:24px;font-weight:700;letter-spacing:.14em;color:var(--ink-400)">ZONA · TIPO · PRESUPUESTO</div>
+  </div>
+
+  <!-- S4 ENVÍO AUTOMÁTICO POR WHATSAPP (chat genérico: sin logotipo ni colores de la app) -->
+  <div class="scene on-dark" id="sc4">
+    <div class="hud" id="hud4"><span><b>04</b> · Envío automático</span><span class="num">04 / 06</span></div>
+    <div class="abs" id="notif" style="left:96px;top:420px;height:128px;width:888px;border-radius:26px;background:var(--ink-50);color:var(--ink-950);box-shadow:0 30px 80px rgba(0,0,0,.6);overflow:hidden">
+      <div id="notifTxt" style="position:absolute;left:120px;top:30px;width:700px">
+        <div style="font-weight:800;font-size:32px;letter-spacing:-.01em">Match · 2 propiedades encajan</div>
+        <div style="font-size:26px;color:var(--ink-700);font-weight:500;margin-top:4px">con la búsqueda de A. M.</div>
+      </div>
+      <div id="notifNow" style="position:absolute;right:34px;top:30px;font-size:22px;color:var(--ink-600);font-weight:600">ahora</div>
+    </div>
+    <div class="abs" id="phone" style="left:220px;top:600px;width:640px;height:760px;border-radius:60px;background:#111;border:2px solid var(--ink-800);box-shadow:0 50px 120px rgba(0,0,0,.6);overflow:hidden">
+      <div style="display:flex;align-items:center;gap:20px;padding:44px 36px 26px;border-bottom:1.5px solid var(--ink-800)">
+        <div class="av" style="background:var(--ink-800);color:#fff">AM</div>
+        <div><div style="font-size:30px;font-weight:800;color:#fff">A. M.</div><div style="font-size:21px;color:var(--ink-500);font-weight:600;margin-top:2px">Busca ático · Chamberí · 350–400 k€</div></div>
+      </div>
+      <div style="padding:28px 30px">
+        <div class="bub" id="bIn" style="display:inline-block;background:var(--ink-800);color:#fff;border-radius:24px 24px 24px 6px;font-size:26px;font-weight:600;padding:20px 24px;transform-origin:0 100%">¿Tenéis algo en Chamberí?</div>
+        <div class="bub" id="bOut1" style="margin-left:auto;margin-top:22px;width:420px;background:var(--ink-50);color:var(--ink-950);border-radius:24px 24px 6px 24px;padding:14px;transform-origin:100% 100%">
+          <svg width="392" height="150" viewBox="0 0 392 150" style="display:block;border-radius:14px;background:#1C1C1C">
+            <g stroke="#333" stroke-width="3" fill="none"><path d="M0 40 L150 30 L240 64 L392 48"/><path d="M0 112 L110 100 L220 126 L392 104"/><path d="M70 0 L92 150"/><path d="M190 0 L170 150"/><path d="M300 0 L330 150"/><path d="M0 76 C120 70 180 92 392 82" stroke="#444" stroke-width="6"/></g>
+            <circle cx="196" cy="74" r="30" fill="rgba(255,213,0,.18)"/><path d="M196 92 C186 78 180 70 180 62 a16 16 0 0 1 32 0 c0 8 -6 16 -16 30z" fill="#FFD500"/><circle cx="196" cy="62" r="5.5" fill="#0A0A0A"/></svg>
+          <div style="padding:14px 8px 4px"><div style="font-size:28px;font-weight:800">Ático · Chamberí</div><div style="font-size:22px;color:var(--ink-600);font-weight:600;margin-top:2px">3 hab · 385 k€</div></div>
+        </div>
+        <div class="bub" id="bOut2" style="margin-left:auto;margin-top:16px;width:420px;background:var(--ink-50);color:var(--ink-950);border-radius:24px 24px 6px 24px;padding:18px 22px;display:flex;align-items:center;gap:18px;transform-origin:100% 100%">
+          <div style="width:72px;height:72px;border-radius:12px;background:#1C1C1C;flex:none;position:relative"><span style="position:absolute;left:28px;top:24px;width:16px;height:16px;border-radius:50%;background:var(--y)"></span></div>
+          <div><div style="font-size:26px;font-weight:800">Dúplex · Chamberí</div><div style="font-size:21px;color:var(--ink-600);font-weight:600;margin-top:2px">3 hab · 398 k€</div></div>
+        </div>
+        <div id="sent" style="display:flex;justify-content:flex-end;align-items:center;gap:12px;margin-top:16px;font-size:20px;font-weight:800;letter-spacing:.12em;color:var(--ink-400)">ENVIADO AUTOMÁTICAMENTE
+          <svg width="40" height="24" viewBox="0 0 40 24"><path id="ticks" d="M2 13l6 6 12-14M16 17l2 2 12-14" stroke="#FFD500" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="60" stroke-dashoffset="60"/></svg></div>
+      </div>
+    </div>
+    <div class="kt" id="kt4" style="top:1420px;font-size:72px;color:#fff"></div>
+  </div>
+
+  <!-- S5 OPERATIVA -->
+  <div class="scene" id="sc5">
+    <div class="hud" id="hud5"><span><b>05</b> · Operativa</span><span class="num">05 / 06</span></div>
+    <div class="abs" style="left:70px;top:420px;width:940px;perspective:2000px">
+      <div class="card" id="agenda" style="position:relative;padding:36px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+          <div style="font-weight:700;font-size:22px;letter-spacing:.16em;color:var(--ink-600)">AGENDA DEL EQUIPO</div>
+          <div style="display:flex">
+            <div class="av ava" style="background:var(--ink-950);color:#fff;border:4px solid var(--ink-50)">LS</div>
+            <div class="av ava" style="background:var(--ink-700);color:#fff;border:4px solid var(--ink-50);margin-left:-16px">DV</div>
+            <div class="av ava" style="background:var(--y);color:var(--ink-950);border:4px solid var(--ink-50);margin-left:-16px">MR</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;font-weight:700;font-size:22px;color:var(--ink-600);text-align:center;margin-bottom:12px"><div>LUN</div><div>MAR</div><div>MIÉ</div><div>JUE</div><div>VIE</div></div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(5,104px);gap:12px">
+          <div class="slot" style="grid-column:2;grid-row:2"></div>
+          <div class="slot" style="grid-column:3;grid-row:3/5"></div>
+          <div class="slot" style="grid-column:5;grid-row:1"></div>
+          <div class="slot" style="grid-column:1/3;grid-row:5;background:none;border:2px dashed var(--ink-300)"></div>
+          <div class="blk vb" style="grid-column:1;grid-row:1/3;border-left:6px solid var(--y)">10:00<br><span>Visita · Ático Chamberí</span></div>
+          <div class="blk vb" style="grid-column:3;grid-row:1">12:30<br><span>Visita</span></div>
+          <div class="blk vb" style="grid-column:4;grid-row:2/4">17:00<br><span>Visita · Piso Retiro</span></div>
+          <div class="blk vb" style="grid-column:5;grid-row:3/5">19:00<br><span>Firma · Chalet Pozuelo</span></div>
+          <div class="blk vb" style="grid-column:2;grid-row:4">11:00<br><span>Visita</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="chip" id="chRem" style="left:80px;top:1260px;font-size:30px;padding:22px 30px;display:flex;align-items:center;gap:16px">
+      <svg width="34" height="34" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 20a2 2 0 0 0 4 0" fill="none" stroke="#0A0A0A" stroke-width="2" stroke-linejoin="round"/><circle cx="18" cy="6" r="3.5" fill="#FFD500"/></svg>Recordatorio automático</div>
+    <div class="chip" id="chAg" style="left:600px;top:1190px;font-size:28px;padding:20px 28px;display:flex;align-items:center;gap:14px">
+      <span style="padding:6px 12px;border-radius:8px;background:var(--ink-950);color:#fff;font-size:20px;letter-spacing:.1em">AGENTE</span>Cartera propia</div>
+    <div class="kt" id="kt5" style="top:1410px;font-size:64px"></div>
+  </div>
+
+  <!-- S6 TITULAR -->
+  <div class="scene" id="sc6">
+    <div class="hud" id="hud6"><span><b>06</b> · ImperiOS</span><span class="num">06 / 06</span></div>
+    <div class="kt" id="kt6" style="top:800px;font-size:100px"></div>
+  </div>
+
+  <!-- LOGO -->
+  <div class="scene" id="sc7">
+    <img id="logo" src="logo-noaccent.svg" class="abs" style="left:150px;top:780px;width:780px" alt="">
+    <div class="abs" id="ctaBtn" style="left:0;right:0;top:1060px;display:none;text-align:center">
+      <span style="position:relative;display:inline-flex;align-items:center;gap:22px;padding:34px 60px;border-radius:999px;background:var(--y);color:var(--ink-950);font-weight:800;font-size:50px;letter-spacing:-.01em;box-shadow:0 20px 50px rgba(255,213,0,.35)">
+        <span id="ctaLbl">Pide tu demo</span><svg id="ctaArr" width="44" height="44" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#0A0A0A" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span id="ctaRing" style="position:absolute;inset:-4px;border-radius:999px;border:3px solid var(--y)"></span></span>
+    </div>
+    <div class="abs" id="cta" style="left:0;right:0;top:1150px;text-align:center;font-weight:700;font-size:34px;letter-spacing:.2em;color:var(--ink-700)">IMPERIOS.APP ↗</div>
+  </div>
+
+  <div class="uline" id="ul"></div>
+  <div id="px"></div>
+</div>
+
+<script>
+// ---------- utilidades ----------
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, p) => a + (b - a) * p;
+const E = {
+  lin: p => p,
+  oc: p => 1 - Math.pow(1 - p, 3),
+  ic: p => p * p * p,
+  ioc: p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2,
+  oe: p => p === 1 ? 1 : 1 - Math.pow(2, -10 * p),
+  ob: p => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+  ob2: p => { const c1 = 2.4, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+};
+const k = (t, t0, t1, e = E.oc) => e(clamp((t - t0) / (t1 - t0)));
+const css = (el, o) => { for (const key in o) el.style[key] = o[key]; };
+const tf = (el, s) => { el.style.transform = s; };
+
+// v4: s0 («lo centralizas todo») solo existe en la versión larga; B.skip lista las escenas que la corta no usa
+let B = { hook: 0, s1: 0.6, s2: 4.2, s3: 7.6, s4: 12.4, s5: 15.6, s6: 20.6, logo: 23.4, end: 26.0 };
+const SK = s => (B.skip || []).includes(s);
+window.setBeats = b => {
+  B = Object.assign(B, b);
+  // numeración del HUD según las escenas que tiene esta versión
+  const vis = ['s1', 's2', 's3', 's4', 's5', 's6'].filter(s => !SK(s));
+  vis.forEach((s, i) => {
+    const h = $('#hud' + s[1]), n = String(i + 1).padStart(2, '0');
+    h.querySelector('b').textContent = n;
+    h.querySelector('.num').textContent = `${n} / ${String(vis.length).padStart(2, '0')}`;
+  });
+};
+const HOOKS = {
+  A: ['¿Tus', 'leads', 'se', 'pierden', 'entre', 'portales,', 'WhatsApp', 'y', 'Excel?'],
+  B: ['¿Cuántos', 'clientes', 'se', 'le', 'escapan', 'cada', 'mes', 'a', 'tu', 'inmobiliaria?'],
+  C: ['¿Cansado', 'de', 'usar', 'diferentes', 'herramientas', 'para', 'gestionar', 'tu', 'inmobiliaria?'],
+};
+let WH = [];
+window.setVariant = v => { const el = document.querySelector('#ktH'); el.innerHTML = ''; WH = words(el, [HOOKS[v].map(w => [w])]); };
+
+// ---------- kinetic type ----------
+function words(el, lines) {
+  // lines: [[text, cls?], ...] por línea; devuelve spans
+  const out = [];
+  lines.forEach((ln, li) => {
+    ln.forEach(([txt, cls]) => {
+      const s = document.createElement('span');
+      s.className = 'w' + (cls ? ' ' + cls : '');
+      s.textContent = txt;
+      el.appendChild(s); out.push(s);
+      el.appendChild(document.createTextNode(' '));
+    });
+    if (li < lines.length - 1) el.appendChild(document.createElement('br'));
+  });
+  return out;
+}
+function revealWords(ws, t, times, dur = .38) {
+  ws.forEach((w, i) => {
+    const p = k(t, times[i], times[i] + dur, E.oc);
+    css(w, { opacity: p, transform: `translateY(${(1 - p) * 46}px)`, filter: p < 1 ? `blur(${(1 - p) * 10}px)` : 'none' });
+  });
+}
+function exitBlock(el, t, t0, dur = .32) {
+  const p = k(t, t0, t0 + dur, E.ic);
+  css(el, { opacity: 1 - p, transform: `translateY(${-p * 60}px)`, filter: p > 0 ? `blur(${p * 14}px)` : 'none' });
+}
+const rectOf = el => { const r = el.getBoundingClientRect(); return { x: r.left, y: r.top, w: r.width, h: r.height }; };
+
+window.setVariant('A');
+const W0 = words($('#kt0'), [[['Lo'], ['centralizas']], [['absolutamente']], [['todo.']]]);
+const W1 = words($('#kt1'), [[['Todos'], ['tus'], ['leads,']], [['en'], ['un'], ['solo'], ['sitio.']]]);
+const W2 = words($('#kt2'), [[['Qué'], ['campañas'], ['y'], ['propiedades']], [['te'], ['traen'], ['más'], ['clientes.']]]);
+const W3 = words($('#kt3'), [[['Tus'], ['propiedades']], [['×'], ['lo'], ['que'], ['busca']], [['cada'], ['cliente.']]]);
+const W4 = words($('#kt4'), [[['Y'], ['se'], ['las'], ['envía']], [['por'], ['WhatsApp.']]]);
+const W5 = words($('#kt5'), [[['Visitas,'], ['agentes'], ['y']], [['recordatorios']], [['automáticos.']]]);
+const W6 = words($('#kt6'), [[['Todo'], ['conectado.']], [['De', 'it'], ['principio', 'it'], ['a', 'it'], ['fin.', 'it']]]);
+W6.filter(w => w.classList.contains('it')).forEach(w => { w.style.fontStyle = 'italic'; w.style.fontWeight = 500; });
+W3[2].style.color = 'var(--y)';
+// tiempos por bloque (relativos al inicio de su escena); B.wt los sustituye con los de la VO
+const DEF = {
+  kt0: [.1, .35, .8, 1.3],
+  kt1: [.2, .32, .44, .9, 1.0, 1.1, 1.25],
+  src: [1.6, 2.1, 2.6, 3.1],             // foco de Portales, Web, Campañas, WhatsApp
+  kt2: [.3, .45, .6, .75, 1.5, 1.62, 1.74, 1.9],
+  kt3: [1.2, 1.4, 1.9, 2.0, 2.1, 2.25, 2.6, 2.75],
+  m3: [1.2, 1.9, 2.4],                   // zona (pin), tipo, presupuesto
+  kt4: [.2, .3, .4, .5, 1.2, 1.35],
+  s4ev: [1.0, 1.6, 2.2],                 // 1.ª propiedad, 2.ª propiedad, «enviado»
+  kt5: [.3, .95, 1.4, 1.6, 2.1],
+  s5ev: [.95, 1.6],                      // chip de agente, recordatorio automático
+  kt6: [.45, .7, 1.2, 1.35, 1.55, 1.7],
+};
+const WT = key => (B.wt && B.wt[key]) || DEF[key];
+const rows2 = $$('#panel .row'), blocks = $$('.vb'), avas = $$('.ava'), slots = $$('#agenda .slot'), rks = $$('#camp .rk');
+
+// underline: interpola entre rects de palabras
+function underlineTo(t, keys, color) {
+  // keys: [[time, wordEl], ...] ordenados; antes del primero, oculta
+  const ul = $('#ul');
+  if (!keys.length || t < keys[0][0]) { ul.style.opacity = 0; return; }
+  let i = keys.length - 1; while (i > 0 && t < keys[i][0]) i--;
+  const [t0, w0] = keys[i];
+  const r0 = rectOf(w0);
+  const grow = k(t, t0, t0 + .35, E.oc);
+  let r = r0;
+  if (i > 0 && t < t0 + .35) {
+    const rp = rectOf(keys[i - 1][1]);
+    const p = E.ioc(clamp((t - t0) / .35));
+    r = { x: lerp(rp.x, r0.x, p), y: lerp(rp.y, r0.y, p), w: lerp(rp.w, r0.w, p), h: lerp(rp.h, r0.h, p) };
+  }
+  const sc = i === 0 ? grow : 1;
+  css(ul, { opacity: 1, left: r.x + 'px', top: (r.y + r.h - 4) + 'px', width: r.w + 'px', transform: `scaleX(${sc})`, background: color || 'var(--y)' });
+}
+
+// ---------- escena por escena ----------
+function render(t) {
+  // grids con deriva lenta
+  $('#lgrid').style.backgroundPosition = `${-t * 6}px ${-t * 9}px`;
+  $('#dgrid').style.backgroundPosition = `${-t * 6}px ${-t * 9}px`;
+
+  // ---- escenario oscuro: abre en S3 (match), cierra en S5 ----
+  const openP = k(t, B.s3 - .3, B.s3 + .35, E.ioc);
+  const closeP = k(t, B.s5 - .15, B.s5 + .45, E.ioc);
+  let darkClip;
+  if (t < B.s5 - .15) darkClip = `circle(${openP * 1500}px at 540px 760px)`;
+  else darkClip = `circle(${(1 - closeP) * 1900}px at 860px 1010px)`;
+  $('#dark').style.clipPath = darkClip;
+  const dg = $('#dglowA');
+  css(dg, { left: (580 + Math.sin(t * .6) * 40) + 'px', top: (-220 + Math.cos(t * .5) * 30) + 'px' });
+
+  const th = t - B.hook, camp = B.hook > 0, hasS0 = B.s0 != null;
+  // brillo claro (hook + logo)
+  const lg = $('#lglow');
+  const lgOn = Math.max(camp && th < 0 ? 0 : 1 - k(th, .7, 1.6), k(t, B.logo + .2, B.logo + 1.0)) * (t > B.s5 ? .7 : 1);
+  css(lg, { left: (40 + Math.sin(t * .4) * 30) + 'px', top: (430 + Math.cos(t * .35) * 30) + 'px', opacity: lgOn });
+
+  // ---- HOOK ----
+  const ign = k(th, 0, .9, E.oc);
+  const mask = `radial-gradient(circle at 50% 48%, #000 0, #000 ${ign * 900}px, transparent ${ign * 900 + 500}px)`;
+  const useMask = !camp && th < 1.2;
+  css($('#lgrid'), { webkitMaskImage: useMask ? mask : 'none', maskImage: useMask ? mask : 'none' });
+  const rp1 = k(th, .32, 1.0, E.oe), rp2 = k(th, .4, 1.2, E.oe);
+  css($('#ring1'), { opacity: (1 - rp1) * (th > .32 ? 1 : 0), transform: `scale(${.3 + rp1 * .9})` });
+  css($('#ring2'), { opacity: (1 - rp2) * (th > .4 ? .9 : 0), transform: `scale(${.3 + rp2 * 1.1})` });
+
+  // ---- GANCHO DE CAMPAÑA: del caos al pixel ----
+  const scH = $('#scH');
+  scH.style.display = camp && t < B.hook + .1 ? 'block' : 'none';
+  if (scH.style.display === 'block') {
+    const hc = B.hookCol || .55, col = k(t, B.hook - hc, B.hook, E.ic);   // colapso hacia el centro
+    const tg = k(t, 0, .3, E.ob2);
+    css($('#hTag'), { opacity: k(t, 0, .1) * (1 - col), transform: `scale(${.5 + .5 * tg}) translateY(${-col * 40}px)`, filter: col > 0 ? `blur(${col * 10}px)` : 'none' });
+    const n = WH.length;
+    revealWords(WH, t, (B.wt && B.wt.ktH) || WH.map((_, i) => .08 + i * (.75 / n)), .3);
+    if (col > 0) exitBlock($('#ktH'), t, B.hook - hc, hc * .9); else css($('#ktH'), { opacity: 1, transform: 'none', filter: 'none' });
+    $$('#scH .hc').forEach((c, i) => {
+      const t0 = .1 + i * .09, p = k(t, t0, t0 + .35, E.ob2);
+      const jx = Math.sin(t * 9 + i * 2.1) * 6 * (1 - col), jy = Math.cos(t * 7 + i * 1.3) * 5 * (1 - col);
+      const r0 = { x: parseFloat(c.style.left) + 120, y: parseFloat(c.style.top) + 40 };
+      const dx = col * (540 - r0.x), dy = col * (960 - r0.y);
+      const rot = ((i % 2 ? 1 : -1) * (4 + i)) * (1 - col);
+      const depth = [0, 2, 4, 1, 3, 5][i];
+      const bl = depth * (1 - col) + col * 10;
+      css(c, { opacity: k(t, t0, t0 + .08) * (1 - col * .9), transform: `translate(${dx + jx}px,${dy + jy}px) rotate(${rot}deg) scale(${(.6 + .4 * p) * (1 - col * .85) * (1 - depth * .03)})`, filter: bl > .2 ? `blur(${bl}px)` : 'none' });
+    });
+  }
+
+  // ---- S0: «lo centralizas absolutamente todo» (el pixel late debajo) ----
+  const scC = $('#scC');
+  scC.style.display = hasS0 && t > B.s0 && t < B.s1 + .4 ? 'block' : 'none';
+  if (scC.style.display === 'block') {
+    const s0 = t - B.s0;
+    tf(scC, `scale(${1 + .02 * clamp(s0 / 3)})`);
+    revealWords(W0, s0, WT('kt0'), .4);
+    exitBlock($('#kt0'), t, B.s1 - .15);
+  }
+
+  // ---- S1: las 4 fuentes de leads ----
+  const s1 = t - B.s1, sc1 = $('#sc1');
+  sc1.style.display = (t > B.s1 - .1 && t < B.s2 + .6) ? 'block' : 'none';
+  if (sc1.style.display === 'block') {
+    tf(sc1, `scale(${1 + .03 * clamp(s1 / 3)})`);
+    const hp = k(s1, .05, .45);
+    const hx = 1 - k(t, B.s2, B.s2 + .3, E.ic);
+    css($('#hud1'), { opacity: hp * hx, transform: `translateY(${(1 - hp) * 20}px)` });
+    // foco por fuente, sincronizado con la palabra; al nombrar la última se encienden todas
+    const ft = WT('src');
+    const all = k(s1, ft[3] + .5, ft[3] + .8, E.oc);
+    const foc = (a, b) => Math.max(Math.min(k(s1, a, a + .3, E.oc), 1 - k(s1, b, b + .3, E.oc) * .65), all);
+    const chips = [
+      { el: $('#cPor'), from: [0, 700], t0: 0.0, base: 1.0, f: foc(ft[0], ft[1]) },
+      { el: $('#cWeb'), from: [700, 0], t0: .08, base: .9, f: foc(ft[1], ft[2]) },
+      { el: $('#cCam'), from: [-700, 0], t0: .14, base: .95, f: foc(ft[2], ft[3]) },
+      { el: $('#cWa'), from: [600, 500], t0: .2, base: 1.0, f: foc(ft[3], 99) },
+    ];
+    const suck = k(t, B.s2, B.s2 + .42, E.ic);
+    chips.forEach(c => {
+      const p = k(s1, c.t0, c.t0 + .65, E.ob);
+      const r0 = { x: parseFloat(c.el.style.left), y: parseFloat(c.el.style.top) };
+      const dx = (1 - p) * c.from[0] + suck * (540 - r0.x - 150), dy = (1 - p) * c.from[1] + suck * (700 - r0.y);
+      const s = c.base * (.9 + .14 * c.f) * (1 - suck * .7);
+      const bl = (1 - c.f) * 6 + (1 - k(s1, c.t0, c.t0 + .5)) * 12 + suck * 10;
+      css(c.el, { transform: `translate(${dx}px,${dy}px) scale(${s})`, filter: bl > .2 ? `blur(${bl}px)` : 'none',
+        opacity: (k(s1, c.t0, c.t0 + .2) * (.55 + .45 * c.f)) * (1 - suck), borderColor: c.f > .5 ? 'var(--ink-300)' : 'var(--ink-200)' });
+    });
+    // mini tarjetas de lead: salen de cada fuente al nombrarla
+    const minis = [[$('#m1'), '#cPor'], [$('#m2'), '#cWeb'], [$('#m3'), '#cCam'], [$('#m4'), '#cWa']];
+    minis.forEach(([el, src], i) => {
+      const t0 = ft[i] + .25;
+      const p = k(s1, t0, t0 + .7, E.ioc);
+      const srcR = { x: parseFloat($(src).style.left) + 60, y: parseFloat($(src).style.top) + 20 };
+      const dst = { x: 415 + (i - 1.5) * 30, y: 1110 + i * 22 };
+      const x = lerp(srcR.x, dst.x, p) + suck * (540 - dst.x - 125), y = lerp(srcR.y, dst.y, p) - Math.sin(p * Math.PI) * 120 + suck * (720 - dst.y);
+      const v = Math.sin(p * Math.PI);
+      css(el, { left: x + 'px', top: y + 'px', opacity: (s1 > t0 ? 1 : 0) * (1 - suck), transform: `rotate(${(1 - p) * -14 + (i - 1.5) * 3}deg) scale(${(1 - suck * .7)})`,
+        filter: v > .05 || suck > 0 ? `blur(${v * 7 + suck * 8}px)` : 'none' });
+    });
+    const ap = k(s1, ft[0] + .1, ft[0] + .4, E.ob);
+    css($('#arrow1'), { opacity: ap * (1 - suck), transform: `translateY(${(1 - ap) * -30 + Math.sin(s1 * 5) * 4}px)` });
+    revealWords(W1, s1, WT('kt1'));
+    exitBlock($('#kt1'), t, B.s2 - .05);
+  }
+
+  // ---- S2: panel + qué campañas y propiedades traen más clientes ----
+  const s2 = t - B.s2, sc2 = $('#sc2');
+  sc2.style.display = !SK('s2') && (t > B.s2 - .05 && t < B.s3 + .4) ? 'block' : 'none';
+  if (sc2.style.display === 'block') {
+    const out = k(t, B.s3 - .25, B.s3 + .3, E.ic);
+    tf(sc2, `scale(${1 + .03 * clamp(s2 / 3.3) + out * .5})`);
+    css(sc2, { opacity: 1 - out, filter: out > 0 ? `blur(${out * 12}px)` : 'none' });
+    const hp = k(s2, .05, .45);
+    css($('#hud2'), { opacity: hp, transform: `translateY(${(1 - hp) * 20}px)` });
+    const pu = k(s2, .15, .6, E.oe);
+    css($('#panel'), { transform: `rotateX(${14 + (1 - pu) * 30}deg) rotateZ(-2deg) scaleY(${.02 + .98 * pu}) scaleX(${.6 + .4 * k(s2, .1, .4, E.oc)})`, opacity: k(s2, .1, .25) });
+    css($('#plabel'), { opacity: k(s2, .45, .7) });
+    rows2.forEach((r, i) => {
+      const p = k(s2, .5 + i * .09, .5 + i * .09 + .45, E.ob);
+      const b = +r.dataset.b;
+      const bl = b + (1 - p) * 10;
+      css(r, { opacity: p, transform: `translateY(${(1 - p) * -60}px) scale(${r.id === 'rowAM' ? 1 + .06 * k(s2, 1.0, 1.4, E.ob) : 1})`, filter: bl > .2 ? `blur(${bl / 3}px)` : 'none' });
+    });
+    const np = k(s2, 1.3, 1.6, E.ob2);
+    css($('#tagNuevo'), { transform: `scale(${np})`, opacity: np > 0 ? 1 : 0, display: 'inline-block' });
+    const w2 = WT('kt2'), c0 = Math.max(.7, w2[1] - .25);
+    const cp = k(s2, c0, c0 + .6, E.oc);
+    css($('#camp'), { opacity: cp, transform: `translateX(${(1 - cp) * 600}px) rotate(${2 + (1 - cp) * 8}deg)`, filter: cp < 1 ? `blur(${(1 - cp) * 12}px)` : 'none' });
+    // ranking: la campaña se ilumina al decir «campañas», la propiedad al decir «propiedades»
+    const lit = [w2[1] + .45, w2[3] + .1, 99];
+    rks.forEach((r, i) => {
+      const p = k(s2, c0 + .25 + i * .12, c0 + .65 + i * .12, E.ob);
+      const g = k(s2, c0 + .45 + i * .12, c0 + 1.35 + i * .12, E.ioc);
+      const on = k(s2, lit[i], lit[i] + .25, E.ob2);
+      css(r, { opacity: p, transform: `translateY(${(1 - p) * 30}px) scale(${1 + .03 * on})`, transformOrigin: '0 50%' });
+      const bar = r.querySelector('.rkB');
+      css(bar, { transform: `scaleX(${g * +bar.dataset.w})`, background: on > .5 ? 'var(--y)' : 'var(--ink-950)' });
+      const nEl = r.querySelector('.rkN');
+      nEl.textContent = Math.round(g * +nEl.dataset.n);
+    });
+    revealWords(W2, s2, w2);
+  }
+
+  // ---- S3: match con IA ----
+  const s3 = t - B.s3, sc3 = $('#sc3');
+  sc3.style.display = (t > B.s3 - .1 && t < B.s4 + .4) ? 'block' : 'none';
+  if (sc3.style.display === 'block') {
+    tf(sc3, `scale(${1 + .03 * clamp(s3 / 3.4)})`);
+    const hp = k(s3, .25, .6);
+    css($('#hud3'), { opacity: hp * (1 - k(t, B.s4 - .1, B.s4 + .15)), transform: `translateY(${(1 - hp) * 20}px)` });
+    const tg = k(s3, .3, .65, E.ob2);
+    css($('#tagM'), { opacity: k(s3, .3, .4) * (1 - k(t, B.s4 - .1, B.s4 + .2)), transform: `scale(${.4 + .6 * tg})` });
+    const [tz, tt, tp] = WT('m3');
+    revealWords(W3, s3, WT('kt3'));
+    const ex = k(t, B.s4 - .25, B.s4 + .15, E.ic);
+    [$('#kt3'), $('#ringLbl')].forEach(el => { if (ex > 0) exitBlock(el, t, B.s4 - .25); else css(el, { transform: 'none', filter: 'none', opacity: 1 }); });
+    if (ex === 0) css($('#ringLbl'), { opacity: k(s3, 1.0, 1.4) });
+    const pr = k(s3, .45, 1.1, E.oc);
+    css($('#prop'), { opacity: pr * (1 - ex), transform: `perspective(1600px) translateY(${(1 - pr) * 180 - ex * 260}px) rotateX(${(1 - pr) * 24}deg) scale(${1 - ex * .1})`, filter: (pr < 1 || ex > 0) ? `blur(${(1 - pr) * 10 + ex * 12}px)` : 'none' });
+    $$('#mapLines path').forEach((p, i) => { const L = 900; css(p, { strokeDasharray: L, strokeDashoffset: L * (1 - k(s3, .7 + i * .05, 1.5 + i * .05, E.ioc)) }); });
+    const pin = k(s3, tz, tz + .4, E.ob2);
+    $('#pin').setAttribute('transform', `translate(0 ${(1 - pin) * -90})`); $('#pin').style.opacity = k(s3, tz, tz + .1);
+    const halo = k(s3, tz + .3, tz + .95, E.oe);
+    $('#pinHalo1').setAttribute('r', 70 * halo); $('#pinHalo2').setAttribute('r', 34 * halo);
+    const chipPop = (el, t0) => { const p = k(s3, t0, t0 + .4, E.ob2); const fl = 1 - k(s3, t0 + .2, t0 + 1.0); css(el, { transform: `scale(${.6 + .4 * p})`, opacity: k(s3, t0, t0 + .1), borderColor: `rgba(255,213,0,${fl})` }); };
+    chipPop($('#chZona'), tz); chipPop($('#chTipo'), tt); chipPop($('#chPre'), tp);
+    css($('#range'), { transform: `scaleX(${k(s3, tp, tp + .45, E.oc)})` });
+    const kn = k(s3, tp + .1, tp + .7, E.ob);
+    css($('#knob'), { left: (kn * 52) + '%', opacity: k(s3, tp + .1, tp + .2), boxShadow: `0 0 ${20 + 30 * k(s3, tp + .55, tp + .85)}px rgba(255,213,0,.75)` });
+    [[$('#r1'), tz], [$('#r2'), tt], [$('#r3'), tp]].forEach(([el, tl]) => {
+      const p = k(s3, tl - .45, tl, E.ob);
+      const lock = s3 > tl;
+      css(el, { opacity: k(s3, .6, .9) * (1 - ex), transform: `rotate(${(1 - p) * 220}deg) translateY(${ex * -80}px)`, borderColor: lock ? 'var(--y)' : 'var(--ink-700)', filter: (p < 1 && p > 0) ? `blur(${(1 - p) * 3}px)` : 'none' });
+      el.querySelector('.chk').style.strokeDashoffset = 22 * (1 - k(s3, tl, tl + .25));
+    });
+  }
+
+  // ---- S4: la IA envía las propiedades al cliente por WhatsApp ----
+  const s4 = t - B.s4, sc4 = $('#sc4');
+  sc4.style.display = (t > B.s4 - .1 && t < B.s5 + .5) ? 'block' : 'none';
+  if (sc4.style.display === 'block') {
+    const out = k(t, B.s5 - .2, B.s5 + .3, E.ic);
+    tf(sc4, `scale(${1 + .03 * clamp(s4 / 2.8) - out * .08})`);
+    css(sc4, { opacity: 1 - out, filter: out > 0 ? `blur(${out * 14}px)` : 'none' });
+    const hp = k(s4, .1, .45);
+    css($('#hud4'), { opacity: hp, transform: `translateY(${(1 - hp) * 20}px)` });
+    const nw = k(s4, .3, .8, E.oe);
+    css($('#notif'), { width: (60 + 828 * nw) + 'px', left: '96px', opacity: s4 > .28 ? 1 : 0, background: nw < .15 ? 'var(--y)' : 'var(--ink-50)' });
+    css($('#notifTxt'), { opacity: k(s4, .6, .9), transform: `translateX(${(1 - k(s4, .6, .95)) * 30}px)` });
+    css($('#notifNow'), { opacity: k(s4, .85, 1.1) });
+    const pp = k(s4, .35, .95, E.oe);
+    css($('#phone'), { opacity: k(s4, .35, .5), transform: `perspective(1600px) translateY(${(1 - pp) * 240}px) rotateX(${(1 - pp) * 20}deg) scale(${.94 + .06 * pp})`, filter: pp < .98 ? `blur(${(1 - pp) * 10}px)` : 'none' });
+    const bi = k(s4, .75, 1.1, E.ob2);
+    css($('#bIn'), { opacity: k(s4, .75, .85), transform: `scale(${.7 + .3 * bi})` });
+    const [e1, e2, e3] = WT('s4ev').map((x, i) => Math.max(x, [1.0, 1.4, 1.8][i]));
+    [[$('#bOut1'), e1], [$('#bOut2'), e2]].forEach(([el, e]) => {
+      const p = k(s4, e, e + .5, E.ob2), v = 1 - k(s4, e, e + .3);
+      css(el, { opacity: k(s4, e, e + .08), transform: `translateY(${(1 - p) * -260}px) scale(${.75 + .25 * p})`, filter: v > .05 ? `blur(${v * 8}px)` : 'none' });
+    });
+    css($('#sent'), { opacity: k(s4, e3, e3 + .25), transform: `translateY(${(1 - k(s4, e3, e3 + .3, E.ob)) * 14}px)` });
+    $('#ticks').style.strokeDashoffset = 60 * (1 - k(s4, e3 + .05, e3 + .45, E.oc));
+    revealWords(W4, s4, WT('kt4'));
+  }
+
+  // ---- S5: agenda (visitas, agentes, recordatorios automáticos) ----
+  const s5 = t - B.s5, sc5 = $('#sc5');
+  sc5.style.display = !SK('s5') && (t > B.s5 - .1 && t < B.s6 + 1.8) ? 'block' : 'none';
+  if (sc5.style.display === 'block') {
+    const bgOut = k(t, B.s6 - .15, B.s6 + .45, E.oc);
+    tf(sc5, `scale(${1 + .03 * clamp(s5 / 3.5) - bgOut * .04})`);
+    css(sc5, { filter: bgOut > 0 ? `blur(${bgOut * 16}px)` : 'none', opacity: (1 - bgOut * .55) * (1 - k(t, B.s6 + .9, B.s6 + 1.6)) });
+    const hp = k(s5, .25, .6);
+    css($('#hud5'), { opacity: hp * (1 - bgOut), transform: `translateY(${(1 - hp) * 20}px)` });
+    const ap = k(s5, .2, .9, E.oc);
+    const orbit = -10 + 6 * clamp(s5 / 3.5);
+    css($('#agenda'), { opacity: ap, transform: `rotateY(${orbit - (1 - ap) * 30}deg) rotateX(${8 + (1 - ap) * 12}deg) translateY(${(1 - ap) * 140}px)` });
+    avas.forEach((a, i) => { const p = k(s5, .7 + i * .1, 1.0 + i * .1, E.ob2); css(a, { transform: `scale(${p})` }); });
+    slots.forEach((s, i) => css(s, { opacity: k(s5, .8 + i * .05, 1.1 + i * .05) }));
+    blocks.forEach((b, i) => {
+      const t0 = .95 + i * .14, p = k(s5, t0, t0 + .45, E.ob);
+      const v = 1 - k(s5, t0, t0 + .3);
+      css(b, { opacity: k(s5, t0, t0 + .08), transform: `translateY(${(1 - p) * -170}px)`, filter: v > .05 ? `blur(${v * 8}px)` : 'none' });
+    });
+    const [ea, er] = WT('s5ev');
+    const r = k(s5, er, er + .4, E.ob2), a = k(s5, ea, ea + .4, E.ob2);
+    css($('#chRem'), { opacity: k(s5, er, er + .1) * (1 - bgOut), transform: `scale(${.6 + .4 * r}) translateY(${(1 - r) * 30}px)` });
+    css($('#chAg'), { opacity: k(s5, ea, ea + .1) * (1 - bgOut), transform: `scale(${.6 + .4 * a}) translateY(${(1 - a) * 30}px)` });
+    revealWords(W5, s5, WT('kt5'));
+    if (bgOut > 0) exitBlock($('#kt5'), t, B.s6 - .15);
+  }
+
+  // ---- S6 ----
+  const s6 = t - B.s6, sc6 = $('#sc6');
+  sc6.style.display = !SK('s6') && (t > B.s6 && t < B.logo + .6) ? 'block' : 'none';
+  if (sc6.style.display === 'block') {
+    const hp = k(s6, .1, .45);
+    css($('#hud6'), { opacity: hp * (1 - k(t, B.logo - .1, B.logo + .2)), transform: `translateY(${(1 - hp) * 20}px)` });
+    revealWords(W6, s6, WT('kt6'), .45);
+    const ex = k(t, B.logo - .05, B.logo + .3, E.ic);
+    if (ex > 0) W6.forEach(w => css(w, { opacity: 1 - ex, filter: `blur(${ex * 12}px)`, transform: `translateY(${-ex * 50}px)` }));
+  }
+
+  // ---- underline por escena ----
+  const ul = $('#ul');
+  if (hasS0 && t >= B.s0 && t < B.s1) underlineTo(t - B.s0, [[WT('kt0')[3], W0[3]]]);
+  else if (t >= B.s1 && t < B.s2) underlineTo(t - B.s1, [[WT('kt1')[6], W1[6]]]);
+  else if (!SK('s2') && t >= B.s2 && t < B.s3 - .2) underlineTo(t - B.s2, [[WT('kt2')[7], W2[7]]]);
+  else if (t >= B.s3 && t < B.s4 - .2) underlineTo(t - B.s3, [[WT('kt3')[1], W3[1]], [WT('kt3')[7], W3[7]]]);
+  else if (t >= B.s4 && t < B.s5 - .2) underlineTo(t - B.s4, [[WT('kt4')[5], W4[5]]]);
+  else if (!SK('s5') && t >= B.s5 && t < B.s6 - .15) underlineTo(t - B.s5, [[WT('kt5')[4], W5[4]]]);
+  else if (!SK('s6') && t >= B.s6 + WT('kt6')[1] && t < B.logo) underlineTo(t - B.s6, [[WT('kt6')[1] + .25, W6[1]]]);
+  else if (t < B.logo) ul.style.opacity = 0;
+  // fade del underline al salir de cada bloque
+  const exits = [hasS0 ? B.s1 - .1 : -1, B.s2, B.s3 - .2, B.s4 - .2, B.s5 - .2, SK('s6') ? -1 : B.s6 - .15];
+  exits.forEach(x => { if (t > x - .25 && t < x) ul.style.opacity = 1 - k(t, x - .25, x); });
+
+  // ---- PIXEL: hilo conductor ----
+  const px = $('#px');
+  const LOGO = { x: 150 + 107 * 780 / 1280, y: 780 + 40 * 780 / 1280, w: 57 * 780 / 1280, h: 64 * 780 / 1280 };
+  const pxEnd = hasS0 ? B.s1 + .45 : B.hook + .98;   // aterriza en el punto de «Portales»
+  if (t >= B.logo - .05) {
+    // vuela a la «i» del logo: desde el subrayado del titular o, en la versión corta, desde la notificación
+    const T = logoT(t), O = { x: 540, y: 864 };
+    const L0 = LOGO;
+    const LOGOt = { x: O.x + (L0.x - O.x) * T.s, y: O.y + (L0.y - O.y) * T.s + T.dy, w: L0.w * T.s, h: L0.h * T.s };
+    let from;
+    if (!SK('s6')) { const u0 = rectOf(W6[1]); from = { x: u0.x, y: u0.y + u0.h - 4, w: u0.w, h: 8 }; }
+    else { const n = rectOf($('#notif')); from = { x: n.x + 30, y: n.y + 30, w: 60, h: 68 }; }
+    const p = k(t, B.logo - .05, B.logo + .55, E.ioc);
+    const land = t > B.logo + .55 ? 1 + .18 * Math.sin(clamp((t - B.logo - .55) / .22) * Math.PI) : 1;
+    ul.style.opacity = 0;
+    css(px, { display: 'block', left: lerp(from.x, LOGOt.x, p) + 'px', top: lerp(from.y, LOGOt.y, p) - Math.sin(p * Math.PI) * 120 + 'px', width: lerp(from.w, LOGOt.w, p) + 'px', height: lerp(from.h, LOGOt.h, p) + 'px',
+      borderRadius: lerp(SK('s6') ? 6 : 4, 0, p) + 'px', transform: `scale(${land})`, transformOrigin: '50% 50%', boxShadow: `0 0 ${30 * Math.sin(p * Math.PI)}px rgba(255,213,0,.6)`, opacity: 1, filter: 'none' });
+  } else if (th >= 0 && t < pxEnd) {
+    // nace del caos del gancho, late (a 100 BPM mientras se dice «lo centralizas…») y vuela al punto de «Portales»
+    const fall = k(th, 0, .34, E.ic);
+    const y = camp ? 926 : lerp(-140, 926, fall);
+    const sq = th > .34 ? Math.sin(clamp((th - .34) / .22) * Math.PI) : 0;
+    const ph = ((th - .5) % 1.2) / .2, hb = th > .5 && ph < 1 ? Math.sin(ph * Math.PI) : 0;
+    const beat = (1 + .25 * hb) * (camp ? k(th, 0, .3, E.ob2) : 1);
+    const fly = k(t, pxEnd - .36, pxEnd, E.ioc);
+    const dot = rectOf($('#dPor'));
+    const x0 = 510, w0 = 60, h0 = 68;
+    const x = lerp(x0, dot.x, fly), yy = lerp(y, dot.y, fly), w = lerp(w0, dot.w, fly), h = lerp(h0, dot.h, fly);
+    css(px, { display: 'block', left: x + 'px', top: yy + 'px', width: w + 'px', height: h + 'px', borderRadius: lerp(6, dot.h / 2, fly) + 'px',
+      transform: `scale(${(1 + sq * .25) * beat}, ${(1 - sq * .2) * beat})`, transformOrigin: '50% 100%',
+      boxShadow: `0 0 ${60 * (1 - fly)}px rgba(255,213,0,.6)`, opacity: 1, filter: 'none' });
+    $('#dPor').style.opacity = 0;
+  } else if (t >= B.s4 + .05 && t < B.s4 + .9) {
+    // nace la notificación desde el pixel
+    $('#dPor').style.opacity = 1;
+    const p = k(t, B.s4 + .05, B.s4 + .3, E.ob2);
+    const n = rectOf($('#notif'));
+    css(px, { display: 'block', left: (n.x + 30) + 'px', top: (n.y + 30) + 'px', width: '60px', height: '68px', borderRadius: '6px', transform: `scale(${p})`, transformOrigin: '50% 50%', boxShadow: `0 0 ${40 * p}px rgba(255,213,0,.5)`, opacity: 1, filter: 'none' });
+  } else if (t >= B.s4 + .9 && t < B.s5 + .3) {
+    const n = rectOf($('#notif'));
+    const out = SK('s5') ? 0 : k(t, B.s5 - .2, B.s5 + .3, E.ic);
+    css(px, { display: 'block', left: (n.x + 30) + 'px', top: (n.y + 30) + 'px', width: '60px', height: '68px', borderRadius: '6px', transform: `scale(${1 - out * .1})`, boxShadow: 'none', opacity: 1 - out, filter: out > 0 ? `blur(${out * 10}px)` : 'none' });
+  } else { px.style.display = 'none'; $('#dPor').style.opacity = 1; }
+
+  // ---- LOGO ----
+  const s7 = t - B.logo, sc7 = $('#sc7');
+  sc7.style.display = t > B.logo ? 'block' : 'none';
+  if (sc7.style.display === 'block') {
+    const lp = k(s7, .25, .85, E.oc);
+    css($('#logo'), { opacity: lp, filter: lp < 1 ? `blur(${(1 - lp) * 12}px)` : 'none', transform: `scale(${1.06 - .06 * lp})`, clipPath: `inset(0 ${(1 - k(s7, .25, .9, E.ioc)) * 100}% 0 0)` });
+    const cp = k(s7, .95, 1.35, E.oc);
+    const T = logoT(t);
+    const up = B.cta ? k(t, B.cta, B.cta + .6, E.ioc) : 0;
+    css($('#cta'), { opacity: cp, transform: `translateY(${(1 - cp) * 24 + up * 330}px)`, letterSpacing: (.3 - .1 * cp) + 'em' });
+    tf(sc7, `translateY(${T.dy}px) scale(${T.s})`);
+    sc7.style.transformOrigin = '540px 864px';
+    // botón de llamada a la acción (contrarresta la transformación de la escena)
+    const cb = $('#ctaBtn');
+    cb.style.display = B.cta ? 'block' : 'none';
+    if (B.cta) {
+      const bp = k(t, B.cta + .3, B.cta + .75, E.ob2);
+      const pulse = t > B.cta + 1.1 ? (t - B.cta - 1.1) % 1.2 / 1.2 : 0;
+      css(cb, { opacity: k(t, B.cta + .3, B.cta + .4), transform: `translateY(${-T.dy + (1 - bp) * 60}px) scale(${(.7 + .3 * bp) / T.s})` });
+      css($('#ctaRing'), { opacity: pulse > 0 ? (1 - pulse) * .9 : 0, transform: `scale(${1 + pulse * .25})` });
+      css($('#ctaArr'), { transform: `translateX(${Math.max(0, Math.sin((t - B.cta) * 5)) * 8 * bp}px)` });
+    }
+  }
+  // ocultar escenas no activas del hook
+  $('#sc0').style.display = th >= 0 && th < 1.3 ? 'block' : 'none';
+}
+function logoT(t) {
+  const s7 = t - B.logo;
+  const up = B.cta ? k(t, B.cta, B.cta + .6, E.ioc) : 0;
+  return { s: (1 + .015 * clamp(s7 / 2.4)) * (1 - up * .12), dy: -up * 230 };
+}
+window.render = render;
+window.ready = document.fonts.ready.then(() => new Promise(r => { const i = $('#logo'); if (i.complete) r(); else i.onload = r; }));
+</script>
+</body>
+</html>
