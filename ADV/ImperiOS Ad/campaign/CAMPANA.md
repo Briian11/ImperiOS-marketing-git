@@ -45,7 +45,8 @@ Motor: `preview/src/reel-v4.html` · timelines: `preview/build_timeline_v4.py` �
 | Largo B | ¿Cuántos clientes se le escapan cada mes a tu inmobiliaria? | ~35,3 s | `preview/out/v4/imperios-v4-largo-ganchoB_9x16.mp4` |
 | Corto A | (A) | ~18,7 s | `preview/out/v4/imperios-v4-corto-ganchoA_9x16.mp4` |
 | Corto B | (B) | ~18,4 s | `preview/out/v4/imperios-v4-corto-ganchoB_9x16.mp4` |
-| Largo C / Corto C | ¿Cansado de usar diferentes herramientas para gestionar tu inmobiliaria? | — | Pendiente: falta la voz del gancho C (ElevenLabs bloqueó la cuenta gratuita) |
+| Largo C | ¿Cansado de usar diferentes herramientas para gestionar tu inmobiliaria? | ~35,9 s | `preview/out/v4/imperios-v4-largo-ganchoC_9x16.mp4` |
+| Corto C | (C) | ~19,0 s | `preview/out/v4/imperios-v4-corto-ganchoC_9x16.mp4` |
 
 Escenas del largo: gancho → «Lo centralizas absolutamente todo» (pixel late) → 4 fuentes (portales, web, campañas, WhatsApp) →
 panel + ranking «qué campañas y propiedades te traen más clientes» → match con IA → chat: la IA envía las propiedades al cliente

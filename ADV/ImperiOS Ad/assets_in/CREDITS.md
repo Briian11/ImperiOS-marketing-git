@@ -14,3 +14,4 @@
 | Gancho B v4 (`vo/v4-gancho-B-toma-1/2.mp3`) | ElevenLabs, voz Cristina, eleven_v4, 17/10/2026, 118 créditos | Plan ElevenLabs del cliente |
 | Gancho C v4 | No generado: ElevenLabs bloqueó la cuenta gratuita («Unusual activity… Free Tier access has been disabled») | — |
 | Tiempos de palabra v4 (`vo/v4-*.words.json`) | ElevenLabs Scribe v1 (0 créditos); el gancho A reutiliza los de `campana-toma-1` | Plan ElevenLabs del cliente |
+| Gancho C v4 (`vo/v4-gancho-C-toma-1/2.mp3`) | ElevenLabs, voz Cristina, eleven_v4, 18/10/2026, 144 créditos (reintento: el 17/10 falló por bloqueo de la cuenta gratuita) | Plan ElevenLabs del cliente (gratuito: sin licencia comercial) |
