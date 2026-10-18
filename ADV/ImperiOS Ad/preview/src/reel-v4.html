@@ -253,7 +253,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-s
         <span id="ctaLbl">Pide tu demo</span><svg id="ctaArr" width="44" height="44" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#0A0A0A" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span id="ctaRing" style="position:absolute;inset:-4px;border-radius:999px;border:3px solid var(--y)"></span></span>
     </div>
-    <div class="abs" id="cta" style="left:0;right:0;top:1150px;text-align:center;font-weight:700;font-size:34px;letter-spacing:.2em;color:var(--ink-700)">IMPERIOS.APP ↗</div>
+    <div class="abs" id="cta" style="left:0;right:0;top:1150px;text-align:center;font-weight:700;font-size:34px;letter-spacing:.2em;line-height:1.5;color:var(--ink-700)">IMPERIOS.APP ↗</div>
   </div>
 
   <div class="uline" id="ul"></div>
@@ -283,6 +283,7 @@ let B = { hook: 0, s1: 0.6, s2: 4.2, s3: 7.6, s4: 12.4, s5: 15.6, s6: 20.6, logo
 const SK = s => (B.skip || []).includes(s);
 window.setBeats = b => {
   B = Object.assign(B, b);
+  if (B.ctaSub) $('#cta').innerHTML = B.ctaSub;   // línea bajo el botón (p. ej. «GRATIS · SIN COMPROMISO»)
   // numeración del HUD según las escenas que tiene esta versión
   const vis = ['s1', 's2', 's3', 's4', 's5', 's6'].filter(s => !SK(s));
   vis.forEach((s, i) => {

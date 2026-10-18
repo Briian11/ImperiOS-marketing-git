@@ -6,6 +6,7 @@ Uso: python3 build_timeline_v4.py <largo|corto> <gancho.words.json> <gancho.mp3>
 - Cada bloque de texto en pantalla aparece con la palabra hablada; cada escena arranca justo antes de la frase que la narra.
 """
 import json
+import os
 import subprocess
 import sys
 
@@ -68,7 +69,7 @@ if kind == "largo":
     B["s6"] = S(imp2) - .13
     B["logo"] = E(fin) + .03
     B["cta"] = S(demo) + .33
-    end = E(demo) + TAIL
+    end = E(len(BW) - 1) + TAIL       # tras la última palabra (el cierre puede ser más largo que «Pide tu demo»)
     por = find("portales"); web = find("web"); cam = find("campañas"); wa = find("WhatsApp")
     cam2 = find("campañas", y2); pro2 = find("propiedades", y2); car = find("características"); pro3 = find("propiedades", car)
     bus = find("busca", car); cli3 = find("cliente", bus); env = find("envía", y4); aut = find("automáticamente", env)
@@ -100,7 +101,7 @@ else:
     B["s6"] = B["logo"]
     B["cta"] = S(pide) + .2
     B["skip"] = ["s2", "s5", "s6"]
-    end = E(demo) + TAIL
+    end = E(len(BW) - 1) + TAIL       # tras la última palabra (el cierre puede ser más largo que «Pide tu demo»)
     por = find("portales"); web = find("web"); cam = find("campañas"); wa = find("WhatsApp")
     d3 = B["s4"] - B["s3"]
     wt = {
@@ -114,6 +115,8 @@ else:
     }
 
 B["wt"] = wt
+if os.environ.get("CTA_SUB"):
+    B["ctaSub"] = os.environ["CTA_SUB"]   # texto bajo el botón; admite <br>
 B = {k: (round(v, 3) if isinstance(v, float) else v) for k, v in B.items()}
 B["end"] = round(end, 2)
 tl = {"fps": 60, "duration": B["end"], "vo_offset": PRE, "beats": B,
