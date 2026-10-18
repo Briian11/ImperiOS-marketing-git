@@ -15,7 +15,7 @@ ADV/ImperiOS Ad/preview/out/campaign-vo-*/audio/premix.wav
 ADV/ImperiOS Ad/preview/out/campaign-vo-*/audio/mix_premaster.wav
 ADV/ImperiOS Ad/preview/package-lock.json
 ADV/ImperiOS Ad/preview/out/v4/vo-*.wav
-ADV/ImperiOS Ad/preview/out/v4/build.log
+ADV/ImperiOS Ad/preview/out/v4/build*.log
 ADV/ImperiOS Ad/preview/out/v4/*/_*
 ADV/ImperiOS Ad/preview/out/v4/*/vo_proc.wav
 ADV/ImperiOS Ad/preview/out/v4/*/audio/premix.wav
