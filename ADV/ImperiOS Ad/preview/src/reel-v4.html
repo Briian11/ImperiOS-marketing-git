@@ -421,7 +421,7 @@ function render(t) {
       const dx = col * (540 - r0.x), dy = col * (960 - r0.y);
       const rot = ((i % 2 ? 1 : -1) * (4 + i)) * (1 - col);
       const depth = [0, 2, 4, 1, 3, 5][i];
-      const bl = depth * (1 - col) + col * 10;
+      const bl = col * 10;   // nítidos mientras se leen; solo se desenfocan al colapsar hacia el pixel
       css(c, { opacity: k(t, t0, t0 + .08) * (1 - col * .9), transform: `translate(${dx + jx}px,${dy + jy}px) rotate(${rot}deg) scale(${(.6 + .4 * p) * (1 - col * .85) * (1 - depth * .03)})`, filter: bl > .2 ? `blur(${bl}px)` : 'none' });
     });
   }
