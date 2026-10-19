@@ -58,3 +58,7 @@ para bajar de ahí hay que recortar texto (p. ej. quitar «Imperios.» antes de 
 
 Para el gancho C, cuando haya voz: guardar la toma como `assets_in/vo/v4-gancho-C-toma-1.mp3`, transcribirla a
 `v4-gancho-C-toma-1.words.json` y ejecutar `build_timeline_v4.py` + `build_v4.sh` con C (el texto C ya está en el motor).
+
+**Cierre del gancho C (19/10/2026):** la voz termina con «Pide tu demo gratis, sin compromiso» (frase generada aparte y empalmada
+sobre el cuerpo: `assets_in/vo/v4-largo|corto-cierre-gratis.wav`) y bajo el botón aparece «GRATIS · SIN COMPROMISO / IMPERIOS.APP ↗»
+(`CTA_SUB` en `build_timeline_v4.py`). Solo usar si la demo es realmente gratuita. Los ganchos A y B siguen con «Pide tu demo».

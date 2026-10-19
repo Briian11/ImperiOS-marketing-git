@@ -1,6 +1,6 @@
 {
  "fps": 60,
- "duration": 35.85,
+ "duration": 37.54,
  "vo_offset": 0.2,
  "beats": {
   "hook": 4.045,
@@ -13,7 +13,7 @@
   "s5": 24.949,
   "s6": 29.809,
   "logo": 33.259,
-  "cta": 33.933,
+  "cta": 34.237,
   "wt": {
    "kt0": [
     0.947,
@@ -94,7 +94,8 @@
     2.822
    ]
   },
-  "end": 35.85
+  "ctaSub": "GRATIS · SIN COMPROMISO<br>IMPERIOS.APP ↗",
+  "end": 37.54
  },
- "note": "build_timeline_v4.py largo: VO a atempo 1.07; gancho ../assets_in/vo/v4-gancho-C-toma-1.words.json, cuerpo ../assets_in/vo/v4-largo-toma-1.words.json."
+ "note": "build_timeline_v4.py largo: VO a atempo 1.07; gancho ../assets_in/vo/v4-gancho-C-toma-1.words.json, cuerpo ../assets_in/vo/v4-largo-cierre-gratis.words.json."
 }
