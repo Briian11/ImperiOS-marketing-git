@@ -1,9 +1,11 @@
-# ImperiOS — Vídeo demo del CRM · Guion v1 (propuesta)
+# ImperiOS — Vídeo demo del CRM · Guion v2 (propuesta)
 
-**Formato:** 16:9, 1920×1080, 60 fps · **Duración:** ~2:45 · **Tono:** demostración guiada («así se trabaja con ImperiOS»), no anuncio.
+> v2: el punto 10 se divide en «Rendimiento por propiedad» (Métricas + resumen para el propietario) y «Rendimiento por comercial» (Dirección).
+
+**Formato:** 16:9, 1920×1080, 60 fps · **Duración:** ~3:10 · **Tono:** demostración guiada («así se trabaja con ImperiOS»), no anuncio.
 **Imagen:** grabaciones reales de la cuenta demo (navegación, filtros, pestañas, fichas) a 1920×1080 nativo, dentro de una ventana de navegador animada.
 **Capa propia (HyperFrames + GSAP), mismo lenguaje que el anuncio:** etiqueta de sección («02 · CONTACTOS»), cursor animado con onda de clic, zoom y foco con anillo amarillo `#FFD500` sobre lo que se explica, barrido circular a oscuro en la escena de IA, rótulos cinéticos en Manrope, cierre con logo.
-**Voz:** Cristina (ElevenLabs), tono explicativo, ~2.000 caracteres. Subtítulos y música suave opcionales.
+**Voz:** Cristina (ElevenLabs), tono explicativo, ~2.500 caracteres. Subtítulos y música suave opcionales.
 
 | # | Tiempo | Escena | Locución (VO) | Qué se ve / interacción | ¿Modifica datos? |
 |---|---|---|---|---|---|
@@ -17,10 +19,12 @@
 | 7 | 1:33–1:52 | Calendario, Tareas, Seguimientos | «Las visitas, firmas y valoraciones de todo el equipo están en el Calendario. Las tareas se organizan en un tablero y los seguimientos te recuerdan a quién volver a llamar.» | Calendario Mes → Semana; tablero de tareas; lista de seguimientos | No (cambiar de vista) |
 | 8 | 1:52–2:04 | Automatizaciones | «Y por WhatsApp, ImperiOS manda solo los recordatorios de cita, vuelve a contactar a quien lleva días sin responder y pregunta qué tal fue la visita.» | Ajustes → WhatsApp: interruptores de recordatorios 24 h / 2 h, re-contacto, control de calidad (solo mirar) | No |
 | 9 | 2:04–2:17 | Documentos | «Las hojas de visita, las propuestas de compra y los encargos de venta se generan desde el CRM y se firman en el momento.» | Documentos → plantillas → previsualización de la Hoja de visita | No |
-| 10 | 2:17–2:38 | Dirección y métricas | «Y si diriges la agencia, tienes el embudo de todo el equipo, las metas del mes, lo facturado y qué portales y campañas te traen más clientes.» | Dirección (Reporte comercial, Metas, Facturado) → Métricas (leads por procedencia) → Marketing | No (pestañas) |
-| 11 | 2:38–2:48 | Cierre | «ImperiOS. Todo tu negocio inmobiliario, conectado. Pide tu demo en imperios.app.» | Logo + CTA | No |
+| 10 | 2:17–2:43 | Rendimiento por propiedad | «Cada inmueble tiene su propio registro. En Métricas ves el rendimiento de toda tu cartera: cuántas personas se han interesado por cada propiedad, cuántas visitas se han hecho y cuántas han querido hacer una oferta. Y dentro de la ficha, todo eso se convierte en un informe para el propietario: de dónde vienen los interesados, qué opinan después de la visita y por qué la descartan, listo para copiar y enviárselo.» | Métricas → tabla «Rendimiento por propiedad» (foco en Contactos · Visitas · Ofertas) → clic en una propiedad → «Resumen para el propietario»: Han preguntado 20 (por portal) · La han visitado 17 (85 %) · Quieren ofertar 4 (24 %) → «Por qué la descartan» → «Ofertas recibidas» → comentarios de cada visita → botón «Copiar para el propietario» | No (filtro «Todo» y navegación) |
+| 11 | 2:43–3:01 | Rendimiento por comercial | «Y si diriges la agencia, en Dirección tienes el rendimiento de cada comercial: su embudo de la noticia al cierre, sus llamadas y visitas, cómo va frente a sus metas del mes y lo que ha facturado.» | Dirección → «Reporte comercial»: embudo del equipo y tabla por comercial (noticias, valoraciones, encargos, cierres, llamadas, visitas) → «Metas del mes»: conseguido frente a objetivo por comercial → «Facturado» | No (pestañas) |
+| 12 | 3:01–3:11 | Cierre | «ImperiOS. Todo tu negocio inmobiliario, conectado. Pide tu demo en imperios.app.» | Logo + CTA | No |
 
-Módulos vistos y no incluidos en esta versión (se pueden añadir o cambiar por otros): Prospectos, Reporte diario, Email (sin cuenta conectada), Clientes (listado), Agencia y Google Calendar en Ajustes.
+Módulos vistos y no incluidos en esta versión (se pueden añadir o cambiar por otros): Marketing (campañas de Meta), Prospectos, Reporte diario, Email (sin cuenta conectada), Clientes (listado), Agencia y Google Calendar en Ajustes.
+Si hay que bajar de 3 minutos, lo más fácil de recortar es la escena 8 (Automatizaciones) o la 9 (Documentos).
 
 ## Fuera de cuadro siempre
 
@@ -34,7 +38,7 @@ Módulos vistos y no incluidos en esta versión (se pueden añadir o cambiar por
    - nombre del usuario del pie del menú («Brian») → p. ej. «Laura · Demo» (o se oculta el pie con CSS al grabar);
    - inmuebles y documentos `TEST-00x` / «de prueba» / «Piso de prueba con campos nuevos»;
    - «MAGNUS REAL ESTATE» y «AGENCIA EXTRAMUROS 2021 S.L.» en descripciones y en la plantilla de la Hoja de visita (¿empresas reales?) → nombre ficticio;
-   - títulos con errata «Piso en de …»;
+   - títulos con errata «Piso en de …» (salen también en «Rendimiento por propiedad» y en «Más interés de contactos»);
    - notificaciones «Error en IDEALISTA» y aviso rojo de conexión con Meta;
    - textos en inglés: «Settings / Manage your account settings…», migas «Management», «Follow Ups», «Objectives», «Visit Sheet».
    El botón flotante del engranaje se oculta con CSS durante la grabación.
