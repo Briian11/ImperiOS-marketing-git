@@ -1,0 +1,8 @@
+[contactos]
+Todos los leads que entran desde los portales inmobiliarios o desde tu web se registran automáticamente en Contactos, con su origen, su temperatura y sus datos. Y los filtras en un clic.
+
+[chat]
+El Chat centraliza todos los mensajes que te llegan: de Idealista, de Fotocasa, de tu web y de WhatsApp. Todo entra en una misma bandeja, cada lead con la propiedad que le interesa, y le respondes por WhatsApp sin salir del CRM. Y si quieres, el asistente con inteligencia artificial contesta por ti.
+
+[rendimiento]
+En Métricas ves cuántos leads te entran por cada portal y cuántos acaban yendo a una visita. Además, cada inmueble tiene su propio registro: entras en una propiedad y ves cuántas personas se han interesado y desde qué portal, cuántas visitas se han realizado y cuántas han querido lanzar una oferta. Incluso por qué la descartan y por qué se cancelaron las visitas.

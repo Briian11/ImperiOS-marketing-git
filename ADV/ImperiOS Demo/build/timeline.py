@@ -2,61 +2,96 @@
 y resuelve cada acción visual (cursor, clic, cambio de estado, cámara, foco) a un tiempo absoluto anclado a una palabra.
 
 Uso: python3 build/timeline.py          → hyperframes/data.json + hyperframes/assets/audio/vo.wav
-Entradas: vo/demo-toma-1.mp3, vo/demo-toma-1.words.json, ../ImperiOS Ad/capture/out/states/*.json
+Entradas: vo/demo-toma-1.mp3 (+ clips v5-*.mp3 de los párrafos reescritos) con sus .words.json,
+../ImperiOS Ad/capture/out/states/*.json
 """
 import json
 import subprocess
 from pathlib import Path
 
+import numpy as np
+from scipy.io import wavfile
+
 ROOT = Path(__file__).resolve().parents[1]
 STATES = ROOT.parent / "ImperiOS Ad" / "capture" / "out" / "states"
 HF = ROOT / "hyperframes"
-VO = ROOT / "vo" / "demo-toma-1.mp3"
-WORDS = json.loads((ROOT / "vo" / "demo-toma-1.words.json").read_text())
+VODIR = ROOT / "vo"
+TAKE = "demo-toma-1"                         # toma completa de la que salen los párrafos sin cambios
+SR = 48000
 
 INTRO = 1.8      # la voz empieza tras la entrada del logo
 GAP = 1.2        # aire entre escenas (transición + primer gesto)
 TAIL = 3.2       # cola con el logo final
 
-# Escenas: primera palabra del párrafo (orden del guion)
+# Escenas: (id, primera palabra del párrafo en la toma completa, etiqueta, clip propio o None)
+# Los párrafos reescritos en la v5 tienen su propio clip (vo/<clip>.mp3 + .words.json): sin cortes en los bordes.
 SCENES = [
-    ("intro", "Esto", "Intro"), ("dashboard", "Nada", "Dashboard"), ("contactos", "Cada", "Contactos"),
-    ("chat", "Desde", "Chat"), ("cliente", "Cuando", "Clientes"), ("propiedades", "En", "Propiedades"),
-    ("ia", "Aquí", "Coincidencias IA"), ("agenda", "Las", "Agenda"), ("marketing", "Si", "Marketing"),
-    ("rendimiento", "Cada", "Métricas"), ("direccion", "Y", "Dirección"), ("cierre", "Imperios.", ""),
+    ("intro", "Esto", "Intro", None), ("dashboard", "Nada", "Dashboard", None), ("contactos", "Cada", "Contactos", "v5-contactos"),
+    ("chat", "Desde", "Chat", "v5-chat"), ("cliente", "Cuando", "Clientes", None), ("propiedades", "En", "Propiedades", None),
+    ("ia", "Aquí", "Coincidencias IA", None), ("agenda", "Las", "Agenda", None), ("marketing", "Si", "Marketing", None),
+    ("rendimiento", "Cada", "Métricas", "v5-rendimiento"), ("direccion", "Y", "Dirección", None), ("cierre", "Imperios.", "", None),
 ]
 
 
-def split_paragraphs():
-    """Índices de inicio de cada párrafo, buscando la primera palabra de cada escena en orden."""
+def decode(name):
+    """Audio mono float a 48 kHz."""
+    raw = subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-i", str(VODIR / f"{name}.mp3"), "-ac", "1", "-ar", str(SR),
+                          "-f", "f32le", "-"], capture_output=True, check=True).stdout
+    return np.frombuffer(raw, dtype=np.float32).copy()
+
+
+def quietest(x, t0, t1):
+    """Instante de menor energía (ventana de 20 ms) entre t0 y t1: el silencio real entre dos frases."""
+    a, b = int(max(0, t0) * SR), int(min(len(x) / SR, t1) * SR)
+    if b - a < int(0.03 * SR):
+        return (t0 + t1) / 2
+    win = int(0.02 * SR)
+    e = np.convolve(x[a:b] ** 2, np.ones(win) / win, mode="same")
+    return (a + int(np.argmin(e))) / SR
+
+
+def sources():
+    """Por escena: (audio, inicio, fin del tramo en el audio, palabras con tiempos del audio)."""
+    take, words = decode(TAKE), json.loads((VODIR / f"{TAKE}.words.json").read_text())
     idx, i = [], 0
-    for _, first, _ in SCENES:
-        while WORDS[i][0] != first:
+    for _, first, _, _ in SCENES:
+        while words[i][0] != first:
             i += 1
         idx.append(i)
         i += 1
-    return idx + [len(WORDS)]
+    idx.append(len(words))
+    cuts = [0.0]
+    for k in range(1, len(SCENES)):
+        cuts.append(quietest(take, words[idx[k] - 1][2] - 0.15, words[idx[k]][1] + 0.03))
+    cuts.append(len(take) / SR)
+    out = []
+    for k, (_, _, _, clip) in enumerate(SCENES):
+        if clip:
+            x, w = decode(clip), json.loads((VODIR / f"{clip}.words.json").read_text())
+            out.append((x, max(0.0, w[0][1] - 0.3), min(len(x) / SR, w[-1][2] + 0.6), w))
+        else:
+            out.append((take, cuts[k], cuts[k + 1], words[idx[k]:idx[k + 1]]))
+    return out
 
 
 def build():
-    starts = split_paragraphs()
+    src = sources()
     scenes, words, t = [], [], INTRO
-    for k, (sid, _, label) in enumerate(SCENES):
-        a, b = starts[k], starts[k + 1]
-        src0, src1 = WORDS[a][1], WORDS[b - 1][2]
+    for k, ((sid, _, label, clip), (_, c0, c1, w)) in enumerate(zip(SCENES, src)):
         if k:
             t += GAP
-        off = t - src0
-        sw = [[w, round(s + off, 3), round(e + off, 3)] for w, s, e in WORDS[a:b]]
-        scenes.append({"id": sid, "label": label, "n": k, "src": [src0, src1], "vo": [round(t, 3), round(t + src1 - src0, 3)], "words": sw})
+        off = t - w[0][1]                    # la primera palabra cae en t
+        sw = [[x, round(a + off, 3), round(b + off, 3)] for x, a, b in w]
+        scenes.append({"id": sid, "label": label, "n": k, "clip": clip or TAKE, "cut": [round(c0, 3), round(c1, 3)], "off": round(off, 3),
+                       "vo": [sw[0][1], sw[-1][2]], "words": sw})
         words += sw
-        t += src1 - src0
+        t = sw[-1][2]
     dur = round(t + TAIL, 2)
     # Inicio/fin visual de cada escena: arranca 0,5 s antes de su primera palabra
     for k, s in enumerate(scenes):
         s["start"] = 0.0 if k == 0 else round(s["vo"][0] - 0.5, 3)
         s["end"] = round(scenes[k + 1]["vo"][0] - 0.5, 3) if k + 1 < len(scenes) else dur
-    return scenes, words, dur
+    return scenes, words, dur, src
 
 
 def _norm(w):
@@ -74,23 +109,25 @@ def at(scene, word, occ=0, off=0.0):
     return round(hits[occ][1] + off, 3)
 
 
-def make_vo(scenes, dur):
+def make_vo(scenes, dur, src):
+    """Pista de voz: cada tramo en su sitio, cortado en silencio real y con fundidos de 8 ms."""
     out = HF / "assets" / "audio"
     out.mkdir(parents=True, exist_ok=True)
-    parts, labels = [], []
-    for k, s in enumerate(scenes):
-        a, b = s["src"][0] - 0.06, s["src"][1] + 0.25
-        delay = int((s["vo"][0] - 0.06) * 1000)
-        parts.append(f"[0]atrim={a:.3f}:{b:.3f},asetpts=PTS-STARTPTS,afade=t=in:d=0.03,afade=t=out:st={b - a - 0.08:.3f}:d=0.08,adelay={delay}|{delay}[s{k}]")
-        labels.append(f"[s{k}]")
-    fc = ";".join(parts) + f";{''.join(labels)}amix=inputs={len(labels)}:normalize=0,apad=whole_dur={dur}[o]"
-    subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", str(VO), "-filter_complex", fc,
-                    "-map", "[o]", "-ac", "2", "-ar", "48000", "-c:a", "pcm_s24le", str(out / "vo.wav")], check=True)
+    y = np.zeros(int((dur + 1) * SR), dtype=np.float32)
+    fade = int(0.008 * SR)
+    for s, (x, c0, c1, _) in zip(scenes, src):
+        seg = x[int(c0 * SR):int(c1 * SR)].copy()
+        seg[:fade] *= np.linspace(0, 1, fade)
+        seg[-fade:] *= np.linspace(1, 0, fade)
+        p = int(round((c0 + s["off"]) * SR))
+        y[p:p + len(seg)] += seg[: len(y) - p]
+    y = y[: int(dur * SR)]
+    wavfile.write(out / "vo.wav", SR, np.stack([y, y], 1))
 
 
 if __name__ == "__main__":
     from spec import actions  # noqa: E402  (acciones visuales por escena)
-    scenes, words, dur = build()
+    scenes, words, dur, src = build()
     states = {p.stem: json.loads(p.read_text()) for p in sorted(STATES.glob("*.json"))}
     data = {"duration": dur, "scenes": scenes, "words": words, "states": {k: {"pageH": v["pageH"], "boxes": v["boxes"]} for k, v in states.items()}}
     data["actions"] = actions(scenes, states, at)
@@ -103,7 +140,7 @@ if __name__ == "__main__":
             a["bg"] = "#%02x%02x%02x" % im.getpixel((int((x + w / 2) * 2), int((y + h + 5) * 2)))
     (HF / "data.json").write_text(json.dumps(data, ensure_ascii=False, indent=1))
     (HF / "data.js").write_text("window.DEMO = " + json.dumps(data, ensure_ascii=False) + ";\n")
-    make_vo(scenes, dur)
+    make_vo(scenes, dur, src)
     print(f"duración {dur:.2f} s · {len(words)} palabras · {len(data['actions'])} acciones")
     for s in scenes:
         print(f"  {s['n']:>2} {s['id']:<12} {s['start']:7.2f} → {s['end']:7.2f}   voz {s['vo'][0]:7.2f}–{s['vo'][1]:7.2f}")

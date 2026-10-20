@@ -50,16 +50,20 @@ def actions(scenes, states, at):
     ring(at(s, "contactos", 0, 0.4), box("01-dashboard", "sinAtender", 6), at(s, "próximas") - at(s, "contactos") - 0.6)
     ring(at(s, "próximas"), box("01-dashboard", "citas", 6), 1.8)
 
-    # 2 · Contactos: columna Fuente → filtro → Idealista
+    # 2 · Contactos: los leads de portales y web se registran solos, con origen, temperatura y datos → filtro
     s = S["contactos"]
     scene("contactos")
     state("02a-contactos", s["start"])
     cam(s["start"], full(), 0.01)
-    col = clip(box("02a-contactos", "colFuente", 4), 760)
-    ring(at(s, "Idealista"), col, at(s, "entra") - at(s, "Idealista"))
-    cam(at(s, "Idealista", 0, -0.2), union(col, [900, 140, 1000, 300]), 0.9, 1.5)
-    cam(at(s, "Contactos,", 0, -0.2), full(), 0.8)
+    tabla = clip(box("02a-contactos", "tabla", 4), 760)
+    ring(at(s, "registran"), tabla, at(s, "origen") - at(s, "registran"), False)
+    col = lambda n: clip(box("02a-contactos", n, 4), 760)  # noqa: E731
+    cam(at(s, "origen", 0, -0.3), union(col("colContacto"), col("colTemp")), 0.9, 1.3)
+    ring(at(s, "origen"), col("colFuente"), at(s, "temperatura") - at(s, "origen"))
+    ring(at(s, "temperatura"), col("colTemp"), at(s, "datos") - at(s, "temperatura"))
+    ring(at(s, "datos"), union(col("colContacto"), col("colTelefono")), at(s, "filtras") - at(s, "datos") - 0.3)
     filtro = box("02a-contactos", "filtro")
+    cam(at(s, "filtras", 0, -0.9), full(), 0.6)
     cur(at(s, "filtras", 0, -0.75), center(filtro))
     state("02b-contactos-filtro", at(s, "filtras", 0, 0.05), 0.2)
     sfx("click_ui_01", at(s, "filtras", 0, -0.05))
@@ -70,19 +74,28 @@ def actions(scenes, states, at):
     cam(at(s, "clic.", 0, 0.5), full(), 0.9)
     ring(at(s, "clic.", 0, 0.9), clip(box("02c-contactos-idealista", "colFuente", 4), 760), 1.4)
 
-    # 3 · Chat
+    # 3 · Chat: una bandeja con los mensajes de Idealista, Fotocasa, web y WhatsApp; se responde por WhatsApp
     s = S["chat"]
     scene("chat")
     state("03a-chat", s["start"])
     cam(s["start"], full(), 0.01)
-    ring(at(s, "todos"), box("03a-chat", "lista", 6), at(s, "con", 0) - at(s, "todos") - 0.4)
+    lista = box("03a-chat", "lista", 6)
+    cam(at(s, "centraliza", 0, -0.3), union(lista, [256, 140, 400, 10]), 1.0, 1.6)
+    ring(at(s, "centraliza"), lista, at(s, "Idealista") - at(s, "centraliza") - 0.05)
+    for src, w in (("srcIdealista", "Idealista"), ("srcFotocasa", "Fotocasa"), ("srcWeb", "web"), ("srcWhatsApp", "WhatsApp")):
+        ring(at(s, w), box("03a-chat", src, 6), 0.75)
+    ring(at(s, "bandeja", 0, -0.3), lista, at(s, "lead") - at(s, "bandeja"))
     lead = box("03a-chat", "lead")
-    cur(at(s, "WhatsApp", 0, -0.6), center(lead))
-    state("03b-chat-conversacion", at(s, "WhatsApp", 0, 0.1), 0.25)
-    sfx("click_ui_03", at(s, "WhatsApp"))
+    cur(at(s, "lead", 0, -0.7), center(lead))
+    cam(at(s, "lead", 0, -0.7), full(), 0.6)
+    state("03b-chat-conversacion", at(s, "lead", 0, 0.05), 0.25)
+    sfx("click_ui_03", at(s, "lead", 0, -0.05))
     conv = [650, 200, 1250, 330]
     cam(at(s, "propiedad", 0, -0.4), union(conv, box("03b-chat-conversacion", "propiedad", 10)), 1.0, 1.7)
-    ring(at(s, "propiedad"), box("03b-chat-conversacion", "propiedad", 10), 1.6)
+    ring(at(s, "propiedad"), box("03b-chat-conversacion", "propiedad", 10), at(s, "respondes") - at(s, "propiedad"))
+    composer = [645, 1006, 1250, 66]
+    cam(at(s, "respondes", 0, -0.4), [640, 640, 1280, 440], 0.9, 1.6)
+    ring(at(s, "respondes"), composer, at(s, "asistente") - at(s, "respondes") - 0.3)
     cam(at(s, "asistente", 0, -0.3), full(), 0.9)
     ring(at(s, "asistente"), [650, 200, 1250, 800], 2.2, False)
 
@@ -176,23 +189,31 @@ def actions(scenes, states, at):
     sfx("pop_dock_03", at(s, "cambias", 0, 1.05), 0.6)
     ring(at(s, "controlados", 0, -0.2), tgt, 1.8)
 
-    # 9 · Rendimiento por propiedad
+    # 9 · Métricas: leads por portal y cuántos acaban en visita → rendimiento por propiedad → una propiedad
     s = S["rendimiento"]
     scene("rendimiento")
-    state("09a-rendimiento", s["start"])
+    state("09-metricas-portales", s["start"])
+    cam(s["start"], full(), 0.01)
+    m = lambda n: box("09-metricas-portales", n, 6)  # noqa: E731
+    cam(at(s, "leads", 0, -0.3), m("procedencia"), 1.0, 1.3)
+    ring(at(s, "portal"), m("procedencia"), at(s, "visita") - at(s, "portal") - 0.4)
+    cam(at(s, "visita", 0, -0.5), union(m("agendamiento"), m("embudo")), 1.0, 1.6)
+    ring(at(s, "visita", 0, -0.1), m("embudo"), at(s, "registro") - at(s, "visita") - 0.2)
+    ring(at(s, "visita", 0, 0.5), m("agendamiento"), at(s, "registro") - at(s, "visita") - 0.8)
     sec = box("09a-rendimiento", "seccion", 6)
-    cam(s["start"], [sec[0], sec[1] - 40, sec[2], 1000], 0.01)
+    state("09a-rendimiento", at(s, "inmueble", 0, -0.2), 0.01)
+    cam(at(s, "inmueble", 0, -0.3), [sec[0], sec[1] - 40, sec[2], 1000], 1.0)
     cols = union(box("09a-rendimiento", "contactos"), box("09a-rendimiento", "ofertas"))
-    ring(at(s, "rendimiento"), cols, at(s, "propiedad,") - at(s, "rendimiento") - 0.6)
+    ring(at(s, "registro"), cols, at(s, "entras") - at(s, "registro"))
     f1 = box("09a-rendimiento", "fila1")
-    cur(at(s, "entras", 0, -0.5), [f1[0] + 160, f1[1] + f1[3] / 2])
-    state("09b-metricas-propiedad", at(s, "propiedad,", 0, 0.05), 0.3)
-    sfx("click_ui_03", at(s, "propiedad,", 0, -0.05))
-    cam(at(s, "propiedad,", 0, 0.05), full(), 0.01)
+    cur(at(s, "entras", 0, -0.6), [f1[0] + 160, f1[1] + f1[3] / 2])
+    state("09b-metricas-propiedad", at(s, "entras", 0, 0.15), 0.3)
+    sfx("click_ui_03", at(s, "entras", 0, 0.05))
+    cam(at(s, "entras", 0, 0.15), full(), 0.01)
     k = lambda n: box("09b-metricas-propiedad", n, 4)  # noqa: E731
     cam(at(s, "personas", 0, -0.5), union(k("preguntado"), k("canceladas"), k("contactosPor")), 1.0, 1.5)
-    ring(at(s, "personas"), k("preguntado"), at(s, "portal") - at(s, "personas") - 0.2)
-    ring(at(s, "portal", 0, -0.1), k("contactosPor"), at(s, "cuántas", 1) - at(s, "portal") - 0.1)
+    ring(at(s, "personas"), k("preguntado"), at(s, "portal", 1) - at(s, "personas") - 0.2)
+    ring(at(s, "portal", 1, -0.1), k("contactosPor"), at(s, "cuántas", 1) - at(s, "portal", 1) - 0.1)
     ring(at(s, "visitas", 0), k("visitas"), at(s, "cuántas", 2) - at(s, "visitas"))
     ring(at(s, "cuántas", 2), k("ofertar"), at(s, "Incluso") - at(s, "cuántas", 2))
     cam(at(s, "Incluso", 0, -0.3), union(k("descartan"), k("cancelaron")), 1.0, 1.5)
