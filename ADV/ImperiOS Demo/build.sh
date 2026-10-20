@@ -14,7 +14,9 @@ python3 build/audio.py
 cd hyperframes
 [ -d node_modules ] || npm install
 npx hyperframes check
-OUT=renders/imperios-demo-crm-v1_16x9.mp4
+OUT=renders/imperios-demo-crm-v2_16x9.mp4
 npx hyperframes render --quality "${QUALITY:-looks}" --fps 60 --output "$OUT"
-ffmpeg -hide_banner -loglevel error -y -i "$OUT" -vf "fps=1/5,scale=320:-1,drawtext=text='%{pts\:hms}':x=6:y=6:fontsize=16:fontcolor=0x0A0A0A:box=1:boxcolor=0xFFD500@0.9:boxborderw=3,pad=iw+8:ih+8:4:4:color=0x0A0A0A,tile=6x5" -frames:v 1 renders/contact-sheet-demo-v1.png
+# el render de HyperFrames vuelve a mezclar el audio: se sustituye por el máster (−14 LUFS) sin recodificar la imagen
+ffmpeg -hide_banner -loglevel error -y -i "$OUT" -i assets/audio/master.wav -map 0:v -map 1:a -c:v copy -c:a aac -b:a 256k -shortest -movflags +faststart renders/tmp.mp4 && mv renders/tmp.mp4 "$OUT"
+ffmpeg -hide_banner -loglevel error -y -i "$OUT" -vf "fps=1/5,scale=320:-1,drawtext=text='%{pts\:hms}':x=6:y=6:fontsize=16:fontcolor=0x0A0A0A:box=1:boxcolor=0xFFD500@0.9:boxborderw=3,pad=iw+8:ih+8:4:4:color=0x0A0A0A,tile=6x5" -frames:v 1 renders/contact-sheet-demo-v2.png
 ffmpeg -hide_banner -nostats -i "$OUT" -af ebur128=peak=true -f null - 2>&1 | grep -E "^\s+(I|Peak):" | tail -2

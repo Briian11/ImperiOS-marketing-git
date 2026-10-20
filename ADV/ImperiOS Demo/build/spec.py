@@ -80,10 +80,10 @@ def actions(scenes, states, at):
     state("03a-chat", s["start"])
     cam(s["start"], full(), 0.01)
     lista = box("03a-chat", "lista", 6)
-    cam(at(s, "centraliza", 0, -0.3), union(lista, [256, 140, 400, 10]), 1.0, 1.6)
+    cam(at(s, "centraliza", 0, -0.3), lista, 1.0, 2.0)
     ring(at(s, "centraliza"), lista, at(s, "Idealista") - at(s, "centraliza") - 0.05)
     for src, w in (("srcIdealista", "Idealista"), ("srcFotocasa", "Fotocasa"), ("srcWeb", "web"), ("srcWhatsApp", "WhatsApp")):
-        ring(at(s, w), box("03a-chat", src, 6), 0.75)
+        ring(at(s, w), box("03a-chat", src, 9), 0.75)
     ring(at(s, "bandeja", 0, -0.3), lista, at(s, "lead") - at(s, "bandeja"))
     lead = box("03a-chat", "lead")
     cur(at(s, "lead", 0, -0.7), center(lead))
