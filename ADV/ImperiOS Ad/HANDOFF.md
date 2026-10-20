@@ -58,7 +58,7 @@ Pasos:
   node capture.mjs shots       # out/<id>@2x.png (2880×1800) + <id>-full@2x.png
   node capture.mjs record      # out/<id>.mp4 (2880×1800, 60 fps)
   ```
-  El login se hace en un contexto sin vídeo; la sesión se guarda en `/tmp` (fuera del repo) y las credenciales se redactan en los logs. Cualquier elemento que muestre el email de la cuenta sale tapado (magenta) en las capturas; para tapar más cosas, añadir selectores en `"mask"`.
+  El login se hace en un contexto sin vídeo; la sesión se guarda en `/tmp` (fuera del repo) y las credenciales se redactan en los logs. El email de la cuenta se oculta en capturas y vídeos (texto transparente sobre su propio fondo, sin recuadro); para ocultar más cosas, añadir selectores en `"mask"`.
   `capture/out/` está en `.gitignore`: **las capturas no se suben hasta que el usuario las revise** (paso 2).
 
 ### Capturas hechas (14/10/2026) — pendientes de revisión del usuario

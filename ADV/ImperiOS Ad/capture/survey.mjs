@@ -58,12 +58,12 @@ try {
   const home = await login(browser);
   log('login ok');
   const ctx = await browser.newContext(opts({ storageState: STATE }));
-  // Tapa el email de la cuenta en cualquier sitio donde aparezca
+  // Oculta el email de la cuenta donde aparezca: texto transparente sobre su propio fondo (sin recuadro de color)
   await ctx.addInitScript((email) => {
     const paint = () => {
       const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
       for (let t; (t = w.nextNode());) if (t.nodeValue.includes(email)) {
-        const el = t.parentElement; el.style.setProperty('background', '#FF00FF', 'important'); el.style.setProperty('color', 'transparent', 'important');
+        const el = t.parentElement; el.style.setProperty('color', 'transparent', 'important'); el.style.setProperty('text-shadow', 'none', 'important');
       }
     };
     const start = () => { paint(); new MutationObserver(paint).observe(document.body, { subtree: true, childList: true, characterData: true }); };

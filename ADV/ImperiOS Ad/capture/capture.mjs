@@ -87,7 +87,7 @@ async function login(browser) {
   try {
     await page.waitForFunction(() => !document.querySelector('input[type="password"]'), null, { timeout: 30000 });
   } catch {
-    await page.screenshot({ path: path.join(OUT, '_login-failed.png'), mask: [page.locator('input')] });
+    await page.screenshot({ path: path.join(OUT, '_login-failed.png'), mask: [page.locator('input')], maskColor: '#FAFAFA' });
     const msg = await page.locator('[role="alert"], .error, .text-red-500, .text-destructive').first().innerText().catch(() => '');
     die(`El login no ha terminado${msg ? ` («${msg.trim()}»)` : ''} (ver out/_login-failed.png, con los campos tapados)`);
   }
@@ -100,18 +100,14 @@ async function login(browser) {
   return home;
 }
 
-// Oculta en las capturas cualquier elemento que muestre el email de la cuenta demo, más los selectores de screens.json.
-function masks(page) {
-  return [page.getByText(EMAIL, { exact: false }), ...(CFG.mask || []).map((s) => page.locator(s))];
-}
-
-// En vídeo no hay `mask`: se tapa en la propia página cualquier elemento cuyo texto contenga el email (y los selectores de "mask").
+// Oculta, en capturas y en vídeo, el email de la cuenta: su texto pasa a transparente sobre el propio fondo de la página
+// (sin recuadro de color). Los selectores de "mask" en screens.json se ocultan del todo.
 async function maskInPage(ctx) {
   await ctx.addInitScript(({ email, sels }) => {
     const paint = () => {
       const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
       for (let n; (n = w.nextNode());) if (n.nodeValue.includes(email)) {
-        const el = n.parentElement; el.style.setProperty('background', '#FF00FF', 'important'); el.style.setProperty('color', 'transparent', 'important');
+        const el = n.parentElement; el.style.setProperty('color', 'transparent', 'important'); el.style.setProperty('text-shadow', 'none', 'important');
       }
       for (const s of sels) document.querySelectorAll(s).forEach((el) => el.style.setProperty('visibility', 'hidden', 'important'));
     };
@@ -173,20 +169,21 @@ try {
 
   if (mode === 'explore' || mode === 'shots') {
     const ctx = await browser.newContext(ctxOpts({ storageState: STATE }));
+    await maskInPage(ctx);
     const page = await ctx.newPage();
     if (mode === 'explore') {
       await page.goto(home, { waitUntil: 'domcontentloaded' });
       await settle(page);
       const links = await navLinks(page);
       fs.writeFileSync(path.join(OUT, 'explore.json'), redact(JSON.stringify({ home: new URL(home).pathname, links }, null, 2)));
-      await page.screenshot({ path: path.join(OUT, '00-home@2x.png'), mask: masks(page) });
+      await page.screenshot({ path: path.join(OUT, '00-home@2x.png') });
       log(`${links.length} enlaces → out/explore.json; home → out/00-home@2x.png`);
     } else {
       for (const s of screens) {
         if (!(await goToScreen(page, home, s))) { log(`  ${s.id}: sin entrada de menú (${(s.nav || []).join(' / ')}); pon "path" en screens.json`); continue; }
         await runSteps(page, s.before);
-        await page.screenshot({ path: path.join(OUT, `${s.id}@2x.png`), mask: masks(page) });
-        await page.screenshot({ path: path.join(OUT, `${s.id}-full@2x.png`), fullPage: true, mask: masks(page) });
+        await page.screenshot({ path: path.join(OUT, `${s.id}@2x.png`) });
+        await page.screenshot({ path: path.join(OUT, `${s.id}-full@2x.png`), fullPage: true });
         fs.writeFileSync(path.join(OUT, `${s.id}.json`), JSON.stringify({ id: s.id, beat: s.beat, path: new URL(page.url()).pathname }, null, 2));
         log(`  ${s.id}: ok`);
       }
