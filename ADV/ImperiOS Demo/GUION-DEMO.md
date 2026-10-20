@@ -39,7 +39,7 @@ Para bajar de ~3:40: quitar la escena 8 (Automatizaciones, −12 s) y la 9 (Docu
 
 ## Pendiente antes de grabar
 
-1. **Permitir `images.unsplash.com`** en *Allowed domains* (las fotos de los inmuebles vienen de ahí y ahora no cargan).
+1. ~~Permitir `images.unsplash.com`~~ — hecho: las fotos de los inmuebles ya cargan.
 2. **Limpieza de la cuenta demo**, ahora que las pantallas salen completas:
    - nombre del usuario del pie del menú («Brian») → p. ej. «Laura · Demo» (o se oculta el pie con CSS al grabar);
    - inmuebles y documentos `TEST-00x` / «de prueba» / «Piso de prueba con campos nuevos»;
