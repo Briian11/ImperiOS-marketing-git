@@ -1,18 +1,18 @@
 {
  "fps": 60,
- "duration": 18.43,
+ "duration": 18.66,
  "vo_offset": 0.2,
  "beats": {
-  "hook": 3.447,
+  "hook": 3.092,
   "hookCol": 0.32,
-  "s1": 4.047,
-  "s3": 9.622,
-  "s2": 9.572,
-  "s4": 11.491,
-  "logo": 14.624,
-  "s5": 14.624,
-  "s6": 14.624,
-  "cta": 15.896,
+  "s1": 3.692,
+  "s3": 9.277,
+  "s2": 9.227,
+  "s4": 11.632,
+  "logo": 13.914,
+  "s5": 13.914,
+  "s6": 13.914,
+  "cta": 14.812,
   "skip": [
    "s2",
    "s5",
@@ -20,50 +20,51 @@
   ],
   "wt": {
    "kt1": [
-    0.547,
-    0.734,
-    0.921,
-    1.593,
-    1.743,
-    1.893,
-    2.192
+    0.304,
+    0.668,
+    0.855,
+    1.472,
+    1.659,
+    1.836,
+    2.556
    ],
    "src": [
-    2.977,
-    3.762,
-    4.023,
-    4.808
+    2.921,
+    3.631,
+    4.051,
+    4.911
    ],
    "kt3": [
     0.4,
-    0.538,
-    0.677,
-    0.815,
-    0.954,
-    1.092,
-    1.231,
-    1.369
+    0.608,
+    0.816,
+    1.024,
+    1.232,
+    1.439,
+    1.647,
+    1.855
    ],
    "m3": [
     0.55,
-    0.954,
-    1.231
+    1.232,
+    1.647
    ],
    "kt4": [
     0.15,
     0.25,
     0.35,
     0.45,
-    0.902,
-    1.102
+    0.379,
+    0.579
    ],
    "s4ev": [
-    1.102,
-    1.775,
-    2.448
+    0.579,
+    1.018,
+    1.756
    ]
   },
-  "end": 18.43
+  "ctaSub": "GRATIS, SIN COMPROMISO<br>IMPERIOS.APP ↗",
+  "end": 18.66
  },
- "note": "build_timeline_v4.py corto: VO a atempo 1.07; gancho ../assets_in/vo/v4-gancho-B-toma-1.words.json, cuerpo ../assets_in/vo/v4-corto-toma-1.words.json."
+ "note": "build_timeline_v4.py corto: VO a atempo 1.07; gancho ../assets_in/vo/licencia/gancho-B.words.json, cuerpo ../assets_in/vo/licencia/cuerpo-corto.words.json."
 }
