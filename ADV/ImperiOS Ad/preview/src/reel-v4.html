@@ -7,7 +7,7 @@
 @font-face { font-family: "Manrope"; src: url("manrope-latin-variable.woff2") format("woff2"); font-weight: 200 800; }
 :root {
   --ink-950:#0A0A0A; --ink-900:#1C1C1C; --ink-800:#333; --ink-700:#4A4A4A; --ink-600:#727272;
-  --ink-500:#B0B0B0; --ink-400:#C0C0C0; --ink-300:#D4D4D4; --ink-200:#EBEBEB; --ink-100:#F5F5F5; --ink-50:#FAFAFA;
+  --ink-500:#B0B0B0; --ink-400:#C0C0C0; --ink-300:#D4D4D4; --ink-200:#EBEBEB; --ink-100:#F7F7F3; --ink-50:#FAFAFA;
   --y:#FFD500;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -18,7 +18,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-s
 .full { position: absolute; inset: 0; }
 .grid-l { background-image: linear-gradient(to right, rgba(10,10,10,.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(10,10,10,.055) 1px, transparent 1px); background-size: 40px 40px; }
 .grid-d { background-image: linear-gradient(to right, rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.045) 1px, transparent 1px); background-size: 40px 40px; }
-.vig-l { background: radial-gradient(ellipse at 50% 45%, transparent 38%, rgba(245,245,245,.96) 82%); }
+.vig-l { background: radial-gradient(ellipse at 50% 45%, transparent 38%, rgba(247,247,243,.96) 82%); }
 .vig-d { background: radial-gradient(ellipse at 50% 45%, transparent 38%, rgba(10,10,10,.96) 82%); }
 #dark { background: var(--ink-950); }
 .scene { position: absolute; inset: 0; transform-origin: 50% 45%; }
@@ -64,13 +64,13 @@ body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-s
   <!-- light stage -->
   <div class="full" id="lightbg">
     <div class="full grid-l" id="lgrid"></div>
-    <div class="abs" id="lglow" style="width:1000px;height:1000px;border-radius:50%;background:radial-gradient(circle, rgba(255,213,0,.20), rgba(255,213,0,0) 65%);"></div>
+    <div class="abs" id="lglow" style="width:1000px;height:1000px;border-radius:50%;background:radial-gradient(circle, rgba(255,192,0,.20), rgba(255,192,0,0) 65%);"></div>
     <div class="full vig-l"></div>
   </div>
   <!-- dark stage (clip-path animated) -->
   <div class="full" id="dark">
     <div class="full grid-d" id="dgrid"></div>
-    <div class="abs" id="dglowA" style="width:760px;height:760px;border-radius:50%;background:radial-gradient(circle at 35% 65%, rgba(255,213,0,.30), rgba(255,213,0,.06) 60%, transparent 70%)"></div>
+    <div class="abs" id="dglowA" style="width:760px;height:760px;border-radius:50%;background:radial-gradient(circle at 35% 65%, rgba(255,192,0,.30), rgba(255,192,0,.06) 60%, transparent 70%)"></div>
     <div class="full vig-d"></div>
   </div>
 
@@ -88,8 +88,8 @@ body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-s
 
   <!-- HOOK -->
   <div class="scene" id="sc0">
-    <div class="abs" id="ring1" style="width:300px;height:300px;border-radius:50%;border:2px solid rgba(255,213,0,.5);left:390px;top:810px"></div>
-    <div class="abs" id="ring2" style="width:520px;height:520px;border-radius:50%;border:1.5px solid rgba(255,213,0,.22);left:280px;top:700px"></div>
+    <div class="abs" id="ring1" style="width:300px;height:300px;border-radius:50%;border:2px solid rgba(255,192,0,.5);left:390px;top:810px"></div>
+    <div class="abs" id="ring2" style="width:520px;height:520px;border-radius:50%;border:1.5px solid rgba(255,192,0,.22);left:280px;top:700px"></div>
   </div>
 
   <!-- S0 «Con ImperiOS, lo centralizas absolutamente todo» (solo versión larga) -->
@@ -150,7 +150,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-s
           <path d="M0 80 L260 60 L420 120 L708 90"/><path d="M0 230 L180 210 L380 260 L708 220"/><path d="M120 0 L160 340"/><path d="M330 0 L300 340"/><path d="M540 0 L590 340"/><path d="M420 120 L560 200 L708 300"/>
           <path d="M0 150 C200 140 300 180 708 160" stroke="#3A3A3A" stroke-width="7"/>
         </g>
-        <circle id="pinHalo1" cx="372" cy="168" r="70" fill="rgba(255,213,0,.10)"/><circle id="pinHalo2" cx="372" cy="168" r="34" fill="rgba(255,213,0,.25)"/>
+        <circle id="pinHalo1" cx="372" cy="168" r="70" fill="rgba(255,192,0,.10)"/><circle id="pinHalo2" cx="372" cy="168" r="34" fill="rgba(255,192,0,.25)"/>
         <g id="pin"><path d="M372 196 C356 172 346 160 346 146 a26 26 0 0 1 52 0 c0 14 -10 26 -26 50z" fill="#FFD500"/><circle cx="372" cy="146" r="9" fill="#0A0A0A"/></g>
       </svg>
       <div style="display:flex;gap:18px;margin-top:30px;align-items:center">
@@ -160,8 +160,8 @@ body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-s
       </div>
       <div style="margin-top:28px;font-size:20px;font-weight:700;letter-spacing:.14em;color:var(--ink-400)">PRESUPUESTO DEL CLIENTE</div>
       <div style="position:relative;height:14px;border-radius:7px;background:var(--ink-800);margin-top:16px">
-        <div id="range" style="position:absolute;left:38%;width:30%;top:0;bottom:0;border-radius:7px;background:rgba(255,213,0,.35);transform-origin:0 50%"></div>
-        <div id="knob" style="position:absolute;left:52%;top:-9px;width:32px;height:32px;margin-left:-16px;border-radius:50%;background:var(--y);box-shadow:0 0 30px rgba(255,213,0,.7)"></div>
+        <div id="range" style="position:absolute;left:38%;width:30%;top:0;bottom:0;border-radius:7px;background:rgba(255,192,0,.35);transform-origin:0 50%"></div>
+        <div id="knob" style="position:absolute;left:52%;top:-9px;width:32px;height:32px;margin-left:-16px;border-radius:50%;background:var(--y);box-shadow:0 0 30px rgba(255,192,0,.7)"></div>
       </div>
       <div style="display:flex;justify-content:space-between;margin-top:14px;font-size:22px;color:var(--ink-500);font-weight:600"><span style="margin-left:34%">350 k€</span><span style="margin-right:28%">400 k€</span></div>
     </div>
@@ -191,7 +191,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-s
         <div class="bub" id="bOut1" style="margin-left:auto;margin-top:22px;width:420px;background:var(--ink-50);color:var(--ink-950);border-radius:24px 24px 6px 24px;padding:14px;transform-origin:100% 100%">
           <svg width="392" height="150" viewBox="0 0 392 150" style="display:block;border-radius:14px;background:#1C1C1C">
             <g stroke="#333" stroke-width="3" fill="none"><path d="M0 40 L150 30 L240 64 L392 48"/><path d="M0 112 L110 100 L220 126 L392 104"/><path d="M70 0 L92 150"/><path d="M190 0 L170 150"/><path d="M300 0 L330 150"/><path d="M0 76 C120 70 180 92 392 82" stroke="#444" stroke-width="6"/></g>
-            <circle cx="196" cy="74" r="30" fill="rgba(255,213,0,.18)"/><path d="M196 92 C186 78 180 70 180 62 a16 16 0 0 1 32 0 c0 8 -6 16 -16 30z" fill="#FFD500"/><circle cx="196" cy="62" r="5.5" fill="#0A0A0A"/></svg>
+            <circle cx="196" cy="74" r="30" fill="rgba(255,192,0,.18)"/><path d="M196 92 C186 78 180 70 180 62 a16 16 0 0 1 32 0 c0 8 -6 16 -16 30z" fill="#FFD500"/><circle cx="196" cy="62" r="5.5" fill="#0A0A0A"/></svg>
           <div style="padding:14px 8px 4px"><div style="font-size:28px;font-weight:800">Ático · Chamberí</div><div style="font-size:22px;color:var(--ink-600);font-weight:600;margin-top:2px">3 hab · 385 k€</div></div>
         </div>
         <div class="bub" id="bOut2" style="margin-left:auto;margin-top:16px;width:420px;background:var(--ink-50);color:var(--ink-950);border-radius:24px 24px 6px 24px;padding:18px 22px;display:flex;align-items:center;gap:18px;transform-origin:100% 100%">
@@ -249,7 +249,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-s
   <div class="scene" id="sc7">
     <img id="logo" src="logo-noaccent.svg" class="abs" style="left:150px;top:780px;width:780px" alt="">
     <div class="abs" id="ctaBtn" style="left:0;right:0;top:1060px;display:none;text-align:center">
-      <span style="position:relative;display:inline-flex;align-items:center;gap:22px;padding:34px 60px;border-radius:999px;background:var(--y);color:var(--ink-950);font-weight:800;font-size:50px;letter-spacing:-.01em;box-shadow:0 20px 50px rgba(255,213,0,.35)">
+      <span style="position:relative;display:inline-flex;align-items:center;gap:22px;padding:34px 60px;border-radius:999px;background:var(--y);color:var(--ink-950);font-weight:800;font-size:50px;letter-spacing:-.01em;box-shadow:0 20px 50px rgba(255,192,0,.35)">
         <span id="ctaLbl">Pide tu demo</span><svg id="ctaArr" width="44" height="44" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#0A0A0A" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span id="ctaRing" style="position:absolute;inset:-4px;border-radius:999px;border:3px solid var(--y)"></span></span>
     </div>
@@ -410,13 +410,13 @@ function render(t) {
   scH.style.display = camp && t < B.hook + .1 ? 'block' : 'none';
   if (scH.style.display === 'block') {
     const hc = B.hookCol || .55, col = k(t, B.hook - hc, B.hook, E.ic);   // colapso hacia el centro
-    const tg = k(t, 0, .3, E.ob2);
-    css($('#hTag'), { opacity: k(t, 0, .1) * (1 - col), transform: `scale(${.5 + .5 * tg}) translateY(${-col * 40}px)`, filter: col > 0 ? `blur(${col * 10}px)` : 'none' });
-    const n = WH.length;
-    revealWords(WH, t, (B.wt && B.wt.ktH) || WH.map((_, i) => .08 + i * (.75 / n)), .3);
+    // legible desde el primer fotograma (miniatura y autoplay sin sonido): sin animación de entrada
+    const tg = 1;
+    css($('#hTag'), { opacity: 1 - col, transform: `scale(${.5 + .5 * tg}) translateY(${-col * 40}px)`, filter: col > 0 ? `blur(${col * 10}px)` : 'none' });
+    WH.forEach(w => css(w, { opacity: 1, transform: 'none', filter: 'none' }));
     if (col > 0) exitBlock($('#ktH'), t, B.hook - hc, hc * .9); else css($('#ktH'), { opacity: 1, transform: 'none', filter: 'none' });
     $$('#scH .hc').forEach((c, i) => {
-      const t0 = .1 + i * .09, p = k(t, t0, t0 + .35, E.ob2);
+      const t0 = -1, p = 1;
       const jx = Math.sin(t * 9 + i * 2.1) * 6 * (1 - col), jy = Math.cos(t * 7 + i * 1.3) * 5 * (1 - col);
       const r0 = { x: parseFloat(c.style.left) + 120, y: parseFloat(c.style.top) + 40 };
       const dx = col * (540 - r0.x), dy = col * (960 - r0.y);
@@ -542,11 +542,11 @@ function render(t) {
     $('#pin').setAttribute('transform', `translate(0 ${(1 - pin) * -90})`); $('#pin').style.opacity = k(s3, tz, tz + .1);
     const halo = k(s3, tz + .3, tz + .95, E.oe);
     $('#pinHalo1').setAttribute('r', 70 * halo); $('#pinHalo2').setAttribute('r', 34 * halo);
-    const chipPop = (el, t0) => { const p = k(s3, t0, t0 + .4, E.ob2); const fl = 1 - k(s3, t0 + .2, t0 + 1.0); css(el, { transform: `scale(${.6 + .4 * p})`, opacity: k(s3, t0, t0 + .1), borderColor: `rgba(255,213,0,${fl})` }); };
+    const chipPop = (el, t0) => { const p = k(s3, t0, t0 + .4, E.ob2); const fl = 1 - k(s3, t0 + .2, t0 + 1.0); css(el, { transform: `scale(${.6 + .4 * p})`, opacity: k(s3, t0, t0 + .1), borderColor: `rgba(255,192,0,${fl})` }); };
     chipPop($('#chZona'), tz); chipPop($('#chTipo'), tt); chipPop($('#chPre'), tp);
     css($('#range'), { transform: `scaleX(${k(s3, tp, tp + .45, E.oc)})` });
     const kn = k(s3, tp + .1, tp + .7, E.ob);
-    css($('#knob'), { left: (kn * 52) + '%', opacity: k(s3, tp + .1, tp + .2), boxShadow: `0 0 ${20 + 30 * k(s3, tp + .55, tp + .85)}px rgba(255,213,0,.75)` });
+    css($('#knob'), { left: (kn * 52) + '%', opacity: k(s3, tp + .1, tp + .2), boxShadow: `0 0 ${20 + 30 * k(s3, tp + .55, tp + .85)}px rgba(255,192,0,.75)` });
     [[$('#r1'), tz], [$('#r2'), tt], [$('#r3'), tp]].forEach(([el, tl]) => {
       const p = k(s3, tl - .45, tl, E.ob);
       const lock = s3 > tl;
@@ -650,7 +650,7 @@ function render(t) {
     const land = t > B.logo + .55 ? 1 + .18 * Math.sin(clamp((t - B.logo - .55) / .22) * Math.PI) : 1;
     ul.style.opacity = 0;
     css(px, { display: 'block', left: lerp(from.x, LOGOt.x, p) + 'px', top: lerp(from.y, LOGOt.y, p) - Math.sin(p * Math.PI) * 120 + 'px', width: lerp(from.w, LOGOt.w, p) + 'px', height: lerp(from.h, LOGOt.h, p) + 'px',
-      borderRadius: lerp(SK('s6') ? 6 : 4, 0, p) + 'px', transform: `scale(${land})`, transformOrigin: '50% 50%', boxShadow: `0 0 ${30 * Math.sin(p * Math.PI)}px rgba(255,213,0,.6)`, opacity: 1, filter: 'none' });
+      borderRadius: lerp(SK('s6') ? 6 : 4, 0, p) + 'px', transform: `scale(${land})`, transformOrigin: '50% 50%', boxShadow: `0 0 ${30 * Math.sin(p * Math.PI)}px rgba(255,192,0,.6)`, opacity: 1, filter: 'none' });
   } else if (th >= 0 && t < pxEnd) {
     // nace del caos del gancho, late (a 100 BPM mientras se dice «lo centralizas…») y vuela al punto de «Portales»
     const fall = k(th, 0, .34, E.ic);
@@ -664,14 +664,14 @@ function render(t) {
     const x = lerp(x0, dot.x, fly), yy = lerp(y, dot.y, fly), w = lerp(w0, dot.w, fly), h = lerp(h0, dot.h, fly);
     css(px, { display: 'block', left: x + 'px', top: yy + 'px', width: w + 'px', height: h + 'px', borderRadius: lerp(6, dot.h / 2, fly) + 'px',
       transform: `scale(${(1 + sq * .25) * beat}, ${(1 - sq * .2) * beat})`, transformOrigin: '50% 100%',
-      boxShadow: `0 0 ${60 * (1 - fly)}px rgba(255,213,0,.6)`, opacity: 1, filter: 'none' });
+      boxShadow: `0 0 ${60 * (1 - fly)}px rgba(255,192,0,.6)`, opacity: 1, filter: 'none' });
     $('#dPor').style.opacity = 0;
   } else if (t >= B.s4 + .05 && t < B.s4 + .9) {
     // nace la notificación desde el pixel
     $('#dPor').style.opacity = 1;
     const p = k(t, B.s4 + .05, B.s4 + .3, E.ob2);
     const n = rectOf($('#notif'));
-    css(px, { display: 'block', left: (n.x + 30) + 'px', top: (n.y + 30) + 'px', width: '60px', height: '68px', borderRadius: '6px', transform: `scale(${p})`, transformOrigin: '50% 50%', boxShadow: `0 0 ${40 * p}px rgba(255,213,0,.5)`, opacity: 1, filter: 'none' });
+    css(px, { display: 'block', left: (n.x + 30) + 'px', top: (n.y + 30) + 'px', width: '60px', height: '68px', borderRadius: '6px', transform: `scale(${p})`, transformOrigin: '50% 50%', boxShadow: `0 0 ${40 * p}px rgba(255,192,0,.5)`, opacity: 1, filter: 'none' });
   } else if (t >= B.s4 + .9 && t < B.s5 + .3) {
     const n = rectOf($('#notif'));
     const out = SK('s5') ? 0 : k(t, B.s5 - .2, B.s5 + .3, E.ic);

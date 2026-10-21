@@ -115,6 +115,7 @@ else:
     }
 
 B["wt"] = wt
+end = max(end, B["cta"] + 3.0)   # el botón aparece en cta+0,3 s: al menos 2,7 s de «Pide tu demo · Gratis, sin compromiso» en pantalla
 if os.environ.get("CTA_SUB"):
     B["ctaSub"] = os.environ["CTA_SUB"]   # texto bajo el botón; admite <br>
 B = {k: (round(v, 3) if isinstance(v, float) else v) for k, v in B.items()}

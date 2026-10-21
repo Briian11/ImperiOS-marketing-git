@@ -1,3 +1,6 @@
-A: ¿Tus leads se pierden entre portales, WhatsApp y Excel?   (se reutiliza de assets_in/vo/campana-toma-1.mp3, 0–3,52 s)
+A: ¿Tus leads se pierden entre portales, WhatsApp y Excel?
 B: ¿Cuántos clientes se le escapan cada mes a tu inmobiliaria?
 C: ¿Cansado de usar diferentes herramientas para gestionar tu inmobiliaria?
+
+Voces con licencia comercial (plan Starter, desde el 21/10/2026): modelo eleven_multilingual_v2, voz Cristina (1CeqBeXMOqCleeQjfYfO).
+Todas las tomas se generan de nuevo; no se reutiliza ningún audio anterior.
