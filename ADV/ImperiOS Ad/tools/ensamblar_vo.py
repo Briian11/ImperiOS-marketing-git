@@ -1,7 +1,8 @@
 """Une tomas de voz generadas por frases y estima el tiempo de cada palabra sin transcribir.
 
 Uso: python3 tools/ensamblar_vo.py <salida.wav> <salida.words.json> <audio1> "<texto1>" <pausa1> [<audio2> "<texto2>" <pausa2> ...]
-- Cada audio se recorta a su voz (silencio inicial y final fuera) y se une con la pausa indicada (s) detrás.
+- Cada audio se recorta a su voz (silencio inicial y final fuera), se iguala en sonoridad a la mediana
+  y se une con la pausa indicada (s) detrás.
 - Tiempos de palabra: el tramo con voz de cada toma se reparte entre sus palabras según sus sílabas,
   saltando los silencios internos. Medido contra Scribe en frases sueltas: error medio 0,14 s (p90 0,35 s);
   por eso conviene generar la voz por frases. Suficiente para el texto animado.
@@ -21,6 +22,13 @@ def load(path):
     raw = subprocess.run(["ffmpeg", "-v", "error", "-i", path, "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"],
                          capture_output=True, check=True).stdout
     return np.frombuffer(raw, np.float32).copy()
+
+
+def loudness(x):
+    """Sonoridad integrada (LUFS) de un tramo, con ebur128 de ffmpeg."""
+    out = subprocess.run(["ffmpeg", "-hide_banner", "-nostats", "-f", "f32le", "-ar", str(SR), "-ac", "1", "-i", "-",
+                          "-af", "ebur128", "-f", "null", "-"], input=x.tobytes(), capture_output=True).stderr.decode()
+    return float(re.findall(r"I:\s+(-?[\d.]+) LUFS", out)[-1])
 
 
 def voiced(x, thr_db=-38, hop=0.01):
@@ -57,7 +65,7 @@ def syllables(word):
 def main():
     out_wav, out_json, *rest = sys.argv[1:]
     pieces = [(rest[i], rest[i + 1], float(rest[i + 2])) for i in range(0, len(rest), 3)]
-    audio, words, t = [], [], 0.0
+    audio, words, t, segs = [], [], 0.0, []
     for path, text, pause in pieces:
         x = load(path)
         on, hop = voiced(x)
@@ -76,8 +84,16 @@ def main():
             i0 = frames[min(int(edges[k]), len(frames) - 1)]
             i1 = frames[min(int(np.ceil(edges[k + 1])) - 1, len(frames) - 1)] + 1
             words.append([w, round(t + i0 * hop, 3), round(t + i1 * hop, 3)])
+        segs.append(len(audio))
         audio += [seg, np.zeros(int(pause * SR), np.float32)]
         t += len(seg) / SR + pause
+    # cada frase se generó por separado: igualar su sonoridad a la mediana para que la locución suene continua
+    if len(segs) > 1:
+        lu = [loudness(audio[i]) for i in segs]
+        ref = float(np.median(lu))
+        for i, l in zip(segs, lu):
+            audio[i] = audio[i] * np.float32(10 ** ((ref - l) / 20))
+        print("sonoridad por frase (LUFS):", [round(l, 1) for l in lu], "-> todas a", round(ref, 1))
     y = np.concatenate(audio)
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-f", "f32le", "-ar", str(SR), "-ac", "1", "-i", "-",
                     "-c:a", "pcm_s16le", out_wav], input=y.tobytes(), check=True)

@@ -18,7 +18,8 @@ if [ "$DUR" = largo ]; then
     $L/largo-1.mp3 "Con Imperios, lo centralizas absolutamente todo." $P \
     $L/largo-2.mp3 "Todos tus leads entran en un solo sitio: portales inmobiliarios, tu web, campañas publicitarias y WhatsApp." 0.4 \
     $L/largo-3.mp3 "Y ves qué campañas y qué propiedades te traen más clientes." 0.4 \
-    $L/largo-4a.mp3 "La inteligencia artificial cruza las características de tus propiedades con lo que busca cada cliente," 0.12 \
+    $L/largo-4a1.mp3 "La inteligencia artificial cruza las características de tus propiedades" 0.05 \
+    $L/largo-4a2.mp3 "con lo que busca cada cliente," 0.12 \
     $L/largo-4b.mp3 "y le envía automáticamente por WhatsApp las que encajan." 0.4 \
     $L/largo-5.mp3 "Visitas, agentes y recordatorios automáticos, coordinados desde la misma agenda." $P \
     $L/largo-6.mp3 "Imperios. Todo conectado, de principio a fin. Pide tu demo gratis, sin compromiso." 0
