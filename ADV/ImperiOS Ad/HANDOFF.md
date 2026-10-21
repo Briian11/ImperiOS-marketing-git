@@ -46,18 +46,15 @@ Pasos:
 
 ---
 
-## Estado 21/10/2026 — voces con licencia: PENDIENTE (importante)
+## Estado 21/10/2026 — voces con licencia: RESUELTO
 
-- La conexión de ElevenLabs de la sesión anterior generaba en **otra cuenta** (cuota 10.000 = plan gratuito; el flujo
-  `1WyoCZWLmolP3pcjfiH8` vive en esa cuenta). El plan **Starter** del cliente está en **«ImperiOS's Workspace»**
-  (40.000 créditos, sin gastar a 21/10). Por tanto **ninguna voz de `assets_in/vo/licencia*` tiene licencia comercial**
-  y los 6 vídeos de `preview/out/v4/` **no deben pautarse**.
-- Arreglo: reconectar ElevenLabs en claude.ai/customize/connectors con la cuenta de «ImperiOS's Workspace» y abrir
-  sesión nueva. Comprobar que el saldo de 40.000 baja tras la primera generación.
-- Preferencia del cliente: entonación de **eleven_v4** (GA desde 28/09/2026, sin etiqueta beta) con la voz Cristina
-  `1CeqBeXMOqCleeQjfYfO`. Generar el **texto completo de una vez** si el límite lo permite (mejor entonación).
-- Textos: `campaign/VO_v4_cuerpo_largo.txt`, `VO_v4_cuerpo_corto.txt`, `VO_v4_ganchos.txt` (cierre «Pide tu demo gratis,
-  sin compromiso»). Montaje: `preview/build_licencia.sh <largo|corto> <A|B|C>` (ensambla con `tools/ensamblar_vo.py`;
-  si la voz llega en una sola toma por cuerpo, pasarla como única pieza). Prioridad: largo C (piloto Meta).
+- Conector de ElevenLabs reconectado a **«ImperiOS's Workspace»** (plan Starter, workspace `e02846d04b35418abc483b6a7859ccda`).
+  Voces regeneradas allí el 21/10/2026: **eleven_v4** (GA desde 28/09/2026), voz Cristina `1CeqBeXMOqCleeQjfYfO`,
+  una sola toma por texto → `assets_in/vo/starter/` (ganchos A/B/C + cuerpos largo y corto) con tiempos de Scribe
+  (`*.words.json`). Son las **únicas voces con licencia comercial**.
+- `assets_in/vo/licencia*` y todas las tomas anteriores se generaron en la cuenta gratuita («Brian's Workspace»):
+  **no usar en anuncios**.
+- Montaje: `preview/build_licencia.sh <largo|corto> <A|B|C>` (timeline con las tomas de `starter/` + `build_v4.sh`).
+  Los 6 vídeos de `preview/out/v4/` se regeneran con estas voces (prioridad: largo C, piloto Meta).
 - Requisitos ya aplicados en el motor: paleta #F7F7F3 / #FFD500 / brillos #FFC000, gancho legible desde el primer
   fotograma, «Pide tu demo · Gratis, sin compromiso» ≥2,5 s, 1080×1920 H.264 + AAC.
