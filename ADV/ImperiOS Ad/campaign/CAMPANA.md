@@ -39,14 +39,16 @@ Sin cifras de resultados ni testimonios hasta tener fuente y aprobación.
 Mismo estilo recreado (sin pantallas reales del CRM), sin subtítulos aparte: el texto cinético ya sigue a la voz.
 Motor: `preview/src/reel-v4.html` · timelines: `preview/build_timeline_v4.py` · build: `preview/build_v4.sh <largo|corto> <A|B|C>`.
 
+Todas con voz con licencia comercial (eleven_v4, Cristina, plan Starter, 21/10/2026).
+
 | Pieza | Gancho | Duración | Archivo |
 |---|---|---|---|
-| Largo A | ¿Tus leads se pierden entre portales, WhatsApp y Excel? | ~35,5 s | `preview/out/v4/imperios-v4-largo-ganchoA_9x16.mp4` |
-| Largo B | ¿Cuántos clientes se le escapan cada mes a tu inmobiliaria? | ~35,3 s | `preview/out/v4/imperios-v4-largo-ganchoB_9x16.mp4` |
-| Corto A | (A) | ~18,7 s | `preview/out/v4/imperios-v4-corto-ganchoA_9x16.mp4` |
-| Corto B | (B) | ~18,4 s | `preview/out/v4/imperios-v4-corto-ganchoB_9x16.mp4` |
-| Largo C | ¿Cansado de usar diferentes herramientas para gestionar tu inmobiliaria? | ~35,9 s | `preview/out/v4/imperios-v4-largo-ganchoC_9x16.mp4` |
-| Corto C | (C) | ~19,0 s | `preview/out/v4/imperios-v4-corto-ganchoC_9x16.mp4` |
+| Largo A | ¿Tus leads se pierden entre portales, WhatsApp y Excel? | 37,1 s | `preview/out/v4/imperios-v4-largo-ganchoA_9x16.mp4` |
+| Largo B | ¿Cuántos clientes se le escapan cada mes a tu inmobiliaria? | 36,8 s | `preview/out/v4/imperios-v4-largo-ganchoB_9x16.mp4` |
+| Corto A | (A) | 19,9 s | `preview/out/v4/imperios-v4-corto-ganchoA_9x16.mp4` |
+| Corto B | (B) | 19,5 s | `preview/out/v4/imperios-v4-corto-ganchoB_9x16.mp4` |
+| Largo C | ¿Cansado de usar diferentes herramientas para gestionar tu inmobiliaria? | 37,4 s | `preview/out/v4/imperios-v4-largo-ganchoC_9x16.mp4` |
+| Corto C | (C) | 20,2 s | `preview/out/v4/imperios-v4-corto-ganchoC_9x16.mp4` |
 
 Escenas del largo: gancho → «Lo centralizas absolutamente todo» (pixel late) → 4 fuentes (portales, web, campañas, WhatsApp) →
 panel + ranking «qué campañas y propiedades te traen más clientes» → match con IA → chat: la IA envía las propiedades al cliente
