@@ -20,3 +20,4 @@ ADV/ImperiOS Ad/preview/out/v4/*/_*
 ADV/ImperiOS Ad/preview/out/v4/*/vo_proc.wav
 ADV/ImperiOS Ad/preview/out/v4/*/audio/premix.wav
 ADV/ImperiOS Ad/preview/out/v4/*/audio/mix_premaster.wav
+ADV/ImperiOS Ad/preview/out/v4/log-*.txt
