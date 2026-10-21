@@ -62,3 +62,20 @@ Para el gancho C, cuando haya voz: guardar la toma como `assets_in/vo/v4-gancho-
 **Cierre del gancho C (19/10/2026):** la voz termina con «Pide tu demo gratis, sin compromiso» (frase generada aparte y empalmada
 sobre el cuerpo: `assets_in/vo/v4-largo|corto-cierre-gratis.wav`) y bajo el botón aparece «GRATIS · SIN COMPROMISO / IMPERIOS.APP ↗»
 (`CTA_SUB` en `build_timeline_v4.py`). Solo usar si la demo es realmente gratuita. Los ganchos A y B siguen con «Pide tu demo».
+
+## Guía de estilo v4 (aprobada 21/10/2026) — referencia para nuevas piezas
+
+- **Formato:** 1080×1920, 60 fps, H.264 (crf 14) + AAC 320k, −14 LUFS / −1 dBTP. Motor: `preview/src/reel-v4.html`.
+- **Paleta de redes:** fondo `#F7F7F3`, negro `#0A0A0A`, amarillo sólido `#FFD500` solo en detalles (subrayados, botón, chips
+  activos, punto del logo), brillos y sombras `#FFC000` siempre con transparencia. Escenas de IA en fondo negro.
+- **Tipografía:** Manrope (variable). Texto cinético palabra a palabra, sincronizado con los tiempos de Scribe de la voz;
+  la palabra clave lleva subrayado amarillo.
+- **Movimiento:** desenfoque de movimiento real (3 subfotogramas), entradas con blur corto; nada borroso en reposo.
+  El gancho se lee **desde el primer fotograma** (sin animación de entrada).
+- **UI recreada** (nunca capturas del CRM ni datos reales); chat genérico, no copia de WhatsApp; sin marcas de portales.
+- **Estructura:** gancho (pregunta de dolor) → «Lo centralizas todo» → fuentes de leads → panel/ranking → match con IA →
+  envío automático → agenda → «Todo conectado» → logo + «Pide tu demo · Gratis, sin compromiso» (≥2,5 s).
+- **Voz:** Cristina (`1CeqBeXMOqCleeQjfYfO`), eleven_v4, una sola toma por texto, generada en el plan Starter; atempo 1,07.
+- **Audio:** música y SFX generados en código (`preview/audio_mix.py`), música ~22 dB bajo la voz con ducking dinámico.
+- **Sin cifras ni testimonios** no verificados.
+- Hojas de contacto de las versiones anteriores (v2, v3, v6) en `referencia-versiones-anteriores/`.

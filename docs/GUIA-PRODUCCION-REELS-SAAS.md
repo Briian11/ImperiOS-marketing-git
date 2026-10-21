@@ -3,6 +3,9 @@
 > Documento técnico y de proceso, paso a paso, de cómo se produjo el spec ad / campaña de **ImperiOS** (CRM inmobiliario) en octubre de 2026.
 > Está escrito para que **otra persona u otra IA** pueda reproducir vídeos del mismo estilo en otro proyecto sin haber visto la conversación original.
 > Todo lo descrito existe en este repo, en `ADV/ImperiOS Ad/`.
+> **Nota 21/10/2026:** los vídeos v2/v3/v6 y las voces sin licencia comercial se borraron del repo (sus hojas de contacto
+> están en `ADV/ImperiOS Ad/referencia-versiones-anteriores/`). Los comandos que citan `assets_in/vo/campana-toma-*` o
+> `out/campaign*` sirven como receta, pero esos archivos ya no existen. Versión vigente: campaña v4 (`campaign/CAMPANA.md`).
 
 ---
 

@@ -54,6 +54,9 @@ Pasos:
   (`*.words.json`). Son las **únicas voces con licencia comercial**.
 - `assets_in/vo/licencia*` y todas las tomas anteriores se generaron en la cuenta gratuita («Brian's Workspace»):
   **no usar en anuncios**.
+- **Limpieza 21/10/2026:** borrados del repo los vídeos v2/v3/v6 y todas las voces sin licencia (`assets_in/vo/` fuera de
+  `starter/`). Quedan sus hojas de contacto en `referencia-versiones-anteriores/` y la guía de estilo en
+  `campaign/CAMPANA.md`. Las rutas a `assets_in/vo/campana-toma-*` de las secciones anteriores ya no existen.
 - Montaje: `preview/build_licencia.sh <largo|corto> <A|B|C>` (timeline con las tomas de `starter/` + `build_v4.sh`).
   Los 6 vídeos de `preview/out/v4/` se regeneran con estas voces (prioridad: largo C, piloto Meta).
 - Requisitos ya aplicados en el motor: paleta #F7F7F3 / #FFD500 / brillos #FFC000, gancho legible desde el primer

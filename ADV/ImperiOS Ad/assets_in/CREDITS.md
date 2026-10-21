@@ -19,3 +19,5 @@
 | **VO con licencia comercial (`vo/starter/gancho-A|B|C.mp3`, `cuerpo-largo.mp3`, `cuerpo-corto.mp3`)** | ElevenLabs, voz Cristina – Premium Spanish Advertising Voice (1CeqBeXMOqCleeQjfYfO), modelo **eleven_v4** (GA), generadas el 21/10/2026 en «ImperiOS's Workspace» (plan Starter de pago), una toma por texto | **Plan Starter: uso comercial permitido.** Son las únicas voces válidas para pautar |
 | Tiempos de palabra (`vo/starter/*.words.json`) | ElevenLabs Scribe v1 sobre las tomas anteriores (0 créditos) | Plan Starter |
 | `vo/licencia/`, `vo/licencia-v4/` y todas las tomas anteriores a 21/10/2026 | Generadas en la cuenta gratuita «Brian's Workspace» (el conector estaba en esa cuenta) | **Sin licencia comercial: no usar en anuncios** |
+
+**21/10/2026:** las voces sin licencia de las filas anteriores se han borrado del repo; solo queda `vo/starter/`.
