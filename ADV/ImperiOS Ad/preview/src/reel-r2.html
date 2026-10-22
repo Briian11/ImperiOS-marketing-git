@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>ImperiOS Reel R2 — 3 errores</title>
+<!-- Reel orgánico R2 «3 errores que te hacen perder leads». Mismo lenguaje que reel-v4.html (paleta, Manrope, texto cinético).
+     Todo el texto dentro de la zona segura de Reels: y 270–1248 (14 % arriba, 35 % abajo). -->
+<style>
+@font-face { font-family: "Manrope"; src: url("manrope-latin-variable.woff2") format("woff2"); font-weight: 200 800; }
+:root {
+  --ink-950:#0A0A0A; --ink-900:#1C1C1C; --ink-800:#333; --ink-700:#4A4A4A; --ink-600:#727272;
+  --ink-500:#B0B0B0; --ink-400:#C0C0C0; --ink-300:#D4D4D4; --ink-200:#EBEBEB; --ink-100:#F7F7F3; --ink-50:#FAFAFA;
+  --y:#FFD500;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ink-100); }
+body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-smoothing: antialiased; }
+#stage { position: absolute; inset: 0; overflow: hidden; background: var(--ink-100); }
+.abs { position: absolute; }
+.full { position: absolute; inset: 0; }
+.grid-l { background-image: linear-gradient(to right, rgba(10,10,10,.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(10,10,10,.055) 1px, transparent 1px); background-size: 40px 40px; }
+.vig-l { background: radial-gradient(ellipse at 50% 45%, transparent 38%, rgba(247,247,243,.96) 82%); }
+.scene { position: absolute; inset: 0; transform-origin: 50% 45%; display: none; }
+.hud { position: absolute; top: 290px; left: 96px; right: 96px; display: flex; justify-content: space-between;
+  font-weight: 700; font-size: 26px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-600); }
+.hud b { font-weight: 700; color: var(--ink-950); }
+.kt { position: absolute; left: 96px; right: 96px; font-weight: 700; letter-spacing: -.035em; line-height: 1.12; }
+.kt .w { display: inline-block; white-space: pre; will-change: transform, opacity, filter; }
+.it { font-style: italic; font-weight: 500; }
+.uline { position: absolute; height: 8px; border-radius: 4px; background: var(--y); transform-origin: 0 50%; opacity: 0; }
+.tag { display: inline-flex; align-items: center; gap: 14px; padding: 14px 26px; background: var(--y); color: var(--ink-950);
+  border-radius: 999px; font-weight: 800; font-size: 24px; letter-spacing: .14em; }
+.card { position: absolute; background: var(--ink-50); border: 1.5px solid var(--ink-200); border-radius: 24px;
+  box-shadow: 0 30px 80px rgba(10,10,10,.10), 0 4px 14px rgba(10,10,10,.05); }
+.av { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 24px; flex: none; }
+.row { position: absolute; left: 96px; width: 888px; height: 104px; display: flex; align-items: center; gap: 22px; padding: 0 28px;
+  border-radius: 20px; background: var(--ink-50); border: 1.5px solid var(--ink-200); box-shadow: 0 16px 40px rgba(10,10,10,.07); font-size: 32px; font-weight: 700; }
+.st { margin-left: auto; display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+  padding: 10px 16px; border-radius: 12px; background: var(--ink-200); color: var(--ink-600); }
+.chip { position: absolute; padding: 20px 34px; border-radius: 18px; background: var(--ink-50); border: 1.5px solid var(--ink-200);
+  font-weight: 700; font-size: 36px; box-shadow: 0 20px 50px rgba(10,10,10,.08); white-space: nowrap; display: flex; align-items: center; gap: 14px; }
+.dot { width: 16px; height: 16px; border-radius: 50%; background: var(--y); }
+.mini { position: absolute; width: 250px; height: 80px; border-radius: 14px; background: var(--ink-50); border: 1.5px solid var(--ink-200);
+  box-shadow: 0 16px 40px rgba(10,10,10,.10); display: flex; align-items: center; gap: 14px; padding: 0 18px; }
+.mini i { display: block; width: 40px; height: 40px; border-radius: 50%; background: var(--ink-200); flex: none; }
+.mini b { display: block; height: 12px; border-radius: 6px; background: var(--ink-300); }
+.num { position: absolute; left: 96px; top: 360px; width: 132px; height: 132px; border-radius: 28px; background: var(--ink-950); color: var(--y);
+  display: grid; place-items: center; font-weight: 800; font-size: 76px; letter-spacing: -.04em; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="full grid-l" id="lgrid"></div>
+  <div class="abs" id="lglow" style="width:1000px;height:1000px;border-radius:50%;background:radial-gradient(circle, rgba(255,192,0,.20), rgba(255,192,0,0) 65%);"></div>
+  <div class="full vig-l"></div>
+
+  <!-- T · titular (legible desde el primer fotograma) -->
+  <div class="scene" id="scT">
+    <div class="abs" id="tTag" style="left:96px;top:380px"><span class="tag">PARA TU INMOBILIARIA</span></div>
+    <div class="kt" id="ktT" style="top:480px;font-size:132px;line-height:1.02"></div>
+    <div class="mini" id="tm1" style="left:560px;top:1010px"><i></i><div style="flex:1"><b style="width:80%"></b><b style="width:50%;margin-top:10px"></b></div></div>
+    <div class="mini" id="tm2" style="left:610px;top:1060px"><i></i><div style="flex:1"><b style="width:70%"></b><b style="width:45%;margin-top:10px"></b></div></div>
+    <div class="mini" id="tm3" style="left:660px;top:1110px"><i></i><div style="flex:1"><b style="width:85%"></b><b style="width:40%;margin-top:10px"></b></div></div>
+  </div>
+
+  <!-- 1 · contestar tarde -->
+  <div class="scene" id="sc1">
+    <div class="hud" id="hud1"><span><b>01</b> · Error</span><span>01 / 03</span></div>
+    <div class="num" id="n1">1</div>
+    <div class="kt" id="kt1" style="left:260px;top:372px;font-size:84px"></div>
+    <div class="card" id="ask" style="left:96px;top:560px;width:888px;padding:26px 30px;display:flex;align-items:center;gap:22px">
+      <div class="av" style="background:var(--y)">AM</div>
+      <div><div style="font-size:22px;font-weight:800;letter-spacing:.12em;color:var(--ink-600)">NUEVO LEAD</div>
+        <div style="font-size:34px;font-weight:700;margin-top:4px">«¿Sigue disponible el ático de Chamberí?»</div></div>
+    </div>
+    <div class="row" id="ag1" style="top:740px"><div class="av" style="background:var(--ink-200)">A</div>Otra agencia<span class="st" id="st1">Escribiendo…</span></div>
+    <div class="row" id="ag2" style="top:860px"><div class="av" style="background:var(--ink-200)">B</div>Otra agencia<span class="st" id="st2">Sin leer</span></div>
+    <div class="row" id="ag3" style="top:980px"><div class="av" style="background:var(--ink-950);color:#fff">TÚ</div>Tu inmobiliaria<span class="st" id="st3">Sin responder</span></div>
+    <div class="kt" id="kt1b" style="top:1120px;font-size:50px;color:var(--ink-700)"></div>
+  </div>
+
+  <!-- 2 · leads repartidos -->
+  <div class="scene" id="sc2">
+    <div class="hud" id="hud2"><span><b>02</b> · Error</span><span>02 / 03</span></div>
+    <div class="num" id="n2">2</div>
+    <div class="kt" id="kt2" style="left:260px;top:372px;font-size:84px"></div>
+    <div class="chip" id="c2a" style="left:96px;top:600px"><span class="dot"></span>Portales</div>
+    <div class="chip" id="c2b" style="left:400px;top:600px"><span class="dot"></span>WhatsApp</div>
+    <div class="chip" id="c2c" style="left:760px;top:600px"><span class="dot"></span>Excel</div>
+    <div class="mini l2" style="left:96px;top:750px"><i></i><div style="flex:1"><b style="width:80%"></b><b style="width:50%;margin-top:10px"></b></div></div>
+    <div class="mini l2" style="left:96px;top:850px"><i></i><div style="flex:1"><b style="width:70%"></b><b style="width:45%;margin-top:10px"></b></div></div>
+    <div class="mini l2" style="left:415px;top:750px"><i></i><div style="flex:1"><b style="width:85%"></b><b style="width:40%;margin-top:10px"></b></div></div>
+    <div class="mini l2" style="left:415px;top:850px"><i></i><div style="flex:1"><b style="width:75%"></b><b style="width:55%;margin-top:10px"></b></div></div>
+    <div class="mini l2" style="left:415px;top:950px"><i></i><div style="flex:1"><b style="width:65%"></b><b style="width:50%;margin-top:10px"></b></div></div>
+    <div class="mini l2" style="left:734px;top:750px"><i></i><div style="flex:1"><b style="width:80%"></b><b style="width:35%;margin-top:10px"></b></div></div>
+    <div class="kt" id="kt2b" style="top:1075px;font-size:58px"></div>
+  </div>
+
+  <!-- 3 · olvidar a quien no compró -->
+  <div class="scene" id="sc3">
+    <div class="hud" id="hud3"><span><b>03</b> · Error</span><span>03 / 03</span></div>
+    <div class="num" id="n3">3</div>
+    <div class="kt" id="kt3" style="left:260px;top:372px;font-size:76px"></div>
+    <div class="card" id="cli" style="left:96px;top:640px;width:888px;padding:28px 30px;display:flex;align-items:center;gap:22px">
+      <div class="av" id="cliAv" style="background:var(--ink-200)">AM</div>
+      <div><div style="font-size:34px;font-weight:800">A. M.</div><div style="font-size:24px;color:var(--ink-600);font-weight:600;margin-top:2px">Busca ático · Chamberí · 350–400 k€</div></div>
+      <span class="st" id="cliSt" style="position:relative">Archivado</span>
+    </div>
+    <svg class="abs" id="link3" style="left:520px;top:792px" width="40" height="96" viewBox="0 0 40 96"><path id="link3p" d="M20 92V6M6 20L20 6l14 14" stroke="#FFD500" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="120" stroke-dashoffset="120"/></svg>
+    <div class="card" id="prop3" style="left:180px;top:900px;width:720px;padding:22px;display:flex;align-items:center;gap:22px">
+      <div style="width:120px;height:96px;border-radius:14px;background:#1C1C1C;position:relative;flex:none"><span style="position:absolute;left:52px;top:36px;width:18px;height:18px;border-radius:50%;background:var(--y)"></span></div>
+      <div><div style="font-size:32px;font-weight:800">Ático · Chamberí</div><div style="font-size:24px;color:var(--ink-600);font-weight:600;margin-top:2px">3 hab · 385 k€</div></div>
+      <span style="margin-left:auto;font-size:20px;font-weight:800;letter-spacing:.1em;padding:10px 14px;border-radius:10px;background:var(--y)">NUEVO</span>
+    </div>
+    <div class="kt" id="kt3b" style="top:1090px;font-size:50px;color:var(--ink-700)"></div>
+  </div>
+
+  <!-- 4 · guárdalo + logo -->
+  <div class="scene" id="sc4">
+    <svg class="abs" id="bm" style="left:466px;top:420px" width="148" height="190" viewBox="0 0 148 190"><path d="M14 10h120v170l-60-44-60 44z" fill="#FFD500" stroke="#0A0A0A" stroke-width="8" stroke-linejoin="round"/></svg>
+    <div class="kt" id="kt4" style="top:690px;font-size:112px;text-align:center"></div>
+    <div class="kt" id="kt4b" style="top:830px;font-size:56px;text-align:center;color:var(--ink-700)"></div>
+    <img id="logo" src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" class="abs" style="left:290px;top:1020px;width:500px" alt="">
+    <div class="abs" id="web" style="left:0;right:0;top:1200px;text-align:center;font-weight:700;font-size:30px;letter-spacing:.2em;color:var(--ink-600)">IMPERIOS.APP</div>
+  </div>
+
+  <div class="uline" id="ul"></div>
+</div>
+
+<script>
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, p) => a + (b - a) * p;
+const E = {
+  oc: p => 1 - Math.pow(1 - p, 3), ic: p => p * p * p,
+  ioc: p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2,
+  oe: p => p === 1 ? 1 : 1 - Math.pow(2, -10 * p),
+  ob: p => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+  ob2: p => { const c1 = 2.4, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+};
+const k = (t, t0, t1, e = E.oc) => e(clamp((t - t0) / (t1 - t0)));
+const css = (el, o) => { for (const key in o) el.style[key] = o[key]; };
+
+function words(el, lines) {
+  const out = [];
+  lines.forEach((ln, li) => {
+    ln.forEach(([txt, cls]) => {
+      const s = document.createElement('span');
+      s.className = 'w' + (cls ? ' ' + cls : '');
+      s.textContent = txt;
+      el.appendChild(s); out.push(s);
+      el.appendChild(document.createTextNode(' '));
+    });
+    if (li < lines.length - 1) el.appendChild(document.createElement('br'));
+  });
+  return out;
+}
+function revealWords(ws, t, times, dur = .38) {
+  ws.forEach((w, i) => {
+    const p = k(t, times[i], times[i] + dur, E.oc);
+    css(w, { opacity: p, transform: `translateY(${(1 - p) * 46}px)`, filter: p < 1 ? `blur(${(1 - p) * 10}px)` : 'none' });
+  });
+}
+const rectOf = el => { const r = el.getBoundingClientRect(); return { x: r.left, y: r.top, w: r.width, h: r.height }; };
+function underline(t, t0, w) {
+  const ul = $('#ul');
+  if (t < t0) { ul.style.opacity = 0; return; }
+  const r = rectOf(w);
+  css(ul, { opacity: 1, left: r.x + 'px', top: (r.y + r.h - 6) + 'px', width: r.w + 'px', transform: `scaleX(${k(t, t0, t0 + .35)})` });
+}
+// entrada y salida de escena: blur + desplazamiento
+function sceneIO(el, t, a, b) {
+  const on = t > a - .05 && t < b + .4;
+  el.style.display = on ? 'block' : 'none';
+  if (!on) return null;
+  const out = k(t, b - .1, b + .3, E.ic);
+  css(el, { opacity: 1 - out, filter: out > 0 ? `blur(${out * 14}px)` : 'none', transform: `scale(${1 + .025 * clamp((t - a) / 4) + out * .06})` });
+  return t - a;
+}
+
+const WT_ = words($('#ktT'), [[['3', 'y3'], ['errores']], [['que'], ['te'], ['hacen']], [['perder'], ['leads.', 'it']]]);
+WT_[0].style.color = 'var(--ink-950)'; WT_[0].style.background = 'var(--y)'; WT_[0].style.padding = '0 18px'; WT_[0].style.borderRadius = '18px'; WT_[0].style.marginRight = '6px';
+const W1 = words($('#kt1'), [[['Contestar']], [['tarde.', 'it']]]);
+const W1b = words($('#kt1b'), [[['La'], ['primera'], ['que'], ['responde']], [['se'], ['lleva'], ['la'], ['conversación.']]]);
+const W2 = words($('#kt2'), [[['Leads']], [['repartidos.', 'it']]]);
+const W2b = words($('#kt2b'), [[['Lo'], ['que'], ['no'], ['ves,']], [['no'], ['lo'], ['sigues.', 'it']]]);
+const W3 = words($('#kt3'), [[['Olvidar'], ['a'], ['quien']], [['no'], ['compró.', 'it']]]);
+const W3b = words($('#kt3b'), [[['Mañana'], ['puede'], ['entrar']], [['el'], ['piso'], ['que'], ['busca.']]]);
+const W4 = words($('#kt4'), [[['Guárdalo.']]]);
+const W4b = words($('#kt4b'), [[['Y'], ['compártelo'], ['con'], ['tu'], ['equipo.']]]);
+
+let B = { e1: 2.9, e2: 12.4, e3: 19.2, sv: 25, logo: 27.5, end: 30, wt: {} };
+window.setBeats = b => { B = Object.assign(B, b); };
+window.setVariant = () => {};
+const WT = (key, n) => (B.wt && B.wt[key]) || Array.from({ length: n }, (_, i) => .3 + i * .15);
+
+function render(t) {
+  $('#lgrid').style.backgroundPosition = `${-t * 6}px ${-t * 9}px`;
+  css($('#lglow'), { left: (40 + Math.sin(t * .4) * 30) + 'px', top: (330 + Math.cos(t * .35) * 30) + 'px', opacity: .8 });
+  const ul = $('#ul'); ul.style.opacity = 0;
+
+  // ---- T: titular, completo desde el fotograma 0; «perder leads» se subraya al decirlo ----
+  const sT = sceneIO($('#scT'), t, 0, B.e1);
+  if (sT != null) {
+    WT_.forEach(w => css(w, { opacity: 1, transform: 'none', filter: 'none' }));
+    const tw = WT('kT', 1);
+    if (t < B.e1 - .2) underline(sT, tw[0], WT_[6]);
+    // tres leads que se escapan por la derecha
+    $$('#scT .mini').forEach((m, i) => {
+      const p = k(sT, .5 + i * .35, 1.5 + i * .35, E.ic);
+      css(m, { opacity: 1 - p, transform: `translate(${p * 520}px, ${Math.sin(sT * 3 + i) * 6}px) rotate(${(i - 1) * 4 + p * 14}deg)`, filter: p > .05 ? `blur(${p * 8}px)` : 'none' });
+    });
+  }
+
+  // ---- 1: contestar tarde ----
+  const s1 = sceneIO($('#sc1'), t, B.e1, B.e2);
+  if (s1 != null) {
+    const w = WT('k1', 12); // [contestar, tarde, quien, agencias, primera, responde, se, lleva, la, conversación, la(b0), primera(b1)…]
+    css($('#hud1'), { opacity: k(s1, 0, .3) });
+    const np = k(s1, 0, .4, E.ob2); css($('#n1'), { transform: `scale(${.5 + .5 * np}) rotate(${(1 - np) * -20}deg)`, opacity: k(s1, 0, .1) });
+    revealWords(W1, s1, [w[0], w[1]]);
+    if (s1 < B.e2 - B.e1 - .2) underline(s1, w[1] + .2, W1[1]);
+    const ap = k(s1, w[2], w[2] + .5, E.ob);
+    css($('#ask'), { opacity: k(s1, w[2], w[2] + .1), transform: `translateY(${(1 - ap) * 60}px) scale(${.9 + .1 * ap})` });
+    ['#ag1', '#ag2', '#ag3'].forEach((id, i) => {
+      const p = k(s1, w[3] - .4 + i * .14, w[3] + .1 + i * .14, E.ob);
+      const win = i === 0 ? k(s1, w[5], w[5] + .3, E.ob2) : 0;
+      const lose = i > 0 ? k(s1, w[7], w[7] + .4) : 0;
+      css($(id), { opacity: k(s1, w[3] - .4 + i * .14, w[3] - .3 + i * .14) * (1 - lose * .45), transform: `translateX(${(1 - p) * -120}px) scale(${1 + .03 * win})`,
+        borderColor: win > .5 ? 'var(--y)' : 'var(--ink-200)', boxShadow: win > .5 ? '0 20px 60px rgba(255,192,0,.35)' : '' });
+    });
+    // estados: la otra agencia responde primero; tú sigues sin responder (reloj)
+    const st1 = $('#st1');
+    if (s1 > w[5]) { st1.textContent = 'Respondió ✓'; css(st1, { background: 'var(--y)', color: 'var(--ink-950)' }); }
+    else { st1.textContent = 'Escribiendo…'; css(st1, { background: 'var(--ink-200)', color: 'var(--ink-600)' }); }
+    const st3 = $('#st3'); const blink = s1 > w[3] ? .55 + .45 * Math.abs(Math.sin(s1 * 4)) : 1;
+    css(st3, { opacity: blink, background: s1 > w[7] ? 'var(--ink-950)' : 'var(--ink-200)', color: s1 > w[7] ? '#fff' : 'var(--ink-600)' });
+    revealWords(W1b, s1, w.slice(10, 18));
+  }
+
+  // ---- 2: leads repartidos ----
+  const s2 = sceneIO($('#sc2'), t, B.e2, B.e3);
+  if (s2 != null) {
+    const w = WT('k2', 10); // [tener, leads, repartidos, portales, whatsapp, excel, lo, que, no, ves, no, lo, sigues]
+    css($('#hud2'), { opacity: k(s2, 0, .3) });
+    const np = k(s2, 0, .4, E.ob2); css($('#n2'), { transform: `scale(${.5 + .5 * np}) rotate(${(1 - np) * -20}deg)`, opacity: k(s2, 0, .1) });
+    revealWords(W2, s2, [w[1], w[2]]);
+    if (s2 < B.e3 - B.e2 - .2) underline(s2, w[2] + .3, W2[1]);
+    [['#c2a', w[3]], ['#c2b', w[4]], ['#c2c', w[5]]].forEach(([id, tc], i) => {
+      const p = k(s2, tc - .1, tc + .35, E.ob2);
+      css($(id), { opacity: k(s2, tc - .1, tc), transform: `scale(${.6 + .4 * p}) rotate(${(i - 1) * 3}deg)` });
+    });
+    // los leads caen en su columna… y al decir «lo que no ves» se van perdiendo
+    $$('#sc2 .l2').forEach((m, i) => {
+      const col = [0, 0, 1, 1, 1, 2][i], t0 = w[3 + col] + .15 + (i % 3) * .1;
+      const p = k(s2, t0, t0 + .45, E.ob);
+      const lost = k(s2, w[8] + i * .12, w[8] + .5 + i * .12, E.ic);
+      css(m, { opacity: k(s2, t0, t0 + .08) * (1 - lost * .85), transform: `translateY(${(1 - p) * -80 + lost * 40}px) rotate(${(i % 2 ? 1 : -1) * (2 + lost * 8)}deg)`,
+        filter: lost > .05 ? `blur(${lost * 9}px) grayscale(1)` : 'none' });
+    });
+    revealWords(W2b, s2, w.slice(6, 13));
+  }
+
+  // ---- 3: olvidar a quien no compró ----
+  const s3 = sceneIO($('#sc3'), t, B.e3, B.sv);
+  if (s3 != null) {
+    const w = WT('k3', 12); // [olvidarte, de, quien, no, compró, mañana, puede, entrar, el, piso, que, busca]
+    css($('#hud3'), { opacity: k(s3, 0, .3) });
+    const np = k(s3, 0, .4, E.ob2); css($('#n3'), { transform: `scale(${.5 + .5 * np}) rotate(${(1 - np) * -20}deg)`, opacity: k(s3, 0, .1) });
+    revealWords(W3, s3, [w[0], w[1], w[2], w[3], w[4]]);
+    const cp = k(s3, w[2], w[2] + .5, E.ob);
+    const matched = k(s3, w[9], w[9] + .35, E.ob2);
+    // archivado (apagado) desde «compró» hasta que entra el piso que busca
+    const arch = k(s3, w[4], w[4] + .4) * (1 - matched);
+    css($('#cli'), { opacity: k(s3, w[2], w[2] + .1) * (1 - arch * .45),
+      transform: `translateY(${(1 - cp) * 60}px) scale(${1 + .03 * matched})`, filter: arch > .05 ? `grayscale(${arch})` : 'none',
+      borderColor: matched > .5 ? 'var(--y)' : 'var(--ink-200)', boxShadow: matched > .5 ? '0 24px 70px rgba(255,192,0,.35)' : '' });
+    const cs = $('#cliSt');
+    if (matched > .5) { cs.textContent = 'Match · Llamar'; css(cs, { background: 'var(--y)', color: 'var(--ink-950)' }); css($('#cliAv'), { background: 'var(--y)' }); }
+    else { cs.textContent = 'Archivado'; css(cs, { background: 'var(--ink-200)', color: 'var(--ink-600)' }); css($('#cliAv'), { background: 'var(--ink-200)' }); }
+    const pp = k(s3, w[6], w[6] + .55, E.ob);
+    css($('#prop3'), { opacity: k(s3, w[6], w[6] + .1), transform: `translateX(${(1 - pp) * 700}px) rotate(${(1 - pp) * 6}deg)`, filter: pp < .98 ? `blur(${(1 - pp) * 10}px)` : 'none' });
+    $('#link3p').style.strokeDashoffset = 120 * (1 - k(s3, w[9] - .2, w[9] + .25, E.oc));
+    revealWords(W3b, s3, w.slice(5, 12));
+    if (s3 < B.sv - B.e3 - .2) underline(s3, w[4] + .25, W3[4]);
+  }
+
+  // ---- 4: guárdalo + logo ----
+  const s4 = t - B.sv, sc4 = $('#sc4');
+  sc4.style.display = s4 > -.05 ? 'block' : 'none';
+  if (s4 > -.05) {
+    const w = WT('k4', 6); // [guárdalo, y, compártelo, con, tu, equipo]
+    const bp = k(s4, w[0] - .1, w[0] + .35, E.ob2);
+    css($('#bm'), { opacity: k(s4, w[0] - .1, w[0]), transform: `translateY(${(1 - bp) * -120}px) scale(${.6 + .4 * bp})` });
+    revealWords(W4, s4, [w[0]]);
+    revealWords(W4b, s4, w.slice(1, 6));
+    const lg = B.logo - B.sv, lp = k(s4, lg, lg + .6, E.oc);
+    css($('#logo'), { opacity: lp, filter: lp < 1 ? `blur(${(1 - lp) * 12}px)` : 'none', transform: `scale(${1.06 - .06 * lp})`, clipPath: `inset(0 ${(1 - k(s4, lg, lg + .65, E.ioc)) * 100}% 0 0)` });
+    css($('#web'), { opacity: k(s4, lg + .5, lg + .9), letterSpacing: (.3 - .1 * k(s4, lg + .5, lg + .9)) + 'em' });
+  }
+}
+window.render = render;
+window.ready = document.fonts.ready.then(() => new Promise(r => { const i = $('#logo'); if (i.complete) r(); else i.onload = r; }));
+</script>
+</body>
+</html>

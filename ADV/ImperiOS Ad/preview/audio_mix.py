@@ -58,6 +58,7 @@ def saw(f, n, phase=0.0):
 BEAT = 0.6                     # 100 BPM
 BAR = 4 * BEAT
 V4 = bool(B.get("wt", {}).get("src"))   # campaña v4 (build_timeline_v4.py)
+CUES = B.get("cues")   # reels orgánicos: la lista de efectos viene en el timeline (build_timeline_r2.py)
 T0 = B.get("s0", B["s1"])      # el primer compás arranca con la captación (v4 larga: con «lo centralizas…»)
 # acordes (notas MIDI) por compás; Re mayor / Si menor
 CHORDS = [
@@ -75,7 +76,7 @@ FINAL = [38, 50, 57, 62, 64, 66, 69, 76]   # Re add9 abierto
 
 def chord_idx(b):
     # v4 dura más de 8 compases: repite el ciclo; las versiones anteriores sostienen el último acorde
-    return b % len(CHORDS) if V4 else min(b, len(CHORDS) - 1)
+    return b % len(CHORDS) if V4 or CUES else min(b, len(CHORDS) - 1)
 
 
 def chord_at(t):
@@ -206,6 +207,8 @@ def hp(x, f):
 
 
 def cues():
+    if CUES:
+        return [tuple(c) for c in CUES]
     s1, s2, s3, s4, s5, s6, lg = (B[k] for k in ("s1", "s2", "s3", "s4", "s5", "s6", "logo"))
     h = B.get("hook", 0.0)
     if V4:
