@@ -73,17 +73,29 @@ def actions(scenes, states, at):
     cam(at(s, "WhatsApp", 1, -0.35), [640, 640, 1280, 440], 0.7, 1.6)
     ring(at(s, "WhatsApp", 1), composer, 1.3)
 
-    # 3 · Coincidencias IA (escenario oscuro): cruza búsquedas con la cartera y dice a quién llamar
+    # 3 · Coincidencias IA (escenario oscuro): puntúa cada coincidencia → se entra en una → puntuación, criterio a
+    # criterio, y lo que pide el cliente frente a lo que ofrece la propiedad
     s = S["ia"]
     scene("ia", dark=True)
-    swap("06a-coincidencias", s["start"])
-    tarjeta = box("06a-coincidencias", "tarjeta", 6)
-    cam(at(s, "cruza", 0, -0.3), union(tarjeta, box("06a-coincidencias", "tabs")), 0.9, 1.6)
-    ring(at(s, "cliente"), tarjeta, at(s, "dice") - at(s, "cliente") - 0.3)
-    cam(at(s, "dice", 0, -0.45), full(), 0.6)
-    cur(at(s, "dice", 0, -0.3), center(box("06a-coincidencias", "porPropiedad")))
-    state("06b-coincidencias-propiedad", at(s, "llamar", 0, 0.0), 0.3)
-    sfx("click_ui_02", at(s, "llamar", 0, -0.08))
+    L, M = "06c-match-lista", "06d-match-detalle"
+    swap(L, s["start"])
+    tarjeta = box(L, "tarjeta", 6)
+    cam(at(s, "cruza", 0, -0.3), tarjeta, 0.9, 1.8)
+    ring(at(s, "cliente"), tarjeta, at(s, "puntúa") - at(s, "cliente") - 0.1)
+    ring(at(s, "puntúa"), [tarjeta[0] + 12, tarjeta[1] + 50, 300, 84], at(s, "coincidencia") - at(s, "puntúa") + 0.4)
+    cam(at(s, "coincidencia", 0, 0.25), full(), 0.5)
+    cur(at(s, "coincidencia", 0, 0.3), center(box(L, "ver")), dur=0.55)
+    state(M, at(s, "Entras", 0, -0.1), 0.3)
+    sfx("click_ui_03", at(s, "Entras", 0, -0.18))
+    A.append({"t": "cursorOff", "at": at(s, "Entras", 0, 0.25)})
+    d = lambda n, pad=6: box(M, n, pad)  # noqa: E731
+    cam(at(s, "Entras", 0, 0.2), union(d("puntuacion"), d("estado")), 0.7, 1.5)
+    ring(at(s, "Entras", 0, 0.3), d("puntuacion"), at(s, "criterio") - at(s, "Entras") - 0.6)
+    cam(at(s, "criterio", 0, -0.35), d("criterios"), 0.8, 1.5)
+    ring(at(s, "criterio"), d("criterios"), at(s, "pide") - at(s, "criterio") - 0.3)
+    cam(at(s, "pide", 0, -0.35), union(d("comprador"), d("propiedad")), 0.8, 1.4)
+    ring(at(s, "cliente", 1), d("comprador"), at(s, "ofrece") - at(s, "cliente", 1))
+    ring(at(s, "ofrece"), d("propiedad"), 1.5)
 
     # 4 · Marketing: campañas → anuncios → tablero de leads (arrastre real de una tarjeta)
     s = S["marketing"]

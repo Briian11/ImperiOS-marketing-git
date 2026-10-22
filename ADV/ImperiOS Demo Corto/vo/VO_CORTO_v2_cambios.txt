@@ -1,0 +1,4 @@
+# v2: la escena de IA entra en una coincidencia (puntuación, criterio a criterio, cliente frente a propiedad).
+# Clip propio vo/v2-ia.mp3 que sustituye al párrafo de IA de la toma 1.
+[ia]
+La inteligencia artificial cruza lo que busca cada cliente con tu cartera y puntúa cada coincidencia. Entras y ves, criterio a criterio, lo que pide el cliente y lo que ofrece la propiedad.

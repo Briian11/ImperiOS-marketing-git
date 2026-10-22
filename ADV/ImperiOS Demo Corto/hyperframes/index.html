@@ -327,8 +327,8 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="49.81" data-fps="60">
-      <audio id="mix" src="assets/audio/master.wav" data-start="0" data-duration="49.81" data-track-index="9"></audio>
+    <div id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="56.13" data-fps="60">
+      <audio id="mix" src="assets/audio/master.wav" data-start="0" data-duration="56.13" data-track-index="9"></audio>
       <div id="grid"></div>
       <div class="glow abs" style="left: 1320px; top: -380px; width: 900px; height: 900px"></div>
       <div id="dark"><div class="glow abs" style="left: 1240px; top: -420px; width: 1100px; height: 1100px"></div></div>
@@ -487,6 +487,8 @@
             curState = a.after;
             cur = { x: tx + grab.x, y: ty + grab.y };
           }
+        } else if (a.t === "cursorOff") {
+          tl.to("#cursor", { opacity: 0, duration: 0.25 }, a.at);
         } else if (a.t === "ring") {
           const [x, y, w, h] = a.rect;
           const box = `left:${x}px;top:${y}px;width:${w}px;height:${h}px`;

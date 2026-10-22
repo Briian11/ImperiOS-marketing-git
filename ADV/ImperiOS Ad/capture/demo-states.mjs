@@ -25,7 +25,12 @@ const exe = process.env.CHROMIUM_PATH ||
 const opts = (extra = {}) => ({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 2, locale: 'es-ES', timezoneId: 'Europe/Madrid', colorScheme: 'light', ...extra });
 
 const card = (text, extra = {}) => ({ text, card: true, ...extra });
-// Escenas del guion → estados. Pasos: go, firstLink, click(css), clickText, row(css de tabla|null), tab, period, scrollTo, drag.
+// Coincidencia que se abre en el vídeo corto: 96/100 igual en la lista y en el detalle (en demo-match-20 la lista dice 100
+// y el detalle 69). Abrir el detalle genera su «Análisis IA» si aún no lo tiene.
+const MATCH = process.env.CAPTURE_MATCH || 'demo-match-63';
+const matchLink = `main a[href="/matches/${MATCH}"]`;
+// Escenas del guion → estados. Pasos: go, firstLink, click(css), clickText, type(css + text: solo filtra la vista), row(css de tabla|null),
+// tab, period, scrollTo, drag.
 const STATES = [
   { id: '01-dashboard', steps: [{ go: '/' }], boxes: { kpi1: card('Propiedades publicadas'), kpi4: card('Citas esta semana'), sinAtender: card('Contactos sin atender', { nth: 1 }), citas: card('Próximas citas') } },
   { id: '02a-contactos', steps: [{ go: '/contacts' }], boxes: { colFuente: { th: 'Fuente' }, colTemp: { th: 'Temperatura' }, colContacto: { th: 'Contacto' }, colTelefono: { th: 'Teléfono' }, filtro: { css: 'main [role="combobox"]', hasText: 'Fuente' }, tabla: { css: 'main table' } } },
@@ -39,6 +44,9 @@ const STATES = [
   { id: '05c-publicaciones', steps: [{ go: '/publications' }], boxes: { web: card('Web', { exact: true }), fotocasa: card('Fotocasa', { exact: true }), idealista: card('Idealista', { exact: true }), tabla: { css: 'main table' } } },
   { id: '06a-coincidencias', steps: [{ go: '/matches' }], boxes: { tarjeta: card('/ 100 pts'), tabs: card('Calientes'), porPropiedad: { text: 'Por propiedad' } } },
   { id: '06b-coincidencias-propiedad', steps: [{ go: '/matches' }, { clickText: 'Por propiedad' }], boxes: { porPropiedad: { text: 'Por propiedad' }, tarjeta: card('/ 100 pts') } },
+  { id: '06c-match-lista', steps: [{ go: '/matches' }, { type: 'main input[placeholder^="Buscar"]', text: 'Marcos Gimeno' }], boxes: { tarjeta: { css: matchLink, card: true }, ver: { css: matchLink }, tabs: card('Calientes') } },
+  { id: '06d-match-detalle', steps: [{ go: '/matches' }, { click: matchLink }],
+    boxes: { puntuacion: card('Puntuación de coincidencia'), estado: card('Estado del match'), analisis: card('Análisis IA'), criterios: card('Por qué este score'), comprador: card('Comprador', { exact: true }), propiedad: card('Propiedad', { exact: true }) } },
   { id: '07a-calendario', steps: [{ go: '/calendar' }], boxes: { semana: { css: 'main button', hasText: 'Semana', exact: true }, mes: { css: 'main button', hasText: 'Mes', exact: true } } },
   { id: '07b-calendario-semana', steps: [{ go: '/calendar' }, { click: 'main button', hasText: 'Semana', exact: true }], boxes: { semana: { css: 'main button', hasText: 'Semana', exact: true } } },
   { id: '07c-tareas', steps: [{ go: '/tasks' }], boxes: { pendiente: { col: 'Pendiente' }, encurso: { col: 'En curso' }, hecho: { col: 'Hecho' } } },
@@ -102,6 +110,7 @@ async function run(page, home, step) {
     await page.goto(new URL(h, home).href, { waitUntil: 'domcontentloaded' }); return settle(page);
   }
   if (step.click) { await loc(page, step).click(); return settle(page); }
+  if (step.type) { await page.locator(step.type).first().fill(step.text); await page.waitForTimeout(600); return settle(page); }
   if (step.clickText) { await page.getByText(step.clickText, { exact: false }).first().click(); return settle(page); }
   if ('row' in step) {
     const tables = page.locator('main table');
@@ -183,6 +192,7 @@ async function measure(page, boxes) {
           if (s.largest) els.sort((a, b) => b.getBoundingClientRect().width * b.getBoundingClientRect().height - a.getBoundingClientRect().width * a.getBoundingClientRect().height);
           el = els[0];
           if (el && 'row' in s) el = el.querySelectorAll('tbody tr')[s.row];
+          if (el && s.card) { let n = el; while (n && n.tagName !== 'MAIN' && !isCard(n)) n = n.parentElement; if (n && n.tagName !== 'MAIN') el = n; }
           if (s.union && els.length) { const rs = els.slice(0, s.union).map((e) => e.getBoundingClientRect()); const x = Math.min(...rs.map((q) => q.x)), y = Math.min(...rs.map((q) => q.y)); r = { x, y, width: Math.max(...rs.map((q) => q.right)) - x, height: Math.max(...rs.map((q) => q.bottom)) - y }; }
         }
         out[k] = doc(r || (el && el.getBoundingClientRect())) || null;
@@ -222,6 +232,11 @@ try {
     const start = () => { paint(); new MutationObserver(paint).observe(document.body, { subtree: true, childList: true, characterData: true }); };
     document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', start) : start();
   }, EMAIL);
+  // El engranaje flotante (ajustes, icono girando) se vuelve a montar al navegar: se oculta también con una regla CSS fija
+  await ctx.addInitScript(() => {
+    const add = () => { const st = document.createElement('style'); st.textContent = 'button:has(> span[class*="settings"][class*="animate-spin"]){visibility:hidden!important}'; document.head.appendChild(st); };
+    document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', add) : add();
+  });
   const page = await ctx.newPage();
   for (const s of STATES.filter((x) => (!only.length || only.includes(x.id)) && (DRAG || !x.steps.some((st) => st.drag)))) {
     try {

@@ -2,7 +2,8 @@
 silencio real entre párrafos, con poco aire entre escenas, y cada acción visual anclada a una palabra.
 
 Uso: python3 build/timeline.py          → hyperframes/data.json + data.js + hyperframes/assets/audio/vo.wav
-Entradas: vo/corto-toma-1.mp3 + .words.json (Scribe), ../ImperiOS Ad/capture/out/states/*.json
+Entradas: vo/corto-toma-1.mp3 + .words.json (Scribe), clips de párrafos reescritos (vo/v2-*.mp3 + .words.json),
+../ImperiOS Ad/capture/out/states/*.json
 """
 import json
 import subprocess
@@ -22,11 +23,12 @@ INTRO = 1.3      # la voz empieza con el logo ya en pantalla
 GAP = 0.5        # aire entre escenas (la transición cabe en él)
 TAIL = 2.2       # cola con el logo final
 
-# Escenas: (id, primera palabra del párrafo en la toma, etiqueta, aire antes de la escena)
+# Escenas: (id, primera palabra del párrafo en la toma, etiqueta, aire antes de la escena, clip propio o None)
+# v2: el párrafo de IA se regrabó más largo (entrar en una coincidencia) y tiene su propio clip.
 SCENES = [
-    ("intro", "Esto", "Intro", 0), ("contactos", "Los", "Contactos", GAP), ("chat", "Sus", "Chat", GAP),
-    ("ia", "La", "Coincidencias IA", GAP), ("marketing", "En", "Marketing", GAP), ("metricas", "En", "Métricas", GAP),
-    ("ademas", "Y", "Y además", 0.6), ("cierre", "Imperios.", "", 0.8),
+    ("intro", "Esto", "Intro", 0, None), ("contactos", "Los", "Contactos", GAP, None), ("chat", "Sus", "Chat", GAP, None),
+    ("ia", "La", "Coincidencias IA", GAP, "v2-ia"), ("marketing", "En", "Marketing", GAP, None),
+    ("metricas", "En", "Métricas", GAP, None), ("ademas", "Y", "Y además", 0.6, None), ("cierre", "Imperios.", "", 0.8, None),
 ]
 
 
@@ -48,10 +50,10 @@ def quietest(x, t0, t1):
 
 
 def sources():
-    """Por escena: (inicio, fin del tramo en la toma, palabras con tiempos de la toma)."""
+    """Por escena: (audio, inicio, fin del tramo en ese audio, palabras con tiempos de ese audio)."""
     take, words = decode(TAKE), json.loads((VODIR / f"{TAKE}.words.json").read_text())
     idx, i = [], 0
-    for _, first, _, _ in SCENES:
+    for _, first, _, _, _ in SCENES:
         while words[i][0] != first:
             i += 1
         idx.append(i)
@@ -61,17 +63,24 @@ def sources():
     for k in range(1, len(SCENES)):
         cuts.append(quietest(take, words[idx[k] - 1][2] - 0.15, words[idx[k]][1] + 0.03))
     cuts.append(len(take) / SR)
-    return take, [(cuts[k], cuts[k + 1], words[idx[k]:idx[k + 1]]) for k in range(len(SCENES))]
+    out = []
+    for k, (*_, clip) in enumerate(SCENES):
+        if clip:
+            x, w = decode(clip), json.loads((VODIR / f"{clip}.words.json").read_text())
+            out.append((x, max(0.0, w[0][1] - 0.3), min(len(x) / SR, w[-1][2] + 0.4), w))
+        else:
+            out.append((take, cuts[k], cuts[k + 1], words[idx[k]:idx[k + 1]]))
+    return out
 
 
 def build():
-    take, src = sources()
+    src = sources()
     scenes, words, t = [], [], INTRO
-    for k, ((sid, _, label, gap), (c0, c1, w)) in enumerate(zip(SCENES, src)):
+    for k, ((sid, _, label, gap, clip), (_, c0, c1, w)) in enumerate(zip(SCENES, src)):
         t += gap
         off = t - w[0][1]                    # la primera palabra cae en t
         sw = [[x, round(a + off, 3), round(b + off, 3)] for x, a, b in w]
-        scenes.append({"id": sid, "label": label, "n": k, "cut": [round(c0, 3), round(c1, 3)], "off": round(off, 3),
+        scenes.append({"id": sid, "label": label, "n": k, "clip": clip or TAKE, "cut": [round(c0, 3), round(c1, 3)], "off": round(off, 3),
                        "vo": [sw[0][1], sw[-1][2]], "words": sw})
         words += sw
         t = sw[-1][2]
@@ -80,7 +89,7 @@ def build():
     for k, s in enumerate(scenes):
         s["start"] = 0.0 if k == 0 else round(s["vo"][0] - 0.4, 3)
         s["end"] = round(scenes[k + 1]["vo"][0] - 0.4, 3) if k + 1 < len(scenes) else dur
-    return scenes, words, dur, take
+    return scenes, words, dur, src
 
 
 def _norm(w):
@@ -98,15 +107,14 @@ def at(scene, word, occ=0, off=0.0):
     return round(hits[occ][1] + off, 3)
 
 
-def make_vo(scenes, dur, take):
+def make_vo(scenes, dur, src):
     """Pista de voz: cada párrafo en su sitio, cortado en silencio real y con fundidos de 8 ms."""
     out = HF / "assets" / "audio"
     out.mkdir(parents=True, exist_ok=True)
     y = np.zeros(int((dur + 1) * SR), dtype=np.float32)
     fade = int(0.008 * SR)
-    for s in scenes:
-        c0, c1 = s["cut"]
-        seg = take[int(c0 * SR):int(c1 * SR)].copy()
+    for s, (x, c0, c1, _) in zip(scenes, src):
+        seg = x[int(c0 * SR):int(c1 * SR)].copy()
         seg[:fade] *= np.linspace(0, 1, fade)
         seg[-fade:] *= np.linspace(1, 0, fade)
         p = int(round((c0 + s["off"]) * SR))
@@ -117,7 +125,7 @@ def make_vo(scenes, dur, take):
 
 if __name__ == "__main__":
     from spec import actions  # noqa: E402  (acciones visuales por escena)
-    scenes, words, dur, take = build()
+    scenes, words, dur, src = build()
     states = {p.stem: json.loads(p.read_text()) for p in sorted(STATES.glob("*.json"))}
     data = {"duration": dur, "scenes": scenes, "words": words,
             "states": {k: {"pageH": v["pageH"], "boxes": v["boxes"] or {}} for k, v in states.items()}}
@@ -131,7 +139,7 @@ if __name__ == "__main__":
             a["bg"] = "#%02x%02x%02x" % im.getpixel((int((x + w / 2) * 2), int((y + h + 5) * 2)))
     (HF / "data.json").write_text(json.dumps(data, ensure_ascii=False, indent=1))
     (HF / "data.js").write_text("window.DEMO = " + json.dumps(data, ensure_ascii=False) + ";\n")
-    make_vo(scenes, dur, take)
+    make_vo(scenes, dur, src)
     print(f"duración {dur:.2f} s · {len(words)} palabras · {len(data['actions'])} acciones")
     for s in scenes:
         print(f"  {s['n']:>2} {s['id']:<10} {s['start']:6.2f} → {s['end']:6.2f}   voz {s['vo'][0]:6.2f}–{s['vo'][1]:6.2f}")
