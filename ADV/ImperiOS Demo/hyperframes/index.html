@@ -19,11 +19,12 @@
         --ink-600: #5c5c5c;
         --ink-200: #ebebeb;
         --ink-100: #f5f5f5;
+        --brand-white: #f7f7f3; /* fondo claro de redes y vídeos (SOCIAL/tokens.json) */
         --y: #ffd500;
       }
       body {
         margin: 0;
-        background: var(--ink-100);
+        background: var(--brand-white);
         font-family: "Manrope", sans-serif;
       }
       #root {
@@ -31,7 +32,7 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-        background: var(--ink-100);
+        background: var(--brand-white);
       }
       .abs {
         position: absolute;
@@ -48,10 +49,14 @@
         background: var(--ink-950);
         opacity: 0;
       }
+      /* resplandores con accent-glow (#FFC000) y transparencia: sobre negro no tira a oliva */
       .glow {
         position: absolute;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(255, 213, 0, 0.22), rgba(255, 213, 0, 0) 66%);
+        background: radial-gradient(circle, rgba(255, 192, 0, 0.22), rgba(255, 192, 0, 0) 66%);
+      }
+      #dark .glow {
+        background: radial-gradient(circle, rgba(255, 192, 0, 0.16), rgba(255, 192, 0, 0) 66%);
       }
       #win {
         position: absolute;
@@ -128,7 +133,7 @@
         position: absolute;
         border: 3px solid var(--y);
         border-radius: 14px;
-        box-shadow: 0 0 0 6px rgba(255, 213, 0, 0.22);
+        box-shadow: 0 0 0 6px rgba(255, 192, 0, 0.22);
         opacity: 0;
       }
       .spot {
@@ -144,7 +149,7 @@
         margin: -28px 0 0 -28px;
         border-radius: 50%;
         border: 3px solid var(--y);
-        background: rgba(255, 213, 0, 0.25);
+        background: rgba(255, 192, 0, 0.25);
         opacity: 0;
       }
       #states {
@@ -245,7 +250,9 @@
         max-width: 1300px;
         padding: 12px 26px;
         border-radius: 14px;
-        background: rgba(10, 10, 10, 0.8);
+        /* casi opaco y con desenfoque: con 0.8 se leía el texto de la interfaz a través del subtítulo */
+        background: rgba(10, 10, 10, 0.9);
+        backdrop-filter: blur(8px);
         color: #fff;
         font-size: 34px;
         font-weight: 600;
@@ -467,16 +474,32 @@
 
       // ---------- subtítulos (palabra a palabra) ----------
       const show = (w) => w.replace(/^Imperios/, "ImperiOS");
+      const WEAK = /^(y|o|a|de|del|el|la|los|las|en|por|para|con|que|su|sus|tu|tus|cada|se|te|un|una)$/i;
       for (const s of D.scenes) {
         if (s.id === "cierre") continue;
-        const chunks = [];
+        // tramos por frase (y por coma si ya es larga); los que pasan de 54 caracteres se reparten en partes
+        // de longitud parecida, para que no quede una palabra suelta («día.») ni una línea acabada en «y», «de»…
+        const txt = (a) => a.map((x) => x[0]).join(" ");
+        const segs = [];
         let c = [];
         s.words.forEach((w, i) => {
           c.push(w);
-          const len = c.map((x) => x[0]).join(" ").length;
-          const endSent = /[.:;?!]$/.test(w[0]), comma = /,$/.test(w[0]);
-          if (endSent || (comma && len > 26) || len > 46 || i === s.words.length - 1) { chunks.push(c); c = []; }
+          if (/[.:;?!]$/.test(w[0]) || (/,$/.test(w[0]) && txt(c).length > 26) || i === s.words.length - 1) { segs.push(c); c = []; }
         });
+        const chunks = [];
+        for (const sg of segs) {
+          let left = Math.ceil(txt(sg).length / 54), part = [];
+          sg.forEach((w, j) => {
+            part.push(w);
+            const nx = sg[j + 1], rest = txt(sg.slice(j + 1)).length;
+            if (nx && left > 1 && txt(part).length + nx[0].length / 2 >= (txt(part).length + 1 + rest) / left) {
+              const carry = [];
+              while (part.length > 2 && WEAK.test(part[part.length - 1][0])) carry.unshift(part.pop());
+              chunks.push(part); part = carry; left--;
+            }
+          });
+          chunks.push(part);
+        }
         chunks.forEach((ch, i) => {
           const box = el("div", "cap", $("#caps"));
           const pill = el("div", "pill", box);
