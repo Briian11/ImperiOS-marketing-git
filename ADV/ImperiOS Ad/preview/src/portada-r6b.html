@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Portada Reel — R6 opción B</title>
+<!-- Portada 1080×1920 del Reel R6, opción B: «Mismo cliente. Otro final.» Fondo oscuro, logo en blanco,
+     interruptor ANTES / DESPUÉS y las dos fichas del mismo cliente (no se presentó / visita confirmada).
+     Amarillo sólido #FFD500. Todo dentro del recorte 3:4 de la cuadrícula del perfil (y 240–1680). -->
+<style>
+@font-face { font-family: "Manrope"; src: url("manrope-latin-variable.woff2") format("woff2"); font-weight: 200 800; }
+:root { --ink-950:#0A0A0A; --ink-900:#1C1C1C; --ink-800:#333; --ink-700:#4A4A4A; --ink-600:#727272; --ink-500:#B0B0B0;
+  --ink-200:#EBEBEB; --ink-50:#FAFAFA; --y:#FFD500; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; }
+body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; position: relative; background: var(--ink-950); color: #fff; }
+.abs { position: absolute; }
+.grid { position: absolute; inset: 0; background-image: linear-gradient(to right, rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.045) 1px, transparent 1px); background-size: 40px 40px; }
+.logo { left: 96px; top: 280px; }
+.logo img { display: block; height: 86px; }
+.lbl { display: flex; align-items: center; gap: 16px; font-weight: 800; font-size: 26px; letter-spacing: .16em; }
+.lbl i { width: 40px; height: 6px; border-radius: 3px; background: var(--y); }
+h1 { position: absolute; left: 92px; right: 60px; top: 500px; font-weight: 800; font-size: 124px; letter-spacing: -.045em; line-height: 1.0; }
+h1 em { font-style: italic; font-weight: 500; color: var(--y); }
+.toggle { left: 96px; right: 96px; top: 790px; height: 104px; border-radius: 999px; background: var(--ink-900); border: 1.5px solid var(--ink-800);
+  display: grid; grid-template-columns: 1fr 1fr; padding: 10px; font-weight: 800; font-size: 30px; letter-spacing: .14em; }
+.toggle span { display: grid; place-items: center; border-radius: 999px; }
+.card { position: absolute; left: 96px; right: 96px; border-radius: 26px; padding: 26px 30px; }
+.row { display: flex; align-items: center; gap: 22px; }
+.av { width: 68px; height: 68px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 24px; flex: none; }
+.st { margin-left: auto; font-size: 22px; font-weight: 800; letter-spacing: .1em; padding: 10px 16px; border-radius: 12px; white-space: nowrap; }
+.sub { margin-top: 18px; font-size: 24px; font-weight: 600; display: flex; align-items: center; gap: 12px; }
+.foot { position: absolute; left: 96px; right: 96px; top: 1615px; display: flex; justify-content: space-between; font-weight: 800; font-size: 26px; letter-spacing: .16em; }
+</style>
+</head>
+<body>
+<div class="grid"></div>
+<div class="abs logo"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar-blanco.svg" alt="ImperiOS"></div>
+<div class="abs lbl" style="left:96px;top:440px;color:#fff"><i></i>PARA TU INMOBILIARIA</div>
+<h1>Mismo cliente.<br><em>Otro final.</em></h1>
+
+<!-- interruptor ANTES / DESPUÉS -->
+<div class="abs toggle"><span style="color:var(--ink-600)">ANTES</span><span style="background:var(--y);color:var(--ink-950);box-shadow:0 10px 30px rgba(255,213,0,.25)">DESPUÉS</span></div>
+
+<!-- ANTES: no se presentó -->
+<div class="card" style="top:990px;background:var(--ink-900);border:1.5px solid var(--ink-800);transform:rotate(-1.5deg)">
+  <div class="row">
+    <div class="av" style="background:var(--ink-800);color:var(--ink-500)">AM</div>
+    <div><div style="font-size:32px;font-weight:800;color:var(--ink-500)">A. M. · Ático Chamberí</div><div style="font-size:22px;color:var(--ink-600);font-weight:600;margin-top:2px">Visita jueves 17:00</div></div>
+    <span class="st" style="background:var(--ink-800);color:var(--ink-500)">NO SE PRESENTÓ</span>
+  </div>
+  <div class="sub" style="color:var(--ink-600)">Respondido tarde · sin recordatorio</div>
+</div>
+
+<!-- DESPUÉS: visita confirmada -->
+<div class="card" style="top:1240px;background:var(--ink-50);color:var(--ink-950);border-left:12px solid var(--y);box-shadow:0 30px 90px rgba(0,0,0,.5);transform:rotate(1deg)">
+  <div class="row">
+    <div class="av" style="background:var(--y)">AM</div>
+    <div><div style="font-size:32px;font-weight:800">A. M. · Ático Chamberí</div><div style="font-size:22px;color:var(--ink-600);font-weight:600;margin-top:2px">Visita jueves 17:00</div></div>
+    <span class="st" style="background:var(--y);color:var(--ink-950)">CONFIRMADA ✓</span>
+  </div>
+  <div class="sub" style="color:var(--ink-700)">Respuesta en &lt; 1 min · recordatorio automático</div>
+</div>
+
+<div class="foot"><span style="color:var(--ink-500)">IMPERIOS.APP</span><span style="color:var(--y)">COMENTA DEMO ↗</span></div>
+<script>
+window.ready = document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => i.onload = r))));
+</script>
+</body>
+</html>
