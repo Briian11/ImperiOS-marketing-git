@@ -22,3 +22,4 @@ ADV/ImperiOS Ad/preview/out/v4/*/audio/premix.wav
 ADV/ImperiOS Ad/preview/out/v4/*/audio/mix_premaster.wav
 ADV/ImperiOS Ad/preview/out/v4/log-*.txt
 ADV/ImperiOS Ad/preview/out/reels/log-*.txt
+ADV/ImperiOS Ad/preview/out/reels/*/_silent.mp4
