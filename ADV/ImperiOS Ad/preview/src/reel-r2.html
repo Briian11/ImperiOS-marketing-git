@@ -115,13 +115,21 @@ body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-s
     <div class="kt" id="kt3b" style="top:1090px;font-size:50px;color:var(--ink-700)"></div>
   </div>
 
-  <!-- 4 · guárdalo + logo -->
+  <!-- 4 · cierre: pregunta para comentar + ImperiOS «Comenta DEMO» -->
   <div class="scene" id="sc4">
-    <svg class="abs" id="bm" style="left:466px;top:420px" width="148" height="190" viewBox="0 0 148 190"><path d="M14 10h120v170l-60-44-60 44z" fill="#FFD500" stroke="#0A0A0A" stroke-width="8" stroke-linejoin="round"/></svg>
-    <div class="kt" id="kt4" style="top:690px;font-size:112px;text-align:center"></div>
-    <div class="kt" id="kt4b" style="top:830px;font-size:56px;text-align:center;color:var(--ink-700)"></div>
-    <img id="logo" src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" class="abs" style="left:290px;top:1020px;width:500px" alt="">
-    <div class="abs" id="web" style="left:0;right:0;top:1200px;text-align:center;font-weight:700;font-size:30px;letter-spacing:.2em;color:var(--ink-600)">IMPERIOS.APP</div>
+    <div id="q4">
+      <svg class="abs" id="bub" style="left:452px;top:400px" width="176" height="160" viewBox="0 0 176 160"><path d="M24 8h128a16 16 0 0 1 16 16v80a16 16 0 0 1-16 16H76l-38 32v-32H24a16 16 0 0 1-16-16V24A16 16 0 0 1 24 8z" fill="#FFD500" stroke="#0A0A0A" stroke-width="8" stroke-linejoin="round"/><circle cx="56" cy="64" r="9" fill="#0A0A0A"/><circle cx="88" cy="64" r="9" fill="#0A0A0A"/><circle cx="120" cy="64" r="9" fill="#0A0A0A"/></svg>
+      <div class="kt" id="kt4" style="top:610px;font-size:96px;text-align:center"></div>
+      <div class="kt" id="kt4b" style="top:850px;font-size:54px;text-align:center;color:var(--ink-700)"></div>
+    </div>
+    <img id="logo" src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" class="abs" style="left:250px;top:430px;width:580px" alt="">
+    <div class="kt" id="kt5" style="top:660px;font-size:88px;text-align:center"></div>
+    <div class="abs" id="ctaBtn" style="left:0;right:0;top:850px;text-align:center">
+      <span style="display:inline-flex;align-items:center;gap:22px;padding:34px 60px;border-radius:999px;background:var(--y);color:var(--ink-950);font-weight:800;font-size:54px;letter-spacing:-.01em;box-shadow:0 20px 50px rgba(255,192,0,.35)">Comenta DEMO
+        <svg width="46" height="46" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#0A0A0A" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </div>
+    <div class="kt" id="kt5b" style="top:1030px;font-size:50px;text-align:center;color:var(--ink-700)"></div>
+    <div class="abs" id="web" style="left:0;right:0;top:1170px;text-align:center;font-weight:700;font-size:30px;letter-spacing:.2em;color:var(--ink-600)">IMPERIOS.APP</div>
   </div>
 
   <div class="uline" id="ul"></div>
@@ -185,10 +193,12 @@ const W2 = words($('#kt2'), [[['Leads']], [['repartidos.', 'it']]]);
 const W2b = words($('#kt2b'), [[['Lo'], ['que'], ['no'], ['ves,']], [['no'], ['lo'], ['sigues.', 'it']]]);
 const W3 = words($('#kt3'), [[['Olvidar'], ['a'], ['quien']], [['no'], ['compró.', 'it']]]);
 const W3b = words($('#kt3b'), [[['Mañana'], ['puede'], ['entrar']], [['el'], ['piso'], ['que'], ['busca.']]]);
-const W4 = words($('#kt4'), [[['Guárdalo.']]]);
-const W4b = words($('#kt4b'), [[['Y'], ['compártelo'], ['con'], ['tu'], ['equipo.']]]);
+const W4 = words($('#kt4'), [[['¿Cuál'], ['de'], ['los'], ['tres']], [['te'], ['pasa'], ['más?', 'it']]]);
+const W4b = words($('#kt4b'), [[['Cuéntamelo'], ['en'], ['comentarios.']]]);
+const W5 = words($('#kt5'), [[['Evita'], ['los'], ['tres.', 'it']]]);
+const W5b = words($('#kt5b'), [[['Y'], ['te'], ['enseño'], ['cómo.']]]);
 
-let B = { e1: 2.9, e2: 12.4, e3: 19.2, sv: 25, logo: 27.5, end: 30, wt: {} };
+let B = { e1: 2.9, e2: 12.4, e3: 19.2, sv: 25, logo: 28.5, end: 34, wt: {} };
 window.setBeats = b => { B = Object.assign(B, b); };
 window.setVariant = () => {};
 const WT = (key, n) => (B.wt && B.wt[key]) || Array.from({ length: n }, (_, i) => .3 + i * .15);
@@ -284,18 +294,26 @@ function render(t) {
     if (s3 < B.sv - B.e3 - .2) underline(s3, w[4] + .25, W3[4]);
   }
 
-  // ---- 4: guárdalo + logo ----
+  // ---- 4: «¿Cuál de los tres te pasa más? Cuéntamelo en comentarios.» → ImperiOS «Comenta DEMO» ----
   const s4 = t - B.sv, sc4 = $('#sc4');
   sc4.style.display = s4 > -.05 ? 'block' : 'none';
   if (s4 > -.05) {
-    const w = WT('k4', 6); // [guárdalo, y, compártelo, con, tu, equipo]
-    const bp = k(s4, w[0] - .1, w[0] + .35, E.ob2);
-    css($('#bm'), { opacity: k(s4, w[0] - .1, w[0]), transform: `translateY(${(1 - bp) * -120}px) scale(${.6 + .4 * bp})` });
-    revealWords(W4, s4, [w[0]]);
-    revealWords(W4b, s4, w.slice(1, 6));
-    const lg = B.logo - B.sv, lp = k(s4, lg, lg + .6, E.oc);
+    // k4: ¿Cuál de los tres te pasa más? Cuéntamelo en comentarios. | Imperios evita los tres. Comenta demo y te enseño cómo.
+    const w = WT('k4', 20), lg = B.logo - B.sv;
+    const qo = k(s4, lg - .2, lg + .2, E.ic);
+    css($('#q4'), { opacity: 1 - qo, transform: `translateY(${-qo * 80}px)`, filter: qo > 0 ? `blur(${qo * 12}px)` : 'none' });
+    const bp = k(s4, w[0] - .1, w[0] + .35, E.ob2), wig = s4 > w[7] && s4 < lg ? Math.sin((s4 - w[7]) * 14) * 5 * (1 - k(s4, w[7] + .3, w[7] + .9)) : 0;
+    css($('#bub'), { opacity: k(s4, w[0] - .1, w[0]), transform: `translateY(${(1 - bp) * -120}px) scale(${.6 + .4 * bp}) rotate(${wig}deg)` });
+    revealWords(W4, s4, w.slice(0, 7));
+    revealWords(W4b, s4, w.slice(7, 10));
+    if (s4 < lg - .25) underline(s4, w[9] + .2, W4b[2]);
+    const lp = k(s4, lg, lg + .6, E.oc);
     css($('#logo'), { opacity: lp, filter: lp < 1 ? `blur(${(1 - lp) * 12}px)` : 'none', transform: `scale(${1.06 - .06 * lp})`, clipPath: `inset(0 ${(1 - k(s4, lg, lg + .65, E.ioc)) * 100}% 0 0)` });
-    css($('#web'), { opacity: k(s4, lg + .5, lg + .9), letterSpacing: (.3 - .1 * k(s4, lg + .5, lg + .9)) + 'em' });
+    revealWords(W5, s4, w.slice(11, 14));
+    const cp = k(s4, w[14] - .05, w[14] + .4, E.ob2), pulse = s4 > w[15] + .6 ? (s4 - w[15] - .6) % 1.2 / 1.2 : 0;
+    css($('#ctaBtn'), { opacity: k(s4, w[14] - .05, w[14] + .05), transform: `translateY(${(1 - cp) * 60}px) scale(${(.7 + .3 * cp) * (1 + .04 * Math.sin(pulse * Math.PI))})` });
+    revealWords(W5b, s4, w.slice(16, 20));
+    css($('#web'), { opacity: k(s4, w[19] + .3, w[19] + .7), letterSpacing: (.3 - .1 * k(s4, w[19] + .3, w[19] + .7)) + 'em' });
   }
 }
 window.render = render;

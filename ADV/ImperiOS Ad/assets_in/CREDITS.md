@@ -21,3 +21,4 @@
 | `vo/licencia/`, `vo/licencia-v4/` y todas las tomas anteriores a 21/10/2026 | Generadas en la cuenta gratuita «Brian's Workspace» (el conector estaba en esa cuenta) | **Sin licencia comercial: no usar en anuncios** |
 
 **21/10/2026:** las voces sin licencia de las filas anteriores se han borrado del repo; solo queda `vo/starter/`.
+| VO Reel R2 (`vo/starter/reel-r2-errores.mp3`, `reel-r2-cierre-1.mp3`, `reel-r2-cierre-2.mp3`; montaje `reel-r2-v2.wav`) | ElevenLabs, voz Cristina, eleven_v4, 22/10/2026, «ImperiOS's Workspace» (Starter): 428 + 57 + 55 créditos; tiempos con Scribe | Plan Starter: uso comercial permitido |
