@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Portada Reel — R6 Antes / después</title>
+<!-- Portada 1080×1920 del Reel R6, con el estilo claro aprobado (subrayado fino, botón negro).
+     Todo lo importante dentro del recorte 3:4 de la cuadrícula del perfil (y 240–1680). -->
+<style>
+@font-face { font-family: "Manrope"; src: url("manrope-latin-variable.woff2") format("woff2"); font-weight: 200 800; }
+:root { --ink-950:#0A0A0A; --ink-700:#4A4A4A; --ink-600:#727272; --ink-300:#D4D4D4; --ink-200:#EBEBEB; --ink-100:#F7F7F3; --ink-50:#FAFAFA; --y:#FFD500; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; }
+body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; position: relative; background: var(--ink-100); color: var(--ink-950); }
+.abs { position: absolute; }
+.grid { position: absolute; inset: 0; background-image: linear-gradient(to right, rgba(10,10,10,.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(10,10,10,.055) 1px, transparent 1px); background-size: 40px 40px; }
+.glow { position: absolute; right: -380px; top: -60px; width: 760px; height: 760px; border-radius: 50%; background: radial-gradient(circle, rgba(255,192,0,.22), rgba(255,192,0,0) 65%); }
+.logo { left: 96px; top: 280px; }
+.logo img { display: block; height: 96px; }
+.tag { left: 96px; top: 460px; display: inline-flex; padding: 14px 28px; border-radius: 999px; background: var(--y); font-weight: 800; font-size: 26px; letter-spacing: .14em; }
+h1 { position: absolute; left: 92px; top: 560px; right: 60px; font-weight: 800; font-size: 120px; line-height: 1.0; letter-spacing: -.045em; }
+h1 em { font-style: italic; font-weight: 500; }
+h1 .u { background: linear-gradient(transparent 86%, var(--y) 86%, var(--y) 92%, transparent 92%); }
+.col { position: absolute; top: 960px; width: 420px; height: 420px; border-radius: 24px; padding: 26px; }
+.col .t { display: inline-block; padding: 8px 16px; border-radius: 999px; font-weight: 800; font-size: 22px; letter-spacing: .14em; }
+.mess { position: absolute; padding: 10px 16px; border-radius: 12px; background: var(--ink-50); border: 1.5px solid var(--ink-300); font-weight: 700; font-size: 22px; color: var(--ink-600); white-space: nowrap; }
+.ok { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 12px; background: rgba(255,255,255,.08); font-weight: 700; font-size: 24px; color: #fff; margin-top: 12px; }
+.ok i { width: 14px; height: 14px; border-radius: 50%; background: var(--y); flex: none; }
+.panel { left: 96px; right: 96px; top: 1435px; height: 104px; border-radius: 20px; background: var(--ink-950); color: #fff;
+  display: flex; align-items: center; justify-content: center; gap: 22px; font-weight: 800; font-size: 40px; letter-spacing: .02em; }
+.panel i { width: 20px; height: 20px; border-radius: 50%; background: var(--y); }
+.web { left: 96px; top: 1600px; font-weight: 700; font-size: 28px; letter-spacing: .2em; color: var(--ink-600); }
+</style>
+</head>
+<body>
+<div class="grid"></div>
+<div class="glow"></div>
+<div class="abs logo"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" alt="ImperiOS"></div>
+<div class="abs tag">PARA TU INMOBILIARIA</div>
+<h1>¿Tu inmobiliaria sigue en el <em class="u">antes?</em></h1>
+<!-- antes: caos en grises -->
+<div class="col" style="left:96px;background:var(--ink-200);border:1.5px solid var(--ink-300)">
+  <span class="t" style="background:var(--ink-300);color:var(--ink-700)">ANTES</span>
+  <div class="mess" style="left:26px;top:96px;transform:rotate(-4deg)">Llamada perdida</div>
+  <div class="mess" style="left:150px;top:160px;transform:rotate(3deg)">WhatsApp · 12</div>
+  <div class="mess" style="left:40px;top:226px;transform:rotate(2deg)">Excel</div>
+  <div class="mess" style="left:180px;top:280px;transform:rotate(-5deg)">¿Visita… jueves?</div>
+  <div class="mess" style="left:30px;top:340px;transform:rotate(-2deg)">Email · 7</div>
+</div>
+<!-- después: orden -->
+<div class="col" style="left:564px;background:var(--ink-950);box-shadow:0 30px 80px rgba(10,10,10,.25)">
+  <span class="t" style="background:var(--y);color:var(--ink-950)">DESPUÉS</span>
+  <div style="margin-top:14px">
+    <div class="ok"><i></i>Todo centralizado</div>
+    <div class="ok"><i></i>Respuesta en &lt; 1 min</div>
+    <div class="ok"><i></i>Visita en la agenda</div>
+    <div class="ok"><i></i>Recordatorio automático</div>
+  </div>
+</div>
+<div class="abs panel"><i></i>COMENTA DEMO</div>
+<div class="abs web">IMPERIOS.APP</div>
+<script>
+window.ready = document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => i.onload = r))));
+</script>
+</body>
+</html>

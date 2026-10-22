@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>ImperiOS Reel R6 — Antes / después</title>
+<!-- Reel orgánico R6 «Antes / después». Mismo lenguaje que reel-r2.html / reel-v4.html.
+     ANTES en grises y desordenado; DESPUÉS con la paleta de marca y todo en orden.
+     Todo el texto dentro de la zona segura de Reels: y 270–1248. Los tiempos (B.*) vienen de build_timeline_r6.py. -->
+<style>
+@font-face { font-family: "Manrope"; src: url("manrope-latin-variable.woff2") format("woff2"); font-weight: 200 800; }
+:root {
+  --ink-950:#0A0A0A; --ink-900:#1C1C1C; --ink-800:#333; --ink-700:#4A4A4A; --ink-600:#727272;
+  --ink-500:#B0B0B0; --ink-400:#C0C0C0; --ink-300:#D4D4D4; --ink-200:#EBEBEB; --ink-100:#F7F7F3; --ink-50:#FAFAFA;
+  --y:#FFD500;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ink-100); }
+body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-smoothing: antialiased; }
+#stage { position: absolute; inset: 0; overflow: hidden; background: var(--ink-100); }
+.abs { position: absolute; }
+.full { position: absolute; inset: 0; }
+.grid-l { background-image: linear-gradient(to right, rgba(10,10,10,.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(10,10,10,.055) 1px, transparent 1px); background-size: 40px 40px; }
+.vig-l { background: radial-gradient(ellipse at 50% 45%, transparent 38%, rgba(247,247,243,.96) 82%); }
+.half { position: absolute; inset: 0; display: none; }
+.kt { position: absolute; left: 96px; right: 96px; font-weight: 700; letter-spacing: -.035em; line-height: 1.1; }
+.kt .w { display: inline-block; white-space: pre; will-change: transform, opacity, filter; }
+.it { font-style: italic; font-weight: 500; }
+.uline { position: absolute; height: 8px; border-radius: 4px; background: var(--y); transform-origin: 0 50%; opacity: 0; }
+.pill { position: absolute; left: 96px; top: 300px; display: inline-flex; align-items: center; gap: 14px; padding: 14px 28px; border-radius: 999px;
+  font-weight: 800; font-size: 28px; letter-spacing: .16em; }
+.card { position: absolute; background: var(--ink-50); border: 1.5px solid var(--ink-200); border-radius: 24px;
+  box-shadow: 0 30px 80px rgba(10,10,10,.10), 0 4px 14px rgba(10,10,10,.05); }
+.av { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 24px; flex: none; }
+.chip { position: absolute; padding: 16px 24px; border-radius: 16px; background: var(--ink-50); border: 1.5px solid var(--ink-200);
+  font-weight: 700; font-size: 30px; box-shadow: 0 16px 40px rgba(10,10,10,.08); white-space: nowrap; display: flex; align-items: center; gap: 12px; }
+.bdg { display: inline-grid; place-items: center; min-width: 36px; height: 36px; padding: 0 10px; border-radius: 18px; background: var(--ink-950); color: #fff; font-size: 20px; font-weight: 800; }
+.row { display: flex; align-items: center; gap: 22px; padding: 22px 26px; border-radius: 18px; }
+.meta { font-size: 21px; color: var(--ink-400); font-weight: 500; margin-top: 2px; }
+.src { margin-left: auto; font-size: 19px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 9px 14px; border-radius: 10px; background: var(--ink-800); color: var(--ink-400); }
+.bub { border-radius: 24px; padding: 18px 24px; font-size: 28px; font-weight: 600; box-shadow: 0 16px 40px rgba(0,0,0,.25); }
+.lbl { font-size: 20px; font-weight: 800; letter-spacing: .14em; color: var(--ink-600); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="full grid-l" id="lgrid"></div>
+  <div class="abs" id="lglow" style="width:1000px;height:1000px;border-radius:50%;background:radial-gradient(circle, rgba(255,192,0,.20), rgba(255,192,0,0) 65%);"></div>
+  <div class="full vig-l"></div>
+
+  <!-- ================= ANTES ================= -->
+  <div class="half" id="antes">
+    <div class="pill" id="pA" style="background:var(--ink-200);color:var(--ink-700)">ANTES</div>
+    <div class="kt" id="ka" style="top:390px;font-size:80px"></div>
+    <!-- a1: el cliente escribe desde el portal -->
+    <div class="card" id="a1" style="left:96px;top:640px;width:888px;padding:24px 28px;display:flex;align-items:center;gap:22px">
+      <div class="av" style="background:var(--ink-300)">AM</div>
+      <div style="flex:1"><div class="lbl">NUEVO MENSAJE · PORTAL</div><div style="font-size:32px;font-weight:700;margin-top:4px">«¿Sigue disponible el ático?»</div></div>
+      <div id="a1t" style="font-size:24px;font-weight:800;color:var(--ink-600);display:flex;align-items:center;gap:8px">
+        <svg width="28" height="28" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#727272" stroke-width="2.4"/><path d="M12 7v5l3 2" stroke="#727272" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg><span id="a1tt">ahora</span></div>
+    </div>
+    <!-- a2: el caos de conversaciones y llamadas -->
+    <div class="chip a2" style="left:110px;top:820px">Llamada perdida<span class="bdg">3</span></div>
+    <div class="chip a2" style="left:560px;top:800px">WhatsApp<span class="bdg">12</span></div>
+    <div class="chip a2" style="left:380px;top:905px">Email<span class="bdg">7</span></div>
+    <div class="chip a2" style="left:700px;top:930px">Chat<span class="bdg">5</span></div>
+    <div class="chip a2" style="left:96px;top:1000px">Llamada perdida<span class="bdg">2</span></div>
+    <div class="chip a2" style="left:520px;top:1040px">Portal<span class="bdg">4</span></div>
+    <div class="chip a2" style="left:240px;top:1120px">Llamada</div>
+    <div class="chip a2" style="left:680px;top:1130px">WhatsApp<span class="bdg">3</span></div>
+    <!-- a3: la información se pierde por el camino -->
+    <div class="chip a3" style="left:140px;top:840px">Zona · Chamberí</div>
+    <div class="chip a3" style="left:520px;top:860px">350–400 k€</div>
+    <div class="chip a3" style="left:300px;top:960px">Ático · 3 hab</div>
+    <div class="chip a3" style="left:660px;top:970px">Teléfono</div>
+    <!-- a4: la visita en un pósit -->
+    <div class="abs" id="a4" style="left:320px;top:660px;width:440px;height:400px;background:#FFF6C7;border-radius:6px;box-shadow:0 30px 60px rgba(10,10,10,.18);padding:40px 40px;font-family:'Manrope';transform-origin:50% 0">
+      <div style="font-size:30px;font-weight:800;letter-spacing:.06em;color:var(--ink-700)">VISITA</div>
+      <div style="font-size:48px;font-weight:700;margin-top:18px;font-style:italic">jueves 17:00</div>
+      <div style="font-size:34px;font-weight:500;margin-top:14px;color:var(--ink-700);font-style:italic">ático… ¿teléfono?</div>
+    </div>
+    <!-- a5: el recordatorio olvidado → no se presenta -->
+    <svg class="abs" id="a5b" style="left:760px;top:620px" width="140" height="140" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 20a2 2 0 0 0 4 0" fill="#FAFAFA" stroke="#0A0A0A" stroke-width="1.6" stroke-linejoin="round"/><path id="a5x" d="M3 3l18 18" stroke="#0A0A0A" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="26" stroke-dashoffset="26"/></svg>
+    <div class="abs" id="a5s" style="left:150px;top:1110px;padding:20px 36px;border:6px solid var(--ink-950);border-radius:14px;font-weight:800;font-size:52px;letter-spacing:.06em;transform:rotate(-6deg)">NO SE PRESENTÓ</div>
+  </div>
+
+  <!-- ================= DESPUÉS ================= -->
+  <div class="half" id="despues">
+    <div class="pill" id="pD" style="background:var(--y);color:var(--ink-950)">DESPUÉS</div>
+    <div class="kt" id="kd" style="top:390px;font-size:80px"></div>
+    <!-- d1: todo centralizado en el panel -->
+    <div class="abs" id="d1" style="left:80px;top:620px;width:920px">
+      <div style="background:var(--ink-950);border:1.5px solid var(--ink-800);border-radius:28px;color:#fff;padding:30px 26px;box-shadow:0 40px 100px rgba(10,10,10,.30)">
+        <div style="display:flex;align-items:center;gap:14px;font-weight:800;font-size:22px;letter-spacing:.16em;color:var(--y);margin:0 8px 18px"><span style="width:14px;height:14px;border-radius:50%;background:var(--y)"></span>TODOS TUS CLIENTES</div>
+        <div class="row d1r" style="background:var(--ink-900);border:1.5px solid var(--ink-700)"><div class="av" style="background:var(--y);color:var(--ink-950)">AM</div><div><div style="font-size:30px;font-weight:700">Ático · Chamberí</div><div class="meta">3 hab · 350–400 k€</div></div><span class="src" style="color:#fff">Portal</span><span style="margin-left:12px;font-size:19px;font-weight:800;letter-spacing:.1em;color:var(--ink-950);background:var(--y);padding:9px 12px;border-radius:10px">NUEVO</span></div>
+        <div class="row d1r"><div class="av" style="background:var(--ink-800)">LG</div><div><div style="font-size:28px;font-weight:700">Piso · Retiro</div><div class="meta">2 hab · 280–320 k€</div></div><span class="src">Portal</span></div>
+        <div class="row d1r"><div class="av" style="background:var(--ink-800)">JR</div><div><div style="font-size:28px;font-weight:700">Chalet · Pozuelo</div><div class="meta">4 hab · 650–720 k€</div></div><span class="src">Web</span></div>
+        <div class="row d1r"><div class="av" style="background:var(--ink-800)">SP</div><div><div style="font-size:28px;font-weight:700">Piso · Salamanca</div><div class="meta">2 hab · 450–500 k€</div></div><span class="src">WhatsApp</span></div>
+      </div>
+    </div>
+    <!-- d2: respuesta automática por WhatsApp en menos de un minuto -->
+    <div class="abs" id="d2" style="left:96px;top:620px;width:888px;height:470px;border-radius:40px;background:#111;border:2px solid var(--ink-800);box-shadow:0 50px 120px rgba(0,0,0,.35);overflow:hidden">
+      <div style="display:flex;align-items:center;gap:20px;padding:26px 32px;border-bottom:1.5px solid var(--ink-800)">
+        <div class="av" style="background:var(--ink-800);color:#fff">AM</div>
+        <div style="color:#fff"><div style="font-size:28px;font-weight:800">A. M.</div><div style="font-size:20px;color:var(--ink-500);font-weight:600">Ático · Chamberí</div></div>
+        <div id="d2c" style="margin-left:auto;display:flex;align-items:center;gap:12px;padding:12px 18px;border-radius:14px;background:var(--y);color:var(--ink-950);font-weight:800;font-size:24px">
+          <svg width="28" height="28" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" fill="none" stroke="#0A0A0A" stroke-width="2.4"/><path d="M12 9v4l2.5 1.5M10 3h4" stroke="#0A0A0A" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg><span id="d2ct">0:00</span></div>
+      </div>
+      <div style="padding:26px 30px">
+        <div class="bub" id="d2in" style="display:inline-block;background:var(--ink-800);color:#fff;border-radius:24px 24px 24px 6px">¿Sigue disponible el ático?</div>
+        <div class="bub" id="d2out" style="margin-left:auto;margin-top:20px;width:600px;background:var(--ink-50);color:var(--ink-950);border-radius:24px 24px 6px 24px">¡Hola! Sí, sigue disponible: 3 hab, terraza, 385 k€. ¿Te va bien verlo esta semana?</div>
+        <div id="d2s" style="display:flex;justify-content:flex-end;align-items:center;gap:12px;margin-top:14px;font-size:20px;font-weight:800;letter-spacing:.12em;color:var(--ink-400)">ENVIADO AUTOMÁTICAMENTE
+          <svg width="40" height="24" viewBox="0 0 40 24"><path d="M2 13l6 6 12-14M16 17l2 2 12-14" stroke="#FFD500" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+    <!-- d3: el cliente no se enfría -->
+    <div class="card" id="d3" style="left:96px;top:1120px;width:888px;padding:22px 28px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span class="lbl">INTERÉS DEL CLIENTE</span><span id="d3l" style="font-size:22px;font-weight:800;letter-spacing:.12em;padding:6px 14px;border-radius:10px;background:var(--y)">CALIENTE</span></div>
+      <div style="height:16px;border-radius:8px;background:var(--ink-200);margin-top:14px;overflow:hidden"><div id="d3b" style="height:100%;width:100%;border-radius:8px;background:linear-gradient(90deg,#FFE680,#FFC000);transform-origin:0 50%"></div></div>
+    </div>
+    <!-- d4: conversación y visita en la misma ficha -->
+    <div class="card" id="d4" style="left:96px;top:620px;width:888px;padding:28px 30px">
+      <div style="display:flex;align-items:center;gap:22px">
+        <div class="av" style="background:var(--y)">AM</div>
+        <div><div style="font-size:32px;font-weight:800">A. M.</div><div style="font-size:22px;color:var(--ink-600);font-weight:600">Busca ático · Chamberí · 350–400 k€</div></div>
+        <span style="margin-left:auto" class="lbl">FICHA</span>
+      </div>
+      <div style="margin-top:22px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:24px;color:var(--ink-700)"><b style="color:var(--ink-950)">Cliente:</b> ¿Sigue disponible el ático?</div>
+        <div style="font-size:24px;color:var(--ink-700)"><b style="color:var(--ink-950)">IA:</b> ¡Hola! Sí, sigue disponible…</div>
+      </div>
+      <div id="d4v" style="margin-top:22px;display:flex;align-items:center;gap:18px;padding:18px 22px;border-radius:16px;background:var(--ink-950);color:#fff;border-left:8px solid var(--y)">
+        <div style="font-size:30px;font-weight:800">JUE 17:00</div>
+        <div style="font-size:22px;color:var(--ink-400);font-weight:600">Visita · Ático Chamberí</div>
+        <span style="margin-left:auto;font-size:19px;font-weight:800;letter-spacing:.1em;padding:8px 12px;border-radius:10px;background:var(--y);color:var(--ink-950)">AGENTE · L. S.</span>
+      </div>
+    </div>
+    <!-- d5: el recordatorio le llega solo, con ubicación, día y hora -->
+    <div class="card" id="d5" style="left:180px;top:1000px;width:720px;padding:24px 28px">
+      <div class="lbl" style="display:flex;align-items:center;gap:10px"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 20a2 2 0 0 0 4 0" fill="none" stroke="#0A0A0A" stroke-width="2" stroke-linejoin="round"/><circle cx="18" cy="6" r="3.5" fill="#FFD500"/></svg>RECORDATORIO AUTOMÁTICO</div>
+      <div style="display:flex;gap:14px;margin-top:16px;flex-wrap:wrap">
+        <span class="chip d5c" style="position:relative;font-size:26px;padding:12px 18px"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 22s7-7 7-12a7 7 0 0 0-14 0c0 5 7 12 7 12z" fill="#FFD500" stroke="#0A0A0A" stroke-width="2"/><circle cx="12" cy="10" r="2.5" fill="#0A0A0A"/></svg>Chamberí, Madrid</span>
+        <span class="chip d5c" style="position:relative;font-size:26px;padding:12px 18px">Jueves</span>
+        <span class="chip d5c" style="position:relative;font-size:26px;padding:12px 18px">17:00</span>
+      </div>
+      <div id="d5ok" style="margin-top:16px;font-size:24px;font-weight:800;letter-spacing:.06em;color:var(--ink-950);display:flex;align-items:center;gap:10px">
+        <svg width="30" height="30" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFD500"/><path d="M7 12.5l3 3 7-7" stroke="#0A0A0A" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Visita confirmada</div>
+    </div>
+  </div>
+
+  <!-- ================= CIERRE ================= -->
+  <div class="half" id="cierre">
+    <div class="kt" id="kc" style="top:560px;font-size:96px;text-align:center"></div>
+    <img id="logo" src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" class="abs" style="left:250px;top:430px;width:580px" alt="">
+    <div class="abs" id="ctaBtn" style="left:0;right:0;top:720px;text-align:center">
+      <span style="display:inline-flex;align-items:center;gap:22px;padding:34px 60px;border-radius:999px;background:var(--y);color:var(--ink-950);font-weight:800;font-size:54px;letter-spacing:-.01em;box-shadow:0 20px 50px rgba(255,192,0,.35)">Comenta DEMO
+        <svg width="46" height="46" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#0A0A0A" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </div>
+    <div class="kt" id="kc2" style="top:910px;font-size:52px;text-align:center;color:var(--ink-700)"></div>
+    <div class="abs" id="web" style="left:0;right:0;top:1060px;text-align:center;font-weight:700;font-size:30px;letter-spacing:.2em;color:var(--ink-600)">IMPERIOS.APP</div>
+  </div>
+
+  <div class="uline" id="ul"></div>
+</div>
+
+<script>
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const E = {
+  oc: p => 1 - Math.pow(1 - p, 3), ic: p => p * p * p,
+  ioc: p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2,
+  ob: p => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+  ob2: p => { const c1 = 2.4, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+};
+const k = (t, t0, t1, e = E.oc) => e(clamp((t - t0) / (t1 - t0)));
+const css = (el, o) => { for (const key in o) el.style[key] = o[key]; };
+const rectOf = el => { const r = el.getBoundingClientRect(); return { x: r.left, y: r.top, w: r.width, h: r.height }; };
+
+// titulares: cada uno es un bloque de texto que aparece palabra a palabra y sale al llegar el siguiente
+function block(el, lines) {
+  el.innerHTML = '';
+  const out = [];
+  lines.forEach((ln, li) => {
+    ln.forEach(([txt, cls]) => { const s = document.createElement('span'); s.className = 'w' + (cls ? ' ' + cls : ''); s.textContent = txt; el.appendChild(s); out.push(s); el.appendChild(document.createTextNode(' ')); });
+    if (li < lines.length - 1) el.appendChild(document.createElement('br'));
+  });
+  return out;
+}
+const HA = [   // ANTES
+  [[['Te'], ['escribe'], ['desde']], [['el'], ['portal.', 'it']]],
+  [[['Tardas'], ['en']], [['responder.', 'it']]],
+  [[['La'], ['información']], [['se'], ['pierde.', 'it']]],
+  [[['La'], ['visita,'], ['en']], [['una'], ['agenda.', 'it']]],
+  [[['Y'], ['el'], ['cliente']], [['no'], ['se'], ['presenta.', 'it']]],
+];
+const HD = [   // DESPUÉS
+  [[['Todo']], [['centralizado.', 'it']]],
+  [[['Respuesta'], ['en']], [['menos'], ['de'], ['1'], ['minuto.', 'it']]],
+  [[['El'], ['cliente'], ['no']], [['se'], ['enfría.', 'it']]],
+  [[['Todo'], ['en'], ['el']], [['mismo'], ['sitio.', 'it']]],
+  [[['Recordatorio']], [['automático.', 'it']]],
+];
+let B = { a: [0.3, 3.4, 7.6, 11.9, 14], d0: 18.3, d: [18.6, 25.4, 30.9, 32.8, 35.6], c0: 39.9, logo: 42, end: 47, wt: {} };
+window.setBeats = b => { B = Object.assign(B, b); };
+window.setVariant = () => {};
+
+let cur = { a: -1, d: -1 }, curW = { a: [], d: [] };
+function headline(key, el, set, t, starts, wkey) {
+  let i = -1; starts.forEach((s, j) => { if (t >= s - .05) i = j; });
+  if (i !== cur[key]) { cur[key] = i; curW[key] = i >= 0 ? block(el, set[i]) : (el.innerHTML = '', []); }
+  if (i < 0) return null;
+  const t0 = starts[i], next = starts[i + 1] ?? 1e9;
+  const wt = (B.wt[wkey] && B.wt[wkey][i]) || curW[key].map((_, j) => .05 + j * .09);
+  curW[key].forEach((w, j) => { const p = k(t - t0, wt[j], wt[j] + .35); css(w, { opacity: p, transform: `translateY(${(1 - p) * 40}px)`, filter: p < 1 ? `blur(${(1 - p) * 9}px)` : 'none' }); });
+  const out = k(t, next - .25, next, E.ic);
+  css(el, { opacity: 1 - out, transform: `translateY(${-out * 40}px)`, filter: out > 0 ? `blur(${out * 10}px)` : 'none' });
+  // subrayado en la última palabra (cursiva) cuando ya se ha dicho
+  const last = curW[key][curW[key].length - 1], tl = t0 + wt[wt.length - 1] + .25;
+  if (t > tl && t < next - .25) { const r = rectOf(last); css($('#ul'), { opacity: 1, left: r.x + 'px', top: (r.y + r.h - 6) + 'px', width: r.w + 'px', transform: `scaleX(${k(t, tl, tl + .35)})` }); }
+  return i;
+}
+const show = (el, p, dy = 60, extra = '') => css(el, { opacity: p, transform: `translateY(${(1 - p) * dy}px) ${extra}`, filter: p < .98 ? `blur(${(1 - p) * 10}px)` : 'none' });
+
+function render(t) {
+  $('#lgrid').style.backgroundPosition = `${-t * 6}px ${-t * 9}px`;
+  css($('#lglow'), { left: (40 + Math.sin(t * .4) * 30) + 'px', top: (330 + Math.cos(t * .35) * 30) + 'px' });
+  $('#ul').style.opacity = 0;
+  const [a1, a2, a3, a4, a5] = B.a, [d1, d2, d3, d4, d5] = B.d;
+
+  // ===== ANTES: en grises, con un leve temblor que crece con el caos =====
+  const antes = $('#antes'), aOut = k(t, B.d0 - .15, B.d0 + .35, E.ic);
+  antes.style.display = t < B.d0 + .4 ? 'block' : 'none';
+  if (t < B.d0 + .4) {
+    const chaos = k(t, a2, a2 + 1.5) * (1 - k(t, a4, a4 + .5)) * .7 + k(t, a5, a5 + .6) * .3;
+    css(antes, { filter: `grayscale(1) ${aOut > 0 ? `blur(${aOut * 16}px)` : ''}`, opacity: 1 - aOut,
+      transform: `translate(${Math.sin(t * 23) * 3 * chaos}px, ${Math.cos(t * 19) * 3 * chaos}px) scale(${1 + aOut * .08})` });
+    css($('#lgrid'), { filter: t < B.d0 ? 'grayscale(1)' : 'none' });
+    show($('#pA'), k(t, 0, .3, E.ob2), 20);
+    headline('a', $('#ka'), HA, t, B.a, 'ha');
+    // a1: tarjeta del portal; el reloj corre mientras tardas en responder
+    const p1 = k(t, a1 + .3, a1 + .8, E.ob), o1 = k(t, a3 + .9, a3 + 1.3, E.ic);
+    show($('#a1'), p1 * (1 - o1), 60, `translateX(${o1 * 300}px) rotate(${o1 * 6}deg)`);
+    const mins = Math.floor(k(t, a2, a3, p => p) * 185);
+    $('#a1tt').textContent = t < a2 ? 'ahora' : (mins < 60 ? `hace ${mins} min` : `hace ${Math.floor(mins / 60)} h ${mins % 60} min`);
+    // a2: se amontonan conversaciones y llamadas
+    $$('.a2').forEach((c, i) => {
+      const t0 = a2 + .25 + i * .32, p = k(t, t0, t0 + .35, E.ob2), o = k(t, a3 - .1 + i * .03, a3 + .3 + i * .03, E.ic);
+      css(c, { opacity: k(t, t0, t0 + .05) * (1 - o), transform: `scale(${(.5 + .5 * p) * (1 - o * .5)}) rotate(${(i % 2 ? 1 : -1) * (3 + i)}deg) translate(${Math.sin(t * 9 + i) * 4}px, ${o * 120}px)`,
+        filter: o > .05 ? `blur(${o * 10}px)` : 'none' });
+    });
+    // a3: los datos del cliente se desvanecen por el camino
+    const wi = (B.wt.a3i || 2.0);
+    $$('.a3').forEach((c, i) => {
+      const t0 = a3 + .2 + i * .12, p = k(t, t0, t0 + .4, E.ob), lost = k(t, a3 + wi + i * .15, a3 + wi + .7 + i * .15, E.ic), o = k(t, a4 - .2, a4, E.ic);
+      css(c, { opacity: k(t, t0, t0 + .05) * (1 - lost * .9) * (1 - o), transform: `translateY(${(1 - p) * 40 + lost * 60}px) rotate(${lost * (i % 2 ? 12 : -12)}deg)`,
+        filter: lost > .02 ? `blur(${lost * 12}px)` : 'none' });
+    });
+    // a4: la visita en un pósit
+    const p4 = k(t, a4 + .1, a4 + .6, E.ob), o4 = k(t, a5 + 1.4, a5 + 1.9, E.ic);
+    css($('#a4'), { opacity: k(t, a4 + .1, a4 + .15) * (1 - o4 * .6), transform: `rotate(${-4 + (1 - p4) * -20}deg) scale(${(.7 + .3 * p4) * (1 - o4 * .15)}) translateY(${o4 * -40}px)` });
+    // a5: campana tachada (el recordatorio se olvida) y sello «NO SE PRESENTÓ»
+    const p5 = k(t, a5 + .1, a5 + .5, E.ob2);
+    css($('#a5b'), { opacity: k(t, a5 + .1, a5 + .15), transform: `scale(${.5 + .5 * p5}) rotate(${Math.sin(t * 14) * 6 * (1 - k(t, a5 + .4, a5 + 1.4))}deg)` });
+    $('#a5x').style.strokeDashoffset = 26 * (1 - k(t, a5 + .9, a5 + 1.2));
+    const ns = B.wt.a5n || 2.5, ps = k(t, a5 + ns, a5 + ns + .25, E.ob2);
+    css($('#a5s'), { opacity: k(t, a5 + ns, a5 + ns + .05), transform: `rotate(-6deg) scale(${2.2 - 1.2 * ps})` });
+  }
+
+  // ===== DESPUÉS: color, orden =====
+  const desp = $('#despues');
+  desp.style.display = t > B.d0 - .1 && t < B.c0 + .4 ? 'block' : 'none';
+  if (desp.style.display === 'block') {
+    const dIn = k(t, B.d0 - .1, B.d0 + .35, E.oc), dOut = k(t, B.c0 - .2, B.c0 + .3, E.ic);
+    css(desp, { opacity: dIn * (1 - dOut), transform: `scale(${1.06 - .06 * dIn + dOut * .06})`, filter: dIn < 1 || dOut > 0 ? `blur(${(1 - dIn) * 14 + dOut * 14}px)` : 'none' });
+    show($('#pD'), k(t, B.d0, B.d0 + .35, E.ob2), 20);
+    headline('d', $('#kd'), HD, t, B.d, 'hd');
+    // d1: los clientes de todos los portales entran en el mismo panel
+    const p1 = k(t, d1 + .1, d1 + .6, E.oc), o1 = k(t, d2 - .25, d2 + .1, E.ic);
+    show($('#d1'), p1 * (1 - o1), 80);
+    $$('.d1r').forEach((r, i) => {
+      const t0 = d1 + .4 + i * .3, p = k(t, t0, t0 + .45, E.ob);
+      css(r, { opacity: k(t, t0, t0 + .05), transform: `translateX(${(1 - p) * (i % 2 ? 700 : -700)}px)` });
+    });
+    // d2: chat; la IA responde y el cronómetro se para antes del minuto
+    const p2 = k(t, d2 - .05, d2 + .4, E.ob), o2 = k(t, d4 - .25, d4 + .1, E.ic);
+    show($('#d2'), p2 * (1 - o2), 80);
+    const rIn = d2 + .5, rOut = d2 + (B.wt.d2r || 2.6);
+    css($('#d2in'), { opacity: k(t, rIn, rIn + .1), transform: `scale(${.7 + .3 * k(t, rIn, rIn + .35, E.ob2)})`, transformOrigin: '0 100%' });
+    const secs = Math.round(k(t, rIn, rOut, p => p) * 38);
+    $('#d2ct').textContent = `0:${String(secs).padStart(2, '0')}`;
+    css($('#d2c'), { transform: `scale(${1 + .12 * Math.sin(k(t, rOut, rOut + .4) * Math.PI)})` });
+    const po = k(t, rOut, rOut + .45, E.ob2);
+    css($('#d2out'), { opacity: k(t, rOut, rOut + .08), transform: `translateY(${(1 - po) * -80}px) scale(${.8 + .2 * po})`, transformOrigin: '100% 100%' });
+    css($('#d2s'), { opacity: k(t, rOut + .5, rOut + .8) });
+    // d3: el interés del cliente se mantiene «caliente»
+    const p3 = k(t, d3 - .1, d3 + .4, E.ob), o3 = k(t, d4 - .25, d4 + .1, E.ic);
+    show($('#d3'), p3 * (1 - o3), 60);
+    css($('#d3b'), { transform: `scaleX(${.25 + .7 * k(t, d3 + .2, d3 + 1.0, E.oc)})` });
+    css($('#d3l'), { transform: `scale(${1 + .1 * Math.sin(k(t, d3 + 1.0, d3 + 1.4) * Math.PI)})` });
+    // d4: ficha con la conversación y la visita
+    const p4 = k(t, d4 - .05, d4 + .45, E.ob);
+    show($('#d4'), p4, 80);
+    const pv = k(t, d4 + (B.wt.d4v || .9), d4 + (B.wt.d4v || .9) + .4, E.ob2);
+    css($('#d4v'), { opacity: k(t, d4 + (B.wt.d4v || .9), d4 + (B.wt.d4v || .9) + .05), transform: `scale(${.8 + .2 * pv})` });
+    // d5: recordatorio automático con ubicación, día y hora → visita confirmada
+    const p5 = k(t, d5 + .1, d5 + .55, E.ob);
+    show($('#d5'), p5, 80);
+    const c5 = B.wt.d5c || [1.9, 2.8, 3.5];
+    $$('.d5c').forEach((c, i) => { const p = k(t, d5 + c5[i], d5 + c5[i] + .35, E.ob2); css(c, { opacity: k(t, d5 + c5[i], d5 + c5[i] + .05), transform: `scale(${.6 + .4 * p})` }); });
+    const okt = d5 + c5[2] + .5, pk = k(t, okt, okt + .4, E.ob2);
+    css($('#d5ok'), { opacity: k(t, okt, okt + .05), transform: `scale(${.7 + .3 * pk})`, transformOrigin: '0 50%' });
+  }
+
+  // ===== CIERRE =====
+  const cie = $('#cierre');
+  cie.style.display = t > B.c0 - .1 ? 'block' : 'none';
+  if (t > B.c0 - .1) {
+    const s = t - B.c0, w = B.wt.c || [0, .15, .8, 1.0, 1.08, 1.2, 2.0, 2.56, 2.8, 2.92, 3.04, 3.4, 3.56];
+    // «¿Tu inmobiliaria sigue en el antes?»
+    if (!cie.dataset.built) { cie.dataset.built = 1; window.KC = block($('#kc'), [[['¿Tu'], ['inmobiliaria']], [['sigue'], ['en'], ['el'], ['antes?', 'it']]]); window.KC2 = block($('#kc2'), [[['Y'], ['te'], ['enseño'], ['el'], ['después.', 'it']]]); }
+    const lg = B.logo - B.c0, qo = k(s, lg - .2, lg + .2, E.ic);
+    KC.forEach((wd, j) => { const p = k(s, w[j], w[j] + .35); css(wd, { opacity: p, transform: `translateY(${(1 - p) * 40}px)`, filter: p < 1 ? `blur(${(1 - p) * 9}px)` : 'none' }); });
+    css($('#kc'), { opacity: 1 - qo, transform: `translateY(${-qo * 80}px)`, filter: qo > 0 ? `blur(${qo * 12}px)` : 'none' });
+    if (s > w[5] + .3 && s < lg - .25) { const r = rectOf(KC[5]); css($('#ul'), { opacity: 1, left: r.x + 'px', top: (r.y + r.h - 6) + 'px', width: r.w + 'px', transform: `scaleX(${k(s, w[5] + .3, w[5] + .65)})` }); }
+    const lp = k(s, lg, lg + .6, E.oc);
+    css($('#logo'), { opacity: lp, filter: lp < 1 ? `blur(${(1 - lp) * 12}px)` : 'none', transform: `scale(${1.06 - .06 * lp})`, clipPath: `inset(0 ${(1 - k(s, lg, lg + .65, E.ioc)) * 100}% 0 0)` });
+    const cp = k(s, w[6] - .05, w[6] + .4, E.ob2), pulse = s > w[7] + .6 ? (s - w[7] - .6) % 1.2 / 1.2 : 0;
+    css($('#ctaBtn'), { opacity: k(s, w[6] - .05, w[6] + .05), transform: `translateY(${(1 - cp) * 60}px) scale(${(.7 + .3 * cp) * (1 + .04 * Math.sin(pulse * Math.PI))})` });
+    KC2.forEach((wd, j) => { const p = k(s, w[8 + j], w[8 + j] + .35); css(wd, { opacity: p, transform: `translateY(${(1 - p) * 40}px)`, filter: p < 1 ? `blur(${(1 - p) * 9}px)` : 'none' }); });
+    css($('#web'), { opacity: k(s, w[12] + .4, w[12] + .8), letterSpacing: (.3 - .1 * k(s, w[12] + .4, w[12] + .8)) + 'em' });
+  }
+}
+window.render = render;
+window.ready = document.fonts.ready.then(() => new Promise(r => { const i = $('#logo'); if (i.complete) r(); else i.onload = r; }));
+</script>
+</body>
+</html>
