@@ -6,13 +6,15 @@ Lee hyperframes/data.json y hyperframes/assets/audio/vo.wav. Escribe music.wav, 
 """
 import json
 import subprocess
+import sys
 from pathlib import Path
 
 import numpy as np
 from scipy.io import wavfile
 from scipy.signal import butter, sosfilt
 
-ROOT = Path(__file__).resolve().parents[1]
+# Proyecto: este (por defecto) u otro que reutilice el pipeline, p. ej. «ImperiOS Demo Corto»
+ROOT = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path(__file__).resolve().parents[1]
 HF = ROOT / "hyperframes"
 AUD = HF / "assets" / "audio"
 SFXDIR = ROOT.parent / "ImperiOS Ad" / "assets_in" / "sfx"

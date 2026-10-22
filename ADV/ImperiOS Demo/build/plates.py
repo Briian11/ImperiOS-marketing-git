@@ -1,10 +1,12 @@
 """Prepara las imágenes de estado para la composición: recorta cada captura @2x a la zona útil (alto máx. 2200 px CSS)
 y la guarda como JPEG 4:4:4 de alta calidad. Fuente: ../ImperiOS Ad/capture/out/states/*.png (fuera de git)."""
 import json
+import sys
 from pathlib import Path
 from PIL import Image
 
-ROOT = Path(__file__).resolve().parents[1]
+# Proyecto: este (por defecto) u otro que reutilice el pipeline, p. ej. «ImperiOS Demo Corto»
+ROOT = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else Path(__file__).resolve().parents[1]
 SRC = ROOT.parent / "ImperiOS Ad" / "capture" / "out" / "states"
 DST = ROOT / "hyperframes" / "assets" / "states"
 MAXH = 2200

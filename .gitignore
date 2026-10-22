@@ -36,3 +36,14 @@ ADV/ImperiOS Demo/hyperframes/renders/render.log
 ADV/ImperiOS Demo/hyperframes/renders/work-*/
 ADV/ImperiOS Demo/hyperframes/renders/.*hf-transaction*/
 ADV/ImperiOS Demo/build/__pycache__/
+# Vídeo demo corto 16:9: dependencias, caché, capturas derivadas e intermedios de audio
+ADV/ImperiOS Demo Corto/hyperframes/node_modules
+ADV/ImperiOS Demo Corto/hyperframes/package-lock.json
+ADV/ImperiOS Demo Corto/hyperframes/.hyperframes/
+ADV/ImperiOS Demo Corto/hyperframes/assets/states/
+ADV/ImperiOS Demo Corto/hyperframes/assets/audio/
+ADV/ImperiOS Demo Corto/hyperframes/renders/render.log
+ADV/ImperiOS Demo Corto/hyperframes/renders/work-*/
+ADV/ImperiOS Demo Corto/hyperframes/renders/.*hf-transaction*/
+ADV/ImperiOS Demo Corto/hyperframes/renders/tmp.mp4
+ADV/ImperiOS Demo Corto/build/__pycache__/

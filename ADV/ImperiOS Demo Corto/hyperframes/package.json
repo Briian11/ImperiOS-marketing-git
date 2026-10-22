@@ -1,0 +1,9 @@
+{
+  "name": "imperios-demo-hyperframes",
+  "private": true,
+  "description": "Vídeo demo 16:9 del CRM ImperiOS: estados reales de la cuenta demo animados en HyperFrames",
+  "dependencies": {
+    "gsap": "3.14.2",
+    "hyperframes": "0.8.158"
+  }
+}

@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>ImperiOS — Demo corto del CRM</title>
+    <script src="node_modules/gsap/dist/gsap.min.js"></script>
+    <script src="data.js"></script>
+    <style>
+      @font-face {
+        font-family: "Manrope";
+        src: url("assets/brand/manrope.woff2") format("woff2");
+        font-weight: 200 800;
+        font-display: block;
+      }
+      :root {
+        --ink-950: #0a0a0a;
+        --ink-700: #4a4a4a;
+        --ink-600: #5c5c5c;
+        --ink-200: #ebebeb;
+        --ink-100: #f5f5f5;
+        --y: #ffd500;
+      }
+      body {
+        margin: 0;
+        background: var(--ink-100);
+        font-family: "Manrope", sans-serif;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--ink-100);
+      }
+      .abs {
+        position: absolute;
+      }
+      #grid {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(10, 10, 10, 0.07) 1.2px, transparent 1.2px);
+        background-size: 28px 28px;
+      }
+      #dark {
+        position: absolute;
+        inset: 0;
+        background: var(--ink-950);
+        opacity: 0;
+      }
+      .glow {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255, 213, 0, 0.22), rgba(255, 213, 0, 0) 66%);
+      }
+      #win {
+        position: absolute;
+        left: 144px;
+        top: 84px;
+        width: 1632px;
+        height: 958px;
+        border-radius: 18px;
+        background: #fff;
+        overflow: hidden;
+        box-shadow: 0 40px 100px rgba(10, 10, 10, 0.16), 0 2px 10px rgba(10, 10, 10, 0.06);
+        opacity: 0;
+      }
+      #bar {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 40px;
+        background: #f3f3f3;
+        border-bottom: 1px solid var(--ink-200);
+      }
+      .dot {
+        position: absolute;
+        top: 14px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #dcdcdc;
+      }
+      .wtitle {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 10px;
+        text-align: center;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--ink-600);
+        opacity: 0;
+      }
+      #vp {
+        position: absolute;
+        left: 0;
+        top: 40px;
+        width: 1632px;
+        height: 918px;
+        overflow: hidden;
+        background: #fafafa;
+      }
+      #zoom {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1920px;
+        height: 1080px;
+        transform-origin: 0 0;
+      }
+      #pan {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1920px;
+        height: 4400px;
+      }
+      .st {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1920px;
+        opacity: 0;
+      }
+      .ring {
+        position: absolute;
+        border: 3px solid var(--y);
+        border-radius: 14px;
+        box-shadow: 0 0 0 6px rgba(255, 213, 0, 0.22);
+        opacity: 0;
+      }
+      .spot {
+        position: absolute;
+        border-radius: 14px;
+        box-shadow: 0 0 0 9000px rgba(10, 10, 10, 0.26);
+        opacity: 0;
+      }
+      .rip {
+        position: absolute;
+        width: 56px;
+        height: 56px;
+        margin: -28px 0 0 -28px;
+        border-radius: 50%;
+        border: 3px solid var(--y);
+        background: rgba(255, 213, 0, 0.25);
+        opacity: 0;
+      }
+      #states {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+      }
+      #fx {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 2;
+      }
+      #cursor {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 0;
+        height: 0;
+        z-index: 3;
+        opacity: 0;
+      }
+      #cursor-s {
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform-origin: 0 0;
+      }
+      .clone {
+        position: absolute;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 24px 50px rgba(10, 10, 10, 0.22);
+        opacity: 0;
+      }
+      .clone img {
+        position: absolute;
+        width: 1920px;
+      }
+      .hole {
+        position: absolute;
+        opacity: 0;
+      }
+      .label {
+        position: absolute;
+        left: 144px;
+        right: 144px;
+        top: 34px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        color: var(--ink-600);
+        opacity: 0;
+      }
+      .label b {
+        color: var(--ink-950);
+      }
+      .label.dark,
+      .label.dark b {
+        color: #fff;
+      }
+      #logo {
+        position: absolute;
+        left: 560px;
+        top: 392px;
+        width: 800px;
+        opacity: 0;
+      }
+      #tagline {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 700px;
+        text-align: center;
+        font-size: 46px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: var(--ink-950);
+      }
+      #tagline span {
+        display: inline-block;
+        margin: 0 0.12em;
+        opacity: 0;
+      }
+      #mhead {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 470px;
+        text-align: center;
+        font-size: 84px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: var(--ink-950);
+        opacity: 0;
+      }
+      #mhead em {
+        font-style: normal;
+        box-shadow: inset 0 -0.28em 0 var(--y);
+      }
+      .mcard {
+        position: absolute;
+        width: 652px;
+        height: 397px;
+        border-radius: 14px;
+        background: #fff;
+        overflow: hidden;
+        box-shadow: 0 30px 70px rgba(10, 10, 10, 0.16), 0 2px 8px rgba(10, 10, 10, 0.06);
+        opacity: 0;
+      }
+      .mcard .mbar {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 30px;
+        background: #f3f3f3;
+        border-bottom: 1px solid var(--ink-200);
+      }
+      .mcard .mbar i {
+        position: absolute;
+        top: 11px;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #dcdcdc;
+      }
+      .mcard .mimg {
+        position: absolute;
+        left: 0;
+        top: 30px;
+        width: 652px;
+        height: 367px;
+        overflow: hidden;
+        background: #fafafa;
+      }
+      .mcard .mimg img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 652px;
+      }
+      .mcard .mlab {
+        position: absolute;
+        left: 18px;
+        bottom: 18px;
+        padding: 8px 16px;
+        border-radius: 10px;
+        background: var(--ink-950);
+        color: #fff;
+        font-size: 22px;
+        font-weight: 700;
+      }
+      .cap {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 58px;
+        display: flex;
+        justify-content: center;
+        opacity: 0;
+      }
+      .cap .pill {
+        max-width: 1300px;
+        padding: 12px 26px;
+        border-radius: 14px;
+        background: rgba(10, 10, 10, 0.8);
+        color: #fff;
+        font-size: 34px;
+        font-weight: 600;
+        line-height: 1.25;
+        text-align: center;
+      }
+      .cap .w {
+        opacity: 0.66;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="49.81" data-fps="60">
+      <audio id="mix" src="assets/audio/master.wav" data-start="0" data-duration="49.81" data-track-index="9"></audio>
+      <div id="grid"></div>
+      <div class="glow abs" style="left: 1320px; top: -380px; width: 900px; height: 900px"></div>
+      <div id="dark"><div class="glow abs" style="left: 1240px; top: -420px; width: 1100px; height: 1100px"></div></div>
+      <div id="labels"></div>
+      <div id="win">
+        <div id="bar">
+          <span class="dot" style="left: 18px"></span><span class="dot" style="left: 38px"></span><span class="dot" style="left: 58px"></span>
+          <div id="titles"></div>
+        </div>
+        <div id="vp">
+          <div id="zoom">
+            <div id="pan">
+              <div id="states"></div>
+              <div id="fx"></div>
+              <div id="cursor">
+                <div id="cursor-s">
+                  <svg id="cursor-i" width="34" height="40" viewBox="0 0 34 40" style="position: absolute; left: -3px; top: -2px">
+                    <path d="M3 2 L3 31 L10.5 24.5 L15.5 36 L20.5 33.8 L15.6 22.6 L26 22.6 Z" fill="#0A0A0A" stroke="#FFFFFF" stroke-width="2.4" stroke-linejoin="round" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="montage"><div id="mhead">Y <em>además</em>…</div></div>
+      <img id="logo" src="assets/brand/logo.svg" alt="ImperiOS" />
+      <div id="tagline"></div>
+      <div id="caps"></div>
+    </div>
+
+    <script>
+      const D = window.DEMO;
+      const K = 1632 / 1920; // escala de la página dentro de la ventana
+      const tl = gsap.timeline({ paused: true });
+      const $ = (s) => document.querySelector(s);
+      const el = (tag, cls, parent, css = "") => { const e = document.createElement(tag); if (cls) e.className = cls; e.style.cssText = css; parent.appendChild(e); return e; };
+      const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+      const pad2 = (n) => String(n).padStart(2, "0");
+      const NSC = Math.max(...D.scenes.map((s) => s.n)) - 1; // escenas numeradas (sin intro ni cierre)
+      const sceneAt = (t) => D.scenes.find((s) => t >= s.start && t < s.end) || D.scenes[D.scenes.length - 1];
+      const mont = D.actions.find((a) => a.t === "montage"); // tarjetas de «Y además»
+
+      // ---------- estados (una imagen por estado) ----------
+      const IMG = {};
+      Object.keys(D.states).forEach((id, i) => {
+        const im = el("img", "st", $("#states"));
+        im.src = `assets/states/${id}.jpg`;
+        im.style.zIndex = i + 1;
+        IMG[id] = im;
+      });
+      const pageH = (id) => Math.min(D.states[id].pageH, 2200);
+
+      // ---------- cámara: precálculo secuencial para que el timeline sea buscable ----------
+      function fit(r, ph, zmax) {
+        let z = clamp(Math.min(1920 / (r[2] * 1.12), 1080 / (r[3] * 1.12)), 1, zmax);
+        const w = 1920 / z, h = 1080 / z;
+        const x0 = clamp(r[0] + r[2] / 2 - w / 2, 0, 1920 - w);
+        const y0 = clamp(r[1] + r[3] / 2 - h / 2, 0, Math.max(0, ph - h));
+        return { x0, y0, z };
+      }
+      const ORDER = { scene: 0, state: 1, cam: 2, drag: 3, cursor: 4, ring: 5 };
+      const acts = D.actions.filter((a) => a.t !== "sfx").slice().sort((a, b) => a.at - b.at || (ORDER[a.t] ?? 9) - (ORDER[b.t] ?? 9));
+
+      let camNow = { x0: 0, y0: 0, z: 1 };
+      let cur = { x: 1700, y: 950 }, curState = null, curShown = false;
+      const setZoom = (c) => ({ x: -c.x0, y: -c.y0, scale: K * c.z });
+      gsap.set("#pan", { x: 0, y: 0 });
+      gsap.set("#zoom", { scale: K });
+      gsap.set("#cursor-s", { scale: 1 / K });
+
+      function camTo(t, target, dur) {
+        const from = camNow;
+        const ease = dur < 0.05 ? "none" : "power2.inOut";
+        tl.fromTo("#pan", { x: -from.x0, y: -from.y0 }, { x: -target.x0, y: -target.y0, duration: dur, ease, immediateRender: false }, t);
+        tl.fromTo("#zoom", { scale: K * from.z }, { scale: K * target.z, duration: dur, ease, immediateRender: false }, t);
+        tl.fromTo("#cursor-s", { scale: 1 / (K * from.z) }, { scale: 1 / (K * target.z), duration: dur, ease, immediateRender: false }, t);
+        camNow = target;
+      }
+
+      // ---------- focos ----------
+      const rings = acts.filter((a) => a.t === "ring");
+      rings.forEach((r, i) => {
+        const sc = sceneAt(r.at);
+        const next = rings[i + 1];
+        let end = Math.min(r.at + r.hold, sc.end - 0.15);
+        if (next && next.at < end) end = next.at;
+        r.end = Math.max(r.at + 0.4, end);
+      });
+
+      // Cambio de pantalla sin clic (va acompañado de un salto de cámara): la anterior se desvanece, la cámara se
+      // recoloca con la ventana vacía y la nueva entra deslizándose. Con clic: fundido corto sobre la misma vista.
+      const SWAP = 0.2;
+      let firstState = true;
+      for (const a of acts) {
+        if (a.t !== "state") continue;
+        a.swap = !firstState && acts.some((c) => c.t === "cam" && c.dur < 0.05 && Math.abs(c.at - a.at) < 0.01);
+        firstState = false;
+      }
+      for (const a of acts) if (a.t === "cam" && a.dur < 0.05 && acts.some((s) => s.t === "state" && s.swap && Math.abs(s.at - a.at) < 0.01)) a.at += SWAP;
+
+      // ---------- recorrido de acciones ----------
+      acts.sort((a, b) => a.at - b.at || (ORDER[a.t] ?? 9) - (ORDER[b.t] ?? 9));
+      for (const a of acts) {
+        if (a.t === "state") {
+          const im = IMG[a.img];
+          if (a.swap && curState) {
+            tl.to(IMG[curState], { opacity: 0, duration: SWAP, ease: "power1.in" }, a.at);
+            tl.fromTo(im, { opacity: 0, x: 36 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out", immediateRender: false }, a.at + SWAP + 0.02);
+          } else {
+            tl.fromTo(im, { opacity: 0 }, { opacity: 1, duration: a.dur, ease: "power1.out", immediateRender: false }, a.at);
+            if (curState && curState !== a.img) tl.to(IMG[curState], { opacity: 0, duration: 0.01 }, a.at + a.dur);
+          }
+          curState = a.img;
+        } else if (a.t === "cam") {
+          camTo(a.at, fit(a.rect, pageH(curState), a.zmax || 1.9), a.dur);
+        } else if (a.t === "cursor" || a.t === "drag") {
+          const sc = sceneAt(a.at);
+          if (!curShown || curShown !== sc.id) {
+            // el cursor entra desde la esquina inferior derecha de lo que se ve
+            const vw = 1920 / camNow.z, vh = 1080 / camNow.z;
+            cur = { x: camNow.x0 + vw * 0.86, y: camNow.y0 + vh * 0.82 };
+            tl.set("#cursor", { x: cur.x, y: cur.y }, a.at - 0.3);
+            tl.fromTo("#cursor", { opacity: 0 }, { opacity: 1, duration: 0.25, immediateRender: false }, a.at - 0.3);
+            tl.to("#cursor", { opacity: 0, duration: 0.25 }, sc.end - 0.35);
+            curShown = sc.id;
+          }
+          if (a.t === "cursor") {
+            tl.fromTo("#cursor", { x: cur.x, y: cur.y }, { x: a.to[0], y: a.to[1], duration: a.dur, ease: "power2.inOut", immediateRender: false }, a.at);
+            cur = { x: a.to[0], y: a.to[1] };
+            if (a.click) {
+              const t = a.at + a.dur;
+              tl.to("#cursor-i", { scale: 0.82, duration: 0.08, yoyo: true, repeat: 1, transformOrigin: "10% 10%" }, t - 0.04);
+              const rp = el("div", "rip", $("#fx"), `left:${a.to[0]}px;top:${a.to[1]}px`);
+              tl.fromTo(rp, { scale: 0.3, opacity: 0.95 }, { scale: 1.7, opacity: 0, duration: 0.5, ease: "power2.out", immediateRender: false }, t);
+            }
+          } else {
+            // arrastre de la tarjeta: clon que sigue al cursor + hueco + cambio al estado «después»
+            const [fx, fy, fw, fh] = a.from, [tx, ty] = a.to;
+            const hole = el("div", "hole", $("#fx"), `left:${fx}px;top:${fy}px;width:${fw}px;height:${fh}px;background:${a.bg}`);
+            const clone = el("div", "clone", $("#fx"), `left:${fx}px;top:${fy}px;width:${fw}px;height:${fh}px`);
+            const ci = el("img", "", clone, `left:${-fx}px;top:${-fy}px`);
+            ci.src = `assets/states/${a.img}.jpg`;
+            const grab = { x: cur.x - fx, y: cur.y - fy };
+            tl.set(hole, { opacity: 1 }, a.at);
+            tl.fromTo(clone, { opacity: 1, x: 0, y: 0, rotation: 0, scale: 1 }, { scale: 1.04, rotation: 2.5, duration: 0.18, immediateRender: false }, a.at);
+            tl.to(clone, { x: tx - fx, y: ty - fy, duration: a.dur, ease: "power2.inOut" }, a.at + 0.12);
+            tl.fromTo("#cursor", { x: cur.x, y: cur.y }, { x: tx + grab.x, y: ty + grab.y, duration: a.dur, ease: "power2.inOut", immediateRender: false }, a.at + 0.12);
+            tl.to("#cursor-i", { scale: 0.85, duration: 0.08 }, a.at);
+            tl.to("#cursor-i", { scale: 1, duration: 0.1 }, a.at + a.dur + 0.12);
+            tl.to(clone, { rotation: 0, scale: 1, duration: 0.15 }, a.at + a.dur);
+            const after = IMG[a.after];
+            tl.set(after, { opacity: 1 }, a.at + a.dur + 0.12);
+            tl.set(IMG[curState], { opacity: 0 }, a.at + a.dur + 0.14);
+            tl.set([clone, hole], { opacity: 0 }, a.at + a.dur + 0.16);
+            curState = a.after;
+            cur = { x: tx + grab.x, y: ty + grab.y };
+          }
+        } else if (a.t === "ring") {
+          const [x, y, w, h] = a.rect;
+          const box = `left:${x}px;top:${y}px;width:${w}px;height:${h}px`;
+          const parts = [el("div", "ring", $("#fx"), box)];
+          if (a.spot) parts.unshift(el("div", "spot", $("#fx"), box));
+          parts.forEach((p) => {
+            tl.fromTo(p, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power1.out", immediateRender: false }, a.at);
+            tl.to(p, { opacity: 0, duration: 0.3 }, a.end);
+          });
+          tl.fromTo(parts[parts.length - 1], { scale: 1.035 }, { scale: 1, duration: 0.45, ease: "power2.out", immediateRender: false }, a.at);
+        }
+      }
+
+      // ---------- escenas: etiqueta, título de ventana, escenario oscuro ----------
+      for (const s of D.scenes) {
+        if (s.id === "intro" || s.id === "cierre") continue;
+        const n = s.n;
+        const dark = !!D.actions.find((a) => a.t === "scene" && a.id === s.id && a.dark);
+        const lab = el("div", "label" + (dark ? " dark" : ""), $("#labels"));
+        lab.innerHTML = `<span><b>${pad2(n)}</b> · ${s.label.toUpperCase()}</span><span>${pad2(n)} / ${pad2(NSC)}</span>`;
+        tl.fromTo(lab, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out", immediateRender: false }, s.start + 0.05);
+        tl.to(lab, { opacity: 0, y: -8, duration: 0.25 }, s.end - 0.25);
+        const ttl = el("div", "wtitle", $("#titles"));
+        ttl.textContent = `ImperiOS · ${s.label}`;
+        tl.fromTo(ttl, { opacity: 0 }, { opacity: 1, duration: 0.3, immediateRender: false }, s.start + 0.05);
+        tl.to(ttl, { opacity: 0, duration: 0.2 }, s.end - 0.2);
+        // pequeño «respiro» de la ventana en cada cambio de escena (no en «Y además», donde la ventana sale)
+        if (!(mont && Math.abs(mont.at - s.start) < 0.01)) tl.fromTo("#win", { scale: 1 }, { scale: 0.985, duration: 0.22, ease: "power2.in", yoyo: true, repeat: 1, immediateRender: false }, s.start - 0.15);
+        if (dark) {
+          tl.fromTo("#dark", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.inOut", immediateRender: false }, s.start - 0.1);
+          tl.to("#dark", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, s.end - 0.35);
+        }
+      }
+
+      // ---------- «Y además»: la ventana sale y entran tarjetas de otros módulos, una por palabra ----------
+      if (mont) {
+        tl.to("#win", { opacity: 0, y: -30, duration: 0.4, ease: "power2.in" }, mont.at + 0.05);
+        tl.fromTo("#mhead", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out", immediateRender: false }, mont.at + 0.3);
+        tl.to("#mhead", { opacity: 0, y: -40, duration: 0.3, ease: "power2.in" }, mont.cards[0].at - 0.15);
+        mont.cards.forEach((c, i) => {
+          const x = 288 + (i % 2) * 692, y = 100 + Math.floor(i / 2) * 433;
+          const card = el("div", "mcard", $("#montage"), `left:${x}px;top:${y}px`);
+          const bar = el("div", "mbar", card);
+          [14, 29, 44].forEach((l) => el("i", "", bar, `left:${l}px`));
+          const im = el("img", "", el("div", "mimg", card));
+          im.src = `assets/states/${c.img}.jpg`;
+          el("div", "mlab", card).textContent = c.label;
+          tl.fromTo(card, { opacity: 0, y: 50, scale: 0.92, rotation: i % 2 ? 1.5 : -1.5 },
+            { opacity: 1, y: 0, scale: 1, rotation: 0, duration: 0.55, ease: "power3.out", immediateRender: false }, c.at);
+          tl.fromTo(im, { y: 0 }, { y: -40, duration: D.duration - c.at, ease: "none", immediateRender: false }, c.at);
+        });
+      }
+
+      // ---------- intro y cierre ----------
+      const intro = D.actions.find((a) => a.t === "intro");
+      tl.fromTo("#logo", { opacity: 0, scale: 0.9, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: 0.9, ease: "power3.out", immediateRender: false }, 0.15);
+      tl.to("#logo", { opacity: 0, scale: 0.86, y: -60, duration: 0.6, ease: "power2.in" }, intro.window - 0.1);
+      tl.fromTo("#win", { opacity: 0, y: 90 }, { opacity: 1, y: 0, duration: 1.0, ease: "power3.out", immediateRender: false }, intro.window + 0.25);
+      const outro = D.actions.find((a) => a.t === "outro");
+      tl.to("#win", { opacity: 0, y: 40, duration: 0.7, ease: "power2.in" }, outro.at + 0.1);
+      if (mont) tl.to(".mcard", { opacity: 0, y: -24, duration: 0.5, stagger: 0.05, ease: "power2.in" }, outro.at + 0.1);
+      tl.fromTo("#logo", { opacity: 0, scale: 0.92, y: 30 }, { opacity: 1, scale: 1, y: -40, duration: 0.9, ease: "power3.out", immediateRender: false }, outro.at + 0.7);
+      const cierre = D.scenes.find((s) => s.id === "cierre");
+      cierre.words.slice(1).forEach(([w, t0]) => {
+        const sp = el("span", "", $("#tagline"));
+        sp.textContent = w;
+        tl.fromTo(sp, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, t0 - 0.05);
+      });
+
+      // ---------- subtítulos (palabra a palabra) ----------
+      const show = (w) => w.replace(/^Imperios/, "ImperiOS");
+      for (const s of D.scenes) {
+        if (s.id === "cierre") continue;
+        const chunks = [];
+        let c = [];
+        s.words.forEach((w, i) => {
+          c.push(w);
+          const len = c.map((x) => x[0]).join(" ").length;
+          const endSent = /[.:;?!]$/.test(w[0]), comma = /,$/.test(w[0]);
+          if (endSent || (comma && len > 26) || len > 46 || i === s.words.length - 1) { chunks.push(c); c = []; }
+        });
+        chunks.forEach((ch, i) => {
+          const box = el("div", "cap", $("#caps"));
+          const pill = el("div", "pill", box);
+          const t0 = ch[0][1] - 0.08;
+          const nxt = chunks[i + 1];
+          const t1 = nxt ? Math.min(nxt[0][1] - 0.1, ch[ch.length - 1][2] + 0.7) : ch[ch.length - 1][2] + 0.35;
+          ch.forEach(([w, ws], j) => {
+            const sp = el("span", "w", pill);
+            sp.textContent = show(w) + (j < ch.length - 1 ? " " : "");
+            tl.fromTo(sp, { opacity: 0.66 }, { opacity: 1, duration: 0.1, immediateRender: false }, ws);
+          });
+          tl.fromTo(box, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.14, immediateRender: false }, t0);
+          tl.to(box, { opacity: 0, duration: 0.12 }, Math.max(t0 + 0.3, t1));
+        });
+      }
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
