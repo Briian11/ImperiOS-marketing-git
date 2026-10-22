@@ -1,8 +1,8 @@
 """Empalma tomas de voz que ya tienen tiempos de palabra (Scribe) y une también sus tiempos.
 
 Uso: python3 tools/empalmar_vo.py <salida.wav> <salida.words.json> <audio1> <words1.json> <hasta1> <pausa1> [<audio2> <words2.json> <hasta2> <pausa2> ...]
-- <hasta>: índice de la última palabra que se queda de esa toma (-1 = todas). Si se corta antes del final,
-  el corte cae en el punto de menos energía entre esa palabra y la siguiente (para no comerse ni añadir sílabas).
+- <hasta>: índice de la última palabra que se queda de esa toma (-1 = todas), o «desde:hasta» para quedarse con un tramo.
+  Cada corte cae en el punto de menos energía entre la palabra cortada y su vecina (para no comerse ni añadir sílabas).
 - Cada trozo se iguala en sonoridad a la mediana (como tools/ensamblar_vo.py) y lleva la pausa indicada (s) detrás.
 Sirve para cambiar una frase de una locución sin regenerarla entera.
 """
@@ -31,8 +31,9 @@ def main():
     segs, words, t = [], [], 0.0
     for path, wpath, upto, pause in pieces:
         x, W = load(path), json.load(open(wpath))
-        upto = int(upto) % len(W)
-        a = max(0.0, W[0][1] - .05)
+        frm, upto = (upto.split(":") if ":" in upto else (0, upto))
+        frm, upto = int(frm), int(upto) % len(W)
+        a = cut_point(x, W[frm - 1][2] - .08, W[frm][1] + .06) if frm > 0 else max(0.0, W[0][1] - .05)
         if upto < len(W) - 1:
             b = cut_point(x, W[upto][2] - .08, W[upto + 1][1] + .06)
         else:
@@ -41,7 +42,7 @@ def main():
         f = int(.012 * SR)
         seg[:f] *= np.linspace(0, 1, f)
         seg[-f:] *= np.linspace(1, 0, f)
-        words += [[w, round(t + s - a, 3), round(t + min(e, b) - a, 3)] for w, s, e in W[:upto + 1]]
+        words += [[w, round(t + max(s, a) - a, 3), round(t + min(e, b) - a, 3)] for w, s, e in W[frm:upto + 1]]
         segs.append((seg, float(pause)))
         t += len(seg) / SR + float(pause)
     lu = [loudness(s) for s, _ in segs]
