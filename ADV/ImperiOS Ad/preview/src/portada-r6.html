@@ -2,62 +2,58 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Portada Reel — R6 Antes / después (oscura)</title>
-<!-- Portada 1080×1920 del Reel R6 en versión oscura, como la plantilla vertical-portada del kit de marca
-     (fondo negro, logo en blanco con la «i» amarilla, cursiva en amarillo #FFD500; brillo #FFC000 con transparencia).
-     Todo lo importante dentro del recorte 3:4 de la cuadrícula del perfil (y 240–1680). -->
+<title>Portada Reel — R6 Antes / después</title>
+<!-- Portada 1080×1920 del Reel R6. Mismo lenguaje que el carrusel del feed «¿Cansado de saltar entre herramientas?»:
+     arriba oscuro (el ANTES), corte en diagonal, abajo claro (el DESPUÉS con ImperiOS).
+     Logo en blanco sobre el negro; amarillo sólido #FFD500. Todo dentro del recorte 3:4 de la cuadrícula (y 240–1680). -->
 <style>
 @font-face { font-family: "Manrope"; src: url("manrope-latin-variable.woff2") format("woff2"); font-weight: 200 800; }
-:root { --ink-950:#0A0A0A; --ink-900:#1C1C1C; --ink-800:#333; --ink-500:#B0B0B0; --ink-700:#4A4A4A; --ink-600:#727272; --ink-300:#D4D4D4; --ink-200:#EBEBEB; --ink-100:#F7F7F3; --ink-50:#FAFAFA; --y:#FFD500; }
+:root { --ink-950:#0A0A0A; --ink-900:#1C1C1C; --ink-800:#333; --ink-700:#4A4A4A; --ink-600:#727272; --ink-500:#B0B0B0;
+  --ink-300:#D4D4D4; --ink-200:#EBEBEB; --ink-100:#F7F7F3; --ink-50:#FAFAFA; --y:#FFD500; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { width: 1080px; height: 1920px; overflow: hidden; }
-body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; position: relative; background: var(--ink-950); color: #fff; }
+body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; position: relative; background: var(--ink-100); color: var(--ink-950); }
 .abs { position: absolute; }
-.grid { position: absolute; inset: 0; background-image: linear-gradient(to right, rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.045) 1px, transparent 1px); background-size: 40px 40px; }
-.glow { position: absolute; right: -420px; top: -260px; width: 1100px; height: 1100px; border-radius: 50%; background: radial-gradient(circle, rgba(255,192,0,.22) 0, rgba(255,192,0,.08) 40%, rgba(255,192,0,0) 68%); }
-.logo { left: 96px; top: 290px; }
-.logo img { display: block; height: 110px; }
-.tag { left: 96px; top: 460px; display: inline-flex; padding: 14px 28px; border-radius: 999px; background: var(--y); color: var(--ink-950); font-weight: 800; font-size: 26px; letter-spacing: .14em; }
-h1 { position: absolute; left: 92px; top: 560px; right: 60px; font-weight: 800; font-size: 120px; line-height: 1.0; letter-spacing: -.045em; }
-h1 em { font-style: italic; font-weight: 500; color: var(--y); }
-.col { position: absolute; top: 960px; width: 420px; height: 420px; border-radius: 24px; padding: 26px; }
-.col .t { display: inline-block; padding: 8px 16px; border-radius: 999px; font-weight: 800; font-size: 22px; letter-spacing: .14em; }
-.mess { position: absolute; padding: 10px 16px; border-radius: 12px; background: #262626; border: 1.5px solid var(--ink-700); font-weight: 700; font-size: 22px; color: var(--ink-600); white-space: nowrap; }
-.ok { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 12px; background: var(--ink-200); font-weight: 700; font-size: 24px; color: var(--ink-950); margin-top: 12px; }
-.ok i { width: 14px; height: 14px; border-radius: 50%; background: var(--y); flex: none; box-shadow: 0 0 0 2px var(--ink-950) inset; }
-.panel { left: 96px; right: 96px; top: 1435px; height: 104px; border-radius: 20px; background: var(--y); color: var(--ink-950);
-  display: flex; align-items: center; justify-content: center; gap: 22px; font-weight: 800; font-size: 40px; letter-spacing: .02em; }
-.panel i { width: 20px; height: 20px; border-radius: 50%; background: var(--ink-950); }
-.web { left: 96px; top: 1600px; font-weight: 700; font-size: 28px; letter-spacing: .2em; color: var(--ink-500, #B0B0B0); }
+.dark { position: absolute; left: 0; right: 0; top: 0; height: 1080px; background-color: var(--ink-950); clip-path: polygon(0 0, 100% 0, 100% 91%, 0 100%);
+  background-image: linear-gradient(to right, rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.045) 1px, transparent 1px); background-size: 40px 40px; }
+.lgrid { position: absolute; inset: 0; background-image: linear-gradient(to right, rgba(10,10,10,.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(10,10,10,.055) 1px, transparent 1px); background-size: 40px 40px; }
+.logo { left: 96px; top: 280px; }
+.logo img { display: block; height: 86px; }
+.lbl { display: flex; align-items: center; gap: 16px; font-weight: 800; font-size: 26px; letter-spacing: .16em; }
+.lbl i { width: 40px; height: 6px; border-radius: 3px; background: var(--y); }
+h1 { position: absolute; left: 92px; right: 60px; font-weight: 800; letter-spacing: -.045em; line-height: 1.0; }
+h1 em { font-style: italic; font-weight: 500; }
+.chip { position: absolute; padding: 14px 22px; border-radius: 14px; background: var(--ink-900); border: 1.5px solid var(--ink-800);
+  font-weight: 700; font-size: 26px; color: var(--ink-500); white-space: nowrap; display: flex; align-items: center; gap: 10px; box-shadow: 0 16px 40px rgba(0,0,0,.4); }
+.chip b { display: inline-grid; place-items: center; min-width: 32px; height: 32px; padding: 0 8px; border-radius: 16px; background: var(--y); color: var(--ink-950); font-size: 18px; }
+.ok { position: absolute; padding: 14px 22px; border-radius: 14px; background: var(--ink-50); border: 1.5px solid var(--ink-200);
+  font-weight: 700; font-size: 26px; display: flex; align-items: center; gap: 12px; box-shadow: 0 16px 40px rgba(10,10,10,.07); white-space: nowrap; }
+.ok i { width: 14px; height: 14px; border-radius: 50%; background: var(--y); box-shadow: 0 0 0 2px var(--ink-950) inset; }
+.foot { position: absolute; left: 96px; right: 96px; top: 1615px; display: flex; justify-content: space-between; font-weight: 800; font-size: 26px; letter-spacing: .16em; }
 </style>
 </head>
 <body>
-<div class="grid"></div>
-<div class="glow"></div>
+<div class="lgrid"></div>
+<div class="dark"></div>
+
+<!-- ANTES (oscuro) -->
 <div class="abs logo"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar-blanco.svg" alt="ImperiOS"></div>
-<div class="abs tag">PARA TU INMOBILIARIA</div>
-<h1>¿Tu inmobiliaria sigue en el <em>antes?</em></h1>
-<!-- antes: caos en grises -->
-<div class="col" style="left:96px;background:var(--ink-900);border:1.5px solid var(--ink-800)">
-  <span class="t" style="background:var(--ink-800);color:var(--ink-500)">ANTES</span>
-  <div class="mess" style="left:26px;top:96px;transform:rotate(-4deg)">Llamada perdida</div>
-  <div class="mess" style="left:150px;top:160px;transform:rotate(3deg)">WhatsApp · 12</div>
-  <div class="mess" style="left:40px;top:226px;transform:rotate(2deg)">Excel</div>
-  <div class="mess" style="left:180px;top:280px;transform:rotate(-5deg)">¿Visita… jueves?</div>
-  <div class="mess" style="left:30px;top:340px;transform:rotate(-2deg)">Email · 7</div>
-</div>
-<!-- después: orden -->
-<div class="col" style="left:564px;background:var(--ink-50);box-shadow:0 30px 90px rgba(255,192,0,.18)">
-  <span class="t" style="background:var(--ink-950);color:var(--y)">DESPUÉS</span>
-  <div style="margin-top:14px">
-    <div class="ok"><i></i>Todo centralizado</div>
-    <div class="ok"><i></i>Respuesta en &lt; 1 min</div>
-    <div class="ok"><i></i>Visita en la agenda</div>
-    <div class="ok"><i></i>Recordatorio automático</div>
-  </div>
-</div>
-<div class="abs panel"><i></i>COMENTA DEMO</div>
-<div class="abs web">IMPERIOS.APP</div>
+<div class="abs lbl" style="left:96px;top:440px;color:#fff"><i></i>ANTES</div>
+<h1 style="top:500px;font-size:112px;color:#fff">Clientes que<br>se <em style="color:var(--y)">enfrían.</em></h1>
+<div class="chip" style="left:96px;top:760px;transform:rotate(-4deg)">Llamada perdida<b>3</b></div>
+<div class="chip" style="left:430px;top:745px;transform:rotate(3deg)">WhatsApp<b>12</b></div>
+<div class="chip" style="left:720px;top:770px;transform:rotate(-2deg)">Excel</div>
+<div class="chip" style="left:170px;top:855px;transform:rotate(2deg)">¿Visita… jueves?</div>
+<div class="chip" style="left:520px;top:860px;transform:rotate(-5deg)">Sin responder</div>
+
+<!-- DESPUÉS (claro) -->
+<div class="abs lbl" style="left:96px;top:1120px"><i></i>DESPUÉS · CON IMPERIOS</div>
+<h1 style="top:1180px;font-size:112px">Todo en un<br><em>mismo lugar.</em></h1>
+<div class="ok" style="left:96px;top:1420px"><i></i>Respuesta en &lt; 1 min</div>
+<div class="ok" style="left:470px;top:1420px"><i></i>Visita en agenda</div>
+<div class="ok" style="left:96px;top:1496px"><i></i>Recordatorio automático</div>
+<div class="ok" style="left:500px;top:1496px"><i></i>Todo centralizado</div>
+<div class="foot"><span style="color:var(--ink-600)">IMPERIOS.APP</span><span>COMENTA DEMO ↗</span></div>
 <script>
 window.ready = document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => i.onload = r))));
 </script>
