@@ -1,7 +1,7 @@
 # Reel R6 · «Antes / después» — guion v2 (borrador para aprobar, 22/10/2026)
 
 Recorrido de un cliente desde que escribe hasta la visita, primero con herramientas sueltas y luego con ImperiOS.
-Duración estimada: ~28 s (antes ~13 s · después ~11 s · cierre ~4 s). Voz Cristina, eleven_v4, plan Starter.
+Duración estimada: ~30 s (antes ~13 s · después ~13 s · cierre ~4 s). Voz Cristina, eleven_v4, plan Starter.
 Estilo: «ANTES» desaturado y desordenado (grises, ventanas que se amontonan); «DESPUÉS» con la paleta de marca y todo ordenado.
 Sin marcas de portales (se dice «el portal»). Solo funciones que ya enseñan los anuncios v4.
 
@@ -15,15 +15,17 @@ Sin marcas de portales (se dice «el portal»). Solo funciones que ya enseñan l
 | La visita la apuntas en una agenda. | Una nota tipo pósit: «Visita jueves 17:00» |
 | El recordatorio se te olvida… y el cliente no se presenta. | Campana tachada · silla vacía · «No se presentó» |
 
-## DESPUÉS
+## DESPUÉS (v3, con los cambios de Brian)
 
 | Voz | En pantalla |
 |---|---|
-| Después: con Imperios, el cliente entra directo a tu panel, junto a todos los demás. | Etiqueta **DESPUÉS** · todo se ordena de golpe: panel de leads con su origen |
-| La inteligencia artificial le envía por WhatsApp las propiedades que encajan. | Match con IA → chat genérico «Enviado automáticamente» |
-| Toda la información, en un solo sitio. | Ficha del cliente con zona, presupuesto y conversación |
-| La visita, en la agenda del equipo. | Agenda con la visita y el agente asignado |
-| Y el recordatorio le llega solo. | «Recordatorio automático ✓» · «Visita confirmada» |
+| Después: con Imperios, el cliente entra directo a tu panel. Da igual de qué portal venga: todo centralizado. | Etiqueta **DESPUÉS** · todo se ordena de golpe: leads de varios portales entrando en un mismo panel |
+| En menos de un minuto, la inteligencia artificial le responde por WhatsApp sobre la propiedad que ha consultado. | Cronómetro que se para antes de 1:00 · chat genérico con la respuesta «Enviado automáticamente» |
+| El cliente no se enfría. | Termómetro / indicador que se mantiene en «caliente» |
+| La conversación y la visita, en el mismo sitio. | Ficha del cliente con la visita ya en la agenda del equipo |
+| Y el recordatorio le llega solo, con la ubicación, el día y la hora. | Mensaje de recordatorio: 📍 dirección · jueves · 17:00 → «Visita confirmada» |
+
+Nota: «en menos de un minuto» es una cifra que verá el público; solo se usa si la respuesta automática la cumple siempre.
 
 ## CIERRE
 
