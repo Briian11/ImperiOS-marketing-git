@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Portada Reel — R6 opción B</title>
 <!-- Portada 1080×1920 del Reel R6, opción B: «Mismo cliente. Otro final.» Fondo oscuro, logo en blanco,
-     interruptor ANTES / DESPUÉS y las dos fichas del mismo cliente (no se presentó / visita confirmada).
+     las dos fichas etiquetadas «ANTES · sin ImperiOS» y «DESPUÉS · con ImperiOS» del mismo cliente (no se presentó / visita confirmada).
      Amarillo sólido #FFD500. Todo dentro del recorte 3:4 de la cuadrícula del perfil (y 240–1680). -->
 <style>
 @font-face { font-family: "Manrope"; src: url("manrope-latin-variable.woff2") format("woff2"); font-weight: 200 800; }
@@ -29,6 +29,8 @@ h1 em { font-style: italic; font-weight: 500; color: var(--y); }
 .av { width: 68px; height: 68px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 24px; flex: none; }
 .st { margin-left: auto; font-size: 22px; font-weight: 800; letter-spacing: .1em; padding: 10px 16px; border-radius: 12px; white-space: nowrap; }
 .sub { margin-top: 18px; font-size: 24px; font-weight: 600; display: flex; align-items: center; gap: 12px; }
+.sec { left: 96px; display: flex; align-items: center; gap: 18px; font-weight: 700; font-size: 32px; }
+.sec .pl { padding: 10px 22px; border-radius: 999px; font-weight: 800; font-size: 28px; letter-spacing: .14em; }
 .foot { position: absolute; left: 96px; right: 96px; top: 1615px; display: flex; justify-content: space-between; font-weight: 800; font-size: 26px; letter-spacing: .16em; }
 </style>
 </head>
@@ -38,25 +40,27 @@ h1 em { font-style: italic; font-weight: 500; color: var(--y); }
 <div class="abs lbl" style="left:96px;top:440px;color:#fff"><i></i>PARA TU INMOBILIARIA</div>
 <h1>Mismo cliente.<br><em>Otro final.</em></h1>
 
-<!-- interruptor ANTES / DESPUÉS -->
-<div class="abs toggle"><span style="color:var(--ink-600)">ANTES</span><span style="background:var(--y);color:var(--ink-950);box-shadow:0 10px 30px rgba(255,213,0,.25)">DESPUÉS</span></div>
-
-<!-- ANTES: no se presentó -->
-<div class="card" style="top:990px;background:var(--ink-900);border:1.5px solid var(--ink-800);transform:rotate(-1.5deg)">
+<!-- ANTES · sin ImperiOS: no se presentó -->
+<div class="abs sec" style="top:800px"><span class="pl" style="background:var(--ink-800);color:var(--ink-500)">ANTES</span><span style="color:var(--ink-500)">sin ImperiOS</span></div>
+<div class="card" style="top:870px;background:var(--ink-900);border:1.5px solid var(--ink-800)">
   <div class="row">
     <div class="av" style="background:var(--ink-800);color:var(--ink-500)">AM</div>
     <div><div style="font-size:32px;font-weight:800;color:var(--ink-500)">A. M. · Ático Chamberí</div><div style="font-size:22px;color:var(--ink-600);font-weight:600;margin-top:2px">Visita jueves 17:00</div></div>
-    <span class="st" style="background:var(--ink-800);color:var(--ink-500)">NO SE PRESENTÓ</span>
+    <span class="st" style="background:var(--ink-800);color:var(--ink-500)">✕ NO SE PRESENTÓ</span>
   </div>
   <div class="sub" style="color:var(--ink-600)">Respondido tarde · sin recordatorio</div>
 </div>
 
-<!-- DESPUÉS: visita confirmada -->
-<div class="card" style="top:1240px;background:var(--ink-50);color:var(--ink-950);border-left:12px solid var(--y);box-shadow:0 30px 90px rgba(0,0,0,.5);transform:rotate(1deg)">
+<!-- flecha del antes al después -->
+<svg class="abs" style="left:520px;top:1068px" width="40" height="70" viewBox="0 0 40 70"><path d="M20 2v60M6 48l14 14 14-14" stroke="#FFD500" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+<!-- DESPUÉS · con ImperiOS: visita confirmada -->
+<div class="abs sec" style="top:1160px"><span class="pl" style="background:var(--y);color:var(--ink-950)">DESPUÉS</span><span style="color:#fff">con ImperiOS</span></div>
+<div class="card" style="top:1230px;background:var(--ink-50);color:var(--ink-950);border-left:12px solid var(--y);box-shadow:0 30px 90px rgba(0,0,0,.5)">
   <div class="row">
     <div class="av" style="background:var(--y)">AM</div>
     <div><div style="font-size:32px;font-weight:800">A. M. · Ático Chamberí</div><div style="font-size:22px;color:var(--ink-600);font-weight:600;margin-top:2px">Visita jueves 17:00</div></div>
-    <span class="st" style="background:var(--y);color:var(--ink-950)">CONFIRMADA ✓</span>
+    <span class="st" style="background:var(--y);color:var(--ink-950)">✓ CONFIRMADA</span>
   </div>
   <div class="sub" style="color:var(--ink-700)">Respuesta en &lt; 1 min · recordatorio automático</div>
 </div>
