@@ -49,9 +49,11 @@ body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-s
 
   <!-- ================= GANCHO: «Así se pierde un cliente… y así se gana.» (legible desde el fotograma 0) ================= -->
   <div class="half" id="gancho">
-    <div class="kt" id="kh" style="top:470px;font-size:124px;line-height:1.02"></div>
-    <div class="chip" id="hX" style="left:96px;top:1010px;background:var(--ink-200);color:var(--ink-600);transform:rotate(-2deg)">✕ No se presentó</div>
-    <div class="chip" id="hOk" style="left:470px;top:1010px;background:var(--y);border-color:var(--y);transform:rotate(2deg)">✓ Visita confirmada</div>
+    <img id="hLogo" src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" class="abs" style="left:96px;top:300px;height:84px" alt="ImperiOS">
+    <div class="abs" id="hTag" style="left:96px;top:430px"><span style="display:inline-flex;align-items:center;gap:14px;padding:14px 26px;border-radius:999px;background:var(--ink-950);color:#fff;font-weight:800;font-size:26px;letter-spacing:.14em"><span style="width:12px;height:14px;background:var(--y);border-radius:2px"></span>CRM PARA INMOBILIARIAS</span></div>
+    <div class="kt" id="kh" style="top:530px;font-size:124px;line-height:1.02"></div>
+    <div class="chip" id="hX" style="left:96px;top:1050px;background:var(--ink-200);color:var(--ink-600);transform:rotate(-2deg)">✕ No se presentó</div>
+    <div class="chip" id="hOk" style="left:470px;top:1050px;background:var(--y);border-color:var(--y);transform:rotate(2deg)">✓ Visita confirmada</div>
   </div>
 
   <!-- ================= ANTES ================= -->
@@ -240,7 +242,7 @@ function render(t) {
     if (!gan.dataset.built) { gan.dataset.built = 1; window.KH = block($('#kh'), [[['Así'], ['se'], ['pierde', 'it']], [['un'], ['cliente…']], [['y'], ['así'], ['se'], ['gana.', 'it']]]); }
     const [hp, hg] = B.h;
     KH.forEach((w, j) => css(w, { opacity: 1, transform: 'none', filter: 'none', color: j === 2 ? `rgb(${Math.round(10 + 104 * k(t, hp, hp + .4))},${Math.round(10 + 104 * k(t, hp, hp + .4))},${Math.round(10 + 104 * k(t, hp, hp + .4))})` : '' }));
-    css($('#kh'), { opacity: 1 - gOut, transform: `translateY(${-gOut * 60}px)`, filter: gOut > 0 ? `blur(${gOut * 12}px)` : 'none' });
+    [$('#kh'), $('#hLogo'), $('#hTag')].forEach(el => css(el, { opacity: 1 - gOut, transform: `translateY(${-gOut * 60}px)`, filter: gOut > 0 ? `blur(${gOut * 12}px)` : 'none' }));
     if (t > hg + .1 && t < a1 - .3) { const r = rectOf(KH[8]); css($('#ul'), { opacity: 1, left: r.x + 'px', top: (r.y + r.h - 6) + 'px', width: r.w + 'px', transform: `scaleX(${k(t, hg + .1, hg + .45)})` }); }
     const px = k(t, hp, hp + .35, E.ob2), pk = k(t, hg, hg + .35, E.ob2);
     css($('#hX'), { opacity: 1 - gOut, transform: `rotate(-2deg) scale(${1 + .08 * Math.sin(px * Math.PI)})` });
