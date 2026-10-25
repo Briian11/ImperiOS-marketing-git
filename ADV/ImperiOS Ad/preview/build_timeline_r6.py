@@ -10,7 +10,7 @@ import subprocess
 import sys
 
 TEMPO = 1.07
-PRE = 0.3      # silencio antes de la voz (la etiqueta ANTES ya está en pantalla)
+PRE = 0.3      # silencio antes de la voz (el gancho ya está en pantalla)
 TAIL = 2.6     # «Comenta DEMO» + IMPERIOS.APP tras la última palabra
 
 w_path, audio, out, vo_out = sys.argv[1:5]
@@ -35,6 +35,7 @@ def find(word, start=0):
     raise KeyError(word)
 
 
+pie0, gan = find("pierde"), find("gana")      # gancho «Así se pierde un cliente… y así se gana.»
 ant, tar, lue = find("Antes"), find("Tardas"), find("Luego")
 inf = find("información", lue)
 pie = find("pierde", inf)
@@ -57,7 +58,7 @@ com = find("Comenta", tu)
 B = {"a": [S(ant), S(tar) - .1, S(lue) - .1, S(vis - 1) - .1, S(rec - 1) - .1],
      "d0": S(des) - .1,
      "d": [S(con) - .1, S(en_) - .1, S(el3) - .1, S(cnv - 1) - .1, S(y5) - .1],
-     "c0": S(tu) - .15}
+     "c0": S(tu) - .15, "h": [S(pie0), S(gan)]}
 B["logo"] = S(com) - .35
 end = E(len(W) - 1) + TAIL
 a, d, c0 = B["a"], B["d"], B["c0"]
@@ -73,7 +74,9 @@ B["wt"] = {
 
 # ---- efectos (t, sfx, dB, pan, hpf) ----
 lg = B["logo"]
-cues = [(a[0] + .3, "pop_dock_01", -12, -.3, 0), (a[0] + .35, "click_ui_01", -16, -.3, 0)]
+cues = [(0.0, "hit_soft_03", -12, 0, 0), (S(pie0), "hit_soft_01", -13, -.3, 0), (S(pie0) + .05, "glitch_wake", -19, -.3, 0),
+        (S(gan), "pop_dock_03", -11, .3, 0), (S(gan) + .05, "shimmer_glow", -15, .3, 600), (a[0] - .25, "whoosh_low_wipe", -11, 0, 0)]
+cues += [(a[0] + .3, "pop_dock_01", -12, -.3, 0), (a[0] + .35, "click_ui_01", -16, -.3, 0)]
 cues += [(a[1] + .25 + i * .32, ["pop_dock_02", "click_ui_02", "pop_dock_03", "click_ui_03", "pop_dock_01", "click_ui_01", "pop_dock_02", "click_ui_02"][i], -15, (i % 3 - 1) * .5, 0) for i in range(8)]
 cues += [(a[2] - .1, "whoosh_short_02", -14, .5, 300), (a[2] + .9, "whoosh_long_01", -16, .6, 300),
          (S(pie), "suck_reverse", -14, 0, 200), (S(pie) + .1, "glitch_wake", -18, 0, 0),
@@ -97,9 +100,9 @@ cues += [(c0 - .2, "whoosh_long_01", -14, 0, 300), (lg - .35, "riser_grid", -19,
          (S(com) + .35, "shimmer_glow", -15, 0, 600)]
 B["cues"] = [[round(x[0], 3), *x[1:]] for x in cues]
 # música: ANTES con el filtro oscuro y hats (tensión), groove desde el DESPUÉS, acorde final bajo el logo
-B.update({"s1": 0.0, "s2": B["d0"], "s3": 0.3, "s5": B["d0"], "s6": c0})
+B.update({"s1": 0.0, "s2": B["d0"], "s3": a[0], "s5": B["d0"], "s6": c0})
 
-B = {k: (round(v, 3) if isinstance(v, float) else ([round(x, 3) for x in v] if k in ("a", "d") else v)) for k, v in B.items()}
+B = {k: (round(v, 3) if isinstance(v, float) else ([round(x, 3) for x in v] if k in ("a", "d", "h") else v)) for k, v in B.items()}
 B["end"] = round(end, 2)
 tl = {"fps": 60, "duration": B["end"], "vo_offset": PRE, "beats": B,
       "note": f"build_timeline_r6.py: VO {w_path} a atempo {TEMPO}; offset {PRE} s."}

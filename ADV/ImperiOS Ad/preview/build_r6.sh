@@ -6,7 +6,10 @@ cd "$(dirname "$0")"
 L=../assets_in/vo/starter
 O=out/reels/r6; mkdir -p $O
 export TL=timeline-r6.json PAGE=src/reel-r6.html VARIANT=A
-python3 build_timeline_r6.py $L/reel-r6-antes-despues.words.json $L/reel-r6-antes-despues.mp3 $TL $O/vo.wav
+# gancho (25/10/2026): «Así se pierde un cliente… y así se gana.» delante de «Antes: …»
+python3 ../tools/empalmar_vo.py $L/reel-r6-v2.wav $L/reel-r6-v2.words.json $L/reel-r6-gancho.mp3 $L/reel-r6-gancho.words.json -1 0.45 \
+  $L/reel-r6-antes-despues.mp3 $L/reel-r6-antes-despues.words.json -1 0
+python3 build_timeline_r6.py $L/reel-r6-v2.words.json $L/reel-r6-v2.wav $TL $O/vo.wav
 ffmpeg -hide_banner -loglevel error -y -i $O/vo.wav -af "highpass=f=80,acompressor=threshold=0.035:ratio=3:attack=3:release=80:knee=4:makeup=2.2" -ac 1 -c:a pcm_f32le $O/vo_proc.wav
 VO=$O/vo_proc.wav VO_OFFSET=$(python3 -c "import json;print(json.load(open('$TL'))['vo_offset'])") python3 audio_mix.py $O/audio
 ./master_vo.sh $O/audio
