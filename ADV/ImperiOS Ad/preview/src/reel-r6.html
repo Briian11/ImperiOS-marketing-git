@@ -59,10 +59,27 @@ body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-s
   <!-- ================= PORTÁTIL: entra desde abajo y la cámara se mete en su pantalla (paso del gancho al ANTES) ================= -->
   <div class="half" id="lap" style="transform-origin:540px 900px">
     <div class="abs" style="left:110px;top:620px;width:860px;height:560px;border-radius:30px;background:#0A0A0A;box-shadow:0 60px 140px rgba(10,10,10,.35), inset 0 0 0 2px #333">
-      <div class="abs" id="lapScr" style="left:22px;top:22px;width:816px;height:516px;border-radius:12px;overflow:hidden;background:var(--ink-100)">
+      <div class="abs" id="lapScr" style="left:22px;top:22px;width:816px;height:516px;border-radius:12px;overflow:hidden;background:#E2E2E0">
         <!-- réplica del fotograma 1080×1920 del ANTES, escalada 1/4,1 alrededor del centro de la pantalla (540, 900):
              al terminar el zoom (×4,1) coincide con la escena real -->
         <div class="abs" style="left:-132px;top:-642px;width:1080px;height:1920px;transform-origin:540px 900px;transform:scale(.2439);filter:grayscale(1)">
+          <!-- marco de la aplicación (fuera del encuadre final; solo se ve durante el zoom) -->
+          <div class="abs" style="left:-1140px;top:-170px;width:3360px;height:150px;background:#D4D4D4;display:flex;align-items:center;gap:40px;padding:0 60px">
+            <span style="width:44px;height:44px;border-radius:50%;background:#B0B0B0"></span><span style="width:44px;height:44px;border-radius:50%;background:#B0B0B0"></span><span style="width:44px;height:44px;border-radius:50%;background:#B0B0B0"></span>
+            <span style="margin-left:60px;font-weight:800;font-size:64px;color:#4A4A4A">Bandeja de entrada</span>
+            <span style="margin-left:auto;padding:14px 36px;border-radius:40px;background:#0A0A0A;color:#fff;font-weight:800;font-size:56px">37 sin leer</span></div>
+          <div class="abs" style="left:-1140px;top:-20px;width:1100px;height:2000px;background:#E2E2E0;padding:60px 70px;display:flex;flex-direction:column;gap:56px;font-weight:700;font-size:70px;color:#4A4A4A">
+            <div style="display:flex;justify-content:space-between;color:#0A0A0A">Bandeja<b>37</b></div><div style="display:flex;justify-content:space-between">Portal<b>12</b></div>
+            <div style="display:flex;justify-content:space-between">WhatsApp<b>18</b></div><div style="display:flex;justify-content:space-between">Email<b>7</b></div>
+            <div style="display:flex;justify-content:space-between">Llamadas<b>3</b></div><div>visitas_final2.xlsx</div><div>Notas</div><div>Pósits</div></div>
+          <div class="abs" style="left:1120px;top:-20px;width:1120px;height:2000px;background:#E2E2E0;padding:40px 50px;display:flex;flex-direction:column;gap:34px">
+            <div class="card" style="position:relative;padding:34px 40px;font-size:56px;font-weight:700">Llamada perdida<div style="font-size:42px;color:#727272;margin-top:6px">hace 12 min</div></div>
+            <div class="card" style="position:relative;padding:34px 40px;font-size:56px;font-weight:700">WhatsApp · ¿Me llamas?<div style="font-size:42px;color:#727272;margin-top:6px">hace 25 min</div></div>
+            <div class="card" style="position:relative;padding:34px 40px;font-size:56px;font-weight:700">Email · Solicitud de visita<div style="font-size:42px;color:#727272;margin-top:6px">hace 1 h</div></div>
+            <div class="card" style="position:relative;padding:34px 40px;font-size:56px;font-weight:700">Portal · Nuevo contacto<div style="font-size:42px;color:#727272;margin-top:6px">hace 2 h</div></div>
+            <div class="card" style="position:relative;padding:34px 40px;font-size:56px;font-weight:700">WhatsApp · ¿Hay fotos?<div style="font-size:42px;color:#727272;margin-top:6px">ayer</div></div>
+            <div class="card" style="position:relative;padding:34px 40px;font-size:56px;font-weight:700">Llamada perdida<div style="font-size:42px;color:#727272;margin-top:6px">ayer</div></div></div>
+          <div class="abs" style="left:0;top:-20px;width:1080px;height:2000px;background:var(--ink-100)"></div>
           <div class="full grid-l"></div>
           <div class="pill" style="background:var(--ink-200);color:var(--ink-700)">ANTES</div>
           <div class="card" id="a1r" style="left:96px;top:640px;width:888px;padding:24px 28px;display:flex;align-items:center;gap:22px">
@@ -114,6 +131,46 @@ body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-s
     <!-- a5: el recordatorio olvidado → no se presenta -->
     <svg class="abs" id="a5b" style="left:760px;top:620px" width="140" height="140" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 20a2 2 0 0 0 4 0" fill="#FAFAFA" stroke="#0A0A0A" stroke-width="1.6" stroke-linejoin="round"/><path id="a5x" d="M3 3l18 18" stroke="#0A0A0A" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="26" stroke-dashoffset="26"/></svg>
     <div class="abs" id="a5s" style="left:150px;top:1110px;padding:20px 36px;border:6px solid var(--ink-950);border-radius:14px;font-weight:800;font-size:52px;letter-spacing:.06em;transform:rotate(-6deg)">NO SE PRESENTÓ</div>
+  </div>
+
+  <!-- ================= PORTÁTIL 2: ImperiOS en pantalla; la cámara entra en el panel de clientes (paso al DESPUÉS) ================= -->
+  <div class="half" id="lap2" style="transform-origin:540px 900px">
+    <div class="abs" style="left:110px;top:620px;width:860px;height:560px;border-radius:30px;background:#0A0A0A;box-shadow:0 60px 140px rgba(10,10,10,.35), inset 0 0 0 2px #333">
+      <div class="abs" id="lapScr2" style="left:22px;top:22px;width:816px;height:516px;border-radius:12px;overflow:hidden;background:var(--ink-100)">
+        <!-- réplica del fotograma 1080×1920 del ANTES, escalada 1/4,1 alrededor del centro de la pantalla (540, 900):
+             al terminar el zoom (×4,1) coincide con la escena real -->
+        <div class="abs" style="left:-132px;top:-642px;width:1080px;height:1920px;transform-origin:540px 900px;transform:scale(.2439)">
+          <!-- ImperiOS: barra superior y menú lateral (fuera del encuadre final; solo se ven durante el zoom) -->
+          <div class="abs" style="left:-1140px;top:-170px;width:3360px;height:150px;background:#FAFAFA;border-bottom:3px solid #EBEBEB;display:flex;align-items:center;gap:40px;padding:0 60px 0 1180px">
+            <span style="padding:20px 50px;border-radius:40px;background:#EBEBEB;color:#727272;font-weight:600;font-size:56px;width:1400px">Buscar cliente o propiedad…</span>
+            <span style="margin-left:auto;width:100px;height:100px;border-radius:50%;background:var(--y);display:grid;place-items:center;font-weight:800;font-size:44px">LS</span></div>
+          <div class="abs" style="left:-1140px;top:-170px;width:1100px;height:2150px;background:#0A0A0A;padding:60px 70px;display:flex;flex-direction:column;gap:50px;font-weight:700;font-size:68px;color:#C0C0C0">
+            <img src="../../assets_in/brand-kit/assets/logo-imperios-navbar-blanco.svg" style="height:150px;align-self:flex-start;margin-bottom:40px" alt="">
+            <div style="padding:26px 40px;border-radius:30px;background:var(--y);color:#0A0A0A">Clientes</div><div style="padding:0 40px">Propiedades</div><div style="padding:0 40px">Match con IA</div>
+            <div style="padding:0 40px">Agenda</div><div style="padding:0 40px">Campañas</div><div style="padding:0 40px">Equipo</div></div>
+          <div class="abs" style="left:1120px;top:-20px;width:1120px;height:2000px;background:#F7F7F3;padding:40px 50px;display:flex;flex-direction:column;gap:40px">
+            <div class="card" style="position:relative;padding:40px 44px"><div class="lbl" style="font-size:42px">MATCH CON IA</div><div style="font-size:60px;font-weight:800;margin-top:14px">Ático · Chamberí</div><div style="font-size:46px;color:#727272;margin-top:6px">encaja con A. M.</div></div>
+            <div class="card" style="position:relative;padding:40px 44px"><div class="lbl" style="font-size:42px">AGENDA · HOY</div><div style="margin-top:20px;padding:30px 36px;border-radius:24px;background:#0A0A0A;color:#fff;border-left:16px solid var(--y);font-size:52px;font-weight:800">17:00 · Visita</div></div>
+            <div class="card" style="position:relative;padding:40px 44px"><div class="lbl" style="font-size:42px">RECORDATORIOS</div><div style="font-size:56px;font-weight:700;margin-top:14px">Enviados automáticamente ✓</div></div></div>
+          <div class="abs" style="left:0;top:-20px;width:1080px;height:2000px;background:var(--ink-100)"></div>
+          <div class="full grid-l"></div>
+          <div class="pill" style="background:var(--y);color:var(--ink-950)">DESPUÉS</div>
+          <div class="abs"  style="left:80px;top:620px;width:920px">
+            <div style="background:var(--ink-950);border:1.5px solid var(--ink-800);border-radius:28px;color:#fff;padding:30px 26px;box-shadow:0 40px 100px rgba(10,10,10,.30)">
+              <div style="display:flex;align-items:center;gap:14px;font-weight:800;font-size:22px;letter-spacing:.16em;color:var(--y);margin:0 8px 18px"><span style="width:14px;height:14px;border-radius:50%;background:var(--y)"></span>TODOS TUS CLIENTES</div>
+              <div class="row" style="background:var(--ink-900);border:1.5px solid var(--ink-700)"><div class="av" style="background:var(--y);color:var(--ink-950)">AM</div><div><div style="font-size:30px;font-weight:700">Ático · Chamberí</div><div class="meta">3 hab · 350–400 k€</div></div><span class="src" style="color:#fff">Portal</span><span style="margin-left:12px;font-size:19px;font-weight:800;letter-spacing:.1em;color:var(--ink-950);background:var(--y);padding:9px 12px;border-radius:10px">NUEVO</span></div>
+              <div class="row"><div class="av" style="background:var(--ink-800)">LG</div><div><div style="font-size:28px;font-weight:700">Piso · Retiro</div><div class="meta">2 hab · 280–320 k€</div></div><span class="src">Portal</span></div>
+              <div class="row"><div class="av" style="background:var(--ink-800)">JR</div><div><div style="font-size:28px;font-weight:700">Chalet · Pozuelo</div><div class="meta">4 hab · 650–720 k€</div></div><span class="src">Web</span></div>
+              <div class="row"><div class="av" style="background:var(--ink-800)">SP</div><div><div style="font-size:28px;font-weight:700">Piso · Salamanca</div><div class="meta">2 hab · 450–500 k€</div></div><span class="src">WhatsApp</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="abs" style="left:422px;top:6px;width:16px;height:16px;border-radius:50%;background:#1C1C1C"></div>
+    </div>
+    <div class="abs" style="left:40px;top:1180px;width:1000px;height:34px;border-radius:0 0 26px 26px;background:linear-gradient(#E4E4E2,#B8B8B6);box-shadow:0 30px 60px rgba(10,10,10,.25)">
+      <div class="abs" style="left:430px;top:0;width:140px;height:12px;border-radius:0 0 12px 12px;background:#A6A6A4"></div>
+    </div>
   </div>
 
   <!-- ================= DESPUÉS ================= -->
@@ -232,7 +289,7 @@ const HD = [   // DESPUÉS
   [[['Todo'], ['en'], ['el']], [['mismo'], ['sitio.', 'it']]],
   [[['Recordatorio']], [['automático.', 'it']]],
 ];
-let B = { h: [0.9, 2.8], lap: [3.5, 4.0, 4.8], a: [4.9, 8, 12.2, 16.5, 18.6], d0: 22.9, d: [18.6, 25.4, 30.9, 32.8, 35.6], c0: 39.9, logo: 42, end: 47, wt: {} };
+let B = { h: [0.9, 2.8], lap: [3.5, 4.0, 4.8], lap2: [21, 22, 22.8], a: [4.9, 8, 12.2, 16.5, 18.6], d0: 22.9, d: [18.6, 25.4, 30.9, 32.8, 35.6], c0: 39.9, logo: 42, end: 47, wt: {} };
 window.setBeats = b => { B = Object.assign(B, b); };
 window.setVariant = () => {};
 
@@ -282,6 +339,15 @@ function render(t) {
       filter: z > .02 && z < .98 ? `blur(${Math.sin(z * Math.PI) * 3}px)` : 'none' });
   }
 
+  // ===== PORTÁTIL 2: ImperiOS en pantalla; la cámara entra en el panel de clientes =====
+  const [M0, M1, M2] = B.lap2, lap2 = $('#lap2');
+  lap2.style.display = t > M0 - .05 && t < M2 + .05 ? 'block' : 'none';
+  if (lap2.style.display === 'block') {
+    const up = k(t, M0, M0 + .5, E.oc), z = k(t, M1, M2, E.ioc);
+    css(lap2, { opacity: k(t, M0, M0 + .15), transform: `translateY(${(1 - up) * 900}px) scale(${(.85 + .15 * up) * (1 + 3.1 * z)})`,
+      filter: z > .02 && z < .98 ? `blur(${Math.sin(z * Math.PI) * 3}px)` : 'none' });
+  }
+
   // ===== ANTES: en grises, con un leve temblor que crece con el caos =====
   const antes = $('#antes'), aOut = k(t, B.d0 - .15, B.d0 + .35, E.ic);
   antes.style.display = t > L2 - .02 && t < B.d0 + .4 ? 'block' : 'none';
@@ -322,18 +388,17 @@ function render(t) {
 
   // ===== DESPUÉS: color, orden =====
   const desp = $('#despues');
-  desp.style.display = t > B.d0 - .1 && t < B.c0 + .4 ? 'block' : 'none';
+  desp.style.display = t > M2 - .02 && t < B.c0 + .4 ? 'block' : 'none';
   if (desp.style.display === 'block') {
-    const dIn = k(t, B.d0 - .1, B.d0 + .35, E.oc), dOut = k(t, B.c0 - .2, B.c0 + .3, E.ic);
-    css(desp, { opacity: dIn * (1 - dOut), transform: `scale(${1.06 - .06 * dIn + dOut * .06})`, filter: dIn < 1 || dOut > 0 ? `blur(${(1 - dIn) * 14 + dOut * 14}px)` : 'none' });
-    show($('#pD'), k(t, B.d0, B.d0 + .35, E.ob2), 20);
+    const dOut = k(t, B.c0 - .2, B.c0 + .3, E.ic);   // entra sin fundido: viene de la pantalla del portátil
+    css(desp, { opacity: 1 - dOut, transform: `scale(${1 + dOut * .06})`, filter: dOut > 0 ? `blur(${dOut * 14}px)` : 'none' });
+    show($('#pD'), 1, 20);
     headline('d', $('#kd'), HD, t, B.d, 'hd');
     // d1: los clientes de todos los portales entran en el mismo panel
-    const p1 = k(t, d1 + .1, d1 + .6, E.oc), o1 = k(t, d2 - .25, d2 + .1, E.ic);
+    const p1 = 1, o1 = k(t, d2 - .25, d2 + .1, E.ic);   // ya visible al entrar en la pantalla del portátil
     show($('#d1'), p1 * (1 - o1), 80);
     $$('.d1r').forEach((r, i) => {
-      const t0 = d1 + .4 + i * .3, p = k(t, t0, t0 + .45, E.ob);
-      css(r, { opacity: k(t, t0, t0 + .05), transform: `translateX(${(1 - p) * (i % 2 ? 700 : -700)}px)` });
+      css(r, { opacity: 1, transform: 'none' });
     });
     // d2: chat; la IA responde y el cronómetro se para antes del minuto
     const p2 = k(t, d2 - .05, d2 + .4, E.ob), o2 = k(t, d4 - .25, d4 + .1, E.ic);
