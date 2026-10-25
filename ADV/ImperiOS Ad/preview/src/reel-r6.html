@@ -56,6 +56,30 @@ body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-s
     <div class="chip" id="hOk" style="left:470px;top:1050px;background:var(--y);border-color:var(--y);transform:rotate(2deg)">✓ Visita confirmada</div>
   </div>
 
+  <!-- ================= PORTÁTIL: entra desde abajo y la cámara se mete en su pantalla (paso del gancho al ANTES) ================= -->
+  <div class="half" id="lap" style="transform-origin:540px 900px">
+    <div class="abs" style="left:110px;top:620px;width:860px;height:560px;border-radius:30px;background:#0A0A0A;box-shadow:0 60px 140px rgba(10,10,10,.35), inset 0 0 0 2px #333">
+      <div class="abs" id="lapScr" style="left:22px;top:22px;width:816px;height:516px;border-radius:12px;overflow:hidden;background:var(--ink-100)">
+        <!-- réplica del fotograma 1080×1920 del ANTES, escalada 1/4,1 alrededor del centro de la pantalla (540, 900):
+             al terminar el zoom (×4,1) coincide con la escena real -->
+        <div class="abs" style="left:-132px;top:-642px;width:1080px;height:1920px;transform-origin:540px 900px;transform:scale(.2439);filter:grayscale(1)">
+          <div class="full grid-l"></div>
+          <div class="pill" style="background:var(--ink-200);color:var(--ink-700)">ANTES</div>
+          <div class="card" id="a1r" style="left:96px;top:640px;width:888px;padding:24px 28px;display:flex;align-items:center;gap:22px">
+            <div class="av" style="background:var(--ink-300)">AM</div>
+            <div style="flex:1"><div class="lbl">NUEVO MENSAJE · PORTAL</div><div style="font-size:32px;font-weight:700;margin-top:4px">«¿Sigue disponible el ático?»</div></div>
+            <div id="a1rt" style="font-size:24px;font-weight:800;color:var(--ink-600);display:flex;align-items:center;gap:8px">
+              <svg width="28" height="28" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="#727272" stroke-width="2.4"/><path d="M12 7v5l3 2" stroke="#727272" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg><span id="a1rtt">ahora</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="abs" style="left:422px;top:6px;width:16px;height:16px;border-radius:50%;background:#1C1C1C"></div>
+    </div>
+    <div class="abs" style="left:40px;top:1180px;width:1000px;height:34px;border-radius:0 0 26px 26px;background:linear-gradient(#E4E4E2,#B8B8B6);box-shadow:0 30px 60px rgba(10,10,10,.25)">
+      <div class="abs" style="left:430px;top:0;width:140px;height:12px;border-radius:0 0 12px 12px;background:#A6A6A4"></div>
+    </div>
+  </div>
+
   <!-- ================= ANTES ================= -->
   <div class="half" id="antes">
     <div class="pill" id="pA" style="background:var(--ink-200);color:var(--ink-700)">ANTES</div>
@@ -208,7 +232,7 @@ const HD = [   // DESPUÉS
   [[['Todo'], ['en'], ['el']], [['mismo'], ['sitio.', 'it']]],
   [[['Recordatorio']], [['automático.', 'it']]],
 ];
-let B = { h: [0.9, 2.8], a: [3.7, 6.8, 11, 15.3, 17.4], d0: 21.7, d: [18.6, 25.4, 30.9, 32.8, 35.6], c0: 39.9, logo: 42, end: 47, wt: {} };
+let B = { h: [0.9, 2.8], lap: [3.5, 4.0, 4.8], a: [4.9, 8, 12.2, 16.5, 18.6], d0: 22.9, d: [18.6, 25.4, 30.9, 32.8, 35.6], c0: 39.9, logo: 42, end: 47, wt: {} };
 window.setBeats = b => { B = Object.assign(B, b); };
 window.setVariant = () => {};
 
@@ -236,30 +260,39 @@ function render(t) {
   const [a1, a2, a3, a4, a5] = B.a, [d1, d2, d3, d4, d5] = B.d;
 
   // ===== GANCHO: completo desde el fotograma 0; «pierde» se apaga y «gana» se subraya al decirlos =====
-  const gan = $('#gancho'), gOut = k(t, a1 - .3, a1 + .05, E.ic);
-  gan.style.display = t < a1 + .1 ? 'block' : 'none';
-  if (t < a1 + .1) {
+  const [L0, L1, L2] = B.lap, gan = $('#gancho'), gOut = k(t, L0 - .15, L0 + .3, E.ic);
+  gan.style.display = t < L0 + .4 ? 'block' : 'none';
+  if (t < L0 + .4) {
     if (!gan.dataset.built) { gan.dataset.built = 1; window.KH = block($('#kh'), [[['Así'], ['se'], ['pierde', 'it']], [['un'], ['cliente…']], [['y'], ['así'], ['se'], ['gana.', 'it']]]); }
     const [hp, hg] = B.h;
     KH.forEach((w, j) => css(w, { opacity: 1, transform: 'none', filter: 'none', color: j === 2 ? `rgb(${Math.round(10 + 104 * k(t, hp, hp + .4))},${Math.round(10 + 104 * k(t, hp, hp + .4))},${Math.round(10 + 104 * k(t, hp, hp + .4))})` : '' }));
     [$('#kh'), $('#hLogo'), $('#hTag')].forEach(el => css(el, { opacity: 1 - gOut, transform: `translateY(${-gOut * 60}px)`, filter: gOut > 0 ? `blur(${gOut * 12}px)` : 'none' }));
-    if (t > hg + .1 && t < a1 - .3) { const r = rectOf(KH[8]); css($('#ul'), { opacity: 1, left: r.x + 'px', top: (r.y + r.h - 6) + 'px', width: r.w + 'px', transform: `scaleX(${k(t, hg + .1, hg + .45)})` }); }
+    if (t > hg + .1 && t < L0 - .15) { const r = rectOf(KH[8]); css($('#ul'), { opacity: 1, left: r.x + 'px', top: (r.y + r.h - 6) + 'px', width: r.w + 'px', transform: `scaleX(${k(t, hg + .1, hg + .45)})` }); }
     const px = k(t, hp, hp + .35, E.ob2), pk = k(t, hg, hg + .35, E.ob2);
     css($('#hX'), { opacity: 1 - gOut, transform: `rotate(-2deg) scale(${1 + .08 * Math.sin(px * Math.PI)})` });
     css($('#hOk'), { opacity: 1 - gOut, transform: `rotate(2deg) scale(${1 + .12 * Math.sin(pk * Math.PI)})`, boxShadow: `0 16px 50px rgba(255,192,0,${.15 + .35 * pk})` });
   }
 
+  // ===== PORTÁTIL: sube desde abajo y la cámara entra en la pantalla =====
+  const lap = $('#lap');
+  lap.style.display = t > L0 - .05 && t < L2 + .05 ? 'block' : 'none';
+  if (lap.style.display === 'block') {
+    const up = k(t, L0, L0 + .5, E.oc), z = k(t, L1, L2, E.ioc);
+    css(lap, { opacity: k(t, L0, L0 + .15), transform: `translateY(${(1 - up) * 900}px) scale(${(.85 + .15 * up) * (1 + 3.1 * z)})`,
+      filter: z > .02 && z < .98 ? `blur(${Math.sin(z * Math.PI) * 3}px)` : 'none' });
+  }
+
   // ===== ANTES: en grises, con un leve temblor que crece con el caos =====
   const antes = $('#antes'), aOut = k(t, B.d0 - .15, B.d0 + .35, E.ic);
-  antes.style.display = t > a1 - .1 && t < B.d0 + .4 ? 'block' : 'none';
-  if (t > a1 - .1 && t < B.d0 + .4) {
+  antes.style.display = t > L2 - .02 && t < B.d0 + .4 ? 'block' : 'none';
+  if (t > L2 - .02 && t < B.d0 + .4) {
     const chaos = k(t, a2, a2 + 1.5) * (1 - k(t, a4, a4 + .5)) * .7 + k(t, a5, a5 + .6) * .3;
     css(antes, { filter: `grayscale(1) ${aOut > 0 ? `blur(${aOut * 16}px)` : ''}`, opacity: 1 - aOut,
       transform: `translate(${Math.sin(t * 23) * 3 * chaos}px, ${Math.cos(t * 19) * 3 * chaos}px) scale(${1 + aOut * .08})` });
-    show($('#pA'), k(t, a1, a1 + .3, E.ob2), 20);
+    show($('#pA'), 1, 20);
     headline('a', $('#ka'), HA, t, B.a, 'ha');
     // a1: tarjeta del portal; el reloj corre mientras tardas en responder
-    const p1 = k(t, a1 + .3, a1 + .8, E.ob), o1 = k(t, a3 + .9, a3 + 1.3, E.ic);
+    const p1 = 1, o1 = k(t, a3 + .9, a3 + 1.3, E.ic);   // ya visible al entrar en la pantalla del portátil
     show($('#a1'), p1 * (1 - o1), 60, `translateX(${o1 * 300}px) rotate(${o1 * 6}deg)`);
     const mins = Math.floor(k(t, a2, a3, p => p) * 185);
     $('#a1tt').textContent = t < a2 ? 'ahora' : (mins < 60 ? `hace ${mins} min` : `hace ${Math.floor(mins / 60)} h ${mins % 60} min`);

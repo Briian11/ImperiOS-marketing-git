@@ -59,6 +59,7 @@ B = {"a": [S(ant), S(tar) - .1, S(lue) - .1, S(vis - 1) - .1, S(rec - 1) - .1],
      "d0": S(des) - .1,
      "d": [S(con) - .1, S(en_) - .1, S(el3) - .1, S(cnv - 1) - .1, S(y5) - .1],
      "c0": S(tu) - .15, "h": [S(pie0), S(gan)]}
+B["lap"] = [E(gan) + .05, E(gan) + .6, S(ant) - .1]   # portátil: entra, zoom a su pantalla, ya dentro
 B["logo"] = S(com) - .35
 end = E(len(W) - 1) + TAIL
 a, d, c0 = B["a"], B["d"], B["c0"]
@@ -75,7 +76,10 @@ B["wt"] = {
 # ---- efectos (t, sfx, dB, pan, hpf) ----
 lg = B["logo"]
 cues = [(0.0, "hit_soft_03", -12, 0, 0), (S(pie0), "hit_soft_01", -13, -.3, 0), (S(pie0) + .05, "glitch_wake", -19, -.3, 0),
-        (S(gan), "pop_dock_03", -11, .3, 0), (S(gan) + .05, "shimmer_glow", -15, .3, 600), (a[0] - .25, "whoosh_low_wipe", -11, 0, 0)]
+        (S(gan), "pop_dock_03", -11, .3, 0), (S(gan) + .05, "shimmer_glow", -15, .3, 600)]
+L0, L1, L2 = B["lap"]
+cues += [(L0 - .05, "whoosh_long_02", -12, 0, 250), (L0 + .45, "click_ui_02", -15, 0, 0), (L1 - .25, "riser_grid", -15, 0, 300),
+         (L1 + .05, "whoosh_low_wipe", -8, 0, 0), (L2, "hit_soft_03", -10, 0, 0), (L2 + .02, "glitch_wake", -18, 0, 0)]
 cues += [(a[0] + .3, "pop_dock_01", -12, -.3, 0), (a[0] + .35, "click_ui_01", -16, -.3, 0)]
 cues += [(a[1] + .25 + i * .32, ["pop_dock_02", "click_ui_02", "pop_dock_03", "click_ui_03", "pop_dock_01", "click_ui_01", "pop_dock_02", "click_ui_02"][i], -15, (i % 3 - 1) * .5, 0) for i in range(8)]
 cues += [(a[2] - .1, "whoosh_short_02", -14, .5, 300), (a[2] + .9, "whoosh_long_01", -16, .6, 300),
@@ -102,7 +106,7 @@ B["cues"] = [[round(x[0], 3), *x[1:]] for x in cues]
 # música: ANTES con el filtro oscuro y hats (tensión), groove desde el DESPUÉS, acorde final bajo el logo
 B.update({"s1": 0.0, "s2": B["d0"], "s3": a[0], "s5": B["d0"], "s6": c0})
 
-B = {k: (round(v, 3) if isinstance(v, float) else ([round(x, 3) for x in v] if k in ("a", "d", "h") else v)) for k, v in B.items()}
+B = {k: (round(v, 3) if isinstance(v, float) else ([round(x, 3) for x in v] if k in ("a", "d", "h", "lap") else v)) for k, v in B.items()}
 B["end"] = round(end, 2)
 tl = {"fps": 60, "duration": B["end"], "vo_offset": PRE, "beats": B,
       "note": f"build_timeline_r6.py: VO {w_path} a atempo {TEMPO}; offset {PRE} s."}
