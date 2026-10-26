@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>R9 Match — fotograma de prueba</title>
+<!-- Fotograma de prueba del R9 «Véndela antes de publicarla» (módulo Match), 1080×1920, formato radar.
+     La propiedad nueva en el centro; alrededor, la cartera de clientes antiguos como puntos apagados; el barrido
+     del match enciende los que encajan. Datos simulados. Lo importante dentro de la zona segura de Reels (y 270–1248). -->
+<style>
+@font-face { font-family: "Manrope"; src: url("manrope-latin-variable.woff2") format("woff2"); font-weight: 200 800; }
+:root { --ink-950:#0A0A0A; --ink-900:#1C1C1C; --ink-800:#333; --ink-700:#4A4A4A; --ink-600:#727272; --ink-500:#B0B0B0;
+  --ink-200:#EBEBEB; --ink-50:#FAFAFA; --y:#FFD500; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; }
+body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; position: relative; background: var(--ink-950); color: #fff; }
+.abs { position: absolute; }
+.grid { position: absolute; inset: 0; background-image: linear-gradient(to right, rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 40px 40px; }
+.top { left: 72px; right: 72px; top: 286px; display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 24px; letter-spacing: .16em; }
+.top .l { display: flex; align-items: center; gap: 14px; color: #fff; }
+.top .l i { width: 36px; height: 6px; border-radius: 3px; background: var(--y); }
+.top .r { color: var(--ink-600); }
+/* radar */
+#radar { left: 540px; top: 735px; }
+.ring { position: absolute; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.08); transform: translate(-50%, -50%); }
+.sweep { position: absolute; width: 780px; height: 780px; left: -390px; top: -390px; border-radius: 50%;
+  background: conic-gradient(from 10deg, rgba(255,213,0,0) 0deg, rgba(255,213,0,0) 290deg, rgba(255,213,0,.16) 352deg, rgba(255,213,0,.0) 360deg); }
+.sweep::after { content: ""; position: absolute; left: 390px; top: 390px; width: 390px; height: 3px; background: linear-gradient(90deg, rgba(255,213,0,.9), rgba(255,213,0,0));
+  transform-origin: 0 50%; transform: rotate(-82deg); }
+.dot { position: absolute; width: 18px; height: 18px; margin: -9px; border-radius: 50%; background: var(--ink-800); border: 2px solid var(--ink-700); }
+.hit { position: absolute; width: 64px; height: 64px; margin: -32px; border-radius: 50%; background: var(--y); color: var(--ink-950); font-weight: 800; font-size: 22px;
+  display: grid; place-items: center; box-shadow: 0 0 0 10px rgba(255,213,0,.18), 0 0 60px rgba(255,192,0,.55); }
+.tag { position: absolute; white-space: nowrap; background: var(--ink-50); color: var(--ink-950); border-radius: 14px; padding: 10px 16px; font-weight: 800; font-size: 22px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.5); }
+.tag small { display: block; font-size: 17px; font-weight: 700; color: var(--ink-600); margin-top: 2px; }
+.prop { position: absolute; width: 330px; left: -165px; top: -112px; background: var(--ink-50); color: var(--ink-950); border-radius: 26px; padding: 22px 24px;
+  box-shadow: 0 0 0 6px rgba(255,213,0,.25), 0 30px 90px rgba(0,0,0,.6); }
+.prop .ph { height: 96px; border-radius: 14px; background: linear-gradient(135deg, #2a2a2a, #4a4a4a); position: relative; overflow: hidden; }
+.prop .ph::before { content: ""; position: absolute; left: 50%; top: 22px; width: 60px; height: 48px; margin-left: -30px; background: var(--ink-500);
+  clip-path: polygon(50% 0, 100% 42%, 100% 100%, 0 100%, 0 42%); }
+.prop .nv { position: absolute; right: 10px; top: 10px; font-size: 15px; font-weight: 800; letter-spacing: .12em; background: var(--y); padding: 6px 10px; border-radius: 8px; }
+.prop b { display: block; font-size: 28px; margin-top: 14px; letter-spacing: -.01em; }
+.prop span { font-size: 20px; color: var(--ink-600); font-weight: 700; }
+.pub { left: 72px; right: 72px; top: 1150px; display: flex; gap: 12px; }
+.chip { padding: 12px 18px; border-radius: 16px; background: var(--ink-900); border: 1.5px solid var(--ink-800); font-weight: 700; font-size: 24px; display: flex; align-items: center; gap: 10px; }
+.chip i { font-style: normal; color: var(--y); font-weight: 800; }
+.sub { left: 72px; right: 72px; top: 1232px; font-weight: 800; font-size: 64px; letter-spacing: -.035em; line-height: 1.05; }
+.sub em { font-style: italic; font-weight: 500; color: var(--y); }
+</style>
+</head>
+<body>
+<div class="grid"></div>
+<div class="abs top"><span class="l"><i></i>MATCH CON IA</span><span class="r">TU CARTERA · 2019 → HOY</span></div>
+
+<div class="abs" id="radar">
+  <div class="ring" style="width:340px;height:340px"></div>
+  <div class="ring" style="width:560px;height:560px"></div>
+  <div class="ring" style="width:780px;height:780px"></div>
+  <div class="sweep"></div>
+  <div id="dots"></div>
+  <div class="hit" style="left:-230px;top:-215px">AM</div>
+  <div class="tag" style="left:-330px;top:-318px">A. M.<small>Sin actividad · hace 2 años</small></div>
+  <div class="hit" style="left:285px;top:-40px">LG</div>
+  <div class="tag" style="left:150px;top:-165px">L. G.<small>hace 8 meses</small></div>
+  <div class="hit" style="left:-175px;top:245px">JR</div>
+  <div class="tag" style="left:-110px;top:270px">J. R.<small>hace 3 años</small></div>
+  <div class="prop"><div class="ph"><span class="nv">NUEVA</span></div><b>Ático · Chamberí</b><span>3 hab · 390.000 €</span></div>
+</div>
+
+<div class="abs pub"><span class="chip"><i>✓</i>Zona</span><span class="chip"><i>✓</i>Presupuesto</span><span class="chip"><i>✓</i>Tipo</span><span class="chip"><i>✓</i>Habitaciones</span></div>
+<div class="abs sub">3 clientes encajan.<br><em>Antes de publicarla.</em></div>
+<script>
+// cartera: puntos apagados repartidos por los anillos (deterministas)
+let s = 7; const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
+const box = document.getElementById('dots'), hits = [[-230, -215], [285, -40], [-175, 245]];
+for (let n = 0; n < 90; n++) {
+  const a = rnd() * Math.PI * 2, r = 195 + rnd() * 190, x = Math.cos(a) * r, y = Math.sin(a) * r;
+  if (hits.some(([hx, hy]) => Math.hypot(hx - x, hy - y) < 70) || (Math.abs(x) < 200 && Math.abs(y) < 140) || y < -360) continue;
+  const d = document.createElement('div'); d.className = 'dot';
+  d.style.cssText = `left:${x}px;top:${y}px;opacity:${.45 + rnd() * .55}`; box.appendChild(d);
+}
+window.ready = document.fonts.ready;
+</script>
+</body>
+</html>
