@@ -53,7 +53,7 @@ vis2 = find("visita", cnv)
 y5 = find("Y", vis2)
 ubi, dia, hor = find("ubicación", y5), find("día", y5), find("hora", y5)
 tu = find("Tu", hor)
-com = find("Comenta", tu)
+com = find("Pide", tu)            # cierre: «Pide tu demo gratis y pasa al después.»
 
 B = {"a": [S(ant), S(tar) - .1, S(lue) - .1, S(vis - 1) - .1, S(rec - 1) - .1],
      "d0": E(no_ + 2) + .15,          # sale el ANTES y entra el portátil con ImperiOS
@@ -61,7 +61,7 @@ B = {"a": [S(ant), S(tar) - .1, S(lue) - .1, S(vis - 1) - .1, S(rec - 1) - .1],
      "c0": S(tu) - .15, "h": [S(pie0), S(gan)]}
 B["lap"] = [E(gan) + .05, E(gan) + .6, S(ant) - .1]   # portátil: entra, zoom a su pantalla, ya dentro
 B["lap2"] = [B["d0"], S(des) - .05, S(con) - .15]   # segundo portátil (ImperiOS) en el «Después»
-B["logo"] = S(com) - .35
+B["logo"] = S(com) - .3
 end = E(len(W) - 1) + TAIL
 a, d, c0 = B["a"], B["d"], B["c0"]
 B["wt"] = {

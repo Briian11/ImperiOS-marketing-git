@@ -9,7 +9,8 @@ export TL=timeline-r6.json PAGE=src/reel-r6.html VARIANT=A
 # gancho (25/10/2026; 1,3 s de pausa para la transición del portátil): «Así se pierde un cliente… y así se gana.» delante de «Antes: …»
 python3 ../tools/empalmar_vo.py $L/reel-r6-v2.wav $L/reel-r6-v2.words.json $L/reel-r6-gancho.mp3 $L/reel-r6-gancho.words.json -1 1.3 \
   $L/reel-r6-antes-despues.mp3 $L/reel-r6-antes-despues.words.json 0:51 0.7 \
-  $L/reel-r6-antes-despues.mp3 $L/reel-r6-antes-despues.words.json 52:-1 0   # 0,7 s más antes de «Después» (segundo portátil)
+  $L/reel-r6-antes-despues.mp3 $L/reel-r6-antes-despues.words.json 52:121 0.35 \
+  $L/reel-r6-cierre.mp3 $L/reel-r6-cierre.words.json -1 0   # 0,7 s más antes de «Después» (segundo portátil); cierre «Pide tu demo gratis y pasa al después»
 python3 build_timeline_r6.py $L/reel-r6-v2.words.json $L/reel-r6-v2.wav $TL $O/vo.wav
 ffmpeg -hide_banner -loglevel error -y -i $O/vo.wav -af "highpass=f=80,acompressor=threshold=0.035:ratio=3:attack=3:release=80:knee=4:makeup=2.2" -ac 1 -c:a pcm_f32le $O/vo_proc.wav
 VO=$O/vo_proc.wav VO_OFFSET=$(python3 -c "import json;print(json.load(open('$TL'))['vo_offset'])") python3 audio_mix.py $O/audio
