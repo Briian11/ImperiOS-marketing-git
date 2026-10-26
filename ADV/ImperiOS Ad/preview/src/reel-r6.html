@@ -333,7 +333,8 @@ function headline(key, el, set, t, starts, wkey) {
   css(el, { opacity: 1 - out, transform: `translateY(${-out * 40}px)`, filter: out > 0 ? `blur(${out * 10}px)` : 'none' });
   // subrayado en la última palabra (cursiva) cuando ya se ha dicho
   const last = curW[key][curW[key].length - 1], tl = t0 + wt[wt.length - 1] + .25;
-  if (t > tl && t < next - .25) { const r = rectOf(last); css($('#ul'), { opacity: 1, left: r.x + 'px', top: (r.y + r.h - 6) + 'px', width: r.w + 'px', transform: `scaleX(${k(t, tl, tl + .35)})` }); }
+  const lim = key === 'a' ? B.d0 - .15 : B.c0 - .2;   // el subrayado no sobrevive a la salida de su mitad
+  if (t > tl && t < next - .25 && t < lim) { const r = rectOf(last); css($('#ul'), { opacity: 1, left: r.x + 'px', top: (r.y + r.h - 6) + 'px', width: r.w + 'px', transform: `scaleX(${k(t, tl, tl + .35)})` }); }
   return i;
 }
 const show = (el, p, dy = 60, extra = '') => css(el, { opacity: p, transform: `translateY(${(1 - p) * dy}px) ${extra}`, filter: p < .98 ? `blur(${(1 - p) * 10}px)` : 'none' });
