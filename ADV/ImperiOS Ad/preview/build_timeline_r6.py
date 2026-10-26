@@ -69,6 +69,8 @@ B["wt"] = {
     "a5n": round(S(no_) - a[4], 3),                 # sello «NO SE PRESENTÓ»
     "d2r": round(S(res) - d[1], 3),                 # la IA responde
     "d4v": round(S(vis2) - d[3], 3),                # la visita aparece en la ficha
+    # panel: entra el cliente nuevo («entra»), se iluminan los orígenes («portal»), golpe en «centralizado»
+    "d1": [round(S(find("entra", con)) - d[0], 3), round(S(find("portal", con)) - d[0], 3), round(S(find("centralizado", con)) - d[0], 3)],
     "d5c": [round(S(i) - d[4], 3) for i in (ubi, dia, hor)],
     # ¿Tu inmobiliaria sigue en el antes? | Comenta demo | y te enseño el después.
     "c": [round(S(i) - c0, 3) for i in range(tu, len(W))],
@@ -91,9 +93,10 @@ cues += [(a[2] - .1, "whoosh_short_02", -14, .5, 300), (a[2] + .9, "whoosh_long_
 M0, M1, M2 = B["lap2"]
 cues += [(M0 - .05, "whoosh_long_02", -12, 0, 250), (M0 + .45, "click_ui_02", -15, 0, 0), (M1 - .35, "riser_grid", -14, 0, 300),
          (M1 + .05, "whoosh_low_wipe", -8, 0, 0), (M2, "hit_soft_03", -9, 0, 0), (M2 + .05, "shimmer_glow", -14, 0, 600),
-         *[(d[0] + .4 + i * .3, f"whoosh_short_0{1 + i}", -16, (-.5 if i % 2 == 0 else .5), 400) for i in range(4)],
-         *[(d[0] + .75 + i * .3, "click_ui_0" + str(1 + i % 3), -18, 0, 0) for i in range(4)],
-         (S(find("centralizado", con)), "hit_soft_02", -12, 0, 0),
+         (S(find("entra", con)) - .1, "whoosh_short_02", -13, 0, 400), (S(find("entra", con)) + .25, "pop_dock_01", -10, 0, 0),
+         (S(find("entra", con)) + .3, "shimmer_glow", -16, 0, 600),
+         *[(S(find("portal", con)) + i * .22, "click_ui_0" + str(1 + i % 3), -15, (i - 1.5) * .3, 0) for i in range(4)],
+         (S(find("centralizado", con)), "hit_soft_02", -10, 0, 0), (S(find("centralizado", con)) + .05, "pop_dock_03", -14, 0, 0),
          (d[1], "pop_dock_01", -12, 0, 0), (d[1] + .5, "pop_dock_02", -13, -.4, 0), (d[1] + .5, "ticks_granular_curve", -20, 0, 0),
          (S(res), "pop_dock_03", -10, .4, 0), (S(res) + .05, "shimmer_glow", -15, .3, 600), (S(res) + .5, "click_mech_dial_2", -14, .4, 0),
          (d[2], "whoosh_short_03", -15, 0, 300), (d[2] + .3, "ticks_granular_calendar", -19, 0, 0), (d[2] + 1.0, "hit_soft_01", -14, 0, 0),

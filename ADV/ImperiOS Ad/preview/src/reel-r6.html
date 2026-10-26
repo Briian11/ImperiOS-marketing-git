@@ -174,10 +174,10 @@ body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-s
           <div class="abs"  style="left:80px;top:620px;width:920px">
             <div style="background:var(--ink-950);border:1.5px solid var(--ink-800);border-radius:28px;color:#fff;padding:30px 26px;box-shadow:0 40px 100px rgba(10,10,10,.30)">
               <div style="display:flex;align-items:center;gap:14px;font-weight:800;font-size:22px;letter-spacing:.16em;color:var(--y);margin:0 8px 18px"><span style="width:14px;height:14px;border-radius:50%;background:var(--y)"></span>TODOS TUS CLIENTES</div>
-              <div class="row" style="background:var(--ink-900);border:1.5px solid var(--ink-700)"><div class="av" style="background:var(--y);color:var(--ink-950)">AM</div><div><div style="font-size:30px;font-weight:700">Ático · Chamberí</div><div class="meta">3 hab · 350–400 k€</div></div><span class="src" style="color:#fff">Portal</span><span style="margin-left:12px;font-size:19px;font-weight:800;letter-spacing:.1em;color:var(--ink-950);background:var(--y);padding:9px 12px;border-radius:10px">NUEVO</span></div>
-              <div class="row"><div class="av" style="background:var(--ink-800)">LG</div><div><div style="font-size:28px;font-weight:700">Piso · Retiro</div><div class="meta">2 hab · 280–320 k€</div></div><span class="src">Portal</span></div>
-              <div class="row"><div class="av" style="background:var(--ink-800)">JR</div><div><div style="font-size:28px;font-weight:700">Chalet · Pozuelo</div><div class="meta">4 hab · 650–720 k€</div></div><span class="src">Web</span></div>
-              <div class="row"><div class="av" style="background:var(--ink-800)">SP</div><div><div style="font-size:28px;font-weight:700">Piso · Salamanca</div><div class="meta">2 hab · 450–500 k€</div></div><span class="src">WhatsApp</span></div>
+              <div class="row d1rr" style="background:var(--ink-900);border:1.5px solid var(--ink-700)"><div class="av" style="background:var(--y);color:var(--ink-950)">AM</div><div><div style="font-size:30px;font-weight:700">Ático · Chamberí</div><div class="meta">3 hab · 350–400 k€</div></div><span class="src" style="color:#fff">Portal</span><span style="margin-left:12px;font-size:19px;font-weight:800;letter-spacing:.1em;color:var(--ink-950);background:var(--y);padding:9px 12px;border-radius:10px">NUEVO</span></div>
+              <div class="row d1rr"><div class="av" style="background:var(--ink-800)">LG</div><div><div style="font-size:28px;font-weight:700">Piso · Retiro</div><div class="meta">2 hab · 280–320 k€</div></div><span class="src">Portal</span></div>
+              <div class="row d1rr"><div class="av" style="background:var(--ink-800)">JR</div><div><div style="font-size:28px;font-weight:700">Chalet · Pozuelo</div><div class="meta">4 hab · 650–720 k€</div></div><span class="src">Web</span></div>
+              <div class="row d1rr"><div class="av" style="background:var(--ink-800)">SP</div><div><div style="font-size:28px;font-weight:700">Piso · Salamanca</div><div class="meta">2 hab · 450–500 k€</div></div><span class="src">WhatsApp</span></div>
             </div>
           </div>
         </div>
@@ -374,6 +374,7 @@ function render(t) {
   lap2.style.display = t > M0 - .05 && t < M2 + .05 ? 'block' : 'none';
   if (lap2.style.display === 'block') {
     const up = k(t, M0, M0 + .5, E.oc), z = k(t, M1, M2, E.ioc);
+    { const rr = $$('.d1rr'), h = rr[1].offsetTop - rr[0].offsetTop; rr.forEach((r, i) => css(r, i ? { transform: `translateY(${-h}px)` } : { opacity: 0 })); }
     css(lap2, { opacity: k(t, M0, M0 + .15), transform: `translateY(${(1 - up) * 900}px) scale(${(.85 + .15 * up) * (1 + 3.1 * z)})`,
       filter: z > .02 && z < .98 ? `blur(${Math.sin(z * Math.PI) * 3}px)` : 'none' });
   }
@@ -426,10 +427,21 @@ function render(t) {
     headline('d', $('#kd'), HD, t, B.d, 'hd');
     // d1: los clientes de todos los portales entran en el mismo panel
     const p1 = 1, o1 = k(t, d2 - .25, d2 + .1, E.ic);   // ya visible al entrar en la pantalla del portátil
-    show($('#d1'), p1 * (1 - o1), 80);
-    $$('.d1r').forEach((r, i) => {
-      css(r, { opacity: 1, transform: 'none' });
+    // el cliente nuevo entra arriba y empuja al resto; luego se iluminan los orígenes y el panel «confirma»
+    const [eT, pT, cT] = B.wt.d1 || [1.2, 2.4, 3.1];
+    const rows = $$('.d1r'), rowH = rows[1].offsetTop - rows[0].offsetTop;
+    const drop = k(t, d1 + eT, d1 + eT + .55, E.ob);
+    rows.forEach((r, i) => {
+      const glow = i === 0 ? Math.sin(k(t, d1 + eT + .3, d1 + eT + 1.4) * Math.PI) : 0;
+      const tag = r.querySelector('.src'), tp = k(t, d1 + pT + (i ? i - 1 : 3) * .22, d1 + pT + (i ? i - 1 : 3) * .22 + .5);
+      const lit = Math.sin(tp * Math.PI);
+      if (i === 0) css(r, { opacity: drop, transform: `translateY(${(1 - drop) * -70}px) scale(${.92 + .08 * drop})`, boxShadow: `0 20px 50px rgba(0,0,0,.5), 0 0 ${40 * glow}px rgba(255,192,0,${.6 * glow})` });
+      else css(r, { opacity: 1, transform: `translateY(${(1 - drop) * -rowH}px)` });
+      if (tag.dataset.c === undefined) { tag.dataset.c = tag.style.color; tag.dataset.b = tag.style.background; }
+      css(tag, { background: lit > .05 ? `rgba(255,213,0,${lit})` : tag.dataset.b, color: lit > .5 ? 'var(--ink-950)' : tag.dataset.c, transform: `scale(${1 + .12 * lit})` });
     });
+    const cf = Math.sin(k(t, d1 + cT, d1 + cT + .45) * Math.PI);
+    show($('#d1'), p1 * (1 - o1), 80, `scale(${1 + .03 * cf})`);
     // d2: chat; la IA responde y el cronómetro se para antes del minuto
     const p2 = k(t, d2 - .05, d2 + .4, E.ob), o2 = k(t, d4 - .25, d4 + .1, E.ic);
     show($('#d2'), p2 * (1 - o2), 80);
