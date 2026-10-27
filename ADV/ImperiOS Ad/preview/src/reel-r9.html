@@ -16,7 +16,7 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; }
 body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; position: relative; background: var(--ink-950); color: #fff; }
 .abs { position: absolute; }
 #grid { position: absolute; inset: -80px; background-image: linear-gradient(to right, rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 40px 40px; }
-#glow { left: 540px; top: 700px; width: 1300px; height: 1300px; margin: -650px 0 0 -650px; border-radius: 50%;
+#glow { left: 540px; top: 850px; width: 1300px; height: 1300px; margin: -650px 0 0 -650px; border-radius: 50%;
   background: radial-gradient(circle, rgba(255,192,0,.12), rgba(255,192,0,0) 60%); }
 .lbl { display: flex; align-items: center; gap: 14px; font-weight: 800; font-size: 24px; letter-spacing: .16em; white-space: nowrap; }
 .lbl i { width: 36px; height: 6px; border-radius: 3px; background: var(--y); }
@@ -27,8 +27,8 @@ body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; 
 .k { position: absolute; left: 72px; right: 60px; font-weight: 800; letter-spacing: -.045em; line-height: 1.04; }
 .k .w { display: inline-block; }
 .k .it { font-style: italic; font-weight: 500; color: var(--y); }
-#kh { top: 400px; font-size: 104px; }
-#pub { left: 72px; top: 900px; height: 104px; padding: 0 40px 0 30px; border-radius: 22px; display: flex; align-items: center; gap: 18px;
+#kh { top: 540px; font-size: 104px; }
+#pub { left: 72px; top: 1040px; height: 104px; padding: 0 40px 0 30px; border-radius: 22px; display: flex; align-items: center; gap: 18px;
   font-weight: 800; font-size: 34px; background: var(--ink-50); color: var(--ink-950); border: 3px solid var(--ink-50); white-space: nowrap; }
 #pub svg { flex: none; }
 #pubNo { position: absolute; left: 0; top: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; border-radius: 20px;
@@ -37,7 +37,7 @@ body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; 
 /* radar */
 #topR { left: 72px; right: 72px; top: 286px; display: flex; justify-content: space-between; }
 #topR .r { color: var(--ink-600); font-weight: 800; font-size: 22px; letter-spacing: .16em; }
-#radar { left: 540px; top: 700px; }
+#radar { left: 540px; top: 850px; }
 .ring { position: absolute; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.09); left: 0; top: 0; }
 #shock { position: absolute; left: 0; top: 0; width: 400px; height: 400px; margin: -200px; border-radius: 50%; border: 3px solid var(--y); opacity: 0; }
 #sweep { position: absolute; width: 720px; height: 720px; left: -360px; top: -360px; border-radius: 50%;
@@ -59,15 +59,15 @@ body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; 
 .nv { position: absolute; right: 10px; top: 10px; font-size: 15px; font-weight: 800; letter-spacing: .12em; background: var(--y); padding: 6px 10px; border-radius: 8px; }
 #prop b { display: block; font-size: 28px; margin-top: 14px; letter-spacing: -.01em; }
 #prop span.d { font-size: 20px; color: var(--ink-600); font-weight: 700; }
-#chips { left: 72px; right: 72px; top: 1150px; display: flex; gap: 12px; }
+#chips { left: 72px; right: 72px; top: 1330px; display: flex; gap: 12px; }
 .chip { padding: 14px 20px; border-radius: 16px; background: var(--ink-900); border: 1.5px solid var(--ink-800); font-weight: 700; font-size: 26px; display: flex; align-items: center; gap: 10px; color: var(--ink-600); }
 .chip i { font-style: normal; font-weight: 800; }
 /* subtítulos */
-#sub { left: 72px; right: 72px; top: 1150px; font-weight: 800; font-size: 54px; letter-spacing: -.03em; line-height: 1.1; }
+#sub { left: 72px; right: 72px; top: 1320px; font-weight: 800; font-size: 54px; letter-spacing: -.03em; line-height: 1.1; }
 #sub .w { display: inline-block; }
 #sub .hl { font-style: italic; font-weight: 500; color: var(--y); }
 /* reactivar */
-#rProp { left: 72px; top: 300px; display: flex; align-items: center; gap: 16px; font-weight: 700; font-size: 26px; color: var(--ink-500); white-space: nowrap; }
+#rProp { left: 72px; top: 450px; display: flex; align-items: center; gap: 16px; font-weight: 700; font-size: 26px; color: var(--ink-500); white-space: nowrap; }
 #rProp b { color: #fff; }
 #rProp .nvp { font-size: 17px; font-weight: 800; letter-spacing: .12em; background: var(--y); color: var(--ink-950); padding: 7px 12px; border-radius: 8px; }
 .rc { position: absolute; left: 72px; width: 936px; height: 128px; margin-top: -64px; border-radius: 26px; background: var(--ink-900); border: 1.5px solid var(--ink-800);
@@ -79,18 +79,18 @@ body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; 
 .rc .st span { position: absolute; right: 0; top: 0; height: 52px; display: flex; align-items: center; padding: 0 18px; border-radius: 14px; font-weight: 800; font-size: 21px; letter-spacing: .06em; white-space: nowrap; }
 .rc .s0 { background: var(--ink-800); color: var(--ink-500); }
 .rc .s1 { background: var(--y); color: var(--ink-950); }
-#rBtn { left: 72px; width: 936px; top: 940px; height: 116px; border-radius: 26px; background: var(--y); color: var(--ink-950); display: grid; place-items: center;
+#rBtn { left: 72px; width: 936px; top: 1090px; height: 116px; border-radius: 26px; background: var(--y); color: var(--ink-950); display: grid; place-items: center;
   font-weight: 800; font-size: 38px; letter-spacing: -.01em; box-shadow: 0 24px 70px rgba(255,192,0,.25); }
 #rBtn span { grid-area: 1 / 1; }
-#rPill { left: 50%; top: 1080px; transform: translateX(-50%); }
+#rPill { left: 50%; top: 1230px; transform: translateX(-50%); }
 #rPill div { padding: 14px 26px; border-radius: 999px; border: 2.5px dashed var(--y); color: var(--y); font-weight: 800; font-size: 26px; white-space: nowrap; background: var(--ink-950); }
 /* cierre */
-#kq { top: 330px; font-size: 100px; }
-#logo { left: 50%; top: 700px; width: 470px; margin-left: -235px; }
-#cta { left: 50%; top: 930px; transform: translateX(-50%); }
+#kq { top: 480px; font-size: 100px; }
+#logo { left: 50%; top: 850px; width: 470px; margin-left: -235px; }
+#cta { left: 50%; top: 1080px; transform: translateX(-50%); }
 #cta div { height: 112px; padding: 0 56px; border-radius: 999px; background: var(--y); color: var(--ink-950); display: flex; align-items: center; gap: 16px;
   font-weight: 800; font-size: 40px; white-space: nowrap; }
-#web { left: 0; right: 0; top: 1080px; text-align: center; font-weight: 800; font-size: 26px; letter-spacing: .2em; color: var(--ink-500); }
+#web { left: 0; right: 0; top: 1230px; text-align: center; font-weight: 800; font-size: 26px; letter-spacing: .2em; color: var(--ink-500); }
 </style>
 </head>
 <body>
@@ -208,8 +208,8 @@ function render(t) {
   css($('#pubNo'), { opacity: no, transform: `scale(${.92 + .08 * no})` });
   // cursor: entra hacia el botón y se para en «portal»; luego hace clic en «Reactivar»
   let cx = 1200, cy = 1500, cp = 0, cv = 0;
-  if (t < c0) { const a = k(t, tPub + .1, h1 - .05, E.ioc); cx = lerp(1100, 560, a); cy = lerp(1350, 975, a); cv = k(t, tPub + .1, tPub + .3) * (1 - hOut); }
-  else if (t > r0) { const a = k(t, r0 + .5, r1 - .1, E.ioc); cx = lerp(1100, 640, a); cy = lerp(1400, 1010, a); cp = Math.sin(k(t, r1 - .06, r1 + .14) * Math.PI); cv = k(t, r0 + .5, r0 + .7) * (1 - k(t, r1 + .6, r1 + .9)); }
+  if (t < c0) { const a = k(t, tPub + .1, h1 - .05, E.ioc); cx = lerp(1100, 560, a); cy = lerp(1500, 1125, a); cv = k(t, tPub + .1, tPub + .3) * (1 - hOut); }
+  else if (t > r0) { const a = k(t, r0 + .5, r1 - .1, E.ioc); cx = lerp(1100, 640, a); cy = lerp(1550, 1160, a); cp = Math.sin(k(t, r1 - .06, r1 + .14) * Math.PI); cv = k(t, r0 + .5, r0 + .7) * (1 - k(t, r1 + .6, r1 + .9)); }
   cursorAt(cx, cy, cp); css($('#cursor'), { opacity: cv });
 
   // ---------- RADAR ----------
@@ -264,8 +264,8 @@ function render(t) {
   [$('#rProp'), $('#rBtn'), $('#rPill'), ...$$('.rc')].forEach(el => css(el, { display: rv2 ? '' : 'none' }));
   show($('#rProp'), k(t, r0 + .15, r0 + .5) * (1 - rEnd), 30);
   HITS.forEach(([hx, hy], i) => {
-    const a = k(t, r0 + i * .08, r0 + .55 + i * .08, E.oc), ty = 470 + i * 150;
-    const x = lerp(540 + hx, 540, a), y = lerp(700 + hy, ty, a);
+    const a = k(t, r0 + i * .08, r0 + .55 + i * .08, E.oc), ty = 620 + i * 150;
+    const x = lerp(540 + hx, 540, a), y = lerp(850 + hy, ty, a);
     css($('#rc' + i), { top: y + 'px', transform: `translateX(${x - 540}px) scale(${lerp(.12, 1, a)})`, opacity: k(t, r0 + i * .08, r0 + .2 + i * .08) * (1 - rEnd),
       filter: rEnd > 0 ? `blur(${rEnd * 10}px)` : 'none' });
     const ok = k(t, r1 + .2 + i * .12, r1 + .4 + i * .12, E.ob2);
