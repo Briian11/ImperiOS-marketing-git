@@ -55,7 +55,8 @@ def saw(f, n, phase=0.0):
 
 
 # ---------- armonía ----------
-BEAT = 0.6                     # 100 BPM
+MUS = B.get("music", {})       # un reel puede pedir otro tempo y otra armonía (R9: Fa# menor a 110 BPM)
+BEAT = 60 / MUS.get("bpm", 100)   # 100 BPM por defecto
 BAR = 4 * BEAT
 V4 = bool(B.get("wt", {}).get("src"))   # campaña v4 (build_timeline_v4.py)
 CUES = B.get("cues")   # reels orgánicos: la lista de efectos viene en el timeline (build_timeline_r2.py)
@@ -72,6 +73,9 @@ CHORDS = [
     ("Asus", [45, 52, 57, 62, 64]),
 ]
 FINAL = [38, 50, 57, 62, 64, 66, 69, 76]   # Re add9 abierto
+if MUS.get("chords"):
+    CHORDS = [(c[0], c[1]) for c in MUS["chords"]]
+    FINAL = MUS.get("final", FINAL)
 
 
 def chord_idx(b):
@@ -177,12 +181,22 @@ def music():
         fin[i0:] += (np.sin(2 * np.pi * f * x) * np.exp(-x * (.55 + j * .06)) + .25 * np.sin(2 * np.pi * f * 2.003 * x) * np.exp(-x * 2.2)) * (.11 if note > 45 else .16)
     fin[i0:] *= np.clip(x / .01, 0, 1)
 
+    # PINGS de radar (R9): seno agudo con eco, en los tiempos que pide el timeline
+    ping = np.zeros(N)
+    for tp in B.get("pings", []):
+        for j, (dl, g) in enumerate(((0, 1), (.27, .45), (.54, .2), (.81, .08))):
+            i0 = int((tp + dl) * SR)
+            if i0 >= N:
+                break
+            n = min(int(.9 * SR), N - i0)
+            x = np.arange(n) / SR
+            ping[i0:i0 + n] += (np.sin(2 * np.pi * 1568 * x) + .3 * np.sin(2 * np.pi * 3136 * x)) * np.exp(-x * 7) * np.clip(x / .004, 0, 1) * .07 * g
     mono_bus = (pad * side + pl * side * 1.0 + sub * side)
     # estéreo: pluck alterna lados ligeramente, pad abierto
     d = int(.012 * SR)
     pad_r = np.concatenate([np.zeros(d), pad[:-d]])
-    m[:, 0] = pad * side * .9 + pl * side * .8 + sub * side + kick + hats * .7 + fin
-    m[:, 1] = pad_r * side * .9 + pl * side * 1.0 + sub * side + kick + hats * 1.0 + fin
+    m[:, 0] = pad * side * .9 + pl * side * .8 + sub * side + kick + hats * .7 + fin + ping
+    m[:, 1] = pad_r * side * .9 + pl * side * 1.0 + sub * side + kick + hats * 1.0 + fin + ping
     # fundido de salida en el último medio segundo
     fade = np.clip((DUR - t) / .5, 0, 1)
     m *= fade[:, None]

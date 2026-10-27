@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reel R9 — Véndela antes de publicarla</title>
+<!-- Motor del Reel orgánico R9 (módulo Match), 1080×1920, formato radar en oscuro (distinto del R2/R6).
+     Gancho con el botón «Publicar en el portal» → la cartera de clientes antiguos como puntos → cae la propiedad nueva →
+     barrido del match (zona · presupuesto · tipo · habitaciones) → se encienden los 3 que encajan → «Reactivar» en un clic →
+     cierre «¿Cuántos clientes tienes olvidados…?» + Comenta DEMO. Datos simulados. Tiempos: timeline-r9.json (build_timeline_r9.py). -->
+<style>
+@font-face { font-family: "Manrope"; src: url("manrope-latin-variable.woff2") format("woff2"); font-weight: 200 800; }
+:root { --ink-950:#0A0A0A; --ink-900:#1C1C1C; --ink-850:#242424; --ink-800:#333; --ink-700:#4A4A4A; --ink-600:#727272; --ink-500:#B0B0B0;
+  --ink-200:#EBEBEB; --ink-50:#FAFAFA; --y:#FFD500; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; }
+body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; position: relative; background: var(--ink-950); color: #fff; }
+.abs { position: absolute; }
+#grid { position: absolute; inset: -80px; background-image: linear-gradient(to right, rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 40px 40px; }
+#glow { left: 540px; top: 700px; width: 1300px; height: 1300px; margin: -650px 0 0 -650px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,192,0,.12), rgba(255,192,0,0) 60%); }
+.lbl { display: flex; align-items: center; gap: 14px; font-weight: 800; font-size: 24px; letter-spacing: .16em; white-space: nowrap; }
+.lbl i { width: 36px; height: 6px; border-radius: 3px; background: var(--y); }
+/* gancho */
+#topH { left: 72px; right: 72px; top: 280px; display: flex; justify-content: space-between; align-items: center; }
+#topH img { height: 52px; display: block; }
+#topH span { font-weight: 800; font-size: 22px; letter-spacing: .16em; color: var(--ink-500); }
+.k { position: absolute; left: 72px; right: 60px; font-weight: 800; letter-spacing: -.045em; line-height: 1.04; }
+.k .w { display: inline-block; }
+.k .it { font-style: italic; font-weight: 500; color: var(--y); }
+#kh { top: 400px; font-size: 104px; }
+#pub { left: 72px; top: 900px; height: 104px; padding: 0 40px 0 30px; border-radius: 22px; display: flex; align-items: center; gap: 18px;
+  font-weight: 800; font-size: 34px; background: var(--ink-50); color: var(--ink-950); border: 3px solid var(--ink-50); white-space: nowrap; }
+#pub svg { flex: none; }
+#pubNo { position: absolute; left: 0; top: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; border-radius: 20px;
+  border: 3px dashed var(--y); background: var(--ink-950); color: var(--y); font-weight: 800; font-size: 34px; }
+#cursor { left: 0; top: 0; width: 60px; height: 60px; z-index: 30; filter: drop-shadow(0 10px 20px rgba(0,0,0,.5)); }
+/* radar */
+#topR { left: 72px; right: 72px; top: 286px; display: flex; justify-content: space-between; }
+#topR .r { color: var(--ink-600); font-weight: 800; font-size: 22px; letter-spacing: .16em; }
+#radar { left: 540px; top: 700px; }
+.ring { position: absolute; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.09); left: 0; top: 0; }
+#shock { position: absolute; left: 0; top: 0; width: 400px; height: 400px; margin: -200px; border-radius: 50%; border: 3px solid var(--y); opacity: 0; }
+#sweep { position: absolute; width: 720px; height: 720px; left: -360px; top: -360px; border-radius: 50%;
+  background: conic-gradient(from 10deg, rgba(255,213,0,0) 0deg, rgba(255,213,0,0) 290deg, rgba(255,213,0,.17) 352deg, rgba(255,213,0,0) 360deg); }
+#sweep::after { content: ""; position: absolute; left: 360px; top: 360px; width: 360px; height: 3px; background: linear-gradient(90deg, rgba(255,213,0,.9), rgba(255,213,0,0));
+  transform-origin: 0 50%; transform: rotate(-80deg); }
+.dot { position: absolute; width: 18px; height: 18px; margin: -9px; border-radius: 50%; }
+.hit { position: absolute; width: 64px; height: 64px; margin: -32px; border-radius: 50%; background: var(--y); color: var(--ink-950); font-weight: 800; font-size: 22px;
+  display: grid; place-items: center; }
+.pulse { position: absolute; width: 64px; height: 64px; margin: -32px; border-radius: 50%; border: 3px solid var(--y); }
+.tag { position: absolute; white-space: nowrap; background: var(--ink-50); color: var(--ink-950); border-radius: 14px; padding: 10px 16px; font-weight: 800; font-size: 22px;
+  box-shadow: 0 16px 40px rgba(0,0,0,.5); }
+.tag small { display: block; font-size: 17px; font-weight: 700; color: var(--ink-600); margin-top: 2px; }
+#prop { position: absolute; width: 330px; left: -165px; top: -112px; background: var(--ink-50); color: var(--ink-950); border-radius: 26px; padding: 22px 24px;
+  box-shadow: 0 0 0 6px rgba(255,213,0,.25), 0 30px 90px rgba(0,0,0,.6); }
+.ph { height: 96px; border-radius: 14px; background: linear-gradient(135deg, #2a2a2a, #4a4a4a); position: relative; overflow: hidden; }
+.ph::before { content: ""; position: absolute; left: 50%; top: 22px; width: 60px; height: 48px; margin-left: -30px; background: var(--ink-500);
+  clip-path: polygon(50% 0, 100% 42%, 100% 100%, 0 100%, 0 42%); }
+.nv { position: absolute; right: 10px; top: 10px; font-size: 15px; font-weight: 800; letter-spacing: .12em; background: var(--y); padding: 6px 10px; border-radius: 8px; }
+#prop b { display: block; font-size: 28px; margin-top: 14px; letter-spacing: -.01em; }
+#prop span.d { font-size: 20px; color: var(--ink-600); font-weight: 700; }
+#chips { left: 72px; right: 72px; top: 1150px; display: flex; gap: 12px; }
+.chip { padding: 14px 20px; border-radius: 16px; background: var(--ink-900); border: 1.5px solid var(--ink-800); font-weight: 700; font-size: 26px; display: flex; align-items: center; gap: 10px; color: var(--ink-600); }
+.chip i { font-style: normal; font-weight: 800; }
+/* subtítulos */
+#sub { left: 72px; right: 72px; top: 1150px; font-weight: 800; font-size: 54px; letter-spacing: -.03em; line-height: 1.1; }
+#sub .w { display: inline-block; }
+#sub .hl { font-style: italic; font-weight: 500; color: var(--y); }
+/* reactivar */
+#rProp { left: 72px; top: 300px; display: flex; align-items: center; gap: 16px; font-weight: 700; font-size: 26px; color: var(--ink-500); white-space: nowrap; }
+#rProp b { color: #fff; }
+#rProp .nvp { font-size: 17px; font-weight: 800; letter-spacing: .12em; background: var(--y); color: var(--ink-950); padding: 7px 12px; border-radius: 8px; }
+.rc { position: absolute; left: 72px; width: 936px; height: 128px; margin-top: -64px; border-radius: 26px; background: var(--ink-900); border: 1.5px solid var(--ink-800);
+  display: flex; align-items: center; gap: 22px; padding: 0 28px; box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+.rc .av { width: 72px; height: 72px; border-radius: 50%; background: var(--y); color: var(--ink-950); display: grid; place-items: center; font-weight: 800; font-size: 26px; flex: none; }
+.rc .nm { font-weight: 800; font-size: 32px; }
+.rc .ds { font-weight: 600; font-size: 22px; color: var(--ink-500); margin-top: 2px; }
+.rc .st { margin-left: auto; position: relative; height: 52px; min-width: 250px; }
+.rc .st span { position: absolute; right: 0; top: 0; height: 52px; display: flex; align-items: center; padding: 0 18px; border-radius: 14px; font-weight: 800; font-size: 21px; letter-spacing: .06em; white-space: nowrap; }
+.rc .s0 { background: var(--ink-800); color: var(--ink-500); }
+.rc .s1 { background: var(--y); color: var(--ink-950); }
+#rBtn { left: 72px; width: 936px; top: 940px; height: 116px; border-radius: 26px; background: var(--y); color: var(--ink-950); display: grid; place-items: center;
+  font-weight: 800; font-size: 38px; letter-spacing: -.01em; box-shadow: 0 24px 70px rgba(255,192,0,.25); }
+#rBtn span { grid-area: 1 / 1; }
+#rPill { left: 50%; top: 1080px; transform: translateX(-50%); }
+#rPill div { padding: 14px 26px; border-radius: 999px; border: 2.5px dashed var(--y); color: var(--y); font-weight: 800; font-size: 26px; white-space: nowrap; background: var(--ink-950); }
+/* cierre */
+#kq { top: 330px; font-size: 100px; }
+#logo { left: 50%; top: 700px; width: 470px; margin-left: -235px; }
+#cta { left: 50%; top: 930px; transform: translateX(-50%); }
+#cta div { height: 112px; padding: 0 56px; border-radius: 999px; background: var(--y); color: var(--ink-950); display: flex; align-items: center; gap: 16px;
+  font-weight: 800; font-size: 40px; white-space: nowrap; }
+#web { left: 0; right: 0; top: 1080px; text-align: center; font-weight: 800; font-size: 26px; letter-spacing: .2em; color: var(--ink-500); }
+</style>
+</head>
+<body>
+<div id="grid"></div>
+<div class="abs" id="glow"></div>
+
+<!-- GANCHO -->
+<div id="hook">
+  <div class="abs" id="topH"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar-blanco.svg" alt="ImperiOS"><span>CRM PARA INMOBILIARIAS</span></div>
+  <div class="k" id="kh"></div>
+  <div class="abs" id="pub">
+    <svg width="40" height="40" viewBox="0 0 40 40"><rect x="4" y="8" width="32" height="24" rx="4" fill="none" stroke="#0A0A0A" stroke-width="3.5"/><path d="M4 15h32" stroke="#0A0A0A" stroke-width="3.5"/></svg>
+    Publicar en el portal
+    <div id="pubNo">Todavía no.</div>
+  </div>
+</div>
+
+<!-- RADAR -->
+<div class="abs" id="topR"><span class="lbl" id="tMatch"><i></i>MATCH CON IA</span><span class="r" id="tCart">TU CARTERA · 2019 → HOY</span></div>
+<div class="abs" id="radar">
+  <div class="ring" data-d="320"></div><div class="ring" data-d="520"></div><div class="ring" data-d="720"></div>
+  <div id="sweep"></div>
+  <div id="dots"></div>
+  <div id="shock"></div>
+  <div class="pulse" id="pu0"></div><div class="pulse" id="pu1"></div><div class="pulse" id="pu2"></div>
+  <div class="hit" id="h0">AM</div><div class="hit" id="h1">LG</div><div class="hit" id="h2">JR</div>
+  <div class="tag" id="g0">A. M.<small>Sin actividad · hace 2 años</small></div>
+  <div class="tag" id="g1">L. G.<small>hace 8 meses</small></div>
+  <div class="tag" id="g2">J. R.<small>hace 3 años</small></div>
+  <div id="prop"><div class="ph"><span class="nv" id="nv">NUEVA</span></div><b>Ático · Chamberí</b><span class="d">3 hab · 390.000 €</span></div>
+</div>
+<div class="abs" id="chips"><span class="chip"><i>✓</i>Zona</span><span class="chip"><i>✓</i>Presupuesto</span><span class="chip"><i>✓</i>Tipo</span><span class="chip"><i>✓</i>Habitaciones</span></div>
+
+<!-- REACTIVAR -->
+<div class="abs" id="rProp"><span class="nvp">NUEVA</span><b>Ático · Chamberí</b>· 3 hab · 390.000 €</div>
+<div class="rc" id="rc0"><div class="av">AM</div><div><div class="nm">A. M.</div><div class="ds">Buscaba ático en Chamberí</div></div><div class="st"><span class="s0">HACE 2 AÑOS</span><span class="s1">✓ REACTIVADO</span></div></div>
+<div class="rc" id="rc1"><div class="av">LG</div><div><div class="nm">L. G.</div><div class="ds">3 hab · hasta 400.000 €</div></div><div class="st"><span class="s0">HACE 8 MESES</span><span class="s1">✓ REACTIVADO</span></div></div>
+<div class="rc" id="rc2"><div class="av">JR</div><div><div class="nm">J. R.</div><div class="ds">Ático o piso alto · centro</div></div><div class="st"><span class="s0">HACE 3 AÑOS</span><span class="s1">✓ REACTIVADO</span></div></div>
+<div class="abs" id="rBtn"><span id="rB0">Reactivar a los 3</span><span id="rB1">✓ 3 clientes reactivados</span></div>
+<div class="abs" id="rPill"><div>Aún no está publicada en el portal</div></div>
+
+<div class="abs" id="sub"></div>
+
+<!-- CIERRE -->
+<div class="k" id="kq"></div>
+<img class="abs" id="logo" src="../../assets_in/brand-kit/assets/logo-imperios-navbar-blanco.svg" alt="ImperiOS">
+<div class="abs" id="cta"><div>Comenta DEMO <svg width="34" height="34" viewBox="0 0 34 34"><path d="M9 25L25 9M12 9h13v13" stroke="#0A0A0A" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+<div class="abs" id="web">IMPERIOS.APP</div>
+
+<svg class="abs" id="cursor" viewBox="0 0 60 60"><path d="M10 6l36 22-16 3-8 15z" fill="#fff" stroke="#0A0A0A" stroke-width="3" stroke-linejoin="round"/></svg>
+
+<script>
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const E = {
+  oc: p => 1 - Math.pow(1 - p, 3), ic: p => p * p * p,
+  ioc: p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2,
+  ob: p => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+  ob2: p => { const c1 = 2.4, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+};
+const k = (t, t0, t1, e = E.oc) => e(clamp((t - t0) / (t1 - t0)));
+const css = (el, o) => { for (const key in o) el.style[key] = o[key]; };
+const show = (el, p, dy = 60, extra = '') => css(el, { opacity: p, transform: `translateY(${(1 - p) * dy}px) ${extra}`, filter: p < .98 ? `blur(${(1 - p) * 10}px)` : 'none' });
+const lerp = (a, b, p) => a + (b - a) * p;
+
+let B = { h: [.3, 3], c: [3.8, 6.3], p: [9.1, 10.4], m: [11, 11.4, 13.5], crit: [15.2, 15.7, 16.7, 17.1], e: [18, 19.3, 20], r: [22, 23.1, 24.4], q: [25.4, 28], logo: 27.7, end: 32.6, wt: {}, sub: [] };
+window.setBeats = b => { B = Object.assign(B, b); };
+window.setVariant = () => {};
+
+// titulares palabra a palabra
+function block(el, lines) {
+  el.innerHTML = ''; const out = [];
+  lines.forEach((ln, li) => {
+    ln.forEach(([txt, cls]) => { const s = document.createElement('span'); s.className = 'w' + (cls ? ' ' + cls : ''); s.textContent = txt; el.appendChild(s); out.push(s); el.appendChild(document.createTextNode(' ')); });
+    if (li < lines.length - 1) el.appendChild(document.createElement('br'));
+  });
+  return out;
+}
+const KH = block($('#kh'), [[['¿Y'], ['si'], ['vendes'], ['tu']], [['próxima'], ['propiedad']], [['antes', 'it'], ['de'], ['publicarla']], [['en'], ['el'], ['portal?']]]);
+const KQ = block($('#kq'), [[['¿Cuántos'], ['clientes']], [['tienes'], ['olvidados', 'it']], [['en'], ['tu'], ['cartera?']]]);
+function words(ws, t, t0, wt) { ws.forEach((w, j) => { const p = k(t - t0, wt[j] ?? j * .1, (wt[j] ?? j * .1) + .3); css(w, { opacity: p, transform: `translateY(${(1 - p) * 40}px)`, filter: p < 1 ? `blur(${(1 - p) * 9}px)` : 'none' }); }); }
+
+// radar: anillos, cartera (puntos deterministas) y los 3 clientes que encajan
+const HITS = [[-210, -200], [265, -35], [-160, 230]], TAGS = [[-310, -300], [140, -155], [-100, 255]];
+$$('.ring').forEach(r => { const d = +r.dataset.d; css(r, { width: d + 'px', height: d + 'px', marginLeft: -d / 2 + 'px', marginTop: -d / 2 + 'px' }); });
+let seed = 7; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+const DOTS = [];
+for (let n = 0; n < 110; n++) {
+  const a = rnd() * Math.PI * 2, r = 175 + rnd() * 180, x = Math.cos(a) * r, y = Math.sin(a) * r, o = .5 + rnd() * .5;
+  if (HITS.some(([hx, hy]) => Math.hypot(hx - x, hy - y) < 64) || (Math.abs(x) < 195 && Math.abs(y) < 135)) continue;
+  const el = document.createElement('div'); el.className = 'dot'; css(el, { left: x + 'px', top: y + 'px' }); $('#dots').appendChild(el);
+  DOTS.push({ el, x, y, o, bear: (Math.atan2(x, -y) * 180 / Math.PI + 360) % 360, d: rnd() });
+}
+HITS.forEach(([x, y], i) => { css($('#h' + i), { left: x + 'px', top: y + 'px' }); css($('#pu' + i), { left: x + 'px', top: y + 'px' }); css($('#g' + i), { left: TAGS[i][0] + 'px', top: TAGS[i][1] + 'px' }); });
+const HB = HITS.map(([x, y]) => (Math.atan2(x, -y) * 180 / Math.PI + 360) % 360);
+const SPEED = 300;   // grados por segundo: una vuelta cada 1,2 s (los pings de audio van igual)
+const lit = (t, bear) => { if (t < B.m[1]) return 0; const lead = (10 + (t - B.m[1]) * SPEED) % 360; const d = (lead - bear + 360) % 360; return Math.exp(-d / 40) * (t - B.m[1] < (d / SPEED) ? 0 : 1); };
+
+function cursorAt(x, y, press = 0) { css($('#cursor'), { transform: `translate(${x - 10}px, ${y - 6}px) scale(${1 - .15 * press})` }); }
+
+function render(t) {
+  const [h0, h1] = B.h, [c0, c1] = B.c, [p0, p1] = B.p, [m0, m1, m2] = B.m, [e0, e1, e2] = B.e, [r0, r1, r2] = B.r, [q0, q1] = B.q;
+  css($('#grid'), { transform: `translate(${(-t * 6) % 40}px, ${(-t * 9) % 40}px)` });
+  css($('#glow'), { opacity: .6 + .4 * Math.sin(t * 1.3) });
+
+  // ---------- GANCHO ----------
+  const hOut = k(t, c0 - .35, c0 + .05, E.ic);
+  css($('#hook'), { display: t < c0 + .1 ? 'block' : 'none', opacity: 1 - hOut, transform: `translateY(${-hOut * 60}px)`, filter: hOut > 0 ? `blur(${hOut * 12}px)` : 'none' });
+  css($('#topH'), { opacity: k(t, 0, .35) });
+  words(KH, t, h0, B.wt.h || []);
+  const wt = B.wt.h || [], tPub = h0 + (wt[8] ?? 2);
+  const pIn = k(t, tPub - .15, tPub + .35, E.ob);
+  css($('#pub'), { opacity: k(t, tPub - .15, tPub + .1), transform: `translateY(${(1 - pIn) * 60}px) scale(${.9 + .1 * pIn}) translateX(${h1 < t ? Math.sin((t - h1) * 40) * 10 * Math.exp(-(t - h1) * 6) : 0}px)` });
+  const no = k(t, h1, h1 + .25, E.ob);
+  css($('#pubNo'), { opacity: no, transform: `scale(${.92 + .08 * no})` });
+  // cursor: entra hacia el botón y se para en «portal»; luego hace clic en «Reactivar»
+  let cx = 1200, cy = 1500, cp = 0, cv = 0;
+  if (t < c0) { const a = k(t, tPub + .1, h1 - .05, E.ioc); cx = lerp(1100, 560, a); cy = lerp(1350, 975, a); cv = k(t, tPub + .1, tPub + .3) * (1 - hOut); }
+  else if (t > r0) { const a = k(t, r0 + .5, r1 - .1, E.ioc); cx = lerp(1100, 640, a); cy = lerp(1400, 1010, a); cp = Math.sin(k(t, r1 - .06, r1 + .14) * Math.PI); cv = k(t, r0 + .5, r0 + .7) * (1 - k(t, r1 + .6, r1 + .9)); }
+  cursorAt(cx, cy, cp); css($('#cursor'), { opacity: cv });
+
+  // ---------- RADAR ----------
+  const rOut = k(t, r0 - .1, r0 + .45, E.ic);
+  const rv = t > c0 - .1 && t < q0 + .1;
+  css($('#radar'), { display: rv ? 'block' : 'none', opacity: 1 - rOut, transform: `scale(${1 - .18 * rOut})`, filter: rOut > 0 ? `blur(${rOut * 6}px)` : 'none' });
+  css($('#topR'), { display: rv ? 'flex' : 'none', opacity: 1 - rOut });
+  show($('#tCart'), k(t, c0 + .2, c0 + .6), 20);
+  show($('#tMatch'), k(t, m1 - .1, m1 + .3), 20);
+  $$('.ring').forEach((r, i) => { const p = k(t, c0 + i * .12, c0 + .7 + i * .12, E.ob); css(r, { opacity: p, transform: `scale(${p})` }); });
+  // la propiedad cae: golpe y onda
+  const land = p0 + .42, pd = k(t, p0, land, E.ic);
+  const shake = t > land ? Math.sin((t - land) * 50) * 8 * Math.exp(-(t - land) * 9) : 0;
+  css($('#prop'), { opacity: k(t, p0, p0 + .15), transform: `translateY(${(1 - pd) * -520}px) scale(${1.35 - .35 * pd + (t > land ? .06 * Math.sin(k(t, land, land + .3) * Math.PI) : 0)})` });
+  css($('#dots'), { transform: `translateY(${shake}px)` });
+  const sk = k(t, land, land + .8);
+  css($('#shock'), { opacity: t > land ? .7 * (1 - sk) : 0, transform: `scale(${.6 + 1.6 * sk})` });
+  const nvp = k(t, p1, p1 + .3, E.ob2);
+  css($('#nv'), { transform: `scale(${nvp})`, opacity: nvp > .01 ? 1 : 0 });
+  // cartera: aparece blanca, se apaga con «gente que buscaba casa…», el barrido la ilumina al pasar
+  const dim = k(t, c1 + .3, c1 + 1.6, E.ioc);
+  DOTS.forEach(D => {
+    const a = k(t, c0 + .25 + D.d * 1.3, c0 + .55 + D.d * 1.3, E.ob2);
+    const L = lit(t, D.bear) * (t < r0 ? 1 : 0);
+    const base = lerp(235, 74, dim), rr = lerp(base, 255, L), gg = lerp(base, 228, L), bb = lerp(base, 110, L);
+    css(D.el, { opacity: a * D.o * (1 - .35 * dim) + L * .4, transform: `scale(${a * (1 + .5 * L)})`, background: `rgb(${rr|0},${gg|0},${bb|0})` });
+  });
+  css($('#sweep'), { opacity: k(t, m1 - .2, m1 + .3) * (1 - k(t, e1 + .4, e1 + 1.2)), transform: `rotate(${(t - m1) * SPEED}deg)` });
+  // los 3 clientes que encajan
+  HITS.forEach((_, i) => {
+    const ti = e1 + i * .15, on = k(t, ti, ti + .45, E.ob2), app = k(t, c0 + .3, c0 + .7, E.ob2);
+    const L = lit(t, HB[i]), base = lerp(235, 74, dim);
+    const g = on, col = `rgb(${lerp(lerp(base, 255, L), 255, g)|0},${lerp(lerp(base, 228, L), 213, g)|0},${lerp(lerp(base, 110, L), 0, g)|0})`;
+    css($('#h' + i), { background: col, color: g > .5 ? 'var(--ink-950)' : 'transparent', transform: `scale(${app * (.28 + .72 * on)})`,
+      boxShadow: g > 0 ? `0 0 0 ${10 * g}px rgba(255,213,0,.18), 0 0 ${60 * g}px rgba(255,192,0,${.55 * g})` : 'none', opacity: app });
+    const pp = ((t - ti - .3) % 1.1 + 1.1) % 1.1 / 1.1;
+    css($('#pu' + i), { opacity: t > ti + .3 && t < r0 ? .6 * (1 - pp) : 0, transform: `scale(${1 + 1.4 * pp})` });
+    const tg = k(t, e2 + .1 + i * .18, e2 + .45 + i * .18, E.ob);
+    css($('#g' + i), { opacity: k(t, e2 + .1 + i * .18, e2 + .25 + i * .18), transform: `translateY(${(1 - tg) * 20}px) scale(${.85 + .15 * tg})` });
+  });
+  // criterios del match (en el sitio de los subtítulos)
+  const chV = k(t, B.crit[0] - .35, B.crit[0] - .05) * (1 - k(t, e0 - .1, e0 + .15));
+  css($('#chips'), { opacity: chV, display: chV > 0 ? 'flex' : 'none' });
+  $$('#chips .chip').forEach((c, i) => {
+    const p = k(t, B.crit[i], B.crit[i] + .3, E.ob2), on = t >= B.crit[i];
+    css(c, { transform: `scale(${on ? .9 + .1 * p : .9})`, background: on ? 'var(--ink-50)' : '', color: on ? 'var(--ink-950)' : '', borderColor: on ? 'var(--ink-50)' : '' });
+    css(c.querySelector('i'), { color: on ? 'var(--ink-950)' : 'transparent' });
+  });
+
+  // ---------- REACTIVAR ----------
+  const rv2 = t > r0 - .05 && t < q0 + .4, rEnd = k(t, q0 - .3, q0 + .1, E.ic);
+  [$('#rProp'), $('#rBtn'), $('#rPill'), ...$$('.rc')].forEach(el => css(el, { display: rv2 ? '' : 'none' }));
+  show($('#rProp'), k(t, r0 + .15, r0 + .5) * (1 - rEnd), 30);
+  HITS.forEach(([hx, hy], i) => {
+    const a = k(t, r0 + i * .08, r0 + .55 + i * .08, E.oc), ty = 470 + i * 150;
+    const x = lerp(540 + hx, 540, a), y = lerp(700 + hy, ty, a);
+    css($('#rc' + i), { top: y + 'px', transform: `translateX(${x - 540}px) scale(${lerp(.12, 1, a)})`, opacity: k(t, r0 + i * .08, r0 + .2 + i * .08) * (1 - rEnd),
+      filter: rEnd > 0 ? `blur(${rEnd * 10}px)` : 'none' });
+    const ok = k(t, r1 + .2 + i * .12, r1 + .4 + i * .12, E.ob2);
+    const st = $('#rc' + i).querySelectorAll('.st span');
+    css(st[0], { opacity: 1 - k(t, r1 + .2 + i * .12, r1 + .3 + i * .12) });
+    css(st[1], { opacity: k(t, r1 + .2 + i * .12, r1 + .3 + i * .12), transform: `scale(${.8 + .2 * ok})` });
+    css($('#rc' + i), { borderColor: ok > .5 ? 'var(--y)' : '' });
+  });
+  const bIn = k(t, r0 + .45, r0 + .85, E.ob), press = Math.sin(k(t, r1 - .06, r1 + .14) * Math.PI);
+  css($('#rBtn'), { opacity: k(t, r0 + .45, r0 + .6) * (1 - rEnd), transform: `translateY(${(1 - bIn) * 50}px) scale(${1 - .05 * press})`,
+    filter: rEnd > 0 ? `blur(${rEnd * 10}px)` : 'none', background: t > r1 + .35 ? 'var(--ink-50)' : '' });
+  css($('#rB0'), { opacity: 1 - k(t, r1 + .3, r1 + .4) });
+  css($('#rB1'), { opacity: k(t, r1 + .3, r1 + .45) });
+  const pl = k(t, r2, r2 + .4, E.ob2);
+  css($('#rPill'), { opacity: k(t, r2, r2 + .15) * (1 - rEnd), transform: `translateX(-50%) scale(${.7 + .3 * pl})` });
+
+  // ---------- SUBTÍTULOS ----------
+  const SB = B.sub || [];
+  let si = -1; SB.forEach((s, j) => { if (t >= s.s) si = j; });
+  const sEl = $('#sub');
+  if (si !== sEl._i) { sEl._i = si; sEl.innerHTML = ''; sEl._w = si >= 0 ? SB[si].w.map(([tx, , hl]) => { const s = document.createElement('span'); s.className = 'w' + (hl ? ' hl' : ''); s.textContent = tx; sEl.appendChild(s); sEl.appendChild(document.createTextNode(' ')); return s; }) : []; }
+  if (si >= 0) {
+    const s = SB[si], nx = SB[si + 1] ? SB[si + 1].s : 1e9, end = Math.min(s.e + .5, nx);
+    const vis = k(t, s.s, s.s + .12) * (1 - k(t, end - .12, end));
+    css(sEl, { opacity: vis });
+    sEl._w.forEach((w, j) => { const p = k(t, s.w[j][1] - .06, s.w[j][1] + .14); css(w, { opacity: .28 + .72 * p, transform: `translateY(${(1 - p) * 10}px)` }); });
+  } else css(sEl, { opacity: 0 });
+
+  // ---------- CIERRE ----------
+  const cv2 = t > q0 - .1;
+  [$('#kq'), $('#logo'), $('#cta'), $('#web')].forEach(el => css(el, { display: cv2 ? '' : 'none' }));
+  words(KQ, t, q0, B.wt.q || []);
+  const lg = k(t, B.logo, B.logo + .5, E.ob);
+  css($('#logo'), { opacity: k(t, B.logo, B.logo + .2), transform: `scale(${.85 + .15 * lg})`, filter: lg < .98 ? `blur(${(1 - lg) * 10}px)` : 'none' });
+  const cb = k(t, q1 + .2, q1 + .55, E.ob2), pulse = t > q1 + .9 ? 1 + .04 * Math.sin((t - q1 - .9) * 6) : 1;
+  css($('#cta'), { opacity: k(t, q1 + .2, q1 + .35), transform: `translateX(-50%) scale(${(.7 + .3 * cb) * pulse})` });
+  show($('#web'), k(t, q1 + .5, q1 + .9), 20);
+  // fundido final
+  css(document.body, { opacity: 1 });
+}
+window.render = render;
+window.ready = document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => i.onload = r))));
+</script>
+</body>
+</html>

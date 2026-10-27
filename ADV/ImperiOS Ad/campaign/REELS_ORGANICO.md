@@ -26,7 +26,7 @@ nada de datos reales de clientes. Las capturas del CRM se revisan con Brian ante
 | 6 | 2 | A | «Antes / después» | Excel + notas + mensajes sueltos → todo en un panel | Enlace en la bio |
 | 7 | 3 | F | «¿Cuánto tardas en contestar a un lead nuevo?» | Por qué la rapidez importa y cómo organizarse para responder antes (sin cifras inventadas) | Guárdalo |
 | 8 | 3 | P | «Tu agenda, la de todo tu equipo» | Visita asignada a un agente + recordatorio automático | Comenta DEMO |
-| 9 | 3 | A | «Lo que tienes que preguntar en el primer mensaje» | Zona, presupuesto, tipo de inmueble, plazo: lo que luego usa el match | Guárdalo para tu equipo |
+| 9 | 3 | A | «¿Y si la vendes antes de publicarla?» (formato radar) | Match: la propiedad nueva se cruza con la cartera de clientes antiguos y se encienden los que encajan | Comenta DEMO |
 | 10 | 4 | F | «“Ese cliente lo llevaba yo”» | Situación de equipo con humor: quién atiende a quién y cómo evitar el lío | Etiqueta a tu equipo |
 | 11 | 4 | P | «¿Qué campañas te traen clientes de verdad?» | Panel de rendimiento por campaña y por propiedad | Comenta DEMO |
 | 12 | 4 | F + P | «ImperiOS en 30 segundos» | Brian presenta y la pantalla real enseña el recorrido: lead → match → visita | Pide tu demo gratis (enlace en la bio) |

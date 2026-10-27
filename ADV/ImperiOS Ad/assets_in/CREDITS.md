@@ -25,3 +25,4 @@
 | VO Reel R6 (`vo/starter/reel-r6-antes-despues.mp3` + `.words.json`) | ElevenLabs, voz Cristina, eleven_v4, 22/10/2026, «ImperiOS's Workspace» (Starter): 727 créditos + 165 de Scribe | Plan Starter: uso comercial permitido |
 | Gancho R6 (`vo/starter/reel-r6-gancho.mp3`; montaje `reel-r6-v2.wav`) | ElevenLabs, voz Cristina, eleven_v4, 25/10/2026, «ImperiOS's Workspace» (Starter): 40 créditos | Plan Starter: uso comercial permitido |
 | Cierre R6 (`vo/starter/reel-r6-cierre.mp3`) | ElevenLabs, voz Cristina, eleven_v4, 25/10/2026, «ImperiOS's Workspace» (Starter): 38 créditos | Plan Starter: uso comercial permitido |
+| VO Reel R9 Match (`vo/starter/reel-r9-match.mp3` + `.words.json`) | ElevenLabs, voz Cristina, eleven_v4, 27/10/2026, «ImperiOS's Workspace» (Starter): 539 créditos; tiempos con Scribe (0 créditos) | Plan Starter: uso comercial permitido |
