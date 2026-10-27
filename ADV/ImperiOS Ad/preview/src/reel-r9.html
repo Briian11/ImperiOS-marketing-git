@@ -251,7 +251,7 @@ function render(t) {
     css($('#g' + i), { opacity: k(t, e2 + .1 + i * .18, e2 + .25 + i * .18), transform: `translateY(${(1 - tg) * 20}px) scale(${.85 + .15 * tg})` });
   });
   // criterios del match (en el sitio de los subtítulos)
-  const chV = k(t, B.crit[0] - .35, B.crit[0] - .05) * (1 - k(t, e0 - .1, e0 + .15));
+  const chV = k(t, B.crit[0] - .25, B.crit[0] - .02) * (1 - k(t, e0 - .1, e0 + .15));
   css($('#chips'), { opacity: chV, display: chV > 0 ? 'flex' : 'none' });
   $$('#chips .chip').forEach((c, i) => {
     const p = k(t, B.crit[i], B.crit[i] + .3, E.ob2), on = t >= B.crit[i];
@@ -288,7 +288,7 @@ function render(t) {
   const sEl = $('#sub');
   if (si !== sEl._i) { sEl._i = si; sEl.innerHTML = ''; sEl._w = si >= 0 ? SB[si].w.map(([tx, , hl]) => { const s = document.createElement('span'); s.className = 'w' + (hl ? ' hl' : ''); s.textContent = tx; sEl.appendChild(s); sEl.appendChild(document.createTextNode(' ')); return s; }) : []; }
   if (si >= 0) {
-    const s = SB[si], nx = SB[si + 1] ? SB[si + 1].s : 1e9, end = Math.min(s.e + .5, nx);
+    const s = SB[si], nx = SB[si + 1] ? SB[si + 1].s : 1e9, end = Math.min(s.e + .5, nx, s.e < B.crit[0] ? B.crit[0] - .3 : 1e9);   // deja sitio a los chips
     const vis = k(t, s.s, s.s + .12) * (1 - k(t, end - .12, end));
     css(sEl, { opacity: vis });
     sEl._w.forEach((w, j) => { const p = k(t, s.w[j][1] - .06, s.w[j][1] + .14); css(w, { opacity: .28 + .72 * p, transform: `translateY(${(1 - p) * 10}px)` }); });
