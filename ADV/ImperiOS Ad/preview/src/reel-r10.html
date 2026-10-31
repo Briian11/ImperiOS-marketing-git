@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reel R10 — ¿Qué campaña te trae clientes?</title>
+<!-- Motor del Reel orgánico R10 (módulo de marketing), 1080×1920, formato «embudos» en claro (distinto del R2/R6/R9).
+     Gancho → tres campañas como embudos que se tragan monedas (todas gastan; solo algunas sueltan clientes) →
+     panel: cada cliente con su campaña de origen → rendimiento y ranking → presupuesto a la que funciona →
+     «Lanzar campaña» desde el CRM → cierre + Comenta DEMO. Datos de ejemplo. Tiempos: timeline-r10.json (build_timeline_r10.py). -->
+<style>
+@font-face { font-family: "Manrope"; src: url("manrope-latin-variable.woff2") format("woff2"); font-weight: 200 800; }
+:root { --ink-950:#0A0A0A; --ink-900:#1C1C1C; --ink-800:#333; --ink-700:#4A4A4A; --ink-600:#727272; --ink-500:#B0B0B0;
+  --ink-300:#D4D4D4; --ink-200:#EBEBEB; --ink-100:#F7F7F3; --ink-50:#FAFAFA; --y:#FFD500; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; }
+body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; position: relative; background: var(--ink-100); color: var(--ink-950); }
+.abs { position: absolute; }
+#grid { position: absolute; inset: -80px; background-image: linear-gradient(to right, rgba(10,10,10,.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(10,10,10,.05) 1px, transparent 1px); background-size: 40px 40px; }
+#glow { left: 540px; top: 860px; width: 1200px; height: 1200px; margin: -600px 0 0 -600px; border-radius: 50%; background: radial-gradient(circle, rgba(255,213,0,.16), rgba(255,213,0,0) 60%); }
+.lbl { display: flex; align-items: center; gap: 14px; font-weight: 800; font-size: 24px; letter-spacing: .16em; white-space: nowrap; }
+.lbl i { width: 36px; height: 6px; border-radius: 3px; background: var(--y); }
+#topH { left: 72px; right: 72px; top: 280px; display: flex; justify-content: space-between; align-items: center; }
+#topH img { height: 52px; display: block; }
+#topH span { font-weight: 800; font-size: 22px; letter-spacing: .16em; color: var(--ink-600); }
+#topM { left: 72px; right: 72px; top: 286px; display: flex; justify-content: space-between; align-items: center; }
+#topM .r { font-weight: 800; font-size: 20px; letter-spacing: .16em; color: var(--ink-500); }
+.k { position: absolute; left: 72px; right: 60px; font-weight: 800; letter-spacing: -.045em; line-height: 1.04; }
+.k .w { display: inline-block; }
+.k .it { font-style: italic; font-weight: 500; box-shadow: inset 0 -18px 0 var(--y); }
+#kh { top: 470px; font-size: 96px; }
+.coin { position: absolute; left: 0; top: 0; width: 44px; height: 44px; margin: -22px; border-radius: 50%; background: var(--y); border: 3px solid #E5BE00;
+  display: grid; place-items: center; font-weight: 800; font-size: 22px; color: var(--ink-950); }
+#funnels { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+.av { position: absolute; width: 50px; height: 50px; margin: -25px; border-radius: 50%; background: var(--ink-950); color: #fff; display: grid; place-items: center;
+  font-weight: 800; font-size: 18px; border: 3px solid var(--ink-100); }
+.fl { position: absolute; width: 320px; margin-left: -160px; text-align: center; }
+.fl .n { font-weight: 800; font-size: 27px; letter-spacing: -.01em; line-height: 1.15; }
+.fl .g { margin-top: 10px; font-weight: 700; font-size: 20px; color: var(--ink-600); letter-spacing: .08em; }
+.fl .g b { display: block; font-size: 44px; letter-spacing: -.02em; color: var(--ink-950); margin-top: 2px; }
+.fl .c { display: inline-block; margin-top: 14px; padding: 10px 18px; border-radius: 14px; font-weight: 800; font-size: 22px; letter-spacing: .04em; }
+/* panel */
+#panel { left: 72px; width: 936px; top: 540px; height: 600px; border-radius: 34px; background: var(--ink-950); color: #fff; box-shadow: 0 40px 100px rgba(10,10,10,.28); overflow: hidden; }
+#panel .ph { position: absolute; left: 36px; right: 36px; top: 30px; display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 20px; letter-spacing: .16em; color: var(--ink-500); }
+#panel .ph .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--y); }
+.crow { position: absolute; left: 30px; right: 30px; height: 100px; border-radius: 20px; background: var(--ink-900); border: 1.5px solid var(--ink-800); display: flex; align-items: center; gap: 18px; padding: 0 22px; }
+.crow .a { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 20px; background: var(--ink-800); flex: none; }
+.crow .nm { font-weight: 700; font-size: 28px; }
+.crow .tg { margin-left: auto; font-weight: 800; font-size: 18px; letter-spacing: .1em; padding: 9px 14px; border-radius: 10px; border: 1.5px solid var(--ink-700); color: var(--ink-500); white-space: nowrap; }
+.krow { position: absolute; left: 30px; right: 30px; height: 132px; border-radius: 22px; background: var(--ink-900); border: 2px solid var(--ink-800); padding: 20px 24px; }
+.krow .t { display: flex; align-items: center; gap: 14px; }
+.krow .pos { font-weight: 800; font-size: 28px; color: var(--ink-500); width: 30px; }
+.krow .nm { font-weight: 800; font-size: 29px; }
+.krow .bd { margin-left: 8px; font-weight: 800; font-size: 16px; letter-spacing: .12em; padding: 7px 12px; border-radius: 9px; white-space: nowrap; }
+.krow .vals { margin-left: auto; display: flex; gap: 28px; text-align: right; }
+.krow .vals div { font-weight: 800; font-size: 28px; }
+.krow .vals small { display: block; font-weight: 700; font-size: 14px; letter-spacing: .12em; color: var(--ink-500); }
+.krow .bar { position: absolute; left: 68px; right: 24px; bottom: 18px; height: 10px; border-radius: 5px; background: var(--ink-800); }
+.krow .bar i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 5px; background: #fff; }
+.krow .bl { position: absolute; left: 68px; bottom: 34px; font-weight: 700; font-size: 15px; letter-spacing: .12em; color: var(--ink-500); }
+/* lanzar campaña */
+#launch { left: 72px; width: 936px; top: 520px; height: 640px; border-radius: 34px; background: var(--ink-50); border: 1.5px solid var(--ink-200); box-shadow: 0 40px 100px rgba(10,10,10,.14); padding: 34px 36px; }
+#launch .ph { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 20px; letter-spacing: .16em; color: var(--ink-600); }
+#launch .ph .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--y); }
+.lp { margin-top: 24px; display: flex; align-items: center; gap: 22px; padding: 18px; border-radius: 22px; background: var(--ink-100); border: 1.5px solid var(--ink-200); }
+.lp .th { width: 120px; height: 90px; border-radius: 14px; background: linear-gradient(135deg, #2a2a2a, #4a4a4a); position: relative; flex: none; }
+.lp .th::before { content: ""; position: absolute; left: 50%; top: 20px; width: 50px; height: 40px; margin-left: -25px; background: var(--ink-500); clip-path: polygon(50% 0, 100% 42%, 100% 100%, 0 100%, 0 42%); }
+.lf { margin-top: 18px; display: flex; align-items: center; justify-content: space-between; padding: 0 6px; height: 64px; border-bottom: 1.5px solid var(--ink-200); font-size: 26px; }
+.lf span { color: var(--ink-600); font-weight: 600; }
+.lf b { font-weight: 800; }
+#lBtn { position: absolute; left: 36px; right: 36px; bottom: 34px; height: 104px; border-radius: 24px; background: var(--y); display: grid; place-items: center; font-weight: 800; font-size: 36px; }
+#lBtn span { grid-area: 1 / 1; display: flex; align-items: center; gap: 14px; }
+#lToast { left: 50%; top: 452px; transform: translateX(-50%); padding: 14px 26px; border-radius: 999px; background: var(--ink-950); color: #fff; font-weight: 800; font-size: 24px; white-space: nowrap; display: flex; align-items: center; gap: 12px; }
+#lToast i { width: 12px; height: 12px; border-radius: 50%; background: var(--y); }
+#cursor { left: 0; top: 0; width: 60px; height: 60px; z-index: 30; filter: drop-shadow(0 10px 20px rgba(0,0,0,.3)); }
+/* subtítulos */
+#sub { left: 72px; right: 72px; top: 1300px; font-weight: 800; font-size: 54px; letter-spacing: -.03em; line-height: 1.12; }
+#sub .w { display: inline-block; }
+#sub .hl { font-style: italic; font-weight: 500; box-shadow: inset 0 -14px 0 var(--y); }
+/* cierre */
+#kq { top: 470px; font-size: 96px; }
+#logo { left: 50%; top: 880px; width: 470px; margin-left: -235px; }
+#cta { left: 50%; top: 1080px; transform: translateX(-50%); }
+#cta div { height: 112px; padding: 0 56px; border-radius: 999px; background: var(--ink-950); color: #fff; display: flex; align-items: center; gap: 16px; font-weight: 800; font-size: 40px; white-space: nowrap; }
+#web { left: 0; right: 0; top: 1230px; text-align: center; font-weight: 800; font-size: 26px; letter-spacing: .2em; color: var(--ink-600); }
+</style>
+</head>
+<body>
+<div id="grid"></div>
+<div class="abs" id="glow"></div>
+
+<!-- GANCHO -->
+<div id="hook">
+  <div class="abs" id="topH"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" alt="ImperiOS"><span>CRM PARA INMOBILIARIAS</span></div>
+  <div class="k" id="kh"></div>
+</div>
+<div class="abs" id="topM"><span class="lbl"><i></i>MARKETING · CAMPAÑAS</span><span class="r">DATOS DE EJEMPLO</span></div>
+
+<div id="hcoins"></div>
+<!-- EMBUDOS (las monedas van debajo del embudo: al entrar en la boca desaparecen) -->
+<div id="fScene">
+  <div id="coins"></div>
+  <svg id="funnels" viewBox="0 0 1080 1920"></svg>
+  <div id="avs"></div>
+  <div id="fl"></div>
+</div>
+
+<!-- PANEL -->
+<div class="abs" id="panel"><div class="ph"><span class="dot"></span><span id="phT">CLIENTES NUEVOS · CON SU ORIGEN</span></div><div id="crows"></div><div id="krows"></div></div>
+
+<!-- LANZAR -->
+<div class="abs" id="launch">
+  <div class="ph"><span class="dot"></span>NUEVA CAMPAÑA</div>
+  <div class="lp"><div class="th"></div><div><div style="font-weight:800;font-size:32px">Piso · Salamanca</div><div style="font-weight:600;font-size:22px;color:var(--ink-600);margin-top:4px">2 hab · 480.000 €</div></div></div>
+  <div class="lf"><span>Objetivo</span><b>Captar compradores</b></div>
+  <div class="lf"><span>Presupuesto diario</span><b style="display:flex;align-items:center;gap:14px"><span style="width:200px;height:10px;border-radius:5px;background:var(--ink-200);position:relative;display:inline-block"><i id="sl" style="position:absolute;left:0;top:0;bottom:0;border-radius:5px;background:var(--ink-950)"></i></span></b></div>
+  <div class="lf"><span>Los clientes entran en</span><b>Tu panel de ImperiOS</b></div>
+  <div id="lBtn"><span id="lB0">Lanzar campaña</span><span id="lB1" style="color:#fff">● Campaña activa</span></div>
+</div>
+<div class="abs" id="lToast"><i></i>Publicada desde ImperiOS</div>
+
+<div class="abs" id="sub"></div>
+
+<!-- CIERRE -->
+<div class="k" id="kq"></div>
+<img class="abs" id="logo" src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" alt="ImperiOS">
+<div class="abs" id="cta"><div>Comenta DEMO <svg width="34" height="34" viewBox="0 0 34 34"><path d="M9 25L25 9M12 9h13v13" stroke="#FFD500" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+<div class="abs" id="web">IMPERIOS.APP</div>
+
+<svg class="abs" id="cursor" viewBox="0 0 60 60"><path d="M10 6l36 22-16 3-8 15z" fill="#fff" stroke="#0A0A0A" stroke-width="3" stroke-linejoin="round"/></svg>
+
+<script>
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const E = {
+  oc: p => 1 - Math.pow(1 - p, 3), ic: p => p * p * p, lin: p => p,
+  ioc: p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2,
+  ob: p => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+  ob2: p => { const c1 = 2.4, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+};
+const k = (t, t0, t1, e = E.oc) => e(clamp((t - t0) / (t1 - t0)));
+const css = (el, o) => { for (const key in o) el.style[key] = o[key]; };
+const show = (el, p, dy = 60, extra = '') => css(el, { opacity: p, transform: `translateY(${(1 - p) * dy}px) ${extra}`, filter: p < .98 ? `blur(${(1 - p) * 10}px)` : 'none' });
+const lerp = (a, b, p) => a + (b - a) * p;
+
+let B = { h: [.3, 1.6, 2.8, 4], f: [5, 7.3, 8.4, 9.8], p: [10.4, 12, 13, 14.1, 15.7], s: [16.4, 17.3, 18.2, 18.9], l: [19.7, 21.1, 22.2], q: [23.2, 25.8], logo: 25.5, end: 30.4, wt: {}, sub: [] };
+window.setBeats = b => { B = Object.assign(B, b); };
+window.setVariant = () => {};
+
+function block(el, lines) {
+  el.innerHTML = ''; const out = [];
+  lines.forEach((ln, li) => {
+    ln.forEach(([txt, cls]) => { const s = document.createElement('span'); s.className = 'w' + (cls ? ' ' + cls : ''); s.textContent = txt; el.appendChild(s); out.push(s); el.appendChild(document.createTextNode(' ')); });
+    if (li < lines.length - 1) el.appendChild(document.createElement('br'));
+  });
+  return out;
+}
+const KH = block($('#kh'), [[['¿Sabes'], ['qué'], ['campaña']], [['te'], ['trae'], ['clientes…', 'it']], [['y'], ['cuál'], ['solo'], ['se'], ['come']], [['tu'], ['presupuesto?', 'it']]]);
+const KQ = block($('#kq'), [[['¿Sabes'], ['cuál'], ['de'], ['tus']], [['campañas']], [['funciona'], ['mejor?', 'it']]]);
+function words(ws, t, t0, wt) { ws.forEach((w, j) => { const p = k(t - t0, wt[j] ?? j * .1, (wt[j] ?? j * .1) + .3); css(w, { opacity: p, transform: `translateY(${(1 - p) * 40}px)`, filter: p < 1 ? `blur(${(1 - p) * 9}px)` : 'none' }); }); }
+
+// ---------- embudos ----------
+const CX = [200, 540, 880], MY = 600, NY = 790, SY = 850, MW = 125, NW = 18, GAP = .3;
+const NAMES = ['Ático ·<br>Chamberí', 'Captación<br>propietarios', 'Pisos ·<br>Retiro'];
+const CLI = [5, 0, 2];
+$('#funnels').innerHTML = CX.map(cx => `
+  <path d="M${cx - MW} ${MY} L${cx + MW} ${MY} L${cx + NW} ${NY} L${cx + NW} ${SY} L${cx - NW} ${SY} L${cx - NW} ${NY} Z" fill="#0A0A0A"/>
+  <path d="M${cx - MW + 30} ${MY + 10} L${cx - NW - 4} ${NY - 6}" stroke="rgba(255,255,255,.18)" stroke-width="10" stroke-linecap="round"/>
+  <rect x="${cx - MW - 8}" y="${MY - 12}" width="${2 * MW + 16}" height="18" rx="9" fill="#0A0A0A"/>
+  <rect x="${cx - MW - 8}" y="${MY - 12}" width="${2 * MW + 16}" height="6" rx="3" fill="#FFD500"/>`).join('');
+$('#fl').innerHTML = CX.map((cx, i) => `<div class="fl" id="fl${i}" style="left:${cx}px;top:960px"><div class="n">${NAMES[i]}</div><div class="g">GASTADO<b id="sp${i}">0 €</b></div><div class="c" id="cl${i}"></div></div>`).join('');
+// monedas: cada embudo tiene su fila; posición pura del tiempo
+const COINS = [];
+for (let f = 0; f < 3; f++) for (let j = 0; j < 30; j++) { const el = document.createElement('div'); el.className = 'coin'; el.textContent = '€'; $('#coins').appendChild(el); COINS.push({ el, f, j, dx: ((j * 37 + f * 13) % 70) - 35 }); }
+const spawn = c => B.f[0] + .3 + c.j * GAP + c.f * .1;
+// monedas del gancho: caen por toda la parte baja
+const HC = [];
+for (let j = 0; j < 14; j++) { const el = document.createElement('div'); el.className = 'coin'; el.textContent = '€'; $('#hcoins').appendChild(el); HC.push({ el, x: 90 + ((j * 263) % 900), d: (j * .11) % 1.1 }); }
+// avatares que salen por abajo: 5 del primero, 2 del tercero
+const AVS = [];
+[[0, 5], [2, 2]].forEach(([f, n]) => { for (let a = 0; a < n; a++) { const el = document.createElement('div'); el.className = 'av'; el.textContent = ['AM', 'LG', 'SP', 'MR', 'DV', 'JR', 'CT'][AVS.length]; if (!AVS.length) css(el, { background: 'var(--y)', color: 'var(--ink-950)' }); $('#avs').appendChild(el); AVS.push({ el, f, a, n }); } });
+const spent = (f, t) => COINS.filter(c => c.f === f && spawn(c) + .5 <= t && spawn(c) < B.p[0] - .3).length * 5;
+
+// ---------- panel ----------
+const CR = [['AM', 'Busca ático · Chamberí', 'ÁTICO CHAMBERÍ'], ['LG', 'Piso 3 hab · Chamberí', 'ÁTICO CHAMBERÍ'], ['JR', 'Piso · Retiro', 'PISOS RETIRO'], ['SP', 'Ático · centro', 'ÁTICO CHAMBERÍ']];
+$('#crows').innerHTML = CR.map(([a, n, g], i) => `<div class="crow" id="cr${i}" style="top:${86 + i * 116}px"><span class="a" style="${i ? '' : 'background:var(--y);color:var(--ink-950)'}">${a}</span><span class="nm">${n}</span><span class="tg">${g}</span></div>`).join('');
+// campañas: orden inicial [Captación, Ático, Retiro] → ranking [Ático, Retiro, Captación]
+const KR = [['Captación propietarios', 1, 2], ['Ático · Chamberí', 0, 0], ['Pisos · Retiro', 2, 1]];   // [nombre, embudo, puesto final]
+$('#krows').innerHTML = KR.map(([n, f], i) => `<div class="krow" id="kr${i}"><div class="t"><span class="pos" id="ps${i}">${i + 1}</span><span class="nm">${n}</span><span class="bd" id="bd${i}"></span>
+  <div class="vals"><div><span id="kg${i}">0 €</span><small>GASTO</small></div><div>${CLI[f]}<small>CLIENTES</small></div><div id="kc${i}">—<small>POR CLIENTE</small></div></div></div>
+  <span class="bl" id="bl${i}">PRESUPUESTO</span><div class="bar"><i id="kb${i}"></i></div></div>`).join('');
+
+function cursorAt(x, y, press = 0) { css($('#cursor'), { transform: `translate(${x - 10}px, ${y - 6}px) scale(${1 - .15 * press})` }); }
+
+function render(t) {
+  const [h0, h1, h2, h3] = B.h, [f0, f1, f2, f3] = B.f, [p0, p1, p2, p3, p4] = B.p, [s0, s1, s2, s3] = B.s, [l0, l1, l2] = B.l, [q0, q1] = B.q;
+  css($('#grid'), { transform: `translate(${(-t * 6) % 40}px, ${(-t * 9) % 40}px)` });
+
+  // ---------- GANCHO ----------
+  const hOut = k(t, f0 - .35, f0 + .05, E.ic);
+  css($('#hook'), { display: t < f0 + .1 ? 'block' : 'none', opacity: 1 - hOut, transform: `translateY(${-hOut * 60}px)`, filter: hOut > 0 ? `blur(${hOut * 12}px)` : 'none' });
+  css($('#topH'), { opacity: k(t, 0, .35) });
+  words(KH, t, h0, B.wt.h || []);
+  HC.forEach(c => { const a = t - (h3 - .15 + c.d); const on = a > 0 && a < 1.3; css(c.el, { display: on ? 'grid' : 'none' }); if (on) css(c.el, { transform: `translate(${c.x}px, ${960 + 640 * a * a}px) rotate(${a * 200}deg)`, opacity: 1 }); });
+
+  // ---------- EMBUDOS ----------
+  const fv = t > f0 - .1 && t < p0 + .5, fOut = k(t, p0 - .15, p0 + .35, E.ic);
+  css($('#fScene'), { display: fv ? 'block' : 'none', opacity: 1 - fOut, transform: `scale(${1 - .1 * fOut})`, transformOrigin: '540px 800px', filter: fOut > 0 ? `blur(${fOut * 10}px)` : 'none' });
+  css($('#topM'), { display: t > f0 - .1 && t < q0 ? 'flex' : 'none', opacity: k(t, f0, f0 + .4) * (1 - k(t, q0 - .3, q0)) });
+  const fin = CX.map((_, i) => k(t, f0 + i * .1, f0 + .55 + i * .1, E.ob));
+  css($('#funnels'), { opacity: k(t, f0, f0 + .2) });
+  $('#funnels').querySelectorAll('path, rect').forEach((el, j) => { const i = Math.floor(j / 4); el.style.transform = `translateY(${(1 - fin[i]) * 120}px)`; el.style.opacity = fin[i]; });
+  COINS.forEach(c => {
+    const ts = spawn(c), a = t - ts, cx = CX[c.f];
+    const leak = c.f === 1 && ts + .8 > f2, live = ts < p0 - .3 && a > 0 && a < (leak ? 1.8 : .85);
+    css(c.el, { display: live ? 'grid' : 'none' });
+    if (!live) return;
+    let x, y;
+    if (a < .5) { const p = a / .5; x = cx + c.dx * (1 - p * .7); y = lerp(400, MY + 10, p * p); }
+    else if (a < .8 || !leak) { const p = (a - .5) / .3; x = cx + c.dx * .3 * (1 - p); y = lerp(MY + 10, SY, p); }
+    else { const p = a - .8; x = cx + Math.sin(c.j) * 40 * p; y = SY + 30 + 900 * p * p + 120 * p; }
+    css(c.el, { transform: `translate(${x}px, ${y}px) rotate(${a * 260 + c.j * 30}deg)`, background: leak && a > .8 ? 'var(--ink-300)' : '', borderColor: leak && a > .8 ? 'var(--ink-500)' : '' });
+  });
+  AVS.forEach(v => {
+    const ts = f2 + (v.f ? .25 + v.a * .45 : .1 + v.a * .32), p = k(t, ts, ts + .45, E.ob);
+    const x = CX[v.f] + (v.a - (v.n - 1) / 2) * 46, y = lerp(SY, 905, p);
+    css(v.el, { opacity: k(t, ts, ts + .1), transform: `translate(${lerp(CX[v.f], x, p)}px, ${y}px) scale(${.6 + .4 * p})`, zIndex: 10 - v.a });
+  });
+  CX.forEach((_, i) => {
+    css($('#fl' + i), { opacity: fin[i], transform: `translateY(${(1 - fin[i]) * 40}px)` });
+    $('#sp' + i).textContent = spent(i, t) + ' €';
+    const pu = Math.sin(k(t, f1, f1 + .4) * Math.PI);
+    css($('#sp' + i), { transform: `scale(${1 + .12 * pu})`, display: 'block', color: pu > .3 ? '#B38F00' : '' });
+    const cl = $('#cl' + i), cp = k(t, f3 + i * .15, f3 + i * .15 + .35, E.ob2);
+    cl.textContent = CLI[i] ? `${CLI[i]} clientes` : '✕ 0 clientes';
+    css(cl, { opacity: k(t, f3 + i * .15, f3 + i * .15 + .1), transform: `scale(${cp})`, background: i === 0 ? 'var(--y)' : i === 1 ? 'var(--ink-200)' : 'var(--ink-950)', color: i === 2 ? '#fff' : i === 1 ? 'var(--ink-600)' : 'var(--ink-950)' });
+  });
+
+  // ---------- PANEL ----------
+  const pv = t > p0 - .05 && t < l0 + .6, pIn = k(t, p0 + .22, p0 + .7, E.ob), pOut = k(t, l0 - .05, l0 + .45, E.ic);
+  const bump = Math.sin(k(t, p4, p4 + .4) * Math.PI);
+  css($('#panel'), { display: pv ? 'block' : 'none', opacity: k(t, p0 + .22, p0 + .4), transform: `translateY(${(1 - pIn) * 120}px) translateX(${-pOut * 1150}px) rotate(${-pOut * 4}deg) scale(${1 + .02 * bump})` });
+  $('#phT').textContent = t < p3 ? 'CLIENTES NUEVOS · CON SU ORIGEN' : 'RENDIMIENTO DE CAMPAÑAS';
+  const cOut = k(t, p3 - .15, p3 + .15, E.ic);
+  CR.forEach((_, i) => {
+    const a = k(t, p1 + i * .22, p1 + .4 + i * .22, E.ob);
+    css($('#cr' + i), { opacity: k(t, p1 + i * .22, p1 + .1 + i * .22) * (1 - cOut), transform: `translateX(${(1 - a) * 80}px)` });
+    const g = $('#cr' + i).querySelector('.tg'), on = t > p2 + i * .12;
+    css(g, { background: on ? 'var(--y)' : '', color: on ? 'var(--ink-950)' : '', borderColor: on ? 'var(--y)' : '', transform: `scale(${on ? 1 + .1 * Math.sin(k(t, p2 + i * .12, p2 + .3 + i * .12) * Math.PI) : 1})` });
+  });
+  const so = k(t, s1, s1 + .6, E.ioc), bud = k(t, s3, s3 + .8, E.ioc);
+  const BUD = [[33, 10], [33, 60], [33, 30]];
+  KR.forEach(([n, f, fin2], i) => {
+    const a = k(t, p3 + .1 + i * .15, p3 + .5 + i * .15, E.ob);
+    const y = 86 + lerp(i, fin2, so) * 160;
+    css($('#kr' + i), { top: y + 'px', opacity: k(t, p3 + .1 + i * .15, p3 + .2 + i * .15), transform: `translateX(${(1 - a) * 80}px)`, zIndex: f === 0 ? 3 : 1,
+      borderColor: f === 0 && t > s1 + .3 ? 'var(--y)' : '', boxShadow: f === 0 && t > s1 + .3 ? '0 0 40px rgba(255,213,0,.25)' : 'none' });
+    const g = spent(f, 1e9);
+    $('#kg' + i).textContent = g + ' €';
+    $('#kc' + i).firstChild.textContent = CLI[f] ? Math.round(g / CLI[f]) + ' €' : '—';
+    $('#ps' + i).textContent = t > s1 + .3 ? fin2 + 1 : i + 1;
+    css($('#ps' + i), { color: f === 0 && t > s1 + .3 ? 'var(--y)' : '' });
+    const bd = $('#bd' + i), bp = k(t, s1 + .35, s1 + .65, E.ob2);
+    if (f === 0) { bd.textContent = 'LA MEJOR'; css(bd, { background: 'var(--y)', color: 'var(--ink-950)', opacity: bp > 0 ? 1 : 0, transform: `scale(${bp})` }); }
+    else if (f === 1) { bd.textContent = 'REVISAR'; css(bd, { background: 'var(--ink-800)', color: 'var(--ink-500)', opacity: bp > 0 ? 1 : 0, transform: `scale(${bp})` }); }
+    else css(bd, { opacity: 0 });
+    css($('#kr' + i).querySelector('.nm'), { color: f === 1 && t > s1 + .3 ? 'var(--ink-500)' : '' });
+    const bw = lerp(BUD[f][0], BUD[f][1], bud);
+    css($('#kb' + i), { width: bw + '%', background: f === 0 ? 'var(--y)' : '#fff' });
+    css($('#bl' + i), { opacity: k(t, s2, s2 + .3) });
+    css($('#kr' + i).querySelector('.bar'), { opacity: k(t, s2, s2 + .3) });
+  });
+
+  // ---------- LANZAR ----------
+  const lv = t > l0 - .05 && t < q0 + .4, lIn = k(t, l0 + .05, l0 + .6, E.ob), lEnd = k(t, q0 - .3, q0 + .1, E.ic);
+  css($('#launch'), { display: lv ? 'block' : 'none', opacity: k(t, l0 + .05, l0 + .25) * (1 - lEnd), transform: `translateX(${(1 - lIn) * 900}px) rotate(${(1 - lIn) * 4}deg)`, filter: lEnd > 0 ? `blur(${lEnd * 10}px)` : 'none' });
+  css($('#sl'), { width: (30 + 40 * k(t, l0 + .5, l0 + 1.2, E.ioc)) + '%' });
+  const press = Math.sin(k(t, l1 - .06, l1 + .14) * Math.PI);
+  css($('#lBtn'), { transform: `scale(${1 - .05 * press})`, background: t > l1 + .3 ? 'var(--ink-950)' : '' });
+  css($('#lB0'), { opacity: 1 - k(t, l1 + .25, l1 + .35) });
+  css($('#lB1'), { opacity: k(t, l1 + .3, l1 + .45) });
+  const tp = k(t, l2, l2 + .4, E.ob2);
+  css($('#lToast'), { display: lv ? 'flex' : 'none', opacity: k(t, l2, l2 + .12) * (1 - lEnd), transform: `translateX(-50%) translateY(${(1 - tp) * 20}px) scale(${.8 + .2 * tp})` });
+  // cursor
+  let cv = 0, cx = 1150, cy = 1500, cp = 0;
+  if (t > l0) { const a = k(t, l0 + .5, l1 - .1, E.ioc); cx = lerp(1150, 620, a); cy = lerp(1550, 1110, a); cp = press; cv = k(t, l0 + .5, l0 + .7) * (1 - k(t, l1 + .6, l1 + .9)); }
+  cursorAt(cx, cy, cp); css($('#cursor'), { opacity: cv });
+
+  // ---------- SUBTÍTULOS ----------
+  const SB = B.sub || [];
+  let si = -1; SB.forEach((s, j) => { if (t >= s.s) si = j; });
+  const sEl = $('#sub');
+  if (si !== sEl._i) { sEl._i = si; sEl.innerHTML = ''; sEl._w = si >= 0 ? SB[si].w.map(([tx, , hl]) => { const s = document.createElement('span'); s.className = 'w' + (hl ? ' hl' : ''); s.textContent = tx; sEl.appendChild(s); sEl.appendChild(document.createTextNode(' ')); return s; }) : []; }
+  if (si >= 0) {
+    const s = SB[si], nx = SB[si + 1] ? SB[si + 1].s : 1e9, end = Math.min(s.e + .5, nx, q0 - .1);
+    css(sEl, { opacity: k(t, s.s, s.s + .12) * (1 - k(t, end - .12, end)) });
+    sEl._w.forEach((w, j) => { const p = k(t, s.w[j][1] - .06, s.w[j][1] + .14); css(w, { opacity: .25 + .75 * p, transform: `translateY(${(1 - p) * 10}px)` }); });
+  } else css(sEl, { opacity: 0 });
+
+  // ---------- CIERRE ----------
+  const cv2 = t > q0 - .1;
+  [$('#kq'), $('#logo'), $('#cta'), $('#web')].forEach(el => css(el, { display: cv2 ? '' : 'none' }));
+  words(KQ, t, q0, B.wt.q || []);
+  const lg = k(t, B.logo, B.logo + .5, E.ob);
+  css($('#logo'), { opacity: k(t, B.logo, B.logo + .2), transform: `scale(${.85 + .15 * lg})`, filter: lg < .98 ? `blur(${(1 - lg) * 10}px)` : 'none' });
+  const cb = k(t, q1 + .2, q1 + .55, E.ob2), pulse = t > q1 + .9 ? 1 + .04 * Math.sin((t - q1 - .9) * 6) : 1;
+  css($('#cta'), { opacity: k(t, q1 + .2, q1 + .35), transform: `translateX(-50%) scale(${(.7 + .3 * cb) * pulse})` });
+  show($('#web'), k(t, q1 + .5, q1 + .9), 20);
+}
+window.render = render;
+window.ready = document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => i.onload = r))));
+</script>
+</body>
+</html>

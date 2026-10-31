@@ -62,3 +62,28 @@ Sustituye al R9 «4 preguntas». Formato nuevo, en oscuro: la cartera de cliente
 
 Motor `preview/src/reel-r9.html`, tiempos `preview/build_timeline_r9.py`, render `preview/build_r9.sh`.
 Música en Fa# menor a 110 BPM con pings de radar (distinta del R2/R6). Subtítulos frase a frase con la palabra clave en amarillo.
+
+---
+
+## R10 (31/10/2026) · «¿Qué campaña te trae clientes?» — módulo de marketing, formato embudos en claro (~30 s)
+
+Funciones confirmadas por Brian: medir campañas (clientes por campaña, ranking), crear y lanzar campañas desde el CRM y
+métricas de rendimiento de las campañas de anuncios. No se nombra a la plataforma de anuncios; datos marcados «DATOS DE EJEMPLO».
+
+| Voz | En pantalla |
+|---|---|
+| ¿Sabes qué campaña te trae clientes… y cuál solo se come tu presupuesto? | Logo + «CRM PARA INMOBILIARIAS»; titular palabra a palabra; lluvia de monedas |
+| Tienes tres anuncios funcionando a la vez. Todos gastan. | Tres embudos (Ático · Chamberí, Captación propietarios, Pisos · Retiro) tragando monedas; contadores de gasto |
+| Pero no todos traen clientes. | Del primero salen 5 clientes, del tercero 2; por el segundo se escapan las monedas: «✕ 0 clientes» |
+| Con Imperios, cada cliente entra con su campaña de origen. Y ves el rendimiento de todas en el mismo panel. | Panel oscuro: clientes con su etiqueta de campaña → tabla de rendimiento (gasto, clientes, coste por cliente) |
+| Así sabes cuál funciona… y dónde poner tu presupuesto. | Ranking: «LA MEJOR» / «REVISAR»; las barras de presupuesto se mueven a la campaña buena |
+| Y la siguiente campaña, la lanzas desde el propio CRM. | Ficha «Nueva campaña» (Piso · Salamanca) → clic en «Lanzar campaña» → «Campaña activa» |
+| ¿Sabes cuál de tus campañas funciona mejor? Comenta demo y te enseño cómo medirlo. | Pregunta + logo + botón negro «Comenta DEMO» |
+
+Motor `preview/src/reel-r10.html`, tiempos `preview/build_timeline_r10.py`, render `preview/build_r10.sh`, portada `preview/src/portada-r10.html`.
+Música en Si bemol mayor a 104 BPM con «clinc» de monedas.
+
+## Carrusel · «Las 4 métricas que tienes que mirar en tus campañas» (31/10/2026)
+
+6 diapositivas 1080×1350 (`preview/src/carrusel-metricas.html#1…6` → `preview/out/carruseles/metricas/`):
+portada · 01 coste por cliente · 02 clientes por propiedad · 03 origen de cada cliente · 04 cuándo apagarla · cierre (ranking + Comenta DEMO).

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Portada Reel — R10 Campañas</title>
+<!-- Portada 1080×1920 del Reel R10 «¿Qué campaña te trae clientes?»: fondo crema, logo negro, titular con subrayado amarillo
+     y los tres embudos (uno suelta clientes, otro solo pierde monedas). Todo dentro del recorte 3:4 de la cuadrícula (y 240–1680). -->
+<style>
+@font-face { font-family: "Manrope"; src: url("manrope-latin-variable.woff2") format("woff2"); font-weight: 200 800; }
+:root { --ink-950:#0A0A0A; --ink-600:#727272; --ink-500:#B0B0B0; --ink-300:#D4D4D4; --ink-200:#EBEBEB; --ink-100:#F7F7F3; --y:#FFD500; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; }
+body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; position: relative; background: var(--ink-100); color: var(--ink-950); }
+.abs { position: absolute; }
+.grid { position: absolute; inset: 0; background-image: linear-gradient(to right, rgba(10,10,10,.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(10,10,10,.05) 1px, transparent 1px); background-size: 40px 40px; }
+.top { left: 72px; right: 72px; top: 290px; display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 24px; letter-spacing: .16em; color: var(--ink-600); }
+h1 { position: absolute; left: 72px; right: 60px; top: 410px; font-weight: 800; font-size: 118px; letter-spacing: -.045em; line-height: 1.02; }
+h1 em { font-style: italic; font-weight: 500; box-shadow: inset 0 -20px 0 var(--y); }
+.coin { position: absolute; width: 50px; height: 50px; margin: -25px; border-radius: 50%; background: var(--y); border: 3px solid #E5BE00; display: grid; place-items: center; font-weight: 800; font-size: 24px; }
+.coin.g { background: var(--ink-300); border-color: var(--ink-500); }
+.av { position: absolute; width: 56px; height: 56px; margin: -28px; border-radius: 50%; background: var(--ink-950); color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 19px; border: 3px solid var(--ink-100); }
+.lb { position: absolute; width: 300px; margin-left: -150px; text-align: center; font-weight: 800; font-size: 26px; line-height: 1.15; }
+.pill { display: inline-block; margin-top: 12px; padding: 10px 18px; border-radius: 14px; font-weight: 800; font-size: 22px; }
+.foot { position: absolute; left: 72px; right: 72px; top: 1580px; display: flex; justify-content: space-between; font-weight: 800; font-size: 26px; letter-spacing: .16em; }
+</style>
+</head>
+<body>
+<div class="grid"></div>
+<div class="abs top"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" alt="ImperiOS" style="height:70px;display:block"><span>MARKETING</span></div>
+<h1>¿Qué campaña<br>te trae <em>clientes?</em></h1>
+<svg class="abs" style="left:0;top:0" width="1080" height="1920" id="f"></svg>
+<div id="x"></div>
+<div class="foot"><span style="color:var(--ink-600)">IMPERIOS.APP</span><span>COMENTA DEMO ↗</span></div>
+<script>
+const CX = [200, 540, 880], MY = 940, NY = 1120, SY = 1175, MW = 125, NW = 18;
+document.getElementById('f').innerHTML = CX.map(cx => `
+  <path d="M${cx - MW} ${MY} L${cx + MW} ${MY} L${cx + NW} ${NY} L${cx + NW} ${SY} L${cx - NW} ${SY} L${cx - NW} ${NY} Z" fill="#0A0A0A"/>
+  <path d="M${cx - MW + 30} ${MY + 10} L${cx - NW - 4} ${NY - 6}" stroke="rgba(255,255,255,.18)" stroke-width="10" stroke-linecap="round"/>
+  <rect x="${cx - MW - 8}" y="${MY - 12}" width="${2 * MW + 16}" height="18" rx="9" fill="#0A0A0A"/>
+  <rect x="${cx - MW - 8}" y="${MY - 12}" width="${2 * MW + 16}" height="6" rx="3" fill="#FFD500"/>`).join('');
+const X = document.getElementById('x');
+const add = (cls, x, y, txt, r = 0) => { const d = document.createElement('div'); d.className = cls; d.style.left = x + 'px'; d.style.top = y + 'px'; d.style.transform = `rotate(${r}deg)`; d.textContent = txt; X.appendChild(d); };
+[[170, 820, 20], [235, 870, -30], [530, 800, 10], [575, 868, 40], [860, 830, -15], [905, 885, 25]].forEach(([x, y, r]) => add('coin', x, y, '€', r));
+[[528, 1240, 30], [552, 1330, -20]].forEach(([x, y, r]) => add('coin g', x, y, '€', r));
+['AM', 'LG', 'SP'].forEach((a, i) => add('av', 145 + i * 52, 1240, a));
+X.lastChild.previousSibling.previousSibling.style.background = 'var(--y)'; X.lastChild.previousSibling.previousSibling.style.color = 'var(--ink-950)';
+['JR'].forEach(a => add('av', 880, 1240, a));
+X.insertAdjacentHTML('beforeend', `
+  <div class="lb" style="left:200px;top:1300px">Ático · Chamberí<br><span class="pill" style="background:var(--y)">3 clientes</span></div>
+  <div class="lb" style="left:540px;top:1390px;color:var(--ink-600)">Captación<br><span class="pill" style="background:var(--ink-200)">✕ 0 clientes</span></div>
+  <div class="lb" style="left:880px;top:1300px">Pisos · Retiro<br><span class="pill" style="background:var(--ink-950);color:#fff">1 cliente</span></div>`);
+window.ready = document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => i.onload = r))));
+</script>
+</body>
+</html>

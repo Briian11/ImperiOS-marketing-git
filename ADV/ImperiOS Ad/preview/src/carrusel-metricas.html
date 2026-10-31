@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Carrusel — 4 métricas de campañas</title>
+<!-- Carrusel del feed (1080×1350, 4:5) «Las 4 métricas que tienes que mirar en tus campañas inmobiliarias».
+     Una diapositiva por #n (1–6). Fondo crema, tipografía Manrope, amarillo #FFD500 en detalles, paneles oscuros del kit.
+     Cifras solo como ejemplo y marcadas «Ejemplo». Exportar con: node carrusel.js src/carrusel-metricas.html 6 <salida> -->
+<style>
+@font-face { font-family: "Manrope"; src: url("manrope-latin-variable.woff2") format("woff2"); font-weight: 200 800; }
+:root { --ink-950:#0A0A0A; --ink-900:#1C1C1C; --ink-800:#333; --ink-700:#4A4A4A; --ink-600:#727272; --ink-500:#B0B0B0;
+  --ink-300:#D4D4D4; --ink-200:#EBEBEB; --ink-100:#F7F7F3; --ink-50:#FAFAFA; --y:#FFD500; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1350px; overflow: hidden; }
+body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; position: relative; background: var(--ink-100); color: var(--ink-950); }
+.abs { position: absolute; }
+.grid { position: absolute; inset: 0; background-image: linear-gradient(to right, rgba(10,10,10,.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(10,10,10,.05) 1px, transparent 1px); background-size: 40px 40px; }
+.slide { position: absolute; inset: 0; display: none; }
+.slide.on { display: block; }
+.head { left: 84px; right: 84px; top: 72px; display: flex; justify-content: space-between; align-items: center; }
+.head img { height: 48px; display: block; }
+.head span { font-weight: 800; font-size: 22px; letter-spacing: .16em; color: var(--ink-600); }
+.foot { left: 84px; right: 84px; bottom: 64px; display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 22px; letter-spacing: .16em; color: var(--ink-600); }
+.foot b { color: var(--ink-950); }
+.lbl { display: flex; align-items: center; gap: 14px; font-weight: 800; font-size: 24px; letter-spacing: .16em; }
+.lbl i { width: 36px; height: 6px; border-radius: 3px; background: var(--y); }
+h1 { font-weight: 800; letter-spacing: -.045em; line-height: 1.0; }
+h1 em, h2 em { font-style: italic; font-weight: 500; }
+.ul { box-shadow: inset 0 -16px 0 var(--y); }
+h2 { font-weight: 800; font-size: 84px; letter-spacing: -.04em; line-height: 1.02; }
+.num { font-weight: 800; font-size: 30px; letter-spacing: .1em; display: inline-flex; align-items: center; gap: 14px; }
+.num b { display: inline-grid; place-items: center; width: 64px; height: 64px; border-radius: 18px; background: var(--ink-950); color: var(--y); font-size: 30px; letter-spacing: 0; }
+p.body { font-weight: 600; font-size: 34px; line-height: 1.35; color: var(--ink-700); }
+p.body b { color: var(--ink-950); }
+.card { background: var(--ink-50); border: 1.5px solid var(--ink-200); border-radius: 28px; box-shadow: 0 24px 60px rgba(10,10,10,.07); }
+.dark { background: var(--ink-950); color: #fff; border-radius: 30px; box-shadow: 0 30px 80px rgba(10,10,10,.25); }
+.ej { position: absolute; top: 22px; right: 24px; font-size: 16px; font-weight: 800; letter-spacing: .14em; color: var(--ink-500); }
+.dark .ej { color: var(--ink-600); }
+.dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--y); }
+</style>
+</head>
+<body>
+<div class="grid"></div>
+
+<!-- 1 · PORTADA -->
+<section class="slide" data-n="1">
+  <div class="abs head"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" alt="ImperiOS"><span>MARKETING</span></div>
+  <div class="abs lbl" style="left:84px;top:230px"><i></i>PARA TU INMOBILIARIA</div>
+  <h1 class="abs" style="left:80px;right:60px;top:296px;font-size:98px">Las <span class="ul">4 métricas</span><br>que tienes que mirar<br>en tus <em>campañas.</em></h1>
+  <div class="abs dark" style="left:84px;right:84px;top:690px;height:380px;padding:34px 36px">
+    <div style="display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px;letter-spacing:.16em;color:var(--ink-500)"><span class="dot"></span>RENDIMIENTO DE CAMPAÑAS</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px">
+      <div style="background:var(--ink-900);border:1.5px solid var(--ink-800);border-radius:18px;padding:20px 22px"><div style="color:var(--ink-500);font-weight:700;font-size:20px">01 · Coste por cliente</div><div style="height:10px;border-radius:5px;background:var(--y);width:62%;margin-top:18px"></div></div>
+      <div style="background:var(--ink-900);border:1.5px solid var(--ink-800);border-radius:18px;padding:20px 22px"><div style="color:var(--ink-500);font-weight:700;font-size:20px">02 · Clientes por propiedad</div><div style="height:10px;border-radius:5px;background:#fff;width:80%;margin-top:18px"></div></div>
+      <div style="background:var(--ink-900);border:1.5px solid var(--ink-800);border-radius:18px;padding:20px 22px"><div style="color:var(--ink-500);font-weight:700;font-size:20px">03 · Origen de cada cliente</div><div style="height:10px;border-radius:5px;background:#fff;width:45%;margin-top:18px"></div></div>
+      <div style="background:var(--ink-900);border:1.5px solid var(--ink-800);border-radius:18px;padding:20px 22px"><div style="color:var(--ink-500);font-weight:700;font-size:20px">04 · Cuándo apagarla</div><div style="height:10px;border-radius:5px;background:var(--ink-700);width:22%;margin-top:18px"></div></div>
+    </div>
+  </div>
+  <div class="abs foot"><span>GUÁRDALO PARA TU EQUIPO</span><b>DESLIZA →</b></div>
+</section>
+
+<!-- 2 · COSTE POR CLIENTE -->
+<section class="slide" data-n="2">
+  <div class="abs head"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" alt="ImperiOS"><span>02 / 06</span></div>
+  <div class="abs num" style="left:84px;top:220px"><b>01</b>MÉTRICA</div>
+  <h2 class="abs" style="left:80px;right:60px;top:320px">Coste por<br><em class="ul">cliente.</em></h2>
+  <p class="abs body" style="left:84px;right:110px;top:530px">No te quedes en los clics. Mira <b>cuánto te cuesta cada persona que te escribe</b> de verdad.</p>
+  <div class="abs card" style="left:84px;right:84px;top:760px;height:390px;padding:40px">
+    <span class="ej">EJEMPLO</span>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:20px">
+      <div style="text-align:center;flex:1"><div style="font-weight:700;font-size:22px;color:var(--ink-600)">Gasto</div><div style="font-weight:800;font-size:72px;letter-spacing:-.03em">300 €</div></div>
+      <div style="font-weight:500;font-size:64px;color:var(--ink-500)">÷</div>
+      <div style="text-align:center;flex:1"><div style="font-weight:700;font-size:22px;color:var(--ink-600)">Clientes</div><div style="font-weight:800;font-size:72px;letter-spacing:-.03em">12</div></div>
+      <div style="font-weight:500;font-size:64px;color:var(--ink-500)">=</div>
+      <div style="text-align:center;flex:1.2;background:var(--y);border-radius:22px;padding:18px 10px"><div style="font-weight:700;font-size:22px">Por cliente</div><div style="font-weight:800;font-size:72px;letter-spacing:-.03em">25 €</div></div>
+    </div>
+    <div style="margin-top:40px;font-weight:600;font-size:26px;color:var(--ink-600);line-height:1.35">Compáralo entre campañas: la más barata por clic no siempre es la más barata por cliente.</div>
+  </div>
+  <div class="abs foot"><span>IMPERIOS.APP</span><b>→</b></div>
+</section>
+
+<!-- 3 · CLIENTES POR PROPIEDAD -->
+<section class="slide" data-n="3">
+  <div class="abs head"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" alt="ImperiOS"><span>03 / 06</span></div>
+  <div class="abs num" style="left:84px;top:220px"><b>02</b>MÉTRICA</div>
+  <h2 class="abs" style="left:80px;right:60px;top:320px">Clientes por<br><em class="ul">propiedad.</em></h2>
+  <p class="abs body" style="left:84px;right:110px;top:530px">Qué inmuebles despiertan interés… y <b>cuáles no, aunque les metas dinero.</b></p>
+  <div class="abs card" style="left:84px;right:84px;top:740px;height:410px;padding:40px 40px 30px">
+    <span class="ej">EJEMPLO</span>
+    <div id="bars" style="display:flex;flex-direction:column;gap:22px;margin-top:14px"></div>
+  </div>
+  <div class="abs foot"><span>IMPERIOS.APP</span><b>→</b></div>
+</section>
+
+<!-- 4 · ORIGEN DE CADA CLIENTE -->
+<section class="slide" data-n="4">
+  <div class="abs head"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" alt="ImperiOS"><span>04 / 06</span></div>
+  <div class="abs num" style="left:84px;top:220px"><b>03</b>MÉTRICA</div>
+  <h2 class="abs" style="left:80px;right:60px;top:320px">Origen de<br>cada <em class="ul">cliente.</em></h2>
+  <p class="abs body" style="left:84px;right:110px;top:530px">Portal, web, anuncios, WhatsApp… <b>si no sabes de dónde viene, no sabes qué funciona.</b></p>
+  <div class="abs dark" style="left:84px;right:84px;top:700px;height:470px;padding:34px 36px">
+    <span class="ej">EJEMPLO</span>
+    <div style="display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px;letter-spacing:.16em;color:var(--ink-500)"><span class="dot"></span>TODOS TUS CLIENTES</div>
+    <div id="src" style="display:flex;flex-direction:column;gap:14px;margin-top:24px"></div>
+  </div>
+  <div class="abs foot"><span>IMPERIOS.APP</span><b>→</b></div>
+</section>
+
+<!-- 5 · CUÁNDO APAGARLA -->
+<section class="slide" data-n="5">
+  <div class="abs head"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" alt="ImperiOS"><span>05 / 06</span></div>
+  <div class="abs num" style="left:84px;top:220px"><b>04</b>MÉTRICA</div>
+  <h2 class="abs" style="left:80px;right:60px;top:320px">Cuándo<br><em class="ul">apagarla.</em></h2>
+  <p class="abs body" style="left:84px;right:110px;top:530px">Si lleva días gastando y no trae clientes, <b>cambia el anuncio o mueve el presupuesto</b> a la que sí funciona.</p>
+  <div class="abs" style="left:84px;right:84px;top:770px;display:flex;flex-direction:column;gap:22px">
+    <div class="card" style="padding:28px 32px;display:flex;align-items:center;gap:22px;position:relative">
+      <div style="flex:1"><div style="font-weight:800;font-size:32px">Captación propietarios</div><div style="font-weight:600;font-size:23px;color:var(--ink-600);margin-top:4px">Gastando · 0 clientes en 10 días</div></div>
+      <span style="font-weight:800;font-size:20px;letter-spacing:.1em;background:var(--ink-200);color:var(--ink-700);padding:10px 16px;border-radius:12px">REVISAR</span>
+      <span style="width:84px;height:46px;border-radius:23px;background:var(--ink-300);position:relative"><i style="position:absolute;left:5px;top:5px;width:36px;height:36px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.2)"></i></span>
+    </div>
+    <div style="text-align:center;font-weight:800;font-size:26px;color:var(--ink-600)">presupuesto ↓</div>
+    <div class="card" style="padding:28px 32px;display:flex;align-items:center;gap:22px;border-left:12px solid var(--y)">
+      <div style="flex:1"><div style="font-weight:800;font-size:32px">Ático · Chamberí</div><div style="font-weight:600;font-size:23px;color:var(--ink-600);margin-top:4px">Trae clientes cada semana</div></div>
+      <span style="font-weight:800;font-size:20px;letter-spacing:.1em;background:var(--y);padding:10px 16px;border-radius:12px">LA MEJOR</span>
+      <span style="width:84px;height:46px;border-radius:23px;background:var(--ink-950);position:relative"><i style="position:absolute;right:5px;top:5px;width:36px;height:36px;border-radius:50%;background:var(--y)"></i></span>
+    </div>
+  </div>
+  <div class="abs foot"><span>IMPERIOS.APP</span><b>→</b></div>
+</section>
+
+<!-- 6 · CIERRE -->
+<section class="slide" data-n="6">
+  <div class="abs head"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" alt="ImperiOS"><span>06 / 06</span></div>
+  <h2 class="abs" style="left:80px;right:60px;top:220px;font-size:80px">ImperiOS te enseña<br>las 4 <em class="ul">en un panel.</em></h2>
+  <p class="abs body" style="left:84px;right:110px;top:430px">Conectadas con tu cartera de clientes. Y <b>lanzas la siguiente campaña desde el propio CRM.</b></p>
+  <div class="abs dark" style="left:84px;right:84px;top:620px;height:400px;padding:34px 36px">
+    <span class="ej">EJEMPLO</span>
+    <div style="display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px;letter-spacing:.16em;color:var(--ink-500)"><span class="dot"></span>RANKING DE CAMPAÑAS</div>
+    <div id="rank" style="display:flex;flex-direction:column;gap:14px;margin-top:24px"></div>
+  </div>
+  <div class="abs" style="left:84px;top:1080px;height:100px;padding:0 48px;border-radius:999px;background:var(--y);display:flex;align-items:center;gap:14px;font-weight:800;font-size:36px">Comenta DEMO
+    <svg width="30" height="30" viewBox="0 0 34 34"><path d="M9 25L25 9M12 9h13v13" stroke="#0A0A0A" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="abs" style="left:540px;top:1112px;font-weight:700;font-size:26px;color:var(--ink-600)">y te enseño cómo funciona</div>
+  <div class="abs foot"><span>IMPERIOS.APP</span><b>@IMPERIOS.APP</b></div>
+</section>
+
+<script>
+// barras de clientes por propiedad (ejemplo)
+const P = [['Ático · Chamberí', 14, 1], ['Piso · Retiro', 9, 0], ['Chalet · Pozuelo', 6, 0], ['Piso · Salamanca', 1, 2]];
+document.getElementById('bars').innerHTML = P.map(([n, v, s]) => `
+  <div style="display:grid;grid-template-columns:300px 1fr 56px;align-items:center;gap:18px">
+    <div style="font-weight:700;font-size:26px">${n}</div>
+    <div style="height:26px;border-radius:13px;background:var(--ink-200);position:relative"><i style="position:absolute;left:0;top:0;bottom:0;width:${v / 14 * 100}%;min-width:26px;border-radius:13px;background:${s === 1 ? 'var(--y)' : s === 2 ? 'var(--ink-500)' : 'var(--ink-950)'}"></i></div>
+    <div style="font-weight:800;font-size:28px;text-align:right">${v}</div>
+  </div>`).join('') + `<div style="font-weight:700;font-size:22px;color:var(--ink-600);margin-top:4px">Salamanca: mucho gasto y casi nadie escribe → <b style="color:var(--ink-950)">revisa fotos y precio.</b></div>`;
+// origen de cada cliente (ejemplo)
+const S = [['AM', 'Ático · Chamberí', 'Anuncio'], ['LG', 'Piso · Retiro', 'Portal'], ['JR', 'Chalet · Pozuelo', 'Web'], ['SP', 'Piso · Salamanca', 'WhatsApp']];
+document.getElementById('src').innerHTML = S.map(([a, n, o], i) => `
+  <div style="display:flex;align-items:center;gap:18px;background:var(--ink-900);border:1.5px solid var(--ink-800);border-radius:18px;padding:14px 20px">
+    <span style="width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:20px;background:${i ? 'var(--ink-800)' : 'var(--y)'};color:${i ? '#fff' : 'var(--ink-950)'}">${a}</span>
+    <span style="font-weight:700;font-size:26px">${n}</span>
+    <span style="margin-left:auto;font-weight:800;font-size:19px;letter-spacing:.1em;padding:8px 14px;border-radius:10px;background:${i ? 'transparent' : 'var(--y)'};color:${i ? 'var(--ink-500)' : 'var(--ink-950)'};border:1.5px solid ${i ? 'var(--ink-700)' : 'var(--y)'}">${o.toUpperCase()}</span>
+  </div>`).join('');
+// ranking (ejemplo)
+const R = [['Ático · Chamberí', '25 €', 92], ['Pisos · Retiro', '38 €', 64], ['Captación propietarios', '—', 8]];
+document.getElementById('rank').innerHTML = R.map(([n, c, w], i) => `
+  <div style="display:grid;grid-template-columns:44px 1fr 120px;align-items:center;gap:16px;background:var(--ink-900);border:1.5px solid ${i ? 'var(--ink-800)' : 'var(--y)'};border-radius:18px;padding:16px 20px">
+    <span style="font-weight:800;font-size:26px;color:${i ? 'var(--ink-500)' : 'var(--y)'}">${i + 1}</span>
+    <div><div style="font-weight:700;font-size:26px">${n}</div><div style="height:8px;border-radius:4px;background:var(--ink-800);margin-top:10px"><i style="display:block;height:100%;width:${w}%;border-radius:4px;background:${i ? '#fff' : 'var(--y)'}"></i></div></div>
+    <div style="text-align:right"><div style="font-weight:800;font-size:28px">${c}</div><div style="font-weight:700;font-size:15px;letter-spacing:.1em;color:var(--ink-500)">POR CLIENTE</div></div>
+  </div>`).join('');
+const n = +(location.hash.slice(1) || 1);
+document.querySelector(`.slide[data-n="${n}"]`).classList.add('on');
+window.ready = document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => i.onload = r))));
+</script>
+</body>
+</html>

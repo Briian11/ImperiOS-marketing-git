@@ -191,6 +191,15 @@ def music():
             n = min(int(.9 * SR), N - i0)
             x = np.arange(n) / SR
             ping[i0:i0 + n] += (np.sin(2 * np.pi * 1568 * x) + .3 * np.sin(2 * np.pi * 3136 * x)) * np.exp(-x * 7) * np.clip(x / .004, 0, 1) * .07 * g
+    # MONEDAS (R10): «clinc» metálico corto en cada moneda que cae en un embudo
+    for j, tc in enumerate(B.get("coins", [])):
+        i0 = int(tc * SR)
+        if i0 >= N:
+            continue
+        n = min(int(.25 * SR), N - i0)
+        x = np.arange(n) / SR
+        f0 = (2093, 2349, 2637)[j % 3]
+        ping[i0:i0 + n] += (np.sin(2 * np.pi * f0 * x) + .6 * np.sin(2 * np.pi * f0 * 2.76 * x) * np.exp(-x * 30)) * np.exp(-x * 22) * np.clip(x / .002, 0, 1) * .035
     mono_bus = (pad * side + pl * side * 1.0 + sub * side)
     # estéreo: pluck alterna lados ligeramente, pad abierto
     d = int(.012 * SR)
