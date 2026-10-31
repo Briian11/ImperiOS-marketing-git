@@ -105,7 +105,7 @@ body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; 
 </div>
 
 <!-- PANEL -->
-<div class="abs" id="panel"><div class="ph"><span class="dot"></span><span id="phT">CLIENTES NUEVOS · CON SU ORIGEN</span></div><div id="crows"></div><div id="krows"></div></div>
+<div class="abs" id="panel"><div class="ph"><span class="dot"></span><span id="phT">CLIENTES NUEVOS · POR CAMPAÑA</span></div><div id="crows"></div><div id="krows"></div></div>
 
 <!-- LANZAR -->
 <div class="abs" id="launch">
@@ -239,7 +239,7 @@ function render(t) {
   const pv = t > p0 - .05 && t < l0 + .6, pIn = k(t, p0 + .22, p0 + .7, E.ob), pOut = k(t, l0 - .05, l0 + .45, E.ic);
   const bump = Math.sin(k(t, p4, p4 + .4) * Math.PI);
   css($('#panel'), { display: pv ? 'block' : 'none', opacity: k(t, p0 + .22, p0 + .4), transform: `translateY(${(1 - pIn) * 120}px) translateX(${-pOut * 1150}px) rotate(${-pOut * 4}deg) scale(${1 + .02 * bump})` });
-  $('#phT').textContent = t < p3 ? 'CLIENTES NUEVOS · CON SU ORIGEN' : 'RENDIMIENTO DE CAMPAÑAS';
+  $('#phT').textContent = t < p3 ? 'CLIENTES NUEVOS · POR CAMPAÑA' : 'RENDIMIENTO DE CAMPAÑAS';
   const cOut = k(t, p3 - .15, p3 + .15, E.ic);
   CR.forEach((_, i) => {
     const a = k(t, p1 + i * .22, p1 + .4 + i * .22, E.ob);

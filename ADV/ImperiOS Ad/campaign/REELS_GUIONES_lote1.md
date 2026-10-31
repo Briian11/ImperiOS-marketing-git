@@ -86,4 +86,4 @@ Música en Si bemol mayor a 104 BPM con «clinc» de monedas.
 ## Carrusel · «Las 4 métricas que tienes que mirar en tus campañas» (31/10/2026)
 
 6 diapositivas 1080×1350 (`preview/src/carrusel-metricas.html#1…6` → `preview/out/carruseles/metricas/`):
-portada · 01 coste por cliente · 02 clientes por propiedad · 03 origen de cada cliente · 04 cuándo apagarla · cierre (ranking + Comenta DEMO).
+portada · 01 coste por cliente · 02 clientes por propiedad · 03 del clic al cliente (alcance → clics → clientes) · 04 cuándo apagarla · cierre (ranking + Comenta DEMO).

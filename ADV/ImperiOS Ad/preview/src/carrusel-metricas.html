@@ -52,7 +52,7 @@ p.body b { color: var(--ink-950); }
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px">
       <div style="background:var(--ink-900);border:1.5px solid var(--ink-800);border-radius:18px;padding:20px 22px"><div style="color:var(--ink-500);font-weight:700;font-size:20px">01 · Coste por cliente</div><div style="height:10px;border-radius:5px;background:var(--y);width:62%;margin-top:18px"></div></div>
       <div style="background:var(--ink-900);border:1.5px solid var(--ink-800);border-radius:18px;padding:20px 22px"><div style="color:var(--ink-500);font-weight:700;font-size:20px">02 · Clientes por propiedad</div><div style="height:10px;border-radius:5px;background:#fff;width:80%;margin-top:18px"></div></div>
-      <div style="background:var(--ink-900);border:1.5px solid var(--ink-800);border-radius:18px;padding:20px 22px"><div style="color:var(--ink-500);font-weight:700;font-size:20px">03 · Origen de cada cliente</div><div style="height:10px;border-radius:5px;background:#fff;width:45%;margin-top:18px"></div></div>
+      <div style="background:var(--ink-900);border:1.5px solid var(--ink-800);border-radius:18px;padding:20px 22px"><div style="color:var(--ink-500);font-weight:700;font-size:20px">03 · Del clic al cliente</div><div style="height:10px;border-radius:5px;background:#fff;width:45%;margin-top:18px"></div></div>
       <div style="background:var(--ink-900);border:1.5px solid var(--ink-800);border-radius:18px;padding:20px 22px"><div style="color:var(--ink-500);font-weight:700;font-size:20px">04 · Cuándo apagarla</div><div style="height:10px;border-radius:5px;background:var(--ink-700);width:22%;margin-top:18px"></div></div>
     </div>
   </div>
@@ -92,16 +92,16 @@ p.body b { color: var(--ink-950); }
   <div class="abs foot"><span>IMPERIOS.APP</span><b>→</b></div>
 </section>
 
-<!-- 4 · ORIGEN DE CADA CLIENTE -->
+<!-- 4 · DEL CLIC AL CLIENTE -->
 <section class="slide" data-n="4">
   <div class="abs head"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" alt="ImperiOS"><span>04 / 06</span></div>
   <div class="abs num" style="left:84px;top:220px"><b>03</b>MÉTRICA</div>
-  <h2 class="abs" style="left:80px;right:60px;top:320px">Origen de<br>cada <em class="ul">cliente.</em></h2>
-  <p class="abs body" style="left:84px;right:110px;top:530px">Portal, web, anuncios, WhatsApp… <b>si no sabes de dónde viene, no sabes qué funciona.</b></p>
+  <h2 class="abs" style="left:80px;right:60px;top:320px">Del clic<br>al <em class="ul">cliente.</em></h2>
+  <p class="abs body" style="left:84px;right:110px;top:530px">Muchos clics no sirven si nadie te escribe. <b>Mira cuántos de los que hacen clic acaban siendo clientes.</b></p>
   <div class="abs dark" style="left:84px;right:84px;top:700px;height:470px;padding:34px 36px">
     <span class="ej">EJEMPLO</span>
-    <div style="display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px;letter-spacing:.16em;color:var(--ink-500)"><span class="dot"></span>TODOS TUS CLIENTES</div>
-    <div id="src" style="display:flex;flex-direction:column;gap:14px;margin-top:24px"></div>
+    <div style="display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px;letter-spacing:.16em;color:var(--ink-500)"><span class="dot"></span>CAMPAÑA · ÁTICO CHAMBERÍ</div>
+    <div id="src" style="display:flex;flex-direction:column;gap:0;margin-top:30px"></div>
   </div>
   <div class="abs foot"><span>IMPERIOS.APP</span><b>→</b></div>
 </section>
@@ -153,14 +153,14 @@ document.getElementById('bars').innerHTML = P.map(([n, v, s]) => `
     <div style="height:26px;border-radius:13px;background:var(--ink-200);position:relative"><i style="position:absolute;left:0;top:0;bottom:0;width:${v / 14 * 100}%;min-width:26px;border-radius:13px;background:${s === 1 ? 'var(--y)' : s === 2 ? 'var(--ink-500)' : 'var(--ink-950)'}"></i></div>
     <div style="font-weight:800;font-size:28px;text-align:right">${v}</div>
   </div>`).join('') + `<div style="font-weight:700;font-size:22px;color:var(--ink-600);margin-top:4px">Salamanca: mucho gasto y casi nadie escribe → <b style="color:var(--ink-950)">revisa fotos y precio.</b></div>`;
-// origen de cada cliente (ejemplo)
-const S = [['AM', 'Ático · Chamberí', 'Anuncio'], ['LG', 'Piso · Retiro', 'Portal'], ['JR', 'Chalet · Pozuelo', 'Web'], ['SP', 'Piso · Salamanca', 'WhatsApp']];
-document.getElementById('src').innerHTML = S.map(([a, n, o], i) => `
-  <div style="display:flex;align-items:center;gap:18px;background:var(--ink-900);border:1.5px solid var(--ink-800);border-radius:18px;padding:14px 20px">
-    <span style="width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:20px;background:${i ? 'var(--ink-800)' : 'var(--y)'};color:${i ? '#fff' : 'var(--ink-950)'}">${a}</span>
-    <span style="font-weight:700;font-size:26px">${n}</span>
-    <span style="margin-left:auto;font-weight:800;font-size:19px;letter-spacing:.1em;padding:8px 14px;border-radius:10px;background:${i ? 'transparent' : 'var(--y)'};color:${i ? 'var(--ink-500)' : 'var(--ink-950)'};border:1.5px solid ${i ? 'var(--ink-700)' : 'var(--y)'}">${o.toUpperCase()}</span>
-  </div>`).join('');
+// del clic al cliente (ejemplo)
+const F = [['Personas alcanzadas', '12.400', 100, 'var(--ink-700)'], ['Clics en el anuncio', '380', 72, '#fff'], ['Clientes que te escriben', '12', 48, 'var(--y)']];
+document.getElementById('src').innerHTML = F.map(([n, v, w, c], i) => `
+  <div style="display:flex;flex-direction:column;align-items:center">
+    <div style="width:${w}%;min-width:380px;height:84px;border-radius:18px;background:${c};color:${i ? 'var(--ink-950)' : '#fff'};display:flex;align-items:center;justify-content:space-between;padding:0 26px">
+      <span style="font-weight:700;font-size:23px">${n}</span><span style="font-weight:800;font-size:34px;letter-spacing:-.02em">${v}</span></div>
+    ${i < 2 ? '<div style="height:14px;width:3px;background:var(--ink-700)"></div>' : ''}
+  </div>`).join('') + `<div style="text-align:center;font-weight:700;font-size:23px;color:var(--ink-500);margin-top:10px">3 de cada 100 clics acaban escribiéndote</div>`;
 // ranking (ejemplo)
 const R = [['Ático · Chamberí', '25 €', 92], ['Pisos · Retiro', '38 €', 64], ['Captación propietarios', '—', 8]];
 document.getElementById('rank').innerHTML = R.map(([n, c, w], i) => `
