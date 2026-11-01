@@ -27,3 +27,4 @@
 | Cierre R6 (`vo/starter/reel-r6-cierre.mp3`) | ElevenLabs, voz Cristina, eleven_v4, 25/10/2026, «ImperiOS's Workspace» (Starter): 38 créditos | Plan Starter: uso comercial permitido |
 | VO Reel R9 Match (`vo/starter/reel-r9-match.mp3` + `.words.json`) | ElevenLabs, voz Cristina, eleven_v4, 27/10/2026, «ImperiOS's Workspace» (Starter): 539 créditos; tiempos con Scribe (0 créditos) | Plan Starter: uso comercial permitido |
 | VO Reel R10 Campañas (`vo/starter/reel-r10-campanas.mp3` + `.words.json`) | ElevenLabs, voz Cristina, eleven_v4, 31/10/2026, «ImperiOS's Workspace» (Starter): 460 créditos; tiempos con Scribe (0 créditos) | Plan Starter: uso comercial permitido |
+| VO Reel R11 Falso interés (`vo/starter/reel-r11-falso-interes.mp3` + `.words.json`) | ElevenLabs, voz Cristina, eleven_v4, 01/11/2026, «ImperiOS's Workspace» (Starter): 597 créditos; tiempos con Scribe (0 créditos) | Plan Starter: uso comercial permitido |

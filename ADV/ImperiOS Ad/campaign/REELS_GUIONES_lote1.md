@@ -87,3 +87,29 @@ Música en Si bemol mayor a 104 BPM con «clinc» de monedas.
 
 6 diapositivas 1080×1350 (`preview/src/carrusel-metricas.html#1…6` → `preview/out/carruseles/metricas/`):
 portada · 01 coste por cliente · 02 clientes por propiedad · 03 del clic al cliente (alcance → clics → clientes) · 04 cuándo apagarla · cierre (ranking + Comenta DEMO).
+
+---
+
+## R11 (01/11/2026) · «Falso interés» — calificación con IA, formato criba en oscuro (~36 s)
+
+Confirmado por Brian: el contacto responde a unas preguntas que le hace la IA para calificarlo. Las preguntas que se ven
+(presupuesto, plazo, zona, financiación) son de ejemplo; «20, 30, 50 al día» es la situación del espectador, no un dato de ImperiOS.
+
+| Voz | En pantalla |
+|---|---|
+| ¿Tu equipo pierde la mañana contestando a gente que solo pregunta por preguntar? | Titular + avisos «Portal · nuevo mensaje» que se apilan |
+| Te escriben veinte, treinta, cincuenta personas al día desde los portales. Y muchas, sin intención real de comprar. | Contador 20 → 30 → 50 y avalancha de burbujas («¿Sigue disponible?», «Info»…) que se apagan |
+| Tu equipo contesta a todos igual. Y mientras, el que de verdad quiere comprar… espera. | Bandeja sin filtrar, todo «✓ Respondido»; abajo el interesado («Tengo la hipoteca aprobada») con el contador de espera |
+| Con Imperios, la inteligencia artificial le hace a cada contacto unas preguntas clave para calificarlo. | 4 capas con las preguntas de la IA; los contactos se quedan en cada capa y solo pasan 3 |
+| Así separas a los curiosos de los que están interesados de verdad. | Columnas Curiosos 22 · Templados 5 · Interesados 3 |
+| Y tus comerciales saben a quién llamar primero. | «Prioridad de hoy» con 3 clientes y clic en «Llamar» |
+| ¿Cuánto tiempo pierde tu equipo con el falso interés? Comenta demo y te enseño cómo filtrarlo. | Pregunta + logo + Comenta DEMO |
+
+Motor `preview/src/reel-r11.html`, tiempos `preview/build_timeline_r11.py`, render `preview/build_r11.sh`, portada `preview/src/portada-r11.html`.
+
+## R12 (01/11/2026) · «Red flags de una inmobiliaria desorganizada» — sin voz, texto al ritmo (~19 s)
+
+Pensado para verse en bucle y generar comentarios («¿Cuántas te pasan? Comenta tu número»). 124 BPM; cada flag 4 tiempos,
+fondos negro / amarillo / crema alternos. Flags: Excel que solo entiende uno · «¿Quién tenía la visita de las 17:00?» ·
+contestas al día siguiente · notas en un pósit · nadie sabe qué anuncio trae clientes · el comercial se va y sus clientes también.
+Cierre «Con ImperiOS, ninguna.» + Comenta DEMO. Motor `preview/src/reel-r12.html`, `build_timeline_r12.py`, `build_r12.sh`.

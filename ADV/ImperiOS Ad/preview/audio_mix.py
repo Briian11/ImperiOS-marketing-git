@@ -200,6 +200,15 @@ def music():
         x = np.arange(n) / SR
         f0 = (2093, 2349, 2637)[j % 3]
         ping[i0:i0 + n] += (np.sin(2 * np.pi * f0 * x) + .6 * np.sin(2 * np.pi * f0 * 2.76 * x) * np.exp(-x * 30)) * np.exp(-x * 22) * np.clip(x / .002, 0, 1) * .035
+    # NOTIFICACIONES (R11): «ding» de dos notas por cada mensaje que entra
+    for tc in B.get("dings", []):
+        for dl, f0, g in ((0, 1319, .05), (.07, 1760, .045)):
+            i0 = int((tc + dl) * SR)
+            if i0 >= N:
+                continue
+            n = min(int(.22 * SR), N - i0)
+            x = np.arange(n) / SR
+            ping[i0:i0 + n] += np.sin(2 * np.pi * f0 * x) * np.exp(-x * 18) * np.clip(x / .003, 0, 1) * g
     mono_bus = (pad * side + pl * side * 1.0 + sub * side)
     # estéreo: pluck alterna lados ligeramente, pad abierto
     d = int(.012 * SR)

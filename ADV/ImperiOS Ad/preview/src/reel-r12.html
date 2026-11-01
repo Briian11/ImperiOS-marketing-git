@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reel R12 — Red flags</title>
+<!-- Motor del Reel orgánico R12 «Red flags de una inmobiliaria desorganizada», 1080×1920, sin voz.
+     Texto grande al ritmo de la música (124 BPM): título → 6 red flags que alternan fondo negro / amarillo / crema →
+     «¿Cuántas te pasan? Comenta tu número» → «Con ImperiOS, ninguna.» + Comenta DEMO. Tiempos: timeline-r12.json. -->
+<style>
+@font-face { font-family: "Manrope"; src: url("manrope-latin-variable.woff2") format("woff2"); font-weight: 200 800; }
+:root { --ink-950:#0A0A0A; --ink-800:#333; --ink-600:#727272; --ink-500:#B0B0B0; --ink-100:#F7F7F3; --y:#FFD500; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; }
+body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; position: relative; background: var(--ink-950); color: #fff; }
+.abs { position: absolute; }
+#bg { position: absolute; inset: 0; }
+#grid { position: absolute; inset: -80px; background-size: 40px 40px; }
+#stage { position: absolute; inset: 0; }
+#top { left: 72px; right: 72px; top: 286px; display: flex; justify-content: space-between; align-items: center; }
+#top img { height: 52px; display: block; }
+#top span { font-weight: 800; font-size: 22px; letter-spacing: .16em; }
+#prog { left: 72px; right: 72px; top: 370px; display: flex; gap: 10px; }
+#prog i { flex: 1; height: 8px; border-radius: 4px; }
+#num { left: 64px; top: 530px; font-weight: 800; font-size: 300px; letter-spacing: -.06em; line-height: 1; }
+#flag { left: 760px; top: 590px; }
+.ln { position: relative; font-weight: 800; font-size: 100px; letter-spacing: -.045em; line-height: 1.02; }
+.ln em { font-style: italic; font-weight: 500; }
+#lines { position: absolute; left: 72px; right: 60px; top: 890px; }
+#l2 { margin-top: 26px; }
+#tt { left: 72px; right: 40px; top: 660px; }
+#tt b { display: block; font-weight: 800; font-size: 230px; letter-spacing: -.06em; line-height: .9; }
+#tt span { display: block; margin-top: 30px; font-weight: 800; font-size: 72px; letter-spacing: -.035em; line-height: 1.05; }
+#tt span em { font-style: italic; font-weight: 500; }
+#qq { left: 72px; right: 60px; top: 720px; font-weight: 800; font-size: 150px; letter-spacing: -.055em; line-height: .98; }
+#qs { left: 72px; top: 1070px; display: flex; align-items: center; gap: 18px; font-weight: 800; font-size: 46px; padding: 22px 36px; border-radius: 999px; background: var(--ink-950); color: #fff; }
+#en { left: 72px; right: 60px; top: 650px; font-weight: 800; font-size: 120px; letter-spacing: -.05em; line-height: 1; }
+#en em { font-style: italic; font-weight: 500; color: var(--y); }
+#logo { left: 72px; top: 970px; width: 470px; }
+#cta { left: 72px; top: 1140px; height: 112px; padding: 0 56px; border-radius: 999px; background: var(--y); color: var(--ink-950); display: flex; align-items: center; gap: 16px; font-weight: 800; font-size: 40px; white-space: nowrap; }
+#web { left: 72px; top: 1300px; font-weight: 800; font-size: 26px; letter-spacing: .2em; color: var(--ink-500); }
+</style>
+</head>
+<body>
+<div id="bg"><div id="grid"></div></div>
+<div id="stage">
+  <div class="abs" id="top"><img id="tLogo" alt="ImperiOS"><span id="tTag">RED FLAGS · INMOBILIARIAS</span></div>
+  <div class="abs" id="prog"></div>
+  <div class="abs" id="tt"><b>RED<br>FLAGS</b><span>de una inmobiliaria<br><em>desorganizada.</em></span></div>
+  <div class="abs" id="num">01</div>
+  <svg class="abs" id="flag" width="250" height="250" viewBox="0 0 100 100"><path d="M22 92V10" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><path d="M26 14c18-8 30 8 50 0v40c-20 8-32-8-50 0z" fill="currentColor"/></svg>
+  <div id="lines"><div class="ln" id="l1"></div><div class="ln" id="l2"></div></div>
+  <div class="abs" id="qq">¿Cuántas<br>te pasan?</div>
+  <div class="abs" id="qs">Comenta tu número ↓</div>
+  <div class="abs" id="en">Con ImperiOS,<br><em>ninguna.</em></div>
+  <img class="abs" id="logo" src="../../assets_in/brand-kit/assets/logo-imperios-navbar-blanco.svg" alt="ImperiOS">
+  <div class="abs" id="cta">Comenta DEMO <svg width="34" height="34" viewBox="0 0 34 34"><path d="M9 25L25 9M12 9h13v13" stroke="#0A0A0A" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  <div class="abs" id="web">IMPERIOS.APP</div>
+</div>
+<script>
+const $ = s => document.querySelector(s);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const E = { oc: p => 1 - Math.pow(1 - p, 3), ob2: p => { const c1 = 2.4, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); } };
+const k = (t, t0, t1, e = E.oc) => e(clamp((t - t0) / (t1 - t0)));
+const css = (el, o) => { for (const key in o) el.style[key] = o[key]; };
+let B = { t: 0, flags: [1.935, 3.87, 5.806, 7.742, 9.677, 11.613], q: 13.548, logo: 15.484, bt: .4839, end: 18.7 };
+window.setBeats = b => { B = Object.assign(B, b); };
+window.setVariant = () => {};
+
+const FL = [
+  ['Los clientes, en un Excel', 'que solo entiende uno.'],
+  ['«¿Quién tenía la visita', 'de las 17:00?»'],
+  ['Contestas al cliente…', 'al día siguiente.'],
+  ['Las notas del cliente,', 'en un pósit.'],
+  ['Nadie sabe qué anuncio', 'trae clientes.'],
+  ['El comercial se va…', 'y sus clientes también.'],
+];
+// tema por flag: fondo, texto, acento
+const TH = [['#0A0A0A', '#fff', '#FFD500'], ['#FFD500', '#0A0A0A', '#0A0A0A'], ['#F7F7F3', '#0A0A0A', '#0A0A0A'], ['#0A0A0A', '#fff', '#FFD500'], ['#FFD500', '#0A0A0A', '#0A0A0A'], ['#F7F7F3', '#0A0A0A', '#0A0A0A']];
+$('#prog').innerHTML = FL.map((_, i) => `<i id="pg${i}"></i>`).join('');
+const LOGO_W = '../../assets_in/brand-kit/assets/logo-imperios-navbar-blanco.svg', LOGO_B = '../../assets_in/brand-kit/assets/logo-imperios-navbar.svg';
+
+function slam(el, p) { css(el, { opacity: p > 0 ? 1 : 0, transform: `scale(${1.3 - .3 * E.oc(p)}) translateY(${(1 - E.oc(p)) * 30}px)`, filter: p < 1 ? `blur(${(1 - p) * 14}px)` : 'none', transformOrigin: '0 50%' }); }
+
+function render(t) {
+  const bt = B.bt, F = B.flags;
+  let fi = -1; F.forEach((f, i) => { if (t >= f) fi = i; });
+  const sec = t < F[0] ? 'title' : t < B.q ? 'flag' : t < B.logo ? 'q' : 'end';
+  const t0 = sec === 'title' ? 0 : sec === 'flag' ? F[fi] : sec === 'q' ? B.q : B.logo;
+  const th = sec === 'title' ? ['#0A0A0A', '#fff', '#FFD500'] : sec === 'flag' ? TH[fi] : sec === 'q' ? ['#FFD500', '#0A0A0A', '#0A0A0A'] : ['#0A0A0A', '#fff', '#FFD500'];
+  css($('#bg'), { background: th[0] });
+  const light = th[0] !== '#0A0A0A';
+  css($('#grid'), { backgroundImage: `linear-gradient(to right, ${light ? 'rgba(10,10,10,.06)' : 'rgba(255,255,255,.04)'} 1px, transparent 1px), linear-gradient(to bottom, ${light ? 'rgba(10,10,10,.06)' : 'rgba(255,255,255,.04)'} 1px, transparent 1px)`,
+    transform: `translate(${(-t * 30) % 40}px, ${(-t * 20) % 40}px)` });
+  css(document.body, { color: th[1] });
+  // golpe de cámara en cada entrada
+  const a = t - t0, sh = Math.exp(-a * 9) * 14;
+  css($('#stage'), { transform: `translate(${Math.sin(a * 70) * sh}px, ${Math.cos(a * 55) * sh}px) scale(${1 + .04 * Math.exp(-a * 7)})` });
+  // barra superior
+  $('#tLogo').src = light ? LOGO_B : LOGO_W;
+  css($('#top'), { opacity: sec === 'end' ? 0 : 1 });
+  css($('#tTag'), { color: light ? 'rgba(10,10,10,.6)' : 'var(--ink-500)' });
+  css($('#prog'), { opacity: sec === 'flag' ? 1 : 0 });
+  FL.forEach((_, i) => css($('#pg' + i), { background: i < fi || (i === fi) ? th[2] : (light ? 'rgba(10,10,10,.15)' : 'rgba(255,255,255,.15)'), opacity: i === fi ? .55 + .45 * k(t, F[i], F[i] + 4 * bt, p => p) : 1 }));
+  // título
+  css($('#tt'), { display: sec === 'title' ? 'block' : 'none' });
+  if (sec === 'title') { slam($('#tt b'), k(t, 0, .35, p => p)); slam($('#tt span'), k(t, 2 * bt, 2 * bt + .3, p => p)); css($('#tt b'), { color: '#FFD500' }); }
+  // flags
+  const fv = sec === 'flag';
+  ['#num', '#flag', '#lines'].forEach(s => css($(s), { display: fv ? '' : 'none' }));
+  if (fv) {
+    $('#num').textContent = String(fi + 1).padStart(2, '0');
+    css($('#num'), { color: 'transparent', webkitTextStroke: `3px ${th[2]}`, opacity: .9 });
+    slam($('#num'), k(t, t0, t0 + .3, p => p));
+    css($('#flag'), { color: th[2], transform: `rotate(${Math.sin(t * 9) * 4}deg) scale(${E.ob2(k(t, t0 + .05, t0 + .4, p => p))})`, transformOrigin: '22% 92%' });
+    const [x, y] = FL[fi];
+    if ($('#l1').textContent !== x) { $('#l1').textContent = x; $('#l2').innerHTML = `<em>${y}</em>`; }
+    slam($('#l1'), k(t, t0 + .02, t0 + .32, p => p));
+    slam($('#l2'), k(t, t0 + 2 * bt, t0 + 2 * bt + .3, p => p));
+    const hl = k(t, t0 + 2 * bt + .15, t0 + 2 * bt + .45);
+    css($('#l2 em'), { boxShadow: `inset 0 -${Math.round(20 * hl)}px 0 ${fi % 3 === 0 ? 'rgba(255,213,0,.95)' : fi % 3 === 1 ? 'rgba(255,255,255,.7)' : 'rgba(255,213,0,.95)'}`, color: fi % 3 === 0 ? '#0A0A0A' : '' });
+    if (fi % 3 === 0) css($('#l2 em'), { color: hl > .5 ? '#0A0A0A' : '#fff', boxShadow: `inset 0 -${Math.round(110 * hl)}px 0 rgba(255,213,0,.95)` });
+  }
+  // pregunta
+  ['#qq', '#qs'].forEach(s => css($(s), { display: sec === 'q' ? '' : 'none' }));
+  if (sec === 'q') { slam($('#qq'), k(t, B.q, B.q + .3, p => p)); const p = k(t, B.q + 2 * bt, B.q + 2 * bt + .35, E.ob2); css($('#qs'), { opacity: p > 0 ? 1 : 0, transform: `scale(${p})`, transformOrigin: '0 50%' }); }
+  // cierre
+  ['#en', '#logo', '#cta', '#web'].forEach(s => css($(s), { display: sec === 'end' ? '' : 'none' }));
+  if (sec === 'end') {
+    slam($('#en'), k(t, B.logo, B.logo + .3, p => p));
+    const l = k(t, B.logo + 2 * bt, B.logo + 2 * bt + .4); css($('#logo'), { opacity: l, transform: `translateY(${(1 - l) * 30}px)` });
+    const c = k(t, B.logo + 4 * bt * .5 + .2, B.logo + 2 * bt + .6, E.ob2), pu = t > B.logo + 2 ? 1 + .04 * Math.sin((t - B.logo - 2) * 6) : 1;
+    css($('#cta'), { opacity: c > 0 ? 1 : 0, transform: `scale(${c * pu})`, transformOrigin: '0 50%' });
+    css($('#web'), { opacity: k(t, B.logo + 1.4, B.logo + 1.8) });
+  }
+}
+window.render = render;
+window.ready = document.fonts.ready.then(() => new Promise(r => { const i = $('#logo'); if (i.complete) r(); else i.onload = r; }));
+</script>
+</body>
+</html>

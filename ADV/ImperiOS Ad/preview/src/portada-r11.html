@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Portada Reel — R11 Falso interés</title>
+<!-- Portada 1080×1920 del Reel R11: fondo oscuro, logo blanco, titular «¿Responder a todos? Filtra el falso interés.»
+     con la criba de contactos (los curiosos se quedan en las capas, pasan 3 en amarillo). Dentro del recorte 3:4 (y 240–1680). -->
+<style>
+@font-face { font-family: "Manrope"; src: url("manrope-latin-variable.woff2") format("woff2"); font-weight: 200 800; }
+:root { --ink-950:#0A0A0A; --ink-700:#4A4A4A; --ink-600:#727272; --ink-500:#B0B0B0; --ink-50:#FAFAFA; --y:#FFD500; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; }
+body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; position: relative; background: var(--ink-950); color: #fff; }
+.abs { position: absolute; }
+.grid { position: absolute; inset: 0; background-image: linear-gradient(to right, rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 40px 40px; }
+.top { left: 72px; right: 72px; top: 290px; display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 24px; letter-spacing: .16em; color: var(--ink-500); }
+h1 { position: absolute; left: 72px; right: 50px; top: 410px; font-weight: 800; font-size: 112px; letter-spacing: -.045em; line-height: 1.02; }
+h1 em { font-style: italic; font-weight: 500; color: var(--y); }
+.bar { position: absolute; left: 72px; right: 72px; height: 6px; border-radius: 3px; background: repeating-linear-gradient(90deg, var(--ink-600) 0 18px, transparent 18px 30px); }
+.d { position: absolute; width: 52px; height: 52px; margin: -26px; border-radius: 50%; background: var(--ink-700); color: var(--ink-500); display: grid; place-items: center; font-weight: 800; font-size: 17px; }
+.d.y { background: var(--y); color: var(--ink-950); box-shadow: 0 0 36px rgba(255,192,0,.7); width: 64px; height: 64px; margin: -32px; font-size: 20px; }
+.lb { position: absolute; left: 72px; font-weight: 800; font-size: 22px; letter-spacing: .14em; color: var(--ink-600); }
+.foot { position: absolute; left: 72px; right: 72px; top: 1590px; display: flex; justify-content: space-between; font-weight: 800; font-size: 26px; letter-spacing: .16em; }
+</style>
+</head>
+<body>
+<div class="grid"></div>
+<div class="abs top"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar-blanco.svg" alt="ImperiOS" style="height:70px;display:block"><span>CALIFICACIÓN CON IA</span></div>
+<h1>Filtra el<br><em>falso interés.</em></h1>
+<div id="x"></div>
+<div class="foot"><span style="color:var(--ink-600)">IMPERIOS.APP</span><span style="color:var(--y)">COMENTA DEMO ↗</span></div>
+<script>
+const X = document.getElementById('x'), L = [800, 940, 1080, 1220];
+let h = '';
+L.forEach((y, i) => { h += `<div class="bar" style="top:${y}px"></div>`; const n = [9, 7, 5, 3][i]; for (let j = 0; j < n; j++) h += `<div class="d" style="left:${120 + j * 66 + (i % 2) * 30}px;top:${y - 30}px">${['AM','LG','JR','SP','MR','DV','CT','PL','RS'][j]}</div>`; });
+h += `<div class="lb" style="top:${L[0] - 90}px">CURIOSOS · SE QUEDAN</div>`;
+[740, 830, 920].forEach((x, i) => h += `<div class="d y" style="left:${x}px;top:1400px">${['LM','AR','JS'][i]}</div>`);
+h += `<div class="abs" style="left:640px;right:72px;top:1450px;height:0;border-top:3px solid var(--y)"></div><div class="lb" style="left:640px;top:1470px;color:var(--y)">INTERESADOS · PRIORIDAD</div>`;
+X.innerHTML = h;
+window.ready = document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => i.onload = r))));
+</script>
+</body>
+</html>
