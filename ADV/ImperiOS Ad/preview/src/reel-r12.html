@@ -201,19 +201,19 @@ function render(t) {
   css($('#grid'), { backgroundImage: `linear-gradient(to right, ${light ? 'rgba(10,10,10,.06)' : 'rgba(255,255,255,.04)'} 1px, transparent 1px), linear-gradient(to bottom, ${light ? 'rgba(10,10,10,.06)' : 'rgba(255,255,255,.04)'} 1px, transparent 1px)`,
     transform: `translate(${(-t * 30) % 40}px, ${(-t * 20) % 40}px)` });
   css(document.body, { color: th[1] });
-  const sh = Math.exp(-a * 9) * 14;
+  const sh = Math.exp(-a * 7) * 10;
   css($('#stage'), { transform: `translate(${Math.sin(a * 70) * sh}px, ${Math.cos(a * 55) * sh}px) scale(${1 + .04 * Math.exp(-a * 7)})` });
   // cinta de transición: cruza la pantalla en cada cambio
   const cuts = [...F, B.q, B.logo];
-  let tx = -1; cuts.forEach(c => { if (t > c - .28 && t < c + .3) tx = c; });
+  let tx = -1; cuts.forEach(c => { if (t > c - .45 && t < c + .45) tx = c; });
   css($('#tapeX'), { display: tx > 0 ? 'block' : 'none' });
-  if (tx > 0) { const p = clamp((t - (tx - .28)) / .58); css($('#tapeX'), { top: '810px', transform: `translateX(${lerp(-1900, 1500, E.ioc(p))}px) rotate(-9deg)` }); }
+  if (tx > 0) { const p = clamp((t - (tx - .45)) / .9); css($('#tapeX'), { top: '810px', transform: `translateX(${lerp(-1900, 1500, E.ioc(p))}px) rotate(-9deg)` }); }
   // barra superior
   $('#tLogo').src = light ? LOGO_B : LOGO_W;
   css($('#top'), { opacity: sec === 'end' ? 0 : 1 });
   css($('#tTag'), { color: light ? 'rgba(10,10,10,.6)' : 'var(--ink-500)' });
   css($('#prog'), { opacity: sec === 'flag' ? 1 : 0 });
-  FL.forEach((_, i) => css($('#pg' + i), { background: i <= fi ? th[2] : (light ? 'rgba(10,10,10,.15)' : 'rgba(255,255,255,.15)'), opacity: i === fi ? .55 + .45 * k(t, F[i], F[i] + 4 * bt, p => p) : 1 }));
+  FL.forEach((_, i) => css($('#pg' + i), { background: i <= fi ? th[2] : (light ? 'rgba(10,10,10,.15)' : 'rgba(255,255,255,.15)'), opacity: i === fi ? .55 + .45 * k(t, F[i], F[i] + (B.sec || 4) * bt, p => p) : 1 }));
   // título con dos cintas cruzadas
   css($('#title'), { display: sec === 'title' ? 'block' : 'none' });
   if (sec === 'title') {
@@ -230,12 +230,12 @@ function render(t) {
   if (fv) {
     $('#num').textContent = String(fi + 1).padStart(2, '0');
     css($('#num'), { color: 'transparent', webkitTextStroke: `3px ${th[2]}` });
-    slam($('#num'), k(t, t0, t0 + .3, p => p));
+    slam($('#num'), k(t, t0, t0 + .45, p => p));
     css($('#flag'), { color: th[2], transform: `rotate(${Math.sin(t * 9) * 5}deg) scale(${E.ob2(k(t, t0 + .05, t0 + .4, p => p))})`, transformOrigin: '22% 92%' });
     const [x, y] = FL[fi];
     if ($('#l1').textContent !== x) { $('#l1').textContent = x; $('#l2').innerHTML = `<em>${y}</em>`; }
-    slam($('#l1'), k(t, t0 + .02, t0 + .32, p => p));
-    slam($('#l2'), k(t, t0 + 2 * bt, t0 + 2 * bt + .3, p => p));
+    slam($('#l1'), k(t, t0 + .05, t0 + .5, p => p));
+    slam($('#l2'), k(t, t0 + 2 * bt, t0 + 2 * bt + .45, p => p));
     const hl = k(t, t0 + 2 * bt + .15, t0 + 2 * bt + .45), em = $('#l2 em');
     if (fi % 3 === 0) css(em, { color: hl > .5 ? '#0A0A0A' : '#fff', boxShadow: `inset 0 -${Math.round(96 * hl)}px 0 rgba(255,213,0,.95)` });
     else css(em, { color: '', boxShadow: `inset 0 -${Math.round(18 * hl)}px 0 ${fi % 3 === 1 ? 'rgba(255,255,255,.75)' : 'rgba(255,213,0,.95)'}` });
