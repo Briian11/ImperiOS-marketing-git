@@ -113,3 +113,7 @@ Pensado para verse en bucle y generar comentarios («¿Cuántas te pasan? Coment
 fondos negro / amarillo / crema alternos. Flags: Excel que solo entiende uno · «¿Quién tenía la visita de las 17:00?» ·
 contestas al día siguiente · notas en un pósit · nadie sabe qué anuncio trae clientes · el comercial se va y sus clientes también.
 Cierre «Con ImperiOS, ninguna.» + Comenta DEMO. Motor `preview/src/reel-r12.html`, `build_timeline_r12.py`, `build_r12.sh`.
+
+**R12 v2 (02/11/2026):** mini escena por flag (Excel con #REF!, chat del equipo, «Gracias, ya encontré otro», pósits que caen,
+anuncios con «¿?», la cartera de Marcos que se vacía), cinta «RED FLAG» en el título y en cada transición, selector 1–6 en la
+pregunta y las 6 banderas que se convierten en ✓ en el cierre.

@@ -3,12 +3,14 @@
 <head>
 <meta charset="utf-8">
 <title>Reel R12 — Red flags</title>
-<!-- Motor del Reel orgánico R12 «Red flags de una inmobiliaria desorganizada», 1080×1920, sin voz.
-     Texto grande al ritmo de la música (124 BPM): título → 6 red flags que alternan fondo negro / amarillo / crema →
-     «¿Cuántas te pasan? Comenta tu número» → «Con ImperiOS, ninguna.» + Comenta DEMO. Tiempos: timeline-r12.json. -->
+<!-- Motor del Reel orgánico R12 «Red flags de una inmobiliaria desorganizada», 1080×1920, sin voz (v2).
+     Texto grande al ritmo de la música (124 BPM) + una mini escena por flag que remata el chiste
+     (Excel con #REF!, chat del equipo, «ya encontré otro», pósits, anuncios sin datos, la cartera que se va),
+     cinta «RED FLAG» amarilla y negra en el título y en cada transición, pregunta con selector 1–6 y cierre con
+     las 6 banderas convertidas en ✓. Chat genérico; datos de ejemplo. Tiempos: timeline-r12.json (build_timeline_r12.py). -->
 <style>
 @font-face { font-family: "Manrope"; src: url("manrope-latin-variable.woff2") format("woff2"); font-weight: 200 800; }
-:root { --ink-950:#0A0A0A; --ink-800:#333; --ink-600:#727272; --ink-500:#B0B0B0; --ink-100:#F7F7F3; --y:#FFD500; }
+:root { --ink-950:#0A0A0A; --ink-900:#1C1C1C; --ink-800:#333; --ink-700:#4A4A4A; --ink-600:#727272; --ink-500:#B0B0B0; --ink-200:#EBEBEB; --ink-100:#F7F7F3; --ink-50:#FAFAFA; --y:#FFD500; }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { width: 1080px; height: 1920px; overflow: hidden; }
 body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; position: relative; background: var(--ink-950); color: #fff; }
@@ -21,23 +23,77 @@ body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; 
 #top span { font-weight: 800; font-size: 22px; letter-spacing: .16em; }
 #prog { left: 72px; right: 72px; top: 370px; display: flex; gap: 10px; }
 #prog i { flex: 1; height: 8px; border-radius: 4px; }
-#num { left: 64px; top: 530px; font-weight: 800; font-size: 300px; letter-spacing: -.06em; line-height: 1; }
-#flag { left: 760px; top: 590px; }
-.ln { position: relative; font-weight: 800; font-size: 100px; letter-spacing: -.045em; line-height: 1.02; }
+#num { left: 64px; top: 420px; font-weight: 800; font-size: 210px; letter-spacing: -.06em; line-height: 1; }
+#flag { left: 800px; top: 440px; }
+.ln { position: relative; font-weight: 800; font-size: 86px; letter-spacing: -.045em; line-height: 1.03; }
 .ln em { font-style: italic; font-weight: 500; }
-#lines { position: absolute; left: 72px; right: 60px; top: 890px; }
-#l2 { margin-top: 26px; }
-#tt { left: 72px; right: 40px; top: 660px; }
-#tt b { display: block; font-weight: 800; font-size: 230px; letter-spacing: -.06em; line-height: .9; }
+#lines { position: absolute; left: 72px; right: 60px; top: 660px; }
+#l2 { margin-top: 18px; }
+/* cinta de aviso */
+.tape { position: absolute; left: -300px; width: 1700px; height: 112px; background: var(--y); color: var(--ink-950); overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
+.tape::before, .tape::after { content: ""; position: absolute; left: 0; right: 0; height: 16px; background: repeating-linear-gradient(-45deg, #0A0A0A 0 16px, #FFD500 16px 32px); }
+.tape::before { top: 0; } .tape::after { bottom: 0; }
+.tape div { position: absolute; top: 16px; height: 80px; left: 0; display: flex; align-items: center; white-space: nowrap; font-weight: 800; font-size: 46px; letter-spacing: .12em; }
+#tapeX { z-index: 40; height: 300px; }
+#tapeX::before, #tapeX::after { height: 40px; background: repeating-linear-gradient(-45deg, #0A0A0A 0 30px, #FFD500 30px 60px); }
+#tapeX div { top: 40px; height: 220px; font-size: 140px; letter-spacing: .06em; }
+/* título */
+#tt { left: 72px; right: 40px; top: 470px; }
+#tt b { display: block; font-weight: 800; font-size: 230px; letter-spacing: -.06em; line-height: .9; color: var(--y); }
 #tt span { display: block; margin-top: 30px; font-weight: 800; font-size: 72px; letter-spacing: -.035em; line-height: 1.05; }
 #tt span em { font-style: italic; font-weight: 500; }
-#qq { left: 72px; right: 60px; top: 720px; font-weight: 800; font-size: 150px; letter-spacing: -.055em; line-height: .98; }
-#qs { left: 72px; top: 1070px; display: flex; align-items: center; gap: 18px; font-weight: 800; font-size: 46px; padding: 22px 36px; border-radius: 999px; background: var(--ink-950); color: #fff; }
-#en { left: 72px; right: 60px; top: 650px; font-weight: 800; font-size: 120px; letter-spacing: -.05em; line-height: 1; }
+/* escenas */
+.ill { position: absolute; left: 72px; right: 72px; top: 1080px; height: 380px; }
+.card { position: absolute; border-radius: 26px; box-shadow: 0 30px 80px rgba(0,0,0,.35); }
+/* 01 excel */
+#xl { left: 0; right: 0; top: 0; height: 360px; background: #fff; color: var(--ink-950); overflow: hidden; }
+#xl .hd { height: 58px; background: var(--ink-200); display: flex; align-items: center; gap: 12px; padding: 0 22px; font-weight: 700; font-size: 22px; color: var(--ink-700); }
+#xl .hd i { width: 14px; height: 14px; border-radius: 50%; background: var(--ink-500); }
+#xl table { border-collapse: collapse; width: 100%; font-size: 23px; font-weight: 600; }
+#xl td { border: 1.5px solid var(--ink-200); height: 58px; padding: 0 12px; white-space: nowrap; overflow: hidden; }
+#xl td.h { background: var(--ink-100); color: var(--ink-600); font-weight: 800; font-size: 18px; letter-spacing: .08em; }
+#xl td.e { color: #B38F00; font-weight: 800; }
+/* 02 chat del equipo */
+.bub { position: absolute; padding: 18px 26px; border-radius: 26px; font-weight: 700; font-size: 32px; white-space: nowrap; box-shadow: 0 16px 40px rgba(0,0,0,.18); }
+.bub small { display: block; font-size: 17px; font-weight: 800; letter-spacing: .12em; opacity: .55; margin-bottom: 4px; }
+/* 03 notificación */
+#nt { left: 0; right: 0; top: 0; height: 150px; background: var(--ink-950); color: #fff; display: flex; align-items: center; gap: 22px; padding: 0 28px; }
+#nt .a { width: 70px; height: 70px; border-radius: 50%; background: var(--ink-800); display: grid; place-items: center; font-weight: 800; font-size: 22px; flex: none; }
+#nt b { display: block; font-size: 19px; letter-spacing: .12em; color: var(--ink-500); }
+#nt span { font-weight: 700; font-size: 32px; }
+#nt .tm { margin-left: auto; text-align: right; font-weight: 800; font-size: 20px; letter-spacing: .08em; color: var(--y); white-space: nowrap; }
+#nt .tm div { font-size: 34px; color: #fff; letter-spacing: 0; }
+/* 04 pósits */
+.pst { position: absolute; width: 290px; height: 220px; background: var(--y); color: var(--ink-950); padding: 26px 24px; font-weight: 700; font-size: 32px; line-height: 1.15; font-style: italic;
+  box-shadow: 0 24px 50px rgba(0,0,0,.45); }
+.pst::before { content: ""; position: absolute; left: 50%; top: -14px; width: 110px; height: 30px; margin-left: -55px; background: rgba(255,255,255,.45); transform: rotate(-3deg); }
+/* 05 anuncios */
+.ad { position: absolute; top: 0; width: 290px; height: 360px; background: var(--ink-950); color: #fff; border-radius: 24px; padding: 18px; }
+.ad .th { height: 150px; border-radius: 14px; background: linear-gradient(135deg, #2a2a2a, #4a4a4a); position: relative; }
+.ad .th::before { content: ""; position: absolute; left: 50%; top: 40px; width: 70px; height: 56px; margin-left: -35px; background: var(--ink-500); clip-path: polygon(50% 0, 100% 42%, 100% 100%, 0 100%, 0 42%); }
+.ad b { display: block; margin-top: 16px; font-size: 26px; }
+.ad .m { margin-top: 14px; display: flex; justify-content: space-between; font-weight: 700; font-size: 20px; color: var(--ink-500); letter-spacing: .06em; }
+.ad .m span:last-child { font-size: 44px; color: var(--y); font-weight: 800; letter-spacing: 0; line-height: .8; }
+/* 06 cartera */
+#cart { left: 0; right: 0; top: 0; height: 370px; background: #fff; color: var(--ink-950); padding: 22px 26px; overflow: hidden; }
+#cart .hd { display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 21px; letter-spacing: .14em; color: var(--ink-600); }
+#cart .hd b { font-size: 30px; color: var(--ink-950); letter-spacing: 0; }
+.cr { position: absolute; left: 26px; right: 26px; height: 62px; border-radius: 16px; background: var(--ink-100); display: flex; align-items: center; gap: 16px; padding: 0 16px; font-weight: 700; font-size: 25px; }
+.cr i { width: 40px; height: 40px; border-radius: 50%; background: var(--ink-950); color: #fff; font-style: normal; display: grid; place-items: center; font-weight: 800; font-size: 15px; }
+/* pregunta */
+#qq { left: 72px; right: 60px; top: 520px; font-weight: 800; font-size: 150px; letter-spacing: -.055em; line-height: .98; }
+#pick { left: 72px; right: 72px; top: 870px; display: flex; justify-content: space-between; }
+#pick span { width: 132px; height: 132px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 64px; border: 4px solid var(--ink-950); }
+#qs { left: 72px; top: 1060px; display: flex; align-items: center; gap: 18px; font-weight: 800; font-size: 46px; padding: 22px 36px; border-radius: 999px; background: var(--ink-950); color: #fff; }
+/* cierre */
+#en { left: 72px; right: 60px; top: 470px; font-weight: 800; font-size: 120px; letter-spacing: -.05em; line-height: 1; }
 #en em { font-style: italic; font-weight: 500; color: var(--y); }
-#logo { left: 72px; top: 970px; width: 470px; }
-#cta { left: 72px; top: 1140px; height: 112px; padding: 0 56px; border-radius: 999px; background: var(--y); color: var(--ink-950); display: flex; align-items: center; gap: 16px; font-weight: 800; font-size: 40px; white-space: nowrap; }
-#web { left: 72px; top: 1300px; font-weight: 800; font-size: 26px; letter-spacing: .2em; color: var(--ink-500); }
+#recap { left: 72px; right: 72px; top: 760px; display: flex; justify-content: space-between; }
+#recap span { width: 128px; height: 128px; border-radius: 28px; display: grid; place-items: center; background: var(--ink-900); border: 2px solid var(--ink-800); position: relative; }
+#recap span svg { position: absolute; }
+#logo { left: 72px; top: 960px; width: 470px; }
+#cta { left: 72px; top: 1120px; height: 112px; padding: 0 56px; border-radius: 999px; background: var(--y); color: var(--ink-950); display: flex; align-items: center; gap: 16px; font-weight: 800; font-size: 40px; white-space: nowrap; }
+#web { left: 72px; top: 1275px; font-weight: 800; font-size: 26px; letter-spacing: .2em; color: var(--ink-500); }
 </style>
 </head>
 <body>
@@ -45,21 +101,68 @@ body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; 
 <div id="stage">
   <div class="abs" id="top"><img id="tLogo" alt="ImperiOS"><span id="tTag">RED FLAGS · INMOBILIARIAS</span></div>
   <div class="abs" id="prog"></div>
-  <div class="abs" id="tt"><b>RED<br>FLAGS</b><span>de una inmobiliaria<br><em>desorganizada.</em></span></div>
+  <!-- título -->
+  <div id="title">
+    <div class="abs" id="tt"><b>RED<br>FLAGS</b><span>de una inmobiliaria<br><em>desorganizada.</em></span></div>
+    <div class="tape" id="tapeA" style="top:1210px;transform:rotate(-7deg)"><div></div></div>
+    <div class="tape" id="tapeB" style="top:1260px;transform:rotate(5deg)"><div></div></div>
+  </div>
+  <!-- flags -->
   <div class="abs" id="num">01</div>
-  <svg class="abs" id="flag" width="250" height="250" viewBox="0 0 100 100"><path d="M22 92V10" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><path d="M26 14c18-8 30 8 50 0v40c-20 8-32-8-50 0z" fill="currentColor"/></svg>
+  <svg class="abs" id="flag" width="190" height="190" viewBox="0 0 100 100"><path d="M22 92V10" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><path d="M26 14c18-8 30 8 50 0v40c-20 8-32-8-50 0z" fill="currentColor"/></svg>
   <div id="lines"><div class="ln" id="l1"></div><div class="ln" id="l2"></div></div>
+
+  <div class="ill" id="ill0"><div class="card" id="xl"><div class="hd"><i></i>clientes_DEFINITIVO_v3 (2).xlsx</div>
+    <table><tr><td class="h">NOMBRE</td><td class="h">TELÉFONO</td><td class="h">BUSCA</td><td class="h">ESTADO</td></tr>
+      <tr><td>Ana ??</td><td>617 2…</td><td>ático</td><td class="e">#REF!</td></tr>
+      <tr><td>Luis</td><td class="e">#¿NOMBRE?</td><td>¿piso?</td><td>llamar</td></tr>
+      <tr><td>Marta (la de Retiro)</td><td>—</td><td class="e">#REF!</td><td>??</td></tr>
+      <tr><td>Cliente nuevo</td><td>ver WhatsApp</td><td>—</td><td class="e">#N/A</td></tr></table></div></div>
+
+  <div class="ill" id="ill1">
+    <div class="bub" id="b10" style="left:0;top:0;background:var(--ink-950);color:#fff"><small>CARLOS</small>Yo no.</div>
+    <div class="bub" id="b11" style="right:0;top:100px;background:#fff;color:var(--ink-950)"><small>LAURA</small>¿No era a las 18:00?</div>
+    <div class="bub" id="b12" style="left:40px;top:215px;background:var(--ink-950);color:#fff"><small>DANI</small>Pregúntale a Marta.</div>
+    <div class="bub" id="b13" style="right:30px;top:300px;background:#fff;color:var(--ink-950)"><small>MARTA</small>Hoy libro 🙃</div>
+  </div>
+
+  <div class="ill" id="ill2">
+    <div class="card" id="nt"><span class="a">AM</span><div><b>CLIENTE · ÁTICO CHAMBERÍ</b><span>¿Sigue disponible?</span></div><div class="tm">RECIBIDO<div id="ntT">ayer 10:14</div></div></div>
+    <div class="bub" id="b20" style="right:0;top:190px;background:var(--ink-950);color:#fff"><small>TÚ · HOY 11:02</small>¡Hola! Sí, sigue disponible 😊</div>
+    <div class="bub" id="b21" style="left:0;top:300px;background:#fff;color:var(--ink-950);border:2px solid var(--ink-950)"><small>CLIENTE</small>Gracias, ya encontré otro.</div>
+  </div>
+
+  <div class="ill" id="ill3">
+    <div class="pst" id="p0" style="left:-10px;top:10px">Llamar a Luis<br>(¿martes?)</div>
+    <div class="pst" id="p1" style="left:310px;top:-20px">Ático 3 hab<br>¿400k?<br>617 2…</div>
+    <div class="pst" id="p2" style="left:640px;top:20px;width:290px">¡¡VISITA!!<br>jueves<br>¿o viernes?</div>
+  </div>
+
+  <div class="ill" id="ill4">
+    <div class="ad" id="a0" style="left:0"><div class="th"></div><b>Anuncio A</b><div class="m"><span>CLIENTES</span><span>¿?</span></div></div>
+    <div class="ad" id="a1" style="left:323px"><div class="th"></div><b>Anuncio B</b><div class="m"><span>CLIENTES</span><span>¿?</span></div></div>
+    <div class="ad" id="a2" style="left:646px"><div class="th"></div><b>Anuncio C</b><div class="m"><span>CLIENTES</span><span>¿?</span></div></div>
+  </div>
+
+  <div class="ill" id="ill5"><div class="card" id="cart"><div class="hd">CARTERA DE MARCOS<b id="cN">4 clientes</b></div><div id="crs"></div></div></div>
+
+  <!-- pregunta -->
   <div class="abs" id="qq">¿Cuántas<br>te pasan?</div>
+  <div class="abs" id="pick"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></div>
   <div class="abs" id="qs">Comenta tu número ↓</div>
+  <!-- cierre -->
   <div class="abs" id="en">Con ImperiOS,<br><em>ninguna.</em></div>
+  <div class="abs" id="recap"></div>
   <img class="abs" id="logo" src="../../assets_in/brand-kit/assets/logo-imperios-navbar-blanco.svg" alt="ImperiOS">
   <div class="abs" id="cta">Comenta DEMO <svg width="34" height="34" viewBox="0 0 34 34"><path d="M9 25L25 9M12 9h13v13" stroke="#0A0A0A" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
   <div class="abs" id="web">IMPERIOS.APP</div>
 </div>
+<div class="tape" id="tapeX"><div></div></div>
 <script>
-const $ = s => document.querySelector(s);
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
-const E = { oc: p => 1 - Math.pow(1 - p, 3), ob2: p => { const c1 = 2.4, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); } };
+const E = { oc: p => 1 - Math.pow(1 - p, 3), ic: p => p * p * p, ioc: p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2,
+  ob2: p => { const c1 = 2.4, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); } };
 const k = (t, t0, t1, e = E.oc) => e(clamp((t - t0) / (t1 - t0)));
 const css = (el, o) => { for (const key in o) el.style[key] = o[key]; };
 let B = { t: 0, flags: [1.935, 3.87, 5.806, 7.742, 9.677, 11.613], q: 13.548, logo: 15.484, bt: .4839, end: 18.7 };
@@ -74,63 +177,123 @@ const FL = [
   ['Nadie sabe qué anuncio', 'trae clientes.'],
   ['El comercial se va…', 'y sus clientes también.'],
 ];
-// tema por flag: fondo, texto, acento
 const TH = [['#0A0A0A', '#fff', '#FFD500'], ['#FFD500', '#0A0A0A', '#0A0A0A'], ['#F7F7F3', '#0A0A0A', '#0A0A0A'], ['#0A0A0A', '#fff', '#FFD500'], ['#FFD500', '#0A0A0A', '#0A0A0A'], ['#F7F7F3', '#0A0A0A', '#0A0A0A']];
 $('#prog').innerHTML = FL.map((_, i) => `<i id="pg${i}"></i>`).join('');
 const LOGO_W = '../../assets_in/brand-kit/assets/logo-imperios-navbar-blanco.svg', LOGO_B = '../../assets_in/brand-kit/assets/logo-imperios-navbar.svg';
+const TXT = ('RED FLAG  •  ').repeat(14);
+$$('.tape div').forEach(d => d.textContent = TXT);
+$('#crs').innerHTML = [['AM', 'Ana M. · ático Chamberí'], ['LG', 'Luis G. · piso Retiro'], ['JR', 'Javier R. · chalet'], ['SP', 'Sara P. · 2 hab centro']].map(([a, n], i) => `<div class="cr" id="cr${i}" style="top:${76 + i * 72}px"><i>${a}</i>${n}</div>`).join('');
+const FLAG = c => `<svg width="64" height="64" viewBox="0 0 100 100"><path d="M22 92V10" stroke="${c}" stroke-width="8" stroke-linecap="round"/><path d="M26 14c18-8 30 8 50 0v40c-20 8-32-8-50 0z" fill="${c}"/></svg>`;
+const CHECK = `<svg width="70" height="70" viewBox="0 0 70 70"><circle cx="35" cy="35" r="33" fill="#FFD500"/><path d="M20 36l10 10 20-22" stroke="#0A0A0A" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+$('#recap').innerHTML = FL.map((_, i) => `<span><i class="f" style="position:absolute;inset:0;display:grid;place-items:center">${FLAG('#FFD500')}</i><i class="c" style="position:absolute;inset:0;display:grid;place-items:center">${CHECK}</i></span>`).join('');
 
 function slam(el, p) { css(el, { opacity: p > 0 ? 1 : 0, transform: `scale(${1.3 - .3 * E.oc(p)}) translateY(${(1 - E.oc(p)) * 30}px)`, filter: p < 1 ? `blur(${(1 - p) * 14}px)` : 'none', transformOrigin: '0 50%' }); }
+function pop(el, p, extra = '') { css(el, { opacity: p > 0 ? 1 : 0, transform: `scale(${E.ob2(p) * .9 + .1 * (p > 0)}) ${extra}` }); }
 
 function render(t) {
   const bt = B.bt, F = B.flags;
   let fi = -1; F.forEach((f, i) => { if (t >= f) fi = i; });
   const sec = t < F[0] ? 'title' : t < B.q ? 'flag' : t < B.logo ? 'q' : 'end';
-  const t0 = sec === 'title' ? 0 : sec === 'flag' ? F[fi] : sec === 'q' ? B.q : B.logo;
+  const t0 = sec === 'title' ? 0 : sec === 'flag' ? F[fi] : sec === 'q' ? B.q : B.logo, a = t - t0;
   const th = sec === 'title' ? ['#0A0A0A', '#fff', '#FFD500'] : sec === 'flag' ? TH[fi] : sec === 'q' ? ['#FFD500', '#0A0A0A', '#0A0A0A'] : ['#0A0A0A', '#fff', '#FFD500'];
-  css($('#bg'), { background: th[0] });
   const light = th[0] !== '#0A0A0A';
+  css($('#bg'), { background: th[0] });
   css($('#grid'), { backgroundImage: `linear-gradient(to right, ${light ? 'rgba(10,10,10,.06)' : 'rgba(255,255,255,.04)'} 1px, transparent 1px), linear-gradient(to bottom, ${light ? 'rgba(10,10,10,.06)' : 'rgba(255,255,255,.04)'} 1px, transparent 1px)`,
     transform: `translate(${(-t * 30) % 40}px, ${(-t * 20) % 40}px)` });
   css(document.body, { color: th[1] });
-  // golpe de cámara en cada entrada
-  const a = t - t0, sh = Math.exp(-a * 9) * 14;
+  const sh = Math.exp(-a * 9) * 14;
   css($('#stage'), { transform: `translate(${Math.sin(a * 70) * sh}px, ${Math.cos(a * 55) * sh}px) scale(${1 + .04 * Math.exp(-a * 7)})` });
+  // cinta de transición: cruza la pantalla en cada cambio
+  const cuts = [...F, B.q, B.logo];
+  let tx = -1; cuts.forEach(c => { if (t > c - .28 && t < c + .3) tx = c; });
+  css($('#tapeX'), { display: tx > 0 ? 'block' : 'none' });
+  if (tx > 0) { const p = clamp((t - (tx - .28)) / .58); css($('#tapeX'), { top: '810px', transform: `translateX(${lerp(-1900, 1500, E.ioc(p))}px) rotate(-9deg)` }); }
   // barra superior
   $('#tLogo').src = light ? LOGO_B : LOGO_W;
   css($('#top'), { opacity: sec === 'end' ? 0 : 1 });
   css($('#tTag'), { color: light ? 'rgba(10,10,10,.6)' : 'var(--ink-500)' });
   css($('#prog'), { opacity: sec === 'flag' ? 1 : 0 });
-  FL.forEach((_, i) => css($('#pg' + i), { background: i < fi || (i === fi) ? th[2] : (light ? 'rgba(10,10,10,.15)' : 'rgba(255,255,255,.15)'), opacity: i === fi ? .55 + .45 * k(t, F[i], F[i] + 4 * bt, p => p) : 1 }));
-  // título
-  css($('#tt'), { display: sec === 'title' ? 'block' : 'none' });
-  if (sec === 'title') { slam($('#tt b'), k(t, 0, .35, p => p)); slam($('#tt span'), k(t, 2 * bt, 2 * bt + .3, p => p)); css($('#tt b'), { color: '#FFD500' }); }
+  FL.forEach((_, i) => css($('#pg' + i), { background: i <= fi ? th[2] : (light ? 'rgba(10,10,10,.15)' : 'rgba(255,255,255,.15)'), opacity: i === fi ? .55 + .45 * k(t, F[i], F[i] + 4 * bt, p => p) : 1 }));
+  // título con dos cintas cruzadas
+  css($('#title'), { display: sec === 'title' ? 'block' : 'none' });
+  if (sec === 'title') {
+    slam($('#tt b'), k(t, 0, .35, p => p)); slam($('#tt span'), k(t, 2 * bt, 2 * bt + .3, p => p));
+    const ta = k(t, .1, .55, E.oc), tb = k(t, bt + .1, bt + .55, E.oc);
+    css($('#tapeA'), { transform: `rotate(-7deg) translateX(${(1 - ta) * -1700 - t * 60}px)` });
+    css($('#tapeB'), { transform: `rotate(5deg) translateX(${(1 - tb) * 1700 - 200 + t * 60}px)` });
+    css($('#tt b'), { transform: `${$('#tt b').style.transform} rotate(${Math.sin(t * 10) * .6}deg)` });
+  }
   // flags
   const fv = sec === 'flag';
   ['#num', '#flag', '#lines'].forEach(s => css($(s), { display: fv ? '' : 'none' }));
+  for (let i = 0; i < 6; i++) css($('#ill' + i), { display: fv && fi === i ? 'block' : 'none' });
   if (fv) {
     $('#num').textContent = String(fi + 1).padStart(2, '0');
-    css($('#num'), { color: 'transparent', webkitTextStroke: `3px ${th[2]}`, opacity: .9 });
+    css($('#num'), { color: 'transparent', webkitTextStroke: `3px ${th[2]}` });
     slam($('#num'), k(t, t0, t0 + .3, p => p));
-    css($('#flag'), { color: th[2], transform: `rotate(${Math.sin(t * 9) * 4}deg) scale(${E.ob2(k(t, t0 + .05, t0 + .4, p => p))})`, transformOrigin: '22% 92%' });
+    css($('#flag'), { color: th[2], transform: `rotate(${Math.sin(t * 9) * 5}deg) scale(${E.ob2(k(t, t0 + .05, t0 + .4, p => p))})`, transformOrigin: '22% 92%' });
     const [x, y] = FL[fi];
     if ($('#l1').textContent !== x) { $('#l1').textContent = x; $('#l2').innerHTML = `<em>${y}</em>`; }
     slam($('#l1'), k(t, t0 + .02, t0 + .32, p => p));
     slam($('#l2'), k(t, t0 + 2 * bt, t0 + 2 * bt + .3, p => p));
-    const hl = k(t, t0 + 2 * bt + .15, t0 + 2 * bt + .45);
-    css($('#l2 em'), { boxShadow: `inset 0 -${Math.round(20 * hl)}px 0 ${fi % 3 === 0 ? 'rgba(255,213,0,.95)' : fi % 3 === 1 ? 'rgba(255,255,255,.7)' : 'rgba(255,213,0,.95)'}`, color: fi % 3 === 0 ? '#0A0A0A' : '' });
-    if (fi % 3 === 0) css($('#l2 em'), { color: hl > .5 ? '#0A0A0A' : '#fff', boxShadow: `inset 0 -${Math.round(110 * hl)}px 0 rgba(255,213,0,.95)` });
+    const hl = k(t, t0 + 2 * bt + .15, t0 + 2 * bt + .45), em = $('#l2 em');
+    if (fi % 3 === 0) css(em, { color: hl > .5 ? '#0A0A0A' : '#fff', boxShadow: `inset 0 -${Math.round(96 * hl)}px 0 rgba(255,213,0,.95)` });
+    else css(em, { color: '', boxShadow: `inset 0 -${Math.round(18 * hl)}px 0 ${fi % 3 === 1 ? 'rgba(255,255,255,.75)' : 'rgba(255,213,0,.95)'}` });
+    ill(fi, t, t0, bt);
   }
-  // pregunta
-  ['#qq', '#qs'].forEach(s => css($(s), { display: sec === 'q' ? '' : 'none' }));
-  if (sec === 'q') { slam($('#qq'), k(t, B.q, B.q + .3, p => p)); const p = k(t, B.q + 2 * bt, B.q + 2 * bt + .35, E.ob2); css($('#qs'), { opacity: p > 0 ? 1 : 0, transform: `scale(${p})`, transformOrigin: '0 50%' }); }
-  // cierre
-  ['#en', '#logo', '#cta', '#web'].forEach(s => css($(s), { display: sec === 'end' ? '' : 'none' }));
+  // pregunta con selector
+  ['#qq', '#pick', '#qs'].forEach(s => css($(s), { display: sec === 'q' ? '' : 'none' }));
+  if (sec === 'q') {
+    slam($('#qq'), k(t, B.q, B.q + .3, p => p));
+    const cur = Math.floor((t - B.q - .3) / (bt / 2)) % 6;
+    $$('#pick span').forEach((s, i) => { const p = k(t, B.q + .15 + i * .06, B.q + .45 + i * .06, E.ob2); const on = t > B.q + .3 && i === cur;
+      css(s, { opacity: p > 0 ? 1 : 0, transform: `scale(${p * (on ? 1.12 : 1)})`, background: on ? '#0A0A0A' : 'transparent', color: on ? '#FFD500' : '#0A0A0A' }); });
+    const p = k(t, B.q + 2 * bt, B.q + 2 * bt + .35, E.ob2); css($('#qs'), { opacity: p > 0 ? 1 : 0, transform: `scale(${p})`, transformOrigin: '0 50%' });
+  }
+  // cierre: las 6 banderas se convierten en ✓
+  ['#en', '#recap', '#logo', '#cta', '#web'].forEach(s => css($(s), { display: sec === 'end' ? '' : 'none' }));
   if (sec === 'end') {
     slam($('#en'), k(t, B.logo, B.logo + .3, p => p));
-    const l = k(t, B.logo + 2 * bt, B.logo + 2 * bt + .4); css($('#logo'), { opacity: l, transform: `translateY(${(1 - l) * 30}px)` });
-    const c = k(t, B.logo + 4 * bt * .5 + .2, B.logo + 2 * bt + .6, E.ob2), pu = t > B.logo + 2 ? 1 + .04 * Math.sin((t - B.logo - 2) * 6) : 1;
+    $$('#recap span').forEach((s, i) => { const ti = B.logo + .35 + i * .12, p = k(t, ti - .25, ti, E.oc), c = k(t, ti + .25, ti + .55, E.ob2);
+      css(s, { opacity: p, transform: `translateY(${(1 - p) * 40}px)`, borderColor: c > .5 ? 'var(--y)' : '' });
+      css(s.querySelector('.f'), { opacity: 1 - k(t, ti + .2, ti + .3), transform: `rotate(${k(t, ti + .1, ti + .3) * -40}deg)` });
+      css(s.querySelector('.c'), { opacity: c > 0 ? 1 : 0, transform: `scale(${c})` }); });
+    const l = k(t, B.logo + 1.25, B.logo + 1.6); css($('#logo'), { opacity: l, transform: `translateY(${(1 - l) * 30}px)` });
+    const c = k(t, B.logo + 1.45, B.logo + 1.85, E.ob2), pu = t > B.logo + 2.2 ? 1 + .04 * Math.sin((t - B.logo - 2.2) * 6) : 1;
     css($('#cta'), { opacity: c > 0 ? 1 : 0, transform: `scale(${c * pu})`, transformOrigin: '0 50%' });
-    css($('#web'), { opacity: k(t, B.logo + 1.4, B.logo + 1.8) });
+    css($('#web'), { opacity: k(t, B.logo + 1.8, B.logo + 2.2) });
+  }
+}
+const lerp = (a, b, p) => a + (b - a) * p;
+
+// mini escenas: todas relativas al inicio del flag
+function ill(i, t, t0, bt) {
+  const a = t - t0, L2 = 2 * bt;
+  if (i === 0) {
+    const p = k(a, .15, .55, E.ob2); css($('#xl'), { opacity: p > 0 ? 1 : 0, transform: `translateY(${(1 - E.oc(clamp(a / .45))) * 120}px) rotate(${-2 + 2 * clamp(a / .5)}deg)` });
+    $$('#xl tr').forEach((r, j) => css(r, { opacity: k(a, .2 + j * .1, .3 + j * .1) }));
+    const fl = a > L2 ? (Math.floor((a - L2) * 8) % 2 === 0) : false;
+    $$('#xl td.e').forEach(td => css(td, { background: fl ? '#FFD500' : '', color: fl ? '#0A0A0A' : '' }));
+  } else if (i === 1) {
+    [0, 1, 2, 3].forEach(j => { const tt = .35 + j * bt * .9; const p = k(a, tt, tt + .35, E.ob2); pop($('#b1' + j), p, `rotate(${(j % 2 ? 2 : -2)}deg)`); });
+  } else if (i === 2) {
+    const p = k(a, .1, .45, E.ob2); css($('#nt'), { opacity: p > 0 ? 1 : 0, transform: `translateY(${(1 - E.oc(clamp(a / .4))) * -80}px)` });
+    $('#ntT').textContent = a < L2 ? 'ayer 10:14' : 'hace 25 h';
+    css($('#ntT'), { color: a > L2 ? '#FFD500' : '' });
+    pop($('#b20'), k(a, L2 - .2, L2 + .15, E.ob2)); pop($('#b21'), k(a, L2 + .55, L2 + .9, E.ob2), 'rotate(-1.5deg)');
+  } else if (i === 3) {
+    [0, 1, 2].forEach(j => { const tt = .2 + j * .32, p = k(a, tt, tt + .3, E.ob2); const r = [-6, 4, -3][j] + Math.sin(t * 3 + j) * 1.5;
+      css($('#p' + j), { opacity: p > 0 ? 1 : 0, transform: `translateY(${(1 - E.oc(clamp((a - tt) / .25))) * -200}px) rotate(${r}deg) scale(${.8 + .2 * p})` }); });
+  } else if (i === 4) {
+    [0, 1, 2].forEach(j => { const tt = .15 + j * .12, p = k(a, tt, tt + .35, E.ob2); pop($('#a' + j), p);
+      const q = $('#a' + j).querySelector('.m span:last-child'); css(q, { display: 'inline-block', transform: a > L2 ? `rotate(${Math.sin((a - L2) * 12 + j) * 14}deg) scale(${1 + .15 * Math.sin((a - L2) * 10 + j)})` : 'none' }); });
+  } else if (i === 5) {
+    const p = k(a, .1, .45, E.ob2); css($('#cart'), { opacity: p > 0 ? 1 : 0, transform: `translateY(${(1 - E.oc(clamp(a / .4))) * 120}px)` });
+    let gone = 0;
+    [0, 1, 2, 3].forEach(j => { const tt = L2 + .1 + j * .16, g = k(a, tt, tt + .35, E.ic); if (a > tt + .2) gone++;
+      css($('#cr' + j), { opacity: 1 - g, transform: `translateX(${g * 900}px) rotate(${g * 6}deg)` }); });
+    const left = 4 - gone; $('#cN').textContent = `${left} cliente${left === 1 ? '' : 's'}`;
+    css($('#cN'), { color: gone >= 4 ? '#B38F00' : '' });
   }
 }
 window.render = render;
