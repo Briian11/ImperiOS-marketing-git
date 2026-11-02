@@ -54,6 +54,9 @@ co = [i for i in range(len(W)) if W[i][0] == "Con"][-1]
 B["f"] = [S(co) - .1, S(find("números", co)), S(find("medirlo", co)), S(find("escalarlo", co))]
 last = len(W) - 1
 B["logo"] = S(last) - .1
+# notificaciones en el móvil del gancho (cada 0,45 s hasta «interesa»); suenan con un «ding»
+B["hn"] = [round(i * .5 - (.4 if i == 0 else 0), 3) for i in range(9) if i * .5 < S(inte) - .3]   # la primera ya está en el fotograma 0
+B["dings"] = [x for x in B["hn"] if x >= 0]
 B["wt"] = {"h": [round(S(i) - B["h"][0], 3) for i in range(0, inte + 1)],
            "f": [round(S(i) - B["f"][0], 3) for i in range(co, find("escalarlo", co) + 1)]}
 

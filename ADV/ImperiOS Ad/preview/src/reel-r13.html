@@ -29,7 +29,29 @@ body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; 
 .k { position: absolute; left: 72px; right: 60px; font-weight: 800; letter-spacing: -.045em; line-height: 1.05; }
 .k .w { display: inline-block; }
 .k .it { font-style: italic; font-weight: 500; color: var(--y); }
-#kh { top: 450px; font-size: 84px; }
+#kh { top: 400px; font-size: 72px; }
+#hook { position: absolute; inset: 0; z-index: 6; }
+/* móvil del gancho: pantalla de bloqueo con notificaciones */
+#hph { left: 540px; top: 0; width: 350px; height: 700px; margin-left: -175px; border-radius: 54px; background: #050505; border: 3px solid #3a3a3a;
+  box-shadow: 0 50px 120px rgba(0,0,0,.7), inset 0 0 0 10px #050505; overflow: hidden; transform-origin: 50% 50%; }
+#hph .scr { position: absolute; inset: 10px; border-radius: 44px; overflow: hidden; background: radial-gradient(120% 80% at 50% 0%, #2a2410, #0d0d0d 60%); }
+#hph .tm { position: absolute; left: 0; right: 0; top: 70px; text-align: center; font-weight: 700; font-size: 84px; letter-spacing: -.03em; }
+#hph .dt { position: absolute; left: 0; right: 0; top: 52px; text-align: center; font-weight: 700; font-size: 18px; color: var(--ink-500); }
+#hph .nfs { position: absolute; left: 14px; right: 14px; top: 200px; bottom: 30px; overflow: hidden; }
+.nf { position: absolute; left: 0; right: 0; height: 84px; border-radius: 20px; background: rgba(48,48,48,.92); display: flex; align-items: center; gap: 12px; padding: 0 14px; }
+.nf .ic { width: 38px; height: 38px; border-radius: 10px; background: var(--y); display: grid; place-items: center; flex: none; }
+.nf .ic img { width: 26px; }
+.nf b { display: block; font-size: 12px; letter-spacing: .12em; color: var(--ink-500); }
+.nf span { display: block; font-weight: 700; font-size: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 236px; }
+.bnf { position: absolute; left: 0; top: 0; width: 560px; height: 116px; margin: -58px 0 0 -280px; border-radius: 26px; background: rgba(250,250,250,.97); color: var(--ink-950);
+  display: flex; align-items: center; gap: 18px; padding: 0 22px; box-shadow: 0 30px 70px rgba(0,0,0,.6); z-index: 5; }
+.bnf .ic { width: 64px; height: 64px; border-radius: 16px; background: var(--y); display: grid; place-items: center; flex: none; }
+.bnf .ic img { width: 44px; }
+.bnf b { display: block; font-size: 17px; letter-spacing: .12em; color: var(--ink-600); }
+.bnf span { display: block; font-weight: 800; font-size: 27px; white-space: nowrap; }
+.bnf small { margin-left: auto; align-self: flex-start; margin-top: 22px; font-weight: 700; font-size: 17px; color: var(--ink-600); }
+#hph .badge { position: absolute; left: 50%; top: 210px; transform: translateX(-50%); padding: 10px 18px; border-radius: 999px; background: var(--y); color: var(--ink-950); font-weight: 800; font-size: 20px; white-space: nowrap; }
+#hph .bar { position: absolute; left: 50%; bottom: 14px; width: 120px; height: 5px; margin-left: -60px; border-radius: 3px; background: rgba(255,255,255,.6); }
 /* dispositivo */
 #dev { left: 540px; top: 850px; }
 #frame { position: absolute; background: #050505; border: 3px solid #3a3a3a; box-shadow: 0 50px 120px rgba(0,0,0,.7), inset 0 0 0 10px #050505; overflow: hidden; }
@@ -114,7 +136,9 @@ body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; 
 <div id="hook">
   <div class="abs" id="topH"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar-blanco.svg" alt="ImperiOS"><span>PARA CEOS INMOBILIARIOS</span></div>
   <div class="k" id="kh"></div>
+  <div id="bnfs"></div>
 </div>
+<div class="abs" id="hph"><div class="scr"><div class="dt">Lunes, 3 de noviembre</div><div class="tm">08:47</div><div class="nfs" id="nfs" style="display:none"></div><div class="badge" id="badge">9 notificaciones</div><div class="bar"></div></div></div>
 <div class="abs" id="topM"><span class="lbl"><i></i>EL PANEL DEL CEO</span><span class="r">DATOS DE EJEMPLO</span></div>
 
 <!-- DISPOSITIVOS -->
@@ -192,6 +216,11 @@ $('#rE').innerHTML = PE.map(([n, d], i) => `<div class="tr" id="re${i}" style="t
 const PC = [['LM', 'Laura M.', [9, 12, 21, 3], 0, 'CAPTACIÓN'], ['MG', 'Marta G.', [6, 15, 14, 2], 1, 'VALORACIONES'], ['DP', 'Dani P.', [3, 5, 27, 1], 2, 'VISITAS'], ['CR', 'Carlos R.', [4, 7, 19, 6], 3, 'CIERRES']];
 $('#rC').innerHTML = PC.map(([a, n, v, b, bl], i) => `<div class="tr" id="rc${i}" style="top:${54 + i * 154}px;height:140px;grid-template-columns:1fr 120px 120px 120px 120px"><div class="nm"><i>${a}</i><div>${n}<br><span class="bd" id="bd${i}">MEJOR EN ${bl}</span></div></div>${v.map((x, j) => `<div class="v" id="vc${i}${j}" style="font-size:40px">0</div>`).join('')}</div>`).join('');
 
+const NF = [['NUEVA CONSULTA', 'Ático · Chamberí'], ['OFERTA RECIBIDA', '385.000 € · Piso Retiro'], ['NUEVO LEAD', 'Campaña «Salamanca»'], ['VISITA CONFIRMADA', 'Jueves 17:00 · Chalet Pozuelo'],
+  ['CAPTACIÓN FIRMADA', 'Laura M. · Ático Retiro'], ['NUEVA CONSULTA', 'Piso · Salamanca'], ['FACTURA EMITIDA', 'Nº 2031 · Honorarios'], ['NUEVO LEAD', 'Campaña «Ático Chamberí»'], ['VISITA REALIZADA', 'Marta G. · Piso Retiro']];
+const BP = [[330, 870, -4], [750, 980, 3], [320, 1100, 2.5], [770, 1210, -3], [330, 1320, -2], [750, 1420, 3.5], [340, 940, 3], [760, 1060, -2.5], [330, 1250, -3.5]];
+$('#bnfs').innerHTML = NF.map(([a, b], i) => `<div class="bnf" id="bn${i}"><span class="ic"><img src="../../assets_in/brand-kit/assets/logo-imperios.svg" alt=""></span><div><b>${a}</b><span>${b}</span></div><small>ahora</small></div>`).join('');
+$('#nfs').innerHTML = NF.map(([a, b], i) => `<div class="nf" id="nf${i}"><span class="ic"><img src="../../assets_in/brand-kit/assets/logo-imperios.svg" alt=""></span><div><b>IMPERIOS · ${a}</b><span>${b}</span></div></div>`).join('');
 function render(t) {
   const [h0, h1] = B.h, f = B.f, lg = B.logo;
   css($('#grid'), { transform: `translate(${(-t * 6) % 40}px, ${(-t * 9) % 40}px)` });
@@ -203,8 +232,31 @@ function render(t) {
   // ---------- GANCHO ----------
   const hOut = k(t, first - .35, first + .05, E.ic);
   css($('#hook'), { display: t < first + .1 ? 'block' : 'none', opacity: 1 - hOut, transform: `translateY(${-hOut * 60}px)`, filter: hOut > 0 ? `blur(${hOut * 12}px)` : 'none' });
-  css($('#topH'), { opacity: k(t, 0, .35) });
+  css($('#topH'), { opacity: 1 });
   words(KH, t, h0, B.wt.h || []);
+  // móvil del gancho: visible desde el primer fotograma, recibe notificaciones y al final se coloca donde empieza la escena de dispositivos
+  const HN = B.hn || NF.map((_, i) => .1 + i * .45), dz = B.d ? B.d[0] : first;
+  const mv = k(t, dz - .55, dz + .05, E.ioc), unl = k(t, h1 + .05, h1 + .5, E.ic);
+  css($('#hph'), { display: t < dz + .15 ? 'block' : 'none', opacity: 1 - k(t, dz - .02, dz + .12) * (B.d ? 1 : 0) - (B.d ? 0 : k(t, dz - .3, dz + .05)),
+    transform: `translateY(${lerp(1130, 850, mv) - 350}px) scale(${lerp(.82, 1, mv)}) translateX(${HN.reduce((a, tn) => a + (t > tn ? Math.sin((t - tn) * 70) * 7 * Math.exp(-(t - tn) * 12) : 0), 0)}px)` });
+  const shown = HN.filter(tn => t >= tn).length;
+  NF.forEach((_, i) => {
+    const tn = HN[i] ?? 99, p = k(t, tn, tn + .3, E.ob), slot = shown - 1 - i;
+    css($('#nf' + i), { display: t >= tn ? 'flex' : 'none', top: (slot * 94) + 'px', opacity: Math.min(1, p * 1.5) * (1 - unl) * (slot > 4 ? 0 : 1),
+      transform: `translateY(${(1 - p) * -40 - unl * 500}px) scale(${.9 + .1 * p})` });
+  });
+  // tarjetas grandes: saltan alrededor del móvil y en «interesa» se meten dentro
+  const suck = k(t, h1 - .1, h1 + .55, E.ic), py = lerp(1130, 850, mv);
+  NF.forEach((_, i) => {
+    const tn = HN[i] ?? 99, p = k(t, tn, tn + .35, E.ob2), [x, y, r] = BP[i], age = shown - 1 - i;
+    const xx = lerp(x, 540, suck), yy = lerp(y, py, suck);
+    css($('#bn' + i), { display: t >= tn && suck < 1 ? 'flex' : 'none', opacity: (age > 5 ? 0 : 1 - age * .12) * (1 - suck * .6),
+      transform: `translate(${xx}px, ${yy}px) rotate(${r * (1 - suck)}deg) scale(${(.6 + .4 * p) * (1 - .8 * suck)})`, zIndex: 10 + i });
+  });
+  $('#badge').textContent = `${Math.max(shown, 1)} notificaci${shown === 1 ? 'ón' : 'ones'}`;
+  css($('#badge'), { opacity: 1 - unl, transform: `translateX(-50%) scale(${1 + .08 * Math.sin(k(t, HN[shown - 1] ?? 0, (HN[shown - 1] ?? 0) + .3) * Math.PI)})` });
+  css($('#hph .tm'), { transform: `translateY(${-unl * 120}px)`, opacity: 1 - unl });
+  css($('#hph .dt'), { opacity: 1 - unl });
   css($('#topM'), { display: t > first - .1 && t < f[0] ? 'flex' : 'none', opacity: k(t, first, first + .4) * (1 - k(t, f[0] - .3, f[0])) });
 
   // ---------- DISPOSITIVOS ----------
@@ -217,7 +269,7 @@ function render(t) {
     const cur = [0, 1, 2, 3].map(i => lerp(lerp(S[0][i], S[1][i], p1), S[2][i], p2));
     const [w, hh, r, bs] = cur, inW = w - 20, inH = hh - 20;
     const out = k(t, nextStart('d') - .3, nextStart('d') + .3, E.ic), pin = k(t, D[0], D[0] + .5, E.ob);
-    css($('#dev'), { opacity: k(t, D[0], D[0] + .2) * (1 - out), transform: `translateY(${(1 - pin) * 200}px) scale(${1 + out * .25})` });
+    css($('#dev'), { opacity: k(t, D[0] - .05, D[0] + .08) * (1 - out), transform: `scale(${1 + out * .25})` });
     css($('#frame'), { left: -w / 2 + 'px', top: -hh / 2 + 'px', width: w + 'px', height: hh + 'px', borderRadius: r + 'px' });
     const sc = Math.min(inW / 1000, inH / 700), portrait = inH > inW;
     css($('#screen'), { left: (10 + (inW - 1000 * sc) / 2) + 'px', top: (10 + (inH - 700 * sc) / 2) + 'px', transform: `scale(${sc})` });
