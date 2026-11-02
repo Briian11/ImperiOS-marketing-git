@@ -117,3 +117,15 @@ Cierre «Con ImperiOS, ninguna.» + Comenta DEMO. Motor `preview/src/reel-r12.ht
 **R12 v2 (02/11/2026):** mini escena por flag (Excel con #REF!, chat del equipo, «Gracias, ya encontré otro», pósits que caen,
 anuncios con «¿?», la cartera de Marcos que se vacía), cinta «RED FLAG» en el título y en cada transición, selector 1–6 en la
 pregunta y las 6 banderas que se convierten en ✓ en el cierre.
+
+---
+
+## R13 (02/11/2026) · «El panel del CEO» — Reel + anuncios, oscuro (~47 s; corte de anuncio ~25 s)
+
+Guion aprobado por Brian (con sus cambios: «en qué es mejor cada uno»; campañas publicitarias con inversión, clics en los
+anuncios, leads en directo y notificación de cada lead nuevo; reunión de fin de mes con el equipo de marketing).
+Gancho: móvil del CEO con notificaciones que saltan alrededor desde el primer fotograma → móvil / tablet / ordenador →
+embudo consultas → visitas → ofertas por propiedad → comerciales y «MEJOR EN…» → campañas (gráfica con inversión, clics y leads;
+aviso de lead nuevo dentro del panel; reunión tachada) → documentación, facturación y seguimiento → «Si puedes medirlo… puedes escalarlo».
+Versiones: `imperios-r13-panel-ceo-A` (Reel, Comenta DEMO), `-B` (anuncio, Pide tu demo), `-corto` (anuncio ~25 s).
+Motor `preview/src/reel-r13.html`, tiempos `preview/build_timeline_r13.py`, render `preview/build_r13.sh A|B|corto`.
