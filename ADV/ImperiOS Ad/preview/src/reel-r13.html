@@ -69,16 +69,17 @@ body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; 
 .kt { position: absolute; top: 0; width: 280px; height: 190px; border-radius: 24px; background: var(--ink-900); border: 2px solid var(--ink-800); padding: 24px 26px; }
 .kt small { display: block; font-weight: 800; font-size: 18px; letter-spacing: .14em; color: var(--ink-500); }
 .kt b { display: block; font-size: 66px; letter-spacing: -.035em; margin-top: 14px; }
-#chart { position: absolute; left: 32px; right: 32px; top: 220px; height: 220px; }
-#meet { position: absolute; left: 32px; right: 32px; top: 476px; height: 170px; border-radius: 24px; background: var(--ink-50); color: var(--ink-950); display: flex; align-items: center; gap: 24px; padding: 0 28px; overflow: hidden; }
-#meet .cal { width: 110px; height: 120px; border-radius: 18px; background: #fff; border: 2px solid var(--ink-200); overflow: hidden; text-align: center; flex: none; }
+#chart { position: absolute; left: 32px; right: 32px; top: 210px; height: 180px; }
+.kt small i { display: inline-block; width: 13px; height: 13px; border-radius: 50%; margin-right: 9px; vertical-align: 0; }
+#meet { position: absolute; left: 32px; right: 32px; top: 540px; height: 140px; border-radius: 24px; background: var(--ink-50); color: var(--ink-950); display: flex; align-items: center; gap: 24px; padding: 0 28px; overflow: hidden; }
+#meet .cal { width: 100px; height: 108px; border-radius: 18px; background: #fff; border: 2px solid var(--ink-200); overflow: hidden; text-align: center; flex: none; }
 #meet .cal small { display: block; background: var(--ink-950); color: var(--y); font-weight: 800; font-size: 17px; letter-spacing: .14em; padding: 6px 0; }
-#meet .cal b { display: block; font-size: 54px; margin-top: 6px; }
+#meet .cal b { display: block; font-size: 48px; margin-top: 4px; }
 #meet .tx b { display: block; font-size: 32px; }
 #meet .tx span { font-weight: 600; font-size: 22px; color: var(--ink-600); }
 #strike { position: absolute; left: 20px; top: 50%; height: 7px; border-radius: 4px; background: var(--y); box-shadow: 0 0 0 3px var(--ink-950); }
-#notif { left: 72px; width: 936px; top: 300px; height: 128px; border-radius: 28px; background: rgba(250,250,250,.97); color: var(--ink-950); display: flex; align-items: center; gap: 20px; padding: 0 26px; z-index: 20; box-shadow: 0 30px 80px rgba(0,0,0,.6); }
-#notif .ic { width: 70px; height: 70px; border-radius: 18px; background: var(--ink-950); display: grid; place-items: center; flex: none; }
+#notif { left: 104px; width: 872px; top: 754px; height: 118px; border-radius: 24px; background: rgba(250,250,250,.97); color: var(--ink-950); display: flex; align-items: center; gap: 20px; padding: 0 26px; z-index: 20; box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+#notif .ic { width: 70px; height: 70px; border-radius: 18px; background: var(--y); display: grid; place-items: center; flex: none; }
 #notif .ic img { width: 48px; }
 #notif b { display: block; font-size: 20px; letter-spacing: .12em; color: var(--ink-600); }
 #notif span { font-weight: 800; font-size: 30px; }
@@ -129,10 +130,10 @@ body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; 
   <div class="sc" id="scE"><div class="th" style="grid-template-columns:1fr 150px 150px 150px"><span>PROPIEDAD</span><span id="hE0">CONSULTAS</span><span id="hE1">VISITAS</span><span id="hE2">OFERTAS</span></div><div id="rE"></div></div>
   <div class="sc" id="scC"><div class="th" style="grid-template-columns:1fr 120px 120px 120px 120px"><span>COMERCIAL</span><span id="hC0">CAPT.</span><span id="hC1">VALOR.</span><span id="hC2">VISITAS</span><span id="hC3">CIERRES</span></div><div id="rC"></div></div>
   <div class="sc" id="scM">
-    <div class="kt" id="k0" style="left:32px"><small>INVERSIÓN</small><b id="kv0">0 €</b></div>
-    <div class="kt" id="k1" style="left:328px"><small>CLICS</small><b id="kv1">0</b></div>
-    <div class="kt" id="k2" style="left:624px"><small>LEADS</small><b id="kv2">0</b></div>
-    <svg id="chart" viewBox="0 0 872 220" preserveAspectRatio="none"><path id="chL" stroke="#FFD500" stroke-width="5" fill="none" stroke-linejoin="round"/><path id="chA" fill="rgba(255,213,0,.1)"/></svg>
+    <div class="kt" id="k0" style="left:32px"><small><i style="background:#fff"></i>INVERSIÓN</small><b id="kv0">0 €</b></div>
+    <div class="kt" id="k1" style="left:328px"><small><i style="background:#8A8A8A"></i>CLICS</small><b id="kv1">0</b></div>
+    <div class="kt" id="k2" style="left:624px"><small><i style="background:#FFD500"></i>LEADS</small><b id="kv2">0</b></div>
+    <svg id="chart" viewBox="0 0 872 180" preserveAspectRatio="none"><path id="chA" fill="rgba(255,213,0,.1)"/><path id="chI" stroke="#fff" stroke-width="3.5" fill="none" stroke-linejoin="round"/><path id="chC" stroke="#8A8A8A" stroke-width="3.5" fill="none" stroke-linejoin="round"/><path id="chL" stroke="#FFD500" stroke-width="6" fill="none" stroke-linejoin="round"/></svg>
     <div id="meet"><div class="cal"><small>NOV</small><b>30</b></div><div class="tx"><b>Reunión de marketing</b><span>Resultados del mes · 10:00</span></div><div id="strike"></div></div>
   </div>
   <div class="sc" id="scO">
@@ -278,21 +279,31 @@ function render(t) {
       css($('#k' + j), { borderColor: on ? (j === 2 && t > m[5] ? 'var(--y)' : '#555') : '', transform: `scale(${j === 2 && t > m[5] - .05 ? 1 + .06 * Math.sin(k(t, m[5] - .05, m[5] + .35) * Math.PI) : 1})` });
       css($('#kv' + j), { color: j === 2 && t > m[5] - .05 ? 'var(--y)' : '' });
       css($('#k' + j), { opacity: k(t, m[0] + .1 + j * .1, m[0] + .3 + j * .1) }); });
-    // gráfica en directo
-    let d = 'M0 200', a = 'M0 220 L0 200';
-    const n = 30;
-    for (let i = 0; i <= n; i++) { const x = i / n * 872, y = 190 - i / n * 130 - 18 * Math.sin(i * .9 + t * 2.2) - 10 * Math.sin(i * 2.3 + t * 1.3); d += ` L${x.toFixed(1)} ${y.toFixed(1)}`; a += ` L${x.toFixed(1)} ${y.toFixed(1)}`; }
-    a += ' L872 220 Z';
-    const gp = k(t, m[4] - .5, m[4] + .3);
-    $('#chL').setAttribute('d', d); $('#chA').setAttribute('d', a); css($('#chart'), { opacity: gp, clipPath: `inset(0 ${(1 - gp) * 100}% 0 0)` });
+    // gráfica en directo: inversión (blanco), clics (gris) y leads (amarillo); cada serie entra cuando la voz la nombra
+    const n = 30, np = k(t, m[5] - .35, m[5] + .1, E.ob);
+    const ser = [
+      [i => 92 - i / n * 34 - 4 * Math.sin(i * .7 + t * 1.6), m[1], '#chI'],
+      [i => 150 - i / n * 105 - 14 * Math.sin(i * 1.1 + t * 2.1) - 7 * Math.sin(i * 2.7 + t), m[2], '#chC'],
+      [i => 172 - Math.floor(i / 3) / (n / 3) * 155 - 4 * Math.sin(i * .5 + t * 1.3), m[3], '#chL'],
+    ];
+    ser.forEach(([fy, tt, id], j) => {
+      const p = k(t, tt - .1, tt + .9, E.ioc), last = Math.max(1, Math.round(n * p));
+      let d = '';
+      for (let i = 0; i <= last; i++) d += `${i ? ' L' : 'M'}${(i / n * 872).toFixed(1)} ${fy(i).toFixed(1)}`;
+      $(id).setAttribute('d', d); css($(id), { opacity: p > 0 ? 1 : 0 });
+      if (j === 2) $('#chA').setAttribute('d', p > 0 ? d + ` L${(last / n * 872).toFixed(1)} 180 L0 180 Z` : '');
+    });
+    css($('#chart'), { opacity: k(t, m[1] - .3, m[1]), top: lerp(210, 340, np) + 'px' });
     const mp = k(t, m[6] - .4, m[6] + .1, E.ob);
     css($('#meet'), { opacity: k(t, m[6] - .4, m[6] - .2), transform: `translateY(${(1 - mp) * 60}px)` });
     css($('#strike'), { width: (k(t, m[6] + .3, m[6] + .8, E.ioc) * 860) + 'px' });
     css($('#meet .tx'), { opacity: 1 - .55 * k(t, m[6] + .5, m[6] + .9) });
   }
   // aviso de lead nuevo (fuera del panel)
-  const nt = B.m ? B.m[5] : -9, np = k(t, nt - .35, nt + .05, E.ob), nOut = k(t, nt + 1.6, nt + 2);
-  css($('#notif'), { display: B.m && t > nt - .4 && t < nt + 2.1 ? 'flex' : 'none', opacity: k(t, nt - .35, nt - .2) * (1 - nOut), transform: `translateY(${(1 - np) * -160 - nOut * 120}px)` });
+  // queda dentro del panel, bajo las tarjetas (la gráfica baja para hacerle sitio)
+  const nt = B.m ? B.m[5] : -9, mEnd = B.m ? nextStart('m') : -9, nP = k(t, nt - .35, nt + .05, E.ob), nOut = k(t, mEnd - .25, mEnd + .05);
+  css($('#notif'), { display: B.m && t > nt - .4 && t < mEnd + .1 ? 'flex' : 'none', opacity: k(t, nt - .35, nt - .2) * (1 - nOut),
+    transform: `translateY(${(1 - nP) * -50}px) scale(${.92 + .08 * nP})`, boxShadow: `0 20px 60px rgba(0,0,0,.5), 0 0 0 ${4 * Math.sin(k(t, nt, nt + .6) * Math.PI)}px rgba(255,213,0,.8)` });
   // o: lo tedioso
   if (B.o) {
     const o = B.o;
