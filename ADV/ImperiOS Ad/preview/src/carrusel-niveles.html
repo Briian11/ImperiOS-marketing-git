@@ -41,8 +41,12 @@ body.dark p.body { color: var(--ink-500); } body.dark p.body b { color: #fff; }
 .steps i.done { background: var(--ink-950); }
 body.dark .steps i { background: var(--ink-800); } body.dark .steps i.done { background: var(--ink-600); } body.dark .steps i.on { background: var(--y); }
 .nv { display: flex; align-items: center; gap: 22px; }
-.nv b { font-weight: 800; font-size: 150px; letter-spacing: -.06em; line-height: .8; color: transparent; -webkit-text-stroke: 3px var(--ink-950); }
-body.dark .nv b { -webkit-text-stroke-color: var(--y); }
+.nv b { font-weight: 800; font-size: 150px; letter-spacing: -.06em; line-height: .8; color: var(--ink-950); }
+body.dark .nv b { color: var(--y); }
+.xl { width: 100%; border-collapse: collapse; font-size: 17px; font-weight: 600; }
+.xl td { border: 1px solid var(--ink-200); height: 34px; padding: 0 8px; white-space: nowrap; overflow: hidden; }
+.xl td.h { background: var(--ink-100); color: var(--ink-600); font-weight: 800; font-size: 13px; letter-spacing: .08em; }
+.xl td.e { color: #B38F00; font-weight: 800; }
 .nv span { font-weight: 800; font-size: 26px; letter-spacing: .16em; }
 .sig { left: 84px; right: 84px; display: flex; flex-direction: column; gap: 12px; }
 .sig div { display: flex; align-items: flex-start; gap: 14px; font-weight: 700; font-size: 26px; line-height: 1.3; }
@@ -121,9 +125,9 @@ body.dark .nv b { -webkit-text-stroke-color: var(--y); }
   <h2 class="abs" style="left:80px;right:60px;top:370px">Excel y mil<br><em class="ul">herramientas.</em></h2>
   <p class="abs body" style="left:84px;right:110px;top:560px">Una hoja de clientes, otra app para la agenda, otra para facturar… <b>cada cosa en un sitio.</b></p>
   <div class="abs" style="left:84px;right:84px;top:740px;height:290px">
-    <div class="win" style="left:0;top:10px;width:300px;height:200px;transform:rotate(-3deg)"><div class="t"><i></i>clientes_v3.xlsx</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ink-200);margin:12px;height:120px">${'<span style="background:#fff"></span>'.repeat(9)}</div></div>
-    <div class="win" style="left:330px;top:-10px;width:250px;height:180px;transform:rotate(2deg)"><div class="t"><i></i>Agenda</div><div style="padding:14px;font-weight:700;font-size:20px;color:var(--ink-700)">Jue 17:00 · ¿quién?</div></div>
+    <div class="win" style="left:0;top:10px;width:330px;height:200px;transform:rotate(-3deg)"><div class="t"><i></i>clientes_v3 (2).xlsx</div>
+      <table class="xl"><tr><td class="h">NOMBRE</td><td class="h">TELÉFONO</td><td class="h">ESTADO</td></tr><tr><td>Ana ??</td><td>617 2…</td><td class="e">#REF!</td></tr><tr><td>Luis</td><td>—</td><td>llamar</td></tr><tr><td>Marta (Retiro)</td><td>ver chat</td><td class="e">#N/A</td></tr></table></div>
+    <div class="win" style="left:350px;top:-10px;width:240px;height:180px;transform:rotate(2deg)"><div class="t"><i></i>Agenda</div><div style="padding:14px;font-weight:700;font-size:20px;color:var(--ink-700)">Jue 17:00 · ¿quién?</div></div>
     <div class="win" style="right:0;top:30px;width:280px;height:170px;transform:rotate(-2deg)"><div class="t"><i></i>Facturas</div><div style="padding:14px;font-weight:700;font-size:20px;color:var(--ink-700)">Nº 2031 · pendiente</div></div>
     <div class="abs" style="left:250px;top:215px;font-weight:800;font-size:22px;letter-spacing:.1em;color:var(--ink-600)">COPIAR · PEGAR · COPIAR · PEGAR…</div>
   </div>
@@ -178,7 +182,6 @@ document.getElementById('coverSteps').innerHTML = NAMES.map((n, i) => `<div styl
 document.getElementById('pick').innerHTML = [1, 2, 3, 4].map(i => `<span style="width:200px;height:200px;border-radius:40px;display:grid;place-items:center;font-weight:800;font-size:110px;letter-spacing:-.05em;
   border:4px solid var(--ink-950);${i === 4 ? 'background:var(--ink-950);color:var(--y)' : ''}">${i}</span>`).join('');
 // la cuadrícula del Excel del nivel 3 (el HTML no interpola)
-document.querySelectorAll('.win div[style*="grid-template-columns:repeat(3"]').forEach(g => g.innerHTML = '<span style="background:#fff"></span>'.repeat(9));
 const n = +(location.hash.slice(1) || 1), sl = document.querySelector(`.slide[data-n="${n}"]`);
 sl.classList.add('on'); if (sl.dataset.dark) document.body.classList.add('dark');
 window.ready = document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => i.onload = r))));
