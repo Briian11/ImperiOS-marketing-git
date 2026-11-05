@@ -129,3 +129,9 @@ embudo consultas → visitas → ofertas por propiedad → comerciales y «MEJOR
 aviso de lead nuevo dentro del panel; reunión tachada) → documentación, facturación y seguimiento → «Si puedes medirlo… puedes escalarlo».
 Versiones: `imperios-r13-panel-ceo-A` (Reel, Comenta DEMO), `-B` (anuncio, Pide tu demo), `-corto` (anuncio ~25 s).
 Motor `preview/src/reel-r13.html`, tiempos `preview/build_timeline_r13.py`, render `preview/build_r13.sh A|B|corto`.
+
+## Carrusel · «¿Qué nivel de organización tiene tu inmobiliaria?» (05/11/2026)
+
+6 diapositivas 1080×1350 (`preview/src/carrusel-niveles.html#1…6` → `preview/out/carruseles/niveles/`):
+portada con la escalera de 4 niveles · nivel 1 «Todo en la cabeza» · nivel 2 «Papeles y chats sueltos» ·
+nivel 3 «Excel y mil herramientas» · nivel 4 «Todo conectado y medido» (en negro) · cierre «¿En qué nivel estás tú? Comenta tu número» + Comenta DEMO.

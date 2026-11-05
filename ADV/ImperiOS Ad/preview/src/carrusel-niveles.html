@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Carrusel — Niveles de organización</title>
+<!-- Carrusel del feed (1080×1350, 4:5) «¿Qué nivel de organización tiene tu inmobiliaria?». Una diapositiva por #n (1–6):
+     portada · nivel 1 «Todo en la cabeza» · nivel 2 «Papeles y chats sueltos» · nivel 3 «Excel y mil herramientas» ·
+     nivel 4 «Todo conectado y medido» (en negro) · cierre «Comenta tu nivel» + Comenta DEMO.
+     Mismo estilo que carrusel-metricas.html. Datos de ejemplo. -->
+<style>
+@font-face { font-family: "Manrope"; src: url("manrope-latin-variable.woff2") format("woff2"); font-weight: 200 800; }
+:root { --ink-950:#0A0A0A; --ink-900:#1C1C1C; --ink-850:#242424; --ink-800:#333; --ink-700:#4A4A4A; --ink-600:#727272; --ink-500:#B0B0B0;
+  --ink-300:#D4D4D4; --ink-200:#EBEBEB; --ink-100:#F7F7F3; --ink-50:#FAFAFA; --y:#FFD500; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1350px; overflow: hidden; }
+body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; position: relative; background: var(--ink-100); color: var(--ink-950); }
+body.dark { background: var(--ink-950); color: #fff; }
+.abs { position: absolute; }
+.grid { position: absolute; inset: 0; background-image: linear-gradient(to right, rgba(10,10,10,.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(10,10,10,.05) 1px, transparent 1px); background-size: 40px 40px; }
+body.dark .grid { background-image: linear-gradient(to right, rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px); }
+.slide { position: absolute; inset: 0; display: none; }
+.slide.on { display: block; }
+.head { left: 84px; right: 84px; top: 72px; display: flex; justify-content: space-between; align-items: center; }
+.head img { height: 48px; display: block; }
+.head span { font-weight: 800; font-size: 22px; letter-spacing: .16em; color: var(--ink-600); }
+.foot { left: 84px; right: 84px; bottom: 64px; display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 22px; letter-spacing: .16em; color: var(--ink-600); }
+.foot b { color: var(--ink-950); } body.dark .foot b { color: var(--y); }
+.lbl { display: flex; align-items: center; gap: 14px; font-weight: 800; font-size: 24px; letter-spacing: .16em; }
+.lbl i { width: 36px; height: 6px; border-radius: 3px; background: var(--y); }
+h1 { font-weight: 800; letter-spacing: -.045em; line-height: 1.0; }
+h1 em, h2 em { font-style: italic; font-weight: 500; }
+.ul { box-shadow: inset 0 -16px 0 var(--y); }
+h2 { font-weight: 800; font-size: 80px; letter-spacing: -.04em; line-height: 1.02; }
+p.body { font-weight: 600; font-size: 31px; line-height: 1.35; color: var(--ink-700); }
+p.body b { color: var(--ink-950); }
+body.dark p.body { color: var(--ink-500); } body.dark p.body b { color: #fff; }
+/* escalera de niveles */
+.steps { display: flex; align-items: flex-end; gap: 12px; }
+.steps i { width: 56px; border-radius: 10px; background: var(--ink-300); }
+.steps i.on { background: var(--y); }
+.steps i.done { background: var(--ink-950); }
+body.dark .steps i { background: var(--ink-800); } body.dark .steps i.done { background: var(--ink-600); } body.dark .steps i.on { background: var(--y); }
+.nv { display: flex; align-items: center; gap: 22px; }
+.nv b { font-weight: 800; font-size: 150px; letter-spacing: -.06em; line-height: .8; color: transparent; -webkit-text-stroke: 3px var(--ink-950); }
+body.dark .nv b { -webkit-text-stroke-color: var(--y); }
+.nv span { font-weight: 800; font-size: 26px; letter-spacing: .16em; }
+.sig { left: 84px; right: 84px; display: flex; flex-direction: column; gap: 12px; }
+.sig div { display: flex; align-items: flex-start; gap: 14px; font-weight: 700; font-size: 26px; line-height: 1.3; }
+.sig div i { flex: none; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; font-style: normal; font-weight: 800; font-size: 20px; margin-top: 1px; }
+.sig .no i { background: var(--ink-200); color: var(--ink-700); }
+.sig .ok i { background: var(--y); color: var(--ink-950); }
+/* escenas */
+.card { position: absolute; border-radius: 24px; box-shadow: 0 24px 60px rgba(10,10,10,.12); }
+.bub { position: absolute; padding: 14px 22px; border-radius: 24px; font-weight: 700; font-size: 26px; white-space: nowrap; }
+.pst { position: absolute; width: 230px; height: 180px; background: var(--y); padding: 22px 20px; font-weight: 700; font-size: 26px; line-height: 1.15; font-style: italic; box-shadow: 0 18px 40px rgba(10,10,10,.18); }
+.pst::before { content: ""; position: absolute; left: 50%; top: -12px; width: 90px; height: 26px; margin-left: -45px; background: rgba(255,255,255,.5); transform: rotate(-3deg); }
+.win { position: absolute; background: #fff; border: 1.5px solid var(--ink-200); border-radius: 18px; overflow: hidden; box-shadow: 0 20px 50px rgba(10,10,10,.12); }
+.win .t { height: 44px; background: var(--ink-200); display: flex; align-items: center; gap: 8px; padding: 0 16px; font-weight: 700; font-size: 18px; color: var(--ink-700); }
+.win .t i { width: 10px; height: 10px; border-radius: 50%; background: var(--ink-500); }
+.dk { background: var(--ink-900); border: 1.5px solid var(--ink-800); border-radius: 20px; padding: 20px 22px; }
+.dk small { display: block; font-weight: 800; font-size: 16px; letter-spacing: .14em; color: var(--ink-500); }
+.dk b { display: block; font-size: 52px; letter-spacing: -.03em; margin-top: 6px; }
+.ej { position: absolute; top: 18px; right: 22px; font-size: 15px; font-weight: 800; letter-spacing: .14em; color: var(--ink-500); }
+</style>
+</head>
+<body>
+<div class="grid"></div>
+
+<!-- 1 · PORTADA -->
+<section class="slide" data-n="1">
+  <div class="abs head"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" alt="ImperiOS"><span>TEST RÁPIDO</span></div>
+  <div class="abs lbl" style="left:84px;top:220px"><i></i>PARA TU INMOBILIARIA</div>
+  <h1 class="abs" style="left:80px;right:60px;top:290px;font-size:104px">¿Qué nivel de<br><span class="ul">organización</span><br>tiene tu <em>inmobiliaria?</em></h1>
+  <div class="abs" style="left:84px;right:84px;top:740px;height:400px">
+    <div class="steps" id="coverSteps" style="position:absolute;left:0;bottom:0;gap:18px"></div>
+  </div>
+  <div class="abs foot"><span>COMENTA TU NIVEL</span><b>DESLIZA →</b></div>
+</section>
+
+<!-- 2 · NIVEL 1 -->
+<section class="slide" data-n="2">
+  <div class="abs head"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" alt="ImperiOS"><span>02 / 06</span></div>
+  <div class="abs nv" style="left:84px;top:200px"><span>NIVEL</span><b>1</b></div>
+  <div class="abs steps lv" data-l="1" style="right:84px;top:250px"></div>
+  <h2 class="abs" style="left:80px;right:60px;top:370px">Todo en<br>la <em class="ul">cabeza.</em></h2>
+  <p class="abs body" style="left:84px;right:110px;top:560px">Los clientes, las visitas y los números están en tu memoria… <b>y en la de cada comercial.</b></p>
+  <div class="abs" style="left:84px;right:84px;top:740px;height:290px">
+    <svg class="abs" style="left:310px;top:20px" width="220" height="250" viewBox="0 0 220 250"><path d="M110 20c-50 0-85 35-85 82 0 30 14 50 30 64v54h80v-30h25c10 0 15-6 15-15v-25l20-8-20-35c0-55-25-87-65-87z" fill="none" stroke="#0A0A0A" stroke-width="7" stroke-linejoin="round"/></svg>
+    <div class="bub" style="left:0;top:0;background:#fff;border:2px solid var(--ink-950);transform:rotate(-4deg)">Ana… ¿ático?</div>
+    <div class="bub" style="right:0;top:30px;background:#fff;border:2px solid var(--ink-950);transform:rotate(3deg)">¿Visita jueves o viernes?</div>
+    <div class="bub" style="left:20px;top:150px;background:var(--ink-950);color:#fff;transform:rotate(2deg)">Llamar a Luis</div>
+    <div class="bub" style="right:20px;top:190px;background:var(--ink-950);color:#fff;transform:rotate(-3deg)">¿Cuánto facturamos?</div>
+  </div>
+  <div class="abs sig" style="top:1060px"><div class="no"><i>✕</i>Si un comercial se va, se lleva sus clientes.</div><div class="no"><i>✕</i>Nadie sabe cuántas consultas entran.</div></div>
+  <div class="abs foot"><span>IMPERIOS.APP</span><b>→</b></div>
+</section>
+
+<!-- 3 · NIVEL 2 -->
+<section class="slide" data-n="3">
+  <div class="abs head"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" alt="ImperiOS"><span>03 / 06</span></div>
+  <div class="abs nv" style="left:84px;top:200px"><span>NIVEL</span><b>2</b></div>
+  <div class="abs steps lv" data-l="2" style="right:84px;top:250px"></div>
+  <h2 class="abs" style="left:80px;right:60px;top:370px">Papeles y<br>chats <em class="ul">sueltos.</em></h2>
+  <p class="abs body" style="left:84px;right:110px;top:560px">Pósits, una libreta y mil conversaciones. <b>La información existe, pero nadie la encuentra.</b></p>
+  <div class="abs" style="left:84px;right:84px;top:740px;height:290px">
+    <div class="pst" style="left:0;top:20px;transform:rotate(-5deg)">Visita<br>jueves 17h<br>¿Retiro?</div>
+    <div class="pst" style="left:250px;top:-10px;transform:rotate(4deg)">Ático 3 hab<br>¿400k?</div>
+    <div class="bub" style="right:0;top:10px;background:#fff;border:2px solid var(--ink-200)">¿Sigue disponible?</div>
+    <div class="bub" style="right:40px;top:95px;background:var(--ink-950);color:#fff">Te paso fotos luego</div>
+    <div class="bub" style="right:0;top:180px;background:#fff;border:2px solid var(--ink-200)">¿Me recuerdas la dirección?</div>
+  </div>
+  <div class="abs sig" style="top:1060px"><div class="no"><i>✕</i>Buscas un chat de hace tres semanas.</div><div class="no"><i>✕</i>La visita, apuntada en una libreta que no está.</div></div>
+  <div class="abs foot"><span>IMPERIOS.APP</span><b>→</b></div>
+</section>
+
+<!-- 4 · NIVEL 3 -->
+<section class="slide" data-n="4">
+  <div class="abs head"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" alt="ImperiOS"><span>04 / 06</span></div>
+  <div class="abs nv" style="left:84px;top:200px"><span>NIVEL</span><b>3</b></div>
+  <div class="abs steps lv" data-l="3" style="right:84px;top:250px"></div>
+  <h2 class="abs" style="left:80px;right:60px;top:370px">Excel y mil<br><em class="ul">herramientas.</em></h2>
+  <p class="abs body" style="left:84px;right:110px;top:560px">Una hoja de clientes, otra app para la agenda, otra para facturar… <b>cada cosa en un sitio.</b></p>
+  <div class="abs" style="left:84px;right:84px;top:740px;height:290px">
+    <div class="win" style="left:0;top:10px;width:300px;height:200px;transform:rotate(-3deg)"><div class="t"><i></i>clientes_v3.xlsx</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ink-200);margin:12px;height:120px">${'<span style="background:#fff"></span>'.repeat(9)}</div></div>
+    <div class="win" style="left:330px;top:-10px;width:250px;height:180px;transform:rotate(2deg)"><div class="t"><i></i>Agenda</div><div style="padding:14px;font-weight:700;font-size:20px;color:var(--ink-700)">Jue 17:00 · ¿quién?</div></div>
+    <div class="win" style="right:0;top:30px;width:280px;height:170px;transform:rotate(-2deg)"><div class="t"><i></i>Facturas</div><div style="padding:14px;font-weight:700;font-size:20px;color:var(--ink-700)">Nº 2031 · pendiente</div></div>
+    <div class="abs" style="left:250px;top:215px;font-weight:800;font-size:22px;letter-spacing:.1em;color:var(--ink-600)">COPIAR · PEGAR · COPIAR · PEGAR…</div>
+  </div>
+  <div class="abs sig" style="top:1060px"><div class="no"><i>✕</i>Pasas datos a mano de una herramienta a otra.</div><div class="no"><i>✕</i>Nadie tiene la foto completa del negocio.</div></div>
+  <div class="abs foot"><span>IMPERIOS.APP</span><b>→</b></div>
+</section>
+
+<!-- 5 · NIVEL 4 (oscuro) -->
+<section class="slide" data-n="5" data-dark="1">
+  <div class="abs head"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar-blanco.svg" alt="ImperiOS"><span>05 / 06</span></div>
+  <div class="abs nv" style="left:84px;top:200px"><span style="color:var(--y)">NIVEL</span><b>4</b></div>
+  <div class="abs steps lv" data-l="4" style="right:84px;top:250px"></div>
+  <h2 class="abs" style="left:80px;right:60px;top:370px">Todo conectado<br>y <em style="color:var(--y)">medido.</em></h2>
+  <p class="abs body" style="left:84px;right:110px;top:560px">Clientes, visitas, comerciales y campañas en un mismo panel. <b>Ves cómo va tu negocio cuando quieras.</b></p>
+  <div class="abs" style="left:84px;right:84px;top:740px;height:290px;border-radius:28px;background:var(--ink-925,#111);border:1.5px solid var(--ink-800);padding:24px">
+    <span class="ej">EJEMPLO</span>
+    <div style="display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:.16em;color:var(--ink-500)"><span style="width:12px;height:12px;border-radius:50%;background:var(--y)"></span>HOY · EN DIRECTO</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px">
+      <div class="dk"><small>CONSULTAS</small><b>36</b></div><div class="dk"><small>VISITAS</small><b>12</b></div><div class="dk"><small>OFERTAS</small><b style="color:var(--y)">3</b></div><div class="dk"><small>LEADS</small><b>47</b></div>
+    </div>
+    <svg width="864" height="70" viewBox="0 0 864 70" style="margin-top:14px"><path d="M0 60 L120 50 L240 54 L360 36 L480 40 L600 22 L720 18 L864 4" stroke="#FFD500" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+  <div class="abs sig" style="top:1060px"><div class="ok"><i>✓</i><span style="color:#fff">Sabes qué propiedad, qué comercial y qué campaña funcionan.</span></div><div class="ok"><i>✓</i><span style="color:#fff">Si alguien se va, sus clientes se quedan.</span></div></div>
+  <div class="abs foot"><span>IMPERIOS.APP</span><b>→</b></div>
+</section>
+
+<!-- 6 · CIERRE -->
+<section class="slide" data-n="6">
+  <div class="abs head"><img src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" alt="ImperiOS"><span>06 / 06</span></div>
+  <h2 class="abs" style="left:80px;right:60px;top:220px;font-size:96px">¿En qué nivel<br>estás <em class="ul">tú?</em></h2>
+  <p class="abs body" style="left:84px;right:110px;top:450px">Sé sincero y <b>comenta tu número.</b></p>
+  <div class="abs" id="pick" style="left:84px;right:84px;top:560px;display:flex;justify-content:space-between"></div>
+  <div class="abs" style="left:84px;right:84px;top:820px;border-radius:30px;background:var(--ink-950);color:#fff;padding:36px 40px;box-shadow:0 30px 80px rgba(10,10,10,.25)">
+    <div style="font-weight:800;font-size:46px;letter-spacing:-.03em;line-height:1.1">Pasa al nivel 4 con <span style="color:var(--y)">ImperiOS.</span></div>
+    <div style="margin-top:14px;font-weight:600;font-size:26px;color:var(--ink-500)">Clientes, visitas, comerciales y campañas, en un mismo panel.</div>
+    <div style="margin-top:28px;display:inline-flex;align-items:center;gap:14px;height:92px;padding:0 44px;border-radius:999px;background:var(--y);color:var(--ink-950);font-weight:800;font-size:34px">Comenta DEMO
+      <svg width="28" height="28" viewBox="0 0 34 34"><path d="M9 25L25 9M12 9h13v13" stroke="#0A0A0A" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  </div>
+  <div class="abs foot"><span>IMPERIOS.APP</span><b>@IMPERIOS.APP</b></div>
+</section>
+
+<script>
+// escalera pequeña en cada nivel: los anteriores en negro, el actual en amarillo
+document.querySelectorAll('.steps.lv').forEach(s => { const l = +s.dataset.l; s.innerHTML = [1, 2, 3, 4].map(i => `<i class="${i === l ? 'on' : i < l ? 'done' : ''}" style="height:${18 + i * 16}px"></i>`).join(''); });
+// portada: escalera grande con los nombres de los niveles
+const NAMES = ['Todo en la cabeza', 'Papeles y chats', 'Excel y mil apps', 'Todo conectado'];
+document.getElementById('coverSteps').innerHTML = NAMES.map((n, i) => `<div style="width:204px;display:flex;flex-direction:column;justify-content:flex-end">
+  <div style="font-weight:800;font-size:22px;line-height:1.15;margin-bottom:12px;${i === 3 ? '' : 'color:var(--ink-700)'}">${n}</div>
+  <div style="height:${110 + i * 75}px;border-radius:20px;background:${i === 3 ? 'var(--ink-950)' : i === 2 ? 'var(--ink-500)' : i === 1 ? 'var(--ink-300)' : 'var(--ink-200)'};color:${i === 3 ? 'var(--y)' : 'var(--ink-950)'};
+    display:flex;align-items:flex-start;padding:16px 20px;font-weight:800;font-size:64px;letter-spacing:-.04em">${i + 1}</div></div>`).join('');
+// cierre: selector 1–4
+document.getElementById('pick').innerHTML = [1, 2, 3, 4].map(i => `<span style="width:200px;height:200px;border-radius:40px;display:grid;place-items:center;font-weight:800;font-size:110px;letter-spacing:-.05em;
+  border:4px solid var(--ink-950);${i === 4 ? 'background:var(--ink-950);color:var(--y)' : ''}">${i}</span>`).join('');
+// la cuadrícula del Excel del nivel 3 (el HTML no interpola)
+document.querySelectorAll('.win div[style*="grid-template-columns:repeat(3"]').forEach(g => g.innerHTML = '<span style="background:#fff"></span>'.repeat(9));
+const n = +(location.hash.slice(1) || 1), sl = document.querySelector(`.slide[data-n="${n}"]`);
+sl.classList.add('on'); if (sl.dataset.dark) document.body.classList.add('dark');
+window.ready = document.fonts.ready.then(() => Promise.all([...document.images].map(i => i.complete ? 0 : new Promise(r => i.onload = r))));
+</script>
+</body>
+</html>
