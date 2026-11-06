@@ -6,6 +6,7 @@
 // en «Leads de campaña» se arrastra una tarjeta de «Contactado» a «Interesado».
 //
 // Uso: node demo-states.mjs [--drag] [id ...]   (mismas variables de entorno que capture.mjs)
+// Modo oscuro: CAPTURE_THEME=dark CAPTURE_OUT=out-dark node demo-states.mjs   (el CRM sigue el tema del sistema)
 // Sin --drag se omite el estado que mueve la tarjeta (así repetir capturas no cambia más datos).
 import { chromium } from 'playwright-core';
 import fs from 'node:fs';
@@ -22,7 +23,8 @@ const log = (...a) => console.log(redact(a.join(' ')));
 if (!URL_LOGIN || !EMAIL || !PASS) { console.error('Faltan IMPERIOS_DEMO_URL / _EMAIL / _PASSWORD'); process.exit(1); }
 const exe = process.env.CHROMIUM_PATH ||
   (fs.existsSync('/opt/pw-browsers/chromium-1194/chrome-linux/chrome') ? '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' : undefined);
-const opts = (extra = {}) => ({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 2, locale: 'es-ES', timezoneId: 'Europe/Madrid', colorScheme: 'light', ...extra });
+const THEME = process.env.CAPTURE_THEME === 'dark' ? 'dark' : 'light';
+const opts = (extra = {}) => ({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 2, locale: 'es-ES', timezoneId: 'Europe/Madrid', colorScheme: THEME, ...extra });
 
 const card = (text, extra = {}) => ({ text, card: true, ...extra });
 // Coincidencia que se abre en el vídeo corto: 96/100 igual en la lista y en el detalle (en demo-match-20 la lista dice 100
@@ -232,6 +234,8 @@ try {
     const start = () => { paint(); new MutationObserver(paint).observe(document.body, { subtree: true, childList: true, characterData: true }); };
     document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', start) : start();
   }, EMAIL);
+  // Tema: el CRM (Nuxt color-mode) sigue al sistema; se fija también por si la cuenta guardó otro
+  await ctx.addInitScript((t) => { try { localStorage.setItem('nuxt-color-mode', t); } catch {} }, THEME);
   // El engranaje flotante (ajustes, icono girando) se vuelve a montar al navegar: se oculta también con una regla CSS fija
   await ctx.addInitScript(() => {
     const add = () => { const st = document.createElement('style'); st.textContent = 'button:has(> span[class*="settings"][class*="animate-spin"]){visibility:hidden!important}'; document.head.appendChild(st); };
