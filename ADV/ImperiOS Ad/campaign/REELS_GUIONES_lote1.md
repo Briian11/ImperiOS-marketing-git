@@ -141,7 +141,7 @@ nivel 3 «Excel y mil herramientas» · nivel 4 «Todo conectado y medido» (en 
 Instagram:
 > ¿En qué nivel está tu inmobiliaria? 👇 Sé sincero y comenta tu número (1, 2, 3 o 4).
 > ¿En cuál te ves reflejado? El salto al 4 lo cambia todo.
-> ¿Quieres pasar al nivel 4? Comenta DEMO y te enseño cómo aplicarlo en tu inmobiliaria.
+> (Sin «Comenta DEMO»: la interacción es solo el número.)
 
 LinkedIn (desde el perfil de Brian; carrusel como documento PDF `preview/out/carruseles/niveles/imperios-carrusel-niveles-linkedin.pdf`):
 > Un comercial deja la agencia.
