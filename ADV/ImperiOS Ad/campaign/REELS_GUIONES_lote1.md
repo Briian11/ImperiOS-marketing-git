@@ -135,3 +135,22 @@ Motor `preview/src/reel-r13.html`, tiempos `preview/build_timeline_r13.py`, rend
 6 diapositivas 1080×1350 (`preview/src/carrusel-niveles.html#1…6` → `preview/out/carruseles/niveles/`):
 portada con la escalera de 4 niveles · nivel 1 «Todo en la cabeza» · nivel 2 «Papeles y chats sueltos» ·
 nivel 3 «Excel y mil herramientas» · nivel 4 «Todo conectado y medido» (en negro) · cierre «¿En qué nivel estás tú? Comenta tu número» + Comenta DEMO.
+
+**Textos del carrusel de niveles (06/11/2026)**
+
+Instagram:
+> ¿En qué nivel está tu inmobiliaria? 👇 Sé sincero y comenta tu número (1, 2, 3 o 4).
+> ¿En cuál te ves reflejado? El salto al 4 lo cambia todo.
+> ¿Quieres pasar al nivel 4? Comenta DEMO y te enseño cómo aplicarlo en tu inmobiliaria.
+
+LinkedIn (desde el perfil de Brian; carrusel como documento PDF `preview/out/carruseles/niveles/imperios-carrusel-niveles-linkedin.pdf`):
+> Un comercial deja la agencia.
+> Y con él se van sus clientes, sus visitas y sus notas.
+>
+> Eso pasa cuando la información vive en la cabeza de cada uno, en una libreta o en un Excel que solo entiende él.
+>
+> He resumido en 4 niveles cómo se organiza hoy una inmobiliaria, del «todo en la cabeza» al «todo conectado y medido».
+>
+> ¿En cuál está la tuya?
+>
+> #inmobiliaria #proptech #CRM
