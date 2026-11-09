@@ -153,10 +153,10 @@ LinkedIn (desde el perfil de Brian; carrusel como documento PDF `preview/out/car
 >
 > Si no puedes medir, no sabes qué funciona y qué no.
 >
-> Con ImperiOS queremos acabar con eso:
-> → Que no se pierda la información que de verdad importa.
-> → Que los procesos no dependan de cómo trabaje cada comercial.
-> → Que tu equipo se centre en lo que marca la diferencia: cerrar la venta con el cliente.
+> Con ImperiOS acabamos con eso:
+> → La información que de verdad importa no se pierde.
+> → Los procesos no dependen de cómo trabaje cada comercial.
+> → Tu equipo se centra en lo que marca la diferencia: cerrar la venta con el cliente.
 >
 > He resumido en 4 niveles cómo se organiza hoy una inmobiliaria.
 > ¿En cuál está la tuya? 👇
