@@ -162,3 +162,18 @@ LinkedIn (desde el perfil de Brian; carrusel como documento PDF `preview/out/car
 > ¿En cuál está la tuya? 👇
 >
 > #inmobiliaria #proptech #gestióninmobiliaria #CRM
+
+LinkedIn, página de empresa ImperiOS (Brian la comparte después desde su perfil con su texto):
+> ¿Qué nivel de organización tiene tu inmobiliaria?
+>
+> 1 · Todo en la cabeza: si un comercial se va, toda su información se va con él.
+> 2 · Papeles y chats sueltos: la información existe, pero nadie la encuentra.
+> 3 · Excel y mil herramientas: cada cosa en un sitio y nadie tiene la foto completa.
+> 4 · Todo conectado y medido: sabes qué propiedad, qué comercial y qué campaña funcionan.
+>
+> ImperiOS es el CRM que lleva a tu inmobiliaria al nivel 4: clientes, visitas, comerciales y campañas en un mismo panel, desde el móvil, la tablet o el ordenador.
+>
+> Desliza el carrusel y cuéntanos en comentarios en qué nivel estás 👇
+> Pide tu demo gratis en imperios.app
+>
+> #inmobiliaria #proptech #CRMinmobiliario #gestióninmobiliaria
