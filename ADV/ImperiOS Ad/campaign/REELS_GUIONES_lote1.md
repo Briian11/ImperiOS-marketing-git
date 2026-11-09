@@ -133,7 +133,7 @@ Motor `preview/src/reel-r13.html`, tiempos `preview/build_timeline_r13.py`, rend
 ## Carrusel · «¿Qué nivel de organización tiene tu inmobiliaria?» (05/11/2026)
 
 6 diapositivas 1080×1350 (`preview/src/carrusel-niveles.html#1…6` → `preview/out/carruseles/niveles/`):
-portada con la escalera de 4 niveles · nivel 1 «Todo en la cabeza» · nivel 2 «Papeles y chats sueltos» ·
+portada con la escalera de 4 niveles · nivel 1 «Cada uno a su manera» · nivel 2 «Papeles y chats sueltos» ·
 nivel 3 «Excel y mil herramientas» · nivel 4 «Todo conectado y medido» (en negro) · cierre «¿En qué nivel estás tú? Comenta tu número» + Comenta DEMO.
 
 **Textos del carrusel de niveles (06/11/2026)**
