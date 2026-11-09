@@ -159,7 +159,7 @@ LinkedIn (desde el perfil de Brian; carrusel como documento PDF `preview/out/car
 > → Tu equipo se centra en lo que marca la diferencia: cerrar la venta con el cliente.
 >
 > He resumido en 4 niveles cómo se organiza hoy una inmobiliaria.
-> ¿En cuál está la tuya? 👇
+> Comenta en cuál está la tuya y te enseño cómo podéis llegar al nivel 4 con ImperiOS 👇
 >
 > #inmobiliaria #proptech #gestióninmobiliaria #CRM
 
