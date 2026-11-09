@@ -144,13 +144,21 @@ Instagram:
 > (Sin «Comenta DEMO»: la interacción es solo el número.)
 
 LinkedIn (desde el perfil de Brian; carrusel como documento PDF `preview/out/carruseles/niveles/imperios-carrusel-niveles-linkedin.pdf`):
-> Un comercial deja la agencia.
-> Y con él se van sus clientes, sus visitas y sus notas.
+> Después de hablar con muchos directores de agencias inmobiliarias, casi todos coinciden en el mismo problema:
+> no tienen sus procesos estandarizados.
 >
-> Eso pasa cuando la información vive en la cabeza de cada uno, en una libreta o en un Excel que solo entiende él.
+> Y sin procesos estandarizados, es muy difícil escalar.
 >
-> He resumido en 4 niveles cómo se organiza hoy una inmobiliaria, del «todo en la cabeza» al «todo conectado y medido».
+> Cada comercial trabaja a su manera. La información no está centralizada. Se pierden datos. Y lo que no se registra, no se puede medir.
 >
-> ¿En cuál está la tuya?
+> Si no puedes medir, no sabes qué funciona y qué no.
 >
-> #inmobiliaria #proptech #CRM
+> Con ImperiOS queremos acabar con eso:
+> → Que no se pierda la información que de verdad importa.
+> → Que los procesos no dependan de cómo trabaje cada comercial.
+> → Que tu equipo se centre en lo que marca la diferencia: cerrar la venta con el cliente.
+>
+> He resumido en 4 niveles cómo se organiza hoy una inmobiliaria.
+> ¿En cuál está la tuya? 👇
+>
+> #inmobiliaria #proptech #gestióninmobiliaria #CRM
