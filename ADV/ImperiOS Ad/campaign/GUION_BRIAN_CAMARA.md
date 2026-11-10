@@ -14,14 +14,16 @@ Sin cifras ni testimonios sin verificar. El móvil que se enseña lleva la **cue
 | G1 | «Si diriges una inmobiliaria, contéstame a esto sin preguntarle a nadie: ¿cuántas visitas ha hecho tu equipo esta semana?» | Plano medio, ya hablando. Rótulo: **Brian · fundador de ImperiOS** |
 | G2 | «¿Te enteras de cómo va tu inmobiliaria… cuando el mes ya ha terminado?» | Plano cerrado, gesto de «¿en serio?» |
 | G3 | «Esto es lo que debería poder ver cada mañana el director de una inmobiliaria.» | Brian gira el móvil hacia cámara con el panel ya abierto |
+| G4 | «Si diriges una inmobiliaria, contéstame a esto sin preguntarle a nadie: ¿cuántas consultas ha tenido hoy tu mejor propiedad?» | Igual que G1. Enlaza directo con el punto 2 del cuerpo (consultas por propiedad) |
 
-Recomendación: grabar los tres (cuesta poco) y usar **uno** como anuncio. G1 obliga a hacer la prueba mentalmente y
+Recomendación: grabar los cuatro (cuesta poco) y usar **uno** como anuncio. G1 y G4 son la misma fórmula con distinta
+pregunta: se graban seguidos y se elige uno para el anuncio; el otro, para un Reel orgánico. G1 obliga a hacer la prueba mentalmente y
 quien no sabe contestar ya se siente aludido; G3 enseña producto desde el primer fotograma y es la alternativa para probar
 después. G2 queda para un Reel orgánico.
 
 Variantes de G1 (sin nombrar herramientas, porque no todas las inmobiliarias usan Excel):
 «…contéstame a esto en cinco segundos: …» · «…sin llamar a nadie ni revisar nada: …».
-Si se quiere cambiar la pregunta: «¿cuántas consultas ha tenido hoy tu mejor propiedad?» o «¿cuál de tus comerciales cierra más?». Tres versiones del mismo vídeo con distinto gancho Meta las agruparía como un
+Otra pregunta posible: «¿cuál de tus comerciales cierra más?». Tres versiones del mismo vídeo con distinto gancho Meta las agruparía como un
 solo anuncio (ver `CAMPANA.md`).
 
 ## Cuerpo (mismo recorrido que el R13)
