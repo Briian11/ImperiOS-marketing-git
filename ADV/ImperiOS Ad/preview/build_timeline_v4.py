@@ -59,7 +59,11 @@ if kind == "largo":
     # recordatorios automáticos, coordinados desde la misma agenda. Imperios. Todo conectado, de principio a fin. Pide tu demo.
     lo = find("lo"); tod = find("Todos"); y2 = find("Y", find("WhatsApp") + 1); la = find("La")
     y4 = find("y", find("cliente", la) + 1); vis = find("Visitas"); imp2 = find("Imperios", vis); todo = find("Todo", imp2)
-    fin = find("fin", todo); pide = find("Pide", fin); demo = find("demo", pide)
+    fin = find("fin", todo)
+    try:
+        pide = find("Pide", fin); demo = find("demo", pide)
+    except KeyError:              # cierre «Déjanos tus datos…»: el botón entra con «datos»
+        pide = find("Déjanos", fin); demo = find("datos", pide)
     B["s0"] = B["hook"] + .05
     B["s1"] = S(tod) - .25
     B["s2"] = S(y2) - .13
@@ -91,7 +95,11 @@ else:
     # Con Imperios, todos tus leads entran en un solo sitio: portales, web, campañas y WhatsApp.
     # La IA envía a cada cliente, por WhatsApp, las propiedades que encajan. Imperios. Pide tu demo.
     tod = find("todos"); la = find("La"); env = find("envía", la); cli = find("cliente", env); wa2 = find("WhatsApp", cli)
-    pro = find("propiedades", wa2); enc = find("encajan", pro); imp2 = find("Imperios", enc); pide = find("Pide", imp2); demo = find("demo", pide)
+    pro = find("propiedades", wa2); enc = find("encajan", pro); imp2 = find("Imperios", enc)
+    try:
+        pide = find("Pide", imp2)
+    except KeyError:              # cierre «Déjanos tus datos…»
+        pide = find("Déjanos", imp2)
     B["s1"] = B["hook"] + .6
     B["s3"] = S(la) - .13
     B["s2"] = B["s3"] - .05
@@ -116,6 +124,8 @@ else:
 
 B["wt"] = wt
 end = max(end, B["cta"] + 3.0)   # el botón aparece en cta+0,3 s: al menos 2,7 s de «Pide tu demo · Gratis, sin compromiso» en pantalla
+if os.environ.get("CTA_LBL"):
+    B["ctaLbl"] = os.environ["CTA_LBL"]   # texto del botón
 if os.environ.get("CTA_SUB"):
     B["ctaSub"] = os.environ["CTA_SUB"]   # texto bajo el botón; admite <br>
 B = {k: (round(v, 3) if isinstance(v, float) else v) for k, v in B.items()}

@@ -81,3 +81,27 @@ sobre el cuerpo: `assets_in/vo/v4-largo|corto-cierre-gratis.wav`) y bajo el bot�
 - **Audio:** música y SFX generados en código (`preview/audio_mix.py`), música ~22 dB bajo la voz con ducking dinámico.
 - **Sin cifras ni testimonios** no verificados.
 - Hojas de contacto de las versiones anteriores (v2, v3, v6) en `referencia-versiones-anteriores/`.
+
+---
+
+# Campaña de captación (10/11/2026) — cierre «asesoramiento gratuito»
+
+Objetivo: formulario instantáneo de Meta; Brian llama a cada lead. El cierre dice exactamente eso, sin «Pide tu demo».
+
+| Anuncio | Ángulo | Archivo |
+|---|---|---|
+| v4 corto gancho A (~22 s) | Captar: los leads se pierden entre canales | `preview/out/v4/imperios-v4-corto-ganchoA-asesoria_9x16.mp4` |
+| R11 «Falso interés» (~39 s) | Priorizar: la IA califica a cada contacto | `preview/out/reels/imperios-reel-r11-falso-interes-asesoria_9x16.mp4` |
+| Brian a cámara (pendiente de grabar) | Medir: el panel del director | guion en `GUION_BRIAN_CAMARA.md` |
+
+El R13 queda como Reel orgánico (su mensaje lo cuenta Brian a cámara). R9 y R10 quedan de reserva para renovar creatividades.
+
+- **Voz del cierre:** «Déjanos tus datos y revisamos tu caso para asesorarte gratis, sin compromiso.» Cristina, eleven_v4,
+  ImperiOS's Workspace (licencia comercial), 10/11/2026 → `assets_in/vo/starter/cierre-asesoria.mp3` + tiempos de Scribe.
+  Empalmada con `tools/empalmar_vo.py` tras «Imperios.» (v4) y tras «¿…falso interés?» (R11).
+- **En pantalla:** botón «Déjanos tus datos» y debajo «ASESORAMIENTO GRATUITO / SIN COMPROMISO»
+  (`CTA_LBL` y `CTA_SUB` en los timelines; los motores v4 y R11 ya aceptan los dos).
+- **Build:** `preview/build_asesoria.sh [v4|r11]`. Las versiones orgánicas anteriores no cambian.
+- **Formulario:** tipo «Mayor intención»; nombre, teléfono, inmobiliaria, nº de comerciales y cómo gestionan hoy los leads.
+  Pantalla final: «Brian te llamará personalmente». Botón del anuncio: «Solicitar información».
+- Solo decir «sin compromiso» mientras la llamada no obligue a nada.

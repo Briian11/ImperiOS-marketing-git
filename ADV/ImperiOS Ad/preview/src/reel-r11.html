@@ -127,7 +127,7 @@ body { font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; 
 <!-- CIERRE -->
 <div class="k" id="kq"></div>
 <img class="abs" id="logo" src="../../assets_in/brand-kit/assets/logo-imperios-navbar-blanco.svg" alt="ImperiOS">
-<div class="abs" id="cta"><div>Comenta DEMO <svg width="34" height="34" viewBox="0 0 34 34"><path d="M9 25L25 9M12 9h13v13" stroke="#0A0A0A" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+<div class="abs" id="cta"><div><span id="ctaLbl">Comenta DEMO</span> <svg width="34" height="34" viewBox="0 0 34 34"><path d="M9 25L25 9M12 9h13v13" stroke="#0A0A0A" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
 <div class="abs" id="web">IMPERIOS.APP</div>
 
 <svg class="abs" id="cursor" viewBox="0 0 60 60"><path d="M10 6l36 22-16 3-8 15z" fill="#fff" stroke="#0A0A0A" stroke-width="3" stroke-linejoin="round"/></svg>
@@ -147,7 +147,11 @@ const show = (el, p, dy = 60, extra = '') => css(el, { opacity: p, transform: `t
 const lerp = (a, b, p) => a + (b - a) * p;
 
 let B = { h: [.3, 3.6], a: [4.5, 5.2, 5.8, 6.3, 9, 10.6], b: [11.3, 12.9, 13.8, 15.3, 16.5], f: [17.2, 18.3, 20, 20.8, 21.8], c: [22.8, 23.9, 25], p: [26.3, 26.6, 27.9, 28.2], q: [29.1, 31.9], logo: 31.6, end: 36.5, wt: {}, sub: [], dings: [] };
-window.setBeats = b => { B = Object.assign(B, b); };
+window.setBeats = b => {
+  B = Object.assign(B, b);
+  if (B.ctaLbl) $('#ctaLbl').textContent = B.ctaLbl;   // texto del botón (por defecto «Comenta DEMO»)
+  if (B.ctaSub) $('#web').innerHTML = B.ctaSub;        // línea bajo el botón (por defecto «IMPERIOS.APP»)
+};
 window.setVariant = () => {};
 
 function block(el, lines) {

@@ -6,6 +6,7 @@ Uso: python3 build_timeline_r11.py <voz.words.json> <voz.mp3> <out.json> <out_vo
   curiosos / templados / interesados (c) → prioridad de hoy (p) → cierre (q). B.sub: subtítulos; B.dings: avisos de mensaje.
 """
 import json
+import os
 import subprocess
 import sys
 
@@ -52,7 +53,10 @@ yt = find("Y", inte)
 cme, lla, pri = find("comerciales", yt), find("llamar", yt), find("primero", yt)
 cua = find("Cuánto", pri)
 fal = find("falso", cua)
-cm = find("Comenta", cua)
+try:
+    cm = find("Comenta", cua)
+except KeyError:                  # versión de anuncio: «Déjanos tus datos…»
+    cm = find("Déjanos", cua)
 
 B = {"h": [S(0), S(pre)],
      "a": [S(te) - .1, S(n20), S(n30), S(n50), S(ym), S(com1)],
@@ -104,6 +108,9 @@ B.update({"s1": 0.0, "s2": f[0], "s3": a[0], "s5": f[0], "s6": q[0]})
 for key in ("h", "a", "b", "f", "c", "p", "q"):
     B[key] = [round(x, 3) for x in B[key]]
 B["logo"] = round(B["logo"], 3)
+for key, env in (("ctaLbl", "CTA_LBL"), ("ctaSub", "CTA_SUB")):
+    if os.environ.get(env):
+        B[key] = os.environ[env]
 B["end"] = round(end, 2)
 tl = {"fps": 60, "duration": B["end"], "vo_offset": PRE, "beats": B,
       "note": f"build_timeline_r11.py: VO {w_path} a atempo {TEMPO}; offset {PRE} s."}

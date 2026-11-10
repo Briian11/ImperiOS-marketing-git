@@ -284,6 +284,7 @@ const SK = s => (B.skip || []).includes(s);
 window.setBeats = b => {
   B = Object.assign(B, b);
   if (B.ctaSub) $('#cta').innerHTML = B.ctaSub;   // línea bajo el botón (p. ej. «GRATIS · SIN COMPROMISO»)
+  if (B.ctaLbl) $('#ctaLbl').textContent = B.ctaLbl;   // texto del botón (por defecto «Pide tu demo»)
   // numeración del HUD según las escenas que tiene esta versión
   const vis = ['s1', 's2', 's3', 's4', 's5', 's6'].filter(s => !SK(s));
   vis.forEach((s, i) => {
