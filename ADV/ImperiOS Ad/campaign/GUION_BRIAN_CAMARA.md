@@ -16,17 +16,49 @@ Sin cifras ni testimonios sin verificar. El móvil que se enseña lleva la **cue
 | G3 | «Esto es lo que debería poder ver cada mañana el director de una inmobiliaria.» | Brian gira el móvil hacia cámara con el panel ya abierto |
 | G4 | «Si diriges una inmobiliaria, contéstame a esto sin preguntarle a nadie de tu equipo: ¿cuántas consultas ha tenido hoy tu mejor propiedad?» | Igual que G1. Enlaza directo con el punto 2 del cuerpo (consultas por propiedad) |
 
-Recomendación: grabar los cuatro (cuesta poco) y usar **uno** como anuncio. G1 y G4 son la misma fórmula con distinta
-pregunta: se graban seguidos y se elige uno para el anuncio; el otro, para un Reel orgánico. G1 obliga a hacer la prueba mentalmente y
-quien no sabe contestar ya se siente aludido; G3 enseña producto desde el primer fotograma y es la alternativa para probar
-después. G2 queda para un Reel orgánico.
+**Elegidos: G1 y G4** (guiones completos abajo). Son la misma fórmula con distinta pregunta: se graban seguidos y se
+elige uno para el anuncio; el otro, para un Reel orgánico. Dos versiones del mismo vídeo con distinto gancho Meta las
+agruparía como un solo anuncio (ver `CAMPANA.md`). G3 enseña producto desde el primer fotograma y queda como
+alternativa para probar después; G2, para un Reel orgánico.
 
-Variantes de G1 (sin nombrar herramientas, porque no todas las inmobiliarias usan Excel):
+Variantes de la primera frase (sin nombrar herramientas, porque no todas las inmobiliarias usan Excel):
 «…contéstame a esto en cinco segundos: …» · «…sin llamar a nadie ni revisar nada: …».
-Otra pregunta posible: «¿cuál de tus comerciales cierra más?». Tres versiones del mismo vídeo con distinto gancho Meta las agruparía como un
-solo anuncio (ver `CAMPANA.md`).
+Otra pregunta posible: «¿cuál de tus comerciales cierra más?».
 
-## Cuerpo (mismo recorrido que el R13)
+## Guion completo · G1 «visitas» (~32 s)
+
+Texto para decir tal cual o con tus palabras. Entre corchetes, lo que se ve. Las líneas marcadas con ✂ se quitan en la
+versión corta (~22 s).
+
+| # | Brian dice | En pantalla |
+|---|---|---|
+| 1 | «Si diriges una inmobiliaria, contéstame a esto sin preguntarle a nadie de tu equipo: ¿cuántas visitas habéis hecho esta semana?» | Brian a cámara. Rótulo «Brian · fundador de ImperiOS». Subrayado en **visitas** |
+| 2 | (pausa de 1 s, mirada de «¿lo sabes?») «Si has tenido que pensarlo, es normal: ese dato lo tiene tu equipo, no tú.» | Brian a cámara |
+| 3 | «Con ImperiOS lo ves desde el móvil, cuando quieras.» | Brian gira el móvil a cámara → inserto del panel |
+| 4 | «Las visitas de cada comercial, las consultas de cada propiedad… y cuántas acaban en oferta.» | Inserto: embudo consultas → visitas → ofertas |
+| 5 ✂ | «Quién capta más, quién cierra más, y en qué es mejor cada uno.» | Inserto: ranking de comerciales |
+| 6 ✂ | «Y si haces campañas, ves lo que inviertes, los clics y los leads que entran, en directo. Sin esperar a la reunión de fin de mes.» | Inserto: gráfica de campañas + notificación de lead nuevo |
+| 7 | «Porque si puedes medirlo… puedes escalarlo.» | Brian a cámara. Subrayado en **escalarlo** |
+| 8 | «Pide una demo y te lo enseño yo.» | Logo + «Pide tu demo» (≥ 2,5 s) |
+
+## Guion completo · G4 «consultas» (~32 s)
+
+| # | Brian dice | En pantalla |
+|---|---|---|
+| 1 | «Si diriges una inmobiliaria, contéstame a esto sin preguntarle a nadie de tu equipo: ¿cuántas consultas ha tenido hoy tu mejor propiedad?» | Brian a cámara. Rótulo «Brian · fundador de ImperiOS». Subrayado en **consultas** |
+| 2 | (pausa de 1 s) «Si has tenido que pensarlo, es normal: ese dato lo tiene tu equipo, no tú.» | Brian a cámara |
+| 3 | «Con ImperiOS lo ves desde el móvil, cuando quieras.» | Brian gira el móvil a cámara → inserto del panel |
+| 4 | «Cuántas consultas ha tenido cada propiedad, cuántas acaban en visita… y cuántas en oferta.» | Inserto: embudo consultas → visitas → ofertas |
+| 5 ✂ | «Qué comercial capta más, quién cierra más, y en qué es mejor cada uno.» | Inserto: ranking de comerciales |
+| 6 ✂ | «Y si haces campañas, ves lo que inviertes, los clics y los leads que entran, en directo. Sin esperar a la reunión de fin de mes.» | Inserto: gráfica de campañas + notificación de lead nuevo |
+| 7 | «Porque si puedes medirlo… puedes escalarlo.» | Brian a cámara. Subrayado en **escalarlo** |
+| 8 | «Pide una demo y te lo enseño yo.» | Logo + «Pide tu demo» (≥ 2,5 s) |
+
+Diferencia entre los dos: solo las líneas 1 y 4. En G1 la pregunta es por **visitas**, así que la línea 4 empieza por las
+visitas; en G4 es por **consultas**, así que la línea 4 sigue el orden del embudo desde las consultas. De la línea 5 en
+adelante se graba una sola vez y vale para los dos.
+
+## Cuerpo (referencia: mismo recorrido que el R13)
 
 Ideas, no texto literal; dilo con tus palabras. Entre corchetes, lo que se ve.
 
