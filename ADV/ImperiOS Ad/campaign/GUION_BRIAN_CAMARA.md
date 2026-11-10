@@ -1,42 +1,51 @@
-# F1 · Brian a cámara — anuncio (borrador para revisar, 10/11/2026)
+# F1 · Brian a cámara — «El panel del CEO» contado por Brian (borrador para revisar, 10/11/2026)
 
-Objetivo: tercer anuncio de la campaña, junto a **v4 corto gancho A** y **R13-B**. Aporta el ángulo que les falta:
-**confianza, quién está detrás**. Es el único con persona real, así que Meta lo trata como una creatividad muy distinta.
+Objetivo: tercer anuncio de la campaña, junto a **v4 corto gancho A** y **R13-B**. Mismo mensaje que el R13
+(el director ve cómo va su negocio cuando quiere, y lo que se mide se puede escalar), pero contado por una persona real.
+El mensaje se repite, el formato no: para Meta es una creatividad distinta del R13 animado.
 
 Duración objetivo: 25–35 s. Frases cortas, con tus palabras. No hace falta memorizar: mejor natural que perfecto.
-Sin cifras ni testimonios sin verificar.
+Sin cifras ni testimonios sin verificar. El móvil que se enseña lleva la **cuenta demo con datos simulados**.
 
 ## Ganchos (primer segundo, mirando a cámara)
 
-| # | Gancho | Ángulo | Primer fotograma |
-|---|---|---|---|
-| G1 | «He visto inmobiliarias perder clientes que ya tenían dentro. Por eso estoy construyendo ImperiOS.» | Origen / misión | Plano medio, ya hablando. Rótulo: **Brian · fundador de ImperiOS** |
-| G2 | «Si diriges una inmobiliaria, te hago una pregunta: ¿sabes ahora mismo cuántos leads te han entrado hoy?» | Directo al director (enlaza con R13) | Plano más cerrado, móvil en la mano |
-| G3 | «Ese cliente que te pidió un ático hace un año… ¿sigue buscando? Probablemente sí. Y probablemente no le has vuelto a llamar.» | Clientes olvidados / match (enlaza con R9) | Plano medio, se acerca un paso a cámara |
+| # | Gancho | Primer fotograma |
+|---|---|---|
+| G1 | «Si diriges una inmobiliaria, contéstame a esto sin abrir ningún Excel: ¿cuántas visitas ha hecho tu equipo esta semana?» | Plano medio, ya hablando. Rótulo: **Brian · fundador de ImperiOS** |
+| G2 | «¿Te enteras de cómo va tu inmobiliaria… cuando el mes ya ha terminado?» | Plano cerrado, gesto de «¿en serio?» |
+| G3 | «Esto es lo que debería poder ver cada mañana el director de una inmobiliaria.» | Brian gira el móvil hacia cámara con el panel ya abierto |
 
-Recomendación: grabar los tres (cuesta poco) y usar **uno** como anuncio. G1 es el que más diferencia aporta frente a
-v4 y R13, que ya hablan del problema. G2 y G3 se pueden publicar después como Reels orgánicos.
-Tres versiones del mismo vídeo con distinto gancho Meta las agruparía como un solo anuncio (ver `CAMPANA.md`).
+Recomendación: grabar los tres (cuesta poco) y usar **uno** como anuncio. G1 obliga a hacer la prueba mentalmente y
+quien no sabe contestar ya se siente aludido; G3 enseña producto desde el primer fotograma y es la alternativa para probar
+después. G2 queda para un Reel orgánico. Tres versiones del mismo vídeo con distinto gancho Meta las agruparía como un
+solo anuncio (ver `CAMPANA.md`).
 
-## Cuerpo común (20–25 s)
+## Cuerpo (mismo recorrido que el R13)
 
-Ideas, no texto literal; dilo con tus palabras:
+Ideas, no texto literal; dilo con tus palabras. Entre corchetes, lo que se ve.
 
-1. **El problema que viste:** leads en portales, WhatsApp, Excel y en la cabeza de cada comercial. Nadie ve el conjunto.
-2. **Qué estáis construyendo:** un solo panel donde entra todo, la IA cruza cada cliente con la cartera y el director
-   ve en directo cómo va el negocio.
-3. **Por qué tú:** una frase personal y honesta (qué te frustró, por qué te importa). Es la parte que no puede dar una animación.
-4. **Cierre:** «Si quieres verlo con tus datos, pide una demo. Te la enseño yo.»
+1. **Desde el móvil:** «Con ImperiOS lo ves desde el móvil, cuando quieras.» [Brian enseña el móvil; inserto del panel]
+2. **Por propiedad:** «Cuántas consultas ha tenido cada propiedad, cuántas acaban en visita y cuántas en oferta.»
+   [Inserto del embudo consultas → visitas → ofertas]
+3. **Por comercial:** «Qué comercial capta más, quién cierra más… y en qué es mejor cada uno.» [Ranking de comerciales]
+4. **Campañas:** «Si haces campañas, ves lo que inviertes, los clics y los leads que te entran, en directo. Sin esperar
+   a la reunión de fin de mes.» [Gráfica de campañas + notificación de lead nuevo]
+5. **Cierre:** «Porque si puedes medirlo… puedes escalarlo. Pide una demo y te lo enseño yo.»
+   [Logo + «Pide tu demo»]
 
-En pantalla (lo montamos nosotros): rótulo con nombre y cargo, palabras clave con subrayado amarillo, 1–2 recortes de UI
-recreada (panel, match) mientras hablas, subtítulos y cierre con logo + «Pide tu demo».
+Si hay que acortar a ~25 s: quitar el punto 3 o el 4 (el R13 corto quita los dos).
+
+En pantalla (lo montamos nosotros): rótulo con nombre y cargo, palabras clave con subrayado amarillo, insertos de la UI
+del R13 (misma estética oscura) o de la cuenta demo, subtítulos y cierre con logo + «Pide tu demo».
 
 ## Grabación con el móvil
 
 - Vertical, 1080p o 4K, 30 fps. Cámara trasera si alguien te graba; delantera si estás solo.
 - Luz de ventana de frente o a 45°, nunca detrás.
-- Fondo real y ordenado: despacho, oficina o una pantalla con el CRM (cuenta demo). Mejor que un fondo generado.
+- Fondo real y ordenado: despacho u oficina. Mejor que un fondo generado.
 - Micro de solapa si es posible; si no, habitación pequeña sin eco y móvil a menos de 1 m.
+- Para G3 y el punto 1: segundo móvil con la cuenta demo abierta y el brillo al máximo; grabar también un plano detalle
+  de la pantalla por si el reflejo no deja leerla.
 - 2–3 tomas de cada gancho y del cuerpo completo. Mirar al objetivo, no a la pantalla.
 - Ojos a un tercio desde arriba; deja aire abajo para los subtítulos (zona segura de Reels).
 
