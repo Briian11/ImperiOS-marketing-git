@@ -39,7 +39,7 @@ versión corta (~22 s).
 | 5 ✂ | «Quién capta más, quién cierra más, y en qué es mejor cada uno.» | Inserto: ranking de comerciales |
 | 6 ✂ | «Y si haces campañas, ves lo que inviertes, los clics y los leads que entran, en directo. Sin esperar a la reunión de fin de mes.» | Inserto: gráfica de campañas + notificación de lead nuevo |
 | 7 | «Porque si puedes medirlo… puedes escalarlo.» | Brian a cámara. Subrayado en **escalarlo** |
-| 8 | «Pide una demo y te lo enseño yo.» | Logo + «Pide tu demo» (≥ 2,5 s) |
+| 8 | «Déjame tus datos, reviso tu caso personalmente y te asesoro gratis. Sin ningún compromiso.» | Brian a cámara → logo + «Asesoramiento gratuito · Sin compromiso» (≥ 2,5 s) |
 
 ## Guion completo · G4 «consultas» (~32 s)
 
@@ -52,7 +52,7 @@ versión corta (~22 s).
 | 5 ✂ | «Qué comercial capta más, quién cierra más, y en qué es mejor cada uno.» | Inserto: ranking de comerciales |
 | 6 ✂ | «Y si haces campañas, ves lo que inviertes, los clics y los leads que entran, en directo. Sin esperar a la reunión de fin de mes.» | Inserto: gráfica de campañas + notificación de lead nuevo |
 | 7 | «Porque si puedes medirlo… puedes escalarlo.» | Brian a cámara. Subrayado en **escalarlo** |
-| 8 | «Pide una demo y te lo enseño yo.» | Logo + «Pide tu demo» (≥ 2,5 s) |
+| 8 | «Déjame tus datos, reviso tu caso personalmente y te asesoro gratis. Sin ningún compromiso.» | Brian a cámara → logo + «Asesoramiento gratuito · Sin compromiso» (≥ 2,5 s) |
 
 Diferencia entre los dos: solo las líneas 1 y 4. En G1 la pregunta es por **visitas**, así que la línea 4 empieza por las
 visitas; en G4 es por **consultas**, así que la línea 4 sigue el orden del embudo desde las consultas. De la línea 5 en
@@ -68,13 +68,26 @@ Ideas, no texto literal; dilo con tus palabras. Entre corchetes, lo que se ve.
 3. **Por comercial:** «Qué comercial capta más, quién cierra más… y en qué es mejor cada uno.» [Ranking de comerciales]
 4. **Campañas:** «Si haces campañas, ves lo que inviertes, los clics y los leads que te entran, en directo. Sin esperar
    a la reunión de fin de mes.» [Gráfica de campañas + notificación de lead nuevo]
-5. **Cierre:** «Porque si puedes medirlo… puedes escalarlo. Pide una demo y te lo enseño yo.»
-   [Logo + «Pide tu demo»]
+5. **Cierre:** «Porque si puedes medirlo… puedes escalarlo. Déjame tus datos, reviso tu caso personalmente y te asesoro gratis. Sin ningún compromiso.»
+   [Logo + «Asesoramiento gratuito · Sin compromiso»]
 
 Si hay que acortar a ~25 s: quitar el punto 3 o el 4 (el R13 corto quita los dos).
 
 En pantalla (lo montamos nosotros): rótulo con nombre y cargo, palabras clave con subrayado amarillo, insertos de la UI
-del R13 (misma estética oscura) o de la cuenta demo, subtítulos y cierre con logo + «Pide tu demo».
+del R13 (misma estética oscura) o de la cuenta demo, subtítulos y cierre con logo + «Asesoramiento gratuito · Sin compromiso».
+
+## Cierre y formulario (decidido 10/11/2026)
+
+El anuncio lleva a un formulario instantáneo de Meta; Brian llama a cada lead. El cierre dice exactamente eso.
+
+- **Brian:** «Déjame tus datos, reviso tu caso personalmente y te asesoro gratis. Sin ningún compromiso.»
+  Para el corte corto vale «Déjame tus datos y reviso tu caso personalmente. Gratis y sin compromiso.»
+- **Animaciones (v4, R11, voz Cristina):** «Déjanos tus datos y revisamos tu caso para asesorarte gratis, sin compromiso.»
+  En pantalla: «Asesoramiento gratuito · Sin compromiso».
+- Solo decir «sin ningún compromiso» si es verdad: la llamada no obliga a nada.
+- Formulario: tipo «Mayor intención»; nombre, teléfono, inmobiliaria, nº de comerciales y cómo gestionan hoy los leads.
+  En la pantalla final del formulario: «Brian te llamará personalmente».
+- Botón del anuncio: «Solicitar información».
 
 ## Grabación con el móvil
 
