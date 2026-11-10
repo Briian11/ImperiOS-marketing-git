@@ -11,10 +11,10 @@ Sin cifras ni testimonios sin verificar. El móvil que se enseña lleva la **cue
 
 | # | Gancho | Primer fotograma |
 |---|---|---|
-| G1 | «Si diriges una inmobiliaria, contéstame a esto sin preguntarle a nadie: ¿cuántas visitas ha hecho tu equipo esta semana?» | Plano medio, ya hablando. Rótulo: **Brian · fundador de ImperiOS** |
+| G1 | «Si diriges una inmobiliaria, contéstame a esto sin preguntarle a nadie de tu equipo: ¿cuántas visitas habéis hecho esta semana?» | Plano medio, ya hablando. Rótulo: **Brian · fundador de ImperiOS** |
 | G2 | «¿Te enteras de cómo va tu inmobiliaria… cuando el mes ya ha terminado?» | Plano cerrado, gesto de «¿en serio?» |
 | G3 | «Esto es lo que debería poder ver cada mañana el director de una inmobiliaria.» | Brian gira el móvil hacia cámara con el panel ya abierto |
-| G4 | «Si diriges una inmobiliaria, contéstame a esto sin preguntarle a nadie: ¿cuántas consultas ha tenido hoy tu mejor propiedad?» | Igual que G1. Enlaza directo con el punto 2 del cuerpo (consultas por propiedad) |
+| G4 | «Si diriges una inmobiliaria, contéstame a esto sin preguntarle a nadie de tu equipo: ¿cuántas consultas ha tenido hoy tu mejor propiedad?» | Igual que G1. Enlaza directo con el punto 2 del cuerpo (consultas por propiedad) |
 
 Recomendación: grabar los cuatro (cuesta poco) y usar **uno** como anuncio. G1 y G4 son la misma fórmula con distinta
 pregunta: se graban seguidos y se elige uno para el anuncio; el otro, para un Reel orgánico. G1 obliga a hacer la prueba mentalmente y
