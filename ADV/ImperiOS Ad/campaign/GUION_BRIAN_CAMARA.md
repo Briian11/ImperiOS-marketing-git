@@ -44,6 +44,25 @@ Elegido por Brian como el vídeo a cámara del anuncio. G1 y G4 quedan para Reel
 - **«Te llamo yo»:** solo si llama Brian; si no, «y te llamamos».
 - Las tareas del bloque 2 son funciones que ya enseña el v4 (leads que entran solos, match con IA, recordatorios automáticos).
 
+## Alternativas no elegidas (12/11/2026) — reserva para renovar el anuncio
+
+**G5 · «Ya vas tarde» (~28 s)**
+1. «Si dependes de tu equipo para saber cómo va tu inmobiliaria… ya vas tarde.»
+2. «Porque cada dato que pasa de boca en boca se pierde por el camino. Y no es culpa de nadie.»
+3. «En ImperiOS centralizamos toda la gestión de tu inmobiliaria en un solo sitio, para que no se pierda ni un dato.» (gira el móvil)
+4. «Ves qué propiedades generan más interés. De ese interés, cuántos acaban en visita. Y de esas visitas, cuántas terminan en oferta.»
+5. «Así sabes qué propiedad empujar… y dónde se te están escapando los clientes.»
+6. «Déjame tus datos, reviso tu caso personalmente y te asesoro gratis. Sin ningún compromiso.»
+
+**G6 · «Ya tienes CRM» (~28 s)** — sin nombrar a otros CRM (riesgo de publicidad comparativa denigratoria y de
+reclamación de marca en Meta).
+1. «Tener un CRM no es lo mismo que tener tu inmobiliaria bajo control.»
+2. «Si tu equipo sigue pasando datos a mano y tú sigues sin saber qué te funciona, estás perdiendo tiempo… y dinero.»
+3. «ImperiOS es un CRM automatizado: le quita carga de trabajo a tu equipo, para que se centre en lo que de verdad importa. Vender.»
+4. «Y a ti te pone todos los pilares de tu inmobiliaria en una sola herramienta: captación, clientes, propiedades, visitas y campañas.» (gira el móvil)
+5. «Para que veas qué te está funcionando… y qué no.»
+6. «Déjame tus datos y te asesoro personalmente. Gratis y sin compromiso.»
+
 ## Hoja de grabación (versión final, 12/11/2026)
 
 Grabar por bloques, sin parar la cámara entre tomas: frase, 2 s de silencio, repetir. 2–3 tomas por bloque
