@@ -90,7 +90,8 @@ Objetivo: formulario instantáneo de Meta; Brian llama a cada lead. El cierre di
 
 | Anuncio | Ángulo | Archivo |
 |---|---|---|
-| v4 corto gancho A (~22 s) | Captar: los leads se pierden entre canales | `preview/out/v4/imperios-v4-corto-ganchoA-asesoria_9x16.mp4` |
+| v4 corto gancho A (~25 s) | Captar: los leads se pierden entre canales | `preview/out/v4/imperios-v4-corto-ganchoA-asesoria_9x16.mp4` |
+| *(reserva)* v4 largo gancho A (~40 s) | Renovar creatividad o retargeting | `preview/out/v4/imperios-v4-largo-ganchoA-asesoria_9x16.mp4` |
 | R11 «Falso interés» (~39 s) | Priorizar: la IA califica a cada contacto | `preview/out/reels/imperios-reel-r11-falso-interes-asesoria_9x16.mp4` |
 | Brian a cámara (pendiente de grabar) | Medir: el panel del director | guion en `GUION_BRIAN_CAMARA.md` |
 
@@ -101,7 +102,10 @@ El R13 queda como Reel orgánico (su mensaje lo cuenta Brian a cámara). R9 y R1
   Empalmada con `tools/empalmar_vo.py` tras «Imperios.» (v4) y tras «¿…falso interés?» (R11).
 - **En pantalla:** botón «Déjanos tus datos» y debajo «ASESORAMIENTO GRATUITO / SIN COMPROMISO»
   (`CTA_LBL` y `CTA_SUB` en los timelines; los motores v4 y R11 ya aceptan los dos).
-- **Build:** `preview/build_asesoria.sh [v4|r11]`. Las versiones orgánicas anteriores no cambian.
+- **v4 corto (12/11/2026):** lleva la frase del match del largo («La inteligencia artificial cruza las características de tus
+  propiedades con lo que busca cada cliente, y le envía automáticamente por WhatsApp las que encajan»), empalmada de
+  `cuerpo-largo.mp3` en lugar de la suya; la escena del match usa los tiempos de esa frase.
+- **Build:** `preview/build_asesoria.sh [v4|v4largo|r11]`. Las versiones orgánicas anteriores no cambian.
 - **Formulario:** tipo «Mayor intención»; nombre, teléfono, inmobiliaria, nº de comerciales y cómo gestionan hoy los leads.
   Pantalla final: «Brian te llamará personalmente». Botón del anuncio: «Solicitar información».
 - Solo decir «sin compromiso» mientras la llamada no obligue a nada.

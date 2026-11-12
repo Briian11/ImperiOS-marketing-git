@@ -2,15 +2,20 @@
 # Versiones de anuncio con el cierre «Déjanos tus datos y revisamos tu caso para asesorarte gratis, sin compromiso.»
 # (formulario de Meta + llamada de Brian). Uso: ./build_asesoria.sh [v4|v4largo|r11]   (sin argumento: v4 corto y r11)
 # Voz: assets_in/vo/starter/cierre-asesoria.mp3 (eleven_v4, Cristina, ImperiOS's Workspace, 10/11/2026) + tiempos de Scribe,
-# empalmada con tools/empalmar_vo.py tras «Imperios.» (v4 corto) y tras «¿…falso interés?» (R11).
+# empalmada con tools/empalmar_vo.py tras «Imperios.» (v4) y tras «¿…falso interés?» (R11). El v4 corto lleva además
+# la frase del match del v4 largo en lugar de la suya.
 set -euo pipefail
 cd "$(dirname "$0")"
 L=../assets_in/vo/starter
 LBL='Déjanos tus datos'
 SUB='ASESORAMIENTO GRATUITO<br>SIN COMPROMISO'
 if [ "${1:-v4}" = v4 ]; then
+  # corto con la frase del match del largo («La IA cruza las características… las que encajan.»), 12/11/2026
   python3 ../tools/empalmar_vo.py $L/cuerpo-corto-asesoria.wav $L/cuerpo-corto-asesoria.words.json \
-    $L/cuerpo-corto.mp3 $L/cuerpo-corto.words.json 28 0.15 $L/cierre-asesoria.mp3 $L/cierre-asesoria.words.json -1 0
+    $L/cuerpo-corto.mp3 $L/cuerpo-corto.words.json 0:14 0.1 \
+    $L/cuerpo-largo.mp3 $L/cuerpo-largo.words.json 33:56 0.12 \
+    $L/cuerpo-corto.mp3 $L/cuerpo-corto.words.json 28:28 0.15 \
+    $L/cierre-asesoria.mp3 $L/cierre-asesoria.words.json -1 0
   CTA_LBL="$LBL" CTA_SUB="$SUB" python3 build_timeline_v4.py corto $L/gancho-A.words.json $L/gancho-A.mp3 \
     $L/cuerpo-corto-asesoria.words.json $L/cuerpo-corto-asesoria.wav timeline-v4-corto-A-asesoria.json out/v4/vo-corto-A-asesoria.wav
   SUF=-asesoria ./build_v4.sh corto A

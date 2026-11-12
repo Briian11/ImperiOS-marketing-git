@@ -91,6 +91,37 @@ if kind == "largo":
         "s5ev": r([S(age), S(rec)], "s5"),
         "kt6": r([S(i) for i in range(todo, todo + 6)], "s6"),                  # Todo conectado. / De principio a fin.
     }
+elif any(w[0].startswith("características") for w in BW):
+    # Corto con la frase del match del largo (versión de anuncio, 12/11/2026):
+    # Con Imperios, todos tus leads entran en un solo sitio: portales, web, campañas y WhatsApp.
+    # La IA cruza las características de tus propiedades con lo que busca cada cliente, y le envía automáticamente
+    # por WhatsApp las que encajan. Imperios. <cierre>
+    tod = find("todos"); la = find("La"); car = find("características", la); pro3 = find("propiedades", car)
+    bus = find("busca", car); cli3 = find("cliente", bus); y4 = find("y", cli3 + 1); env = find("envía", y4)
+    aut = find("automáticamente", env); wa4 = find("WhatsApp", env); enc = find("encajan", env); imp2 = find("Imperios", enc)
+    try:
+        pide = find("Pide", imp2)
+    except KeyError:              # cierre «Déjanos tus datos…»
+        pide = find("Déjanos", imp2)
+    B["s1"] = B["hook"] + .6
+    B["s3"] = S(la) - .13
+    B["s2"] = B["s3"] - .05
+    B["s4"] = S(y4) - .13
+    B["logo"] = S(imp2) - .25
+    B["s5"] = B["logo"]
+    B["s6"] = B["logo"]
+    B["cta"] = S(pide) + .2
+    B["skip"] = ["s2", "s5", "s6"]
+    end = E(len(BW) - 1) + TAIL
+    por = find("portales"); web = find("web"); cam = find("campañas"); wa = find("WhatsApp")
+    wt = {
+        "kt1": r([S(i) for i in [tod, tod + 1, tod + 2, tod + 4, tod + 5, tod + 6, tod + 7]], "s1"),
+        "src": r([S(por), S(web), S(cam), S(wa)], "s1"),
+        "kt3": r([S(pro3 - 1), S(pro3), S(pro3 + 1), S(pro3 + 2), S(pro3 + 3), S(bus), S(bus + 1), S(cli3)], "s3"),
+        "m3": r([S(car), S(pro3), S(bus)], "s3"),
+        "kt4": r([S(y4), S(y4 + 1), (S(y4 + 1) + S(env)) / 2, S(env), S(wa4 - 1), S(wa4)], "s4"),
+        "s4ev": r([S(aut), S(wa4), S(enc)], "s4"),
+    }
 else:
     # Con Imperios, todos tus leads entran en un solo sitio: portales, web, campañas y WhatsApp.
     # La IA envía a cada cliente, por WhatsApp, las propiedades que encajan. Imperios. Pide tu demo.
