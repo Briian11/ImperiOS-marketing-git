@@ -1,4 +1,4 @@
-# F1 · Brian a cámara — «El panel del CEO» contado por Brian (borrador para revisar, 10/11/2026)
+# F1 · Brian a cámara (anuncio principal: G7 «Horas que no venden», 12/11/2026)
 
 Objetivo: tercer anuncio de la campaña, junto a **v4 corto gancho A** y **R11 «Falso interés»** (versiones con el
 cierre de asesoramiento, ver `CAMPANA.md`). Lleva el mensaje del R13 (el director ve cómo va su negocio cuando quiere,
@@ -27,6 +27,22 @@ alternativa para probar después; G2, para un Reel orgánico.
 Variantes de la primera frase (sin nombrar herramientas, porque no todas las inmobiliarias usan Excel):
 «…contéstame a esto en cinco segundos: …» · «…sin llamar a nadie ni revisar nada: …».
 Otra pregunta posible: «¿cuál de tus comerciales cierra más?».
+
+## G7 · «Horas que no venden» — ANUNCIO PRINCIPAL (12/11/2026, ~30 s)
+
+Elegido por Brian como el vídeo a cámara del anuncio. G1 y G4 quedan para Reels orgánicos o para renovar el anuncio.
+
+| Bloque | Brian dice | En pantalla |
+|---|---|---|
+| 1 · Gancho | «Si diriges una inmobiliaria, tu equipo está perdiendo horas cada semana en tareas que no venden.» | Brian a cámara desde el primer fotograma; el gancho escrito, subrayado en **horas**. Rótulo «Brian · fundador de ImperiOS» |
+| 2 · Qué tareas | «Pasar leads a mano, buscar qué piso encaja con cada cliente, acordarse de cada visita…» | Cada tarea aparece y se tacha al decirla |
+| 3 · Solución | «Con ImperiOS, el CRM lo hace solo. Más de 30 horas a la semana. Es como tener un comercial más… sin contratarlo.» | «+30 h / semana» en grande → «= 1 comercial más», subrayado amarillo |
+| 4 · Para ti | «Y tú tienes toda tu inmobiliaria en una sola herramienta: captación, clientes, propiedades, visitas y campañas. Para ver qué funciona… y qué no.» | Brian gira el móvil a cámara → inserto del panel de la cuenta demo |
+| 5 · Cierre | «Déjame tus datos, reviso tu caso personalmente y te llamo yo. Gratis y sin compromiso.» | Brian a cámara → logo + «Asesoramiento gratuito · Sin compromiso» (≥ 2,5 s) |
+
+- **30 horas:** guardar cómo se ha calculado (tareas y tamaño de equipo); en publicidad la cifra tiene que poder justificarse.
+- **«Te llamo yo»:** solo si llama Brian; si no, «y te llamamos».
+- Las tareas del bloque 2 son funciones que ya enseña el v4 (leads que entran solos, match con IA, recordatorios automáticos).
 
 ## Hoja de grabación (versión final, 12/11/2026)
 
