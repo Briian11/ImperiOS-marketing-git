@@ -28,29 +28,29 @@ Variantes de la primera frase (sin nombrar herramientas, porque no todas las inm
 «…contéstame a esto en cinco segundos: …» · «…sin llamar a nadie ni revisar nada: …».
 Otra pregunta posible: «¿cuál de tus comerciales cierra más?».
 
-## Guion completo · G1 «visitas» (~32 s)
+## Guion completo · G1 «visitas» (~34 s)
 
 Texto para decir tal cual o con tus palabras. Entre corchetes, lo que se ve. Las líneas marcadas con ✂ se quitan en la
-versión corta (~22 s).
+versión corta (~24 s).
 
 | # | Brian dice | En pantalla |
 |---|---|---|
 | 1 | «Si diriges una inmobiliaria, contéstame a esto sin preguntarle a nadie de tu equipo: ¿cuántas visitas habéis hecho esta semana?» | Brian a cámara. Rótulo «Brian · fundador de ImperiOS». Subrayado en **visitas** |
 | 2 | (pausa de 1 s, mirada de «¿lo sabes?») «Si has tenido que pensarlo, es normal: ese dato lo tiene tu equipo, no tú.» | Brian a cámara |
-| 3 | «Con ImperiOS lo ves desde el móvil, cuando quieras.» | Brian gira el móvil a cámara → inserto del panel |
+| 3 | «Con ImperiOS, el CRM recoge automáticamente lo que hace tu equipo. Tú solo abres el móvil y ves cómo va tu inmobiliaria, estés donde estés.» | Brian a cámara; en «abres el móvil» lo gira hacia cámara → inserto del panel |
 | 4 | «Las visitas de cada comercial, las consultas de cada propiedad… y cuántas acaban en oferta.» | Inserto: embudo consultas → visitas → ofertas |
 | 5 ✂ | «Quién capta más, quién cierra más, y en qué es mejor cada uno.» | Inserto: ranking de comerciales |
 | 6 ✂ | «Y si haces campañas, ves lo que inviertes, los clics y los leads que entran, en directo. Sin esperar a la reunión de fin de mes.» | Inserto: gráfica de campañas + notificación de lead nuevo |
 | 7 | «Porque si puedes medirlo… puedes escalarlo.» | Brian a cámara. Subrayado en **escalarlo** |
 | 8 | «Déjame tus datos, reviso tu caso personalmente y te asesoro gratis. Sin ningún compromiso.» | Brian a cámara → logo + «Asesoramiento gratuito · Sin compromiso» (≥ 2,5 s) |
 
-## Guion completo · G4 «consultas» (~32 s)
+## Guion completo · G4 «consultas» (~34 s)
 
 | # | Brian dice | En pantalla |
 |---|---|---|
 | 1 | «Si diriges una inmobiliaria, contéstame a esto sin preguntarle a nadie de tu equipo: ¿cuántas consultas ha tenido hoy tu mejor propiedad?» | Brian a cámara. Rótulo «Brian · fundador de ImperiOS». Subrayado en **consultas** |
 | 2 | (pausa de 1 s) «Si has tenido que pensarlo, es normal: ese dato lo tiene tu equipo, no tú.» | Brian a cámara |
-| 3 | «Con ImperiOS lo ves desde el móvil, cuando quieras.» | Brian gira el móvil a cámara → inserto del panel |
+| 3 | «Con ImperiOS, el CRM recoge automáticamente lo que hace tu equipo. Tú solo abres el móvil y ves cómo va tu inmobiliaria, estés donde estés.» | Brian a cámara; en «abres el móvil» lo gira hacia cámara → inserto del panel |
 | 4 | «Cuántas consultas ha tenido cada propiedad, cuántas acaban en visita… y cuántas en oferta.» | Inserto: embudo consultas → visitas → ofertas |
 | 5 ✂ | «Qué comercial capta más, quién cierra más, y en qué es mejor cada uno.» | Inserto: ranking de comerciales |
 | 6 ✂ | «Y si haces campañas, ves lo que inviertes, los clics y los leads que entran, en directo. Sin esperar a la reunión de fin de mes.» | Inserto: gráfica de campañas + notificación de lead nuevo |
@@ -61,11 +61,15 @@ Diferencia entre los dos: solo las líneas 1 y 4. En G1 la pregunta es por **vis
 visitas; en G4 es por **consultas**, así que la línea 4 sigue el orden del embudo desde las consultas. De la línea 5 en
 adelante se graba una sola vez y vale para los dos.
 
+Línea 3: decir «automáticamente» solo si ImperiOS registra esos datos sin que el equipo los apunte a mano; si no,
+«todo lo que hace tu equipo queda registrado en el CRM» (12/11/2026).
+
 ## Cuerpo (referencia: mismo recorrido que el R13)
 
 Ideas, no texto literal; dilo con tus palabras. Entre corchetes, lo que se ve.
 
-1. **Desde el móvil:** «Con ImperiOS lo ves desde el móvil, cuando quieras.» [Brian enseña el móvil; inserto del panel]
+1. **El CRM lo recoge solo:** «Con ImperiOS, el CRM recoge automáticamente lo que hace tu equipo. Tú solo abres el móvil y
+   ves cómo va tu inmobiliaria, estés donde estés.» [Brian enseña el móvil; inserto del panel]
 2. **Por propiedad:** «Cuántas consultas ha tenido cada propiedad, cuántas acaban en visita y cuántas en oferta.»
    [Inserto del embudo consultas → visitas → ofertas]
 3. **Por comercial:** «Qué comercial capta más, quién cierra más… y en qué es mejor cada uno.» [Ranking de comerciales]
