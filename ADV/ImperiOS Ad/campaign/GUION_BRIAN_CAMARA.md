@@ -35,13 +35,28 @@ Grabar por bloques, sin parar la cámara entre tomas: frase, 2 s de silencio, re
 
 | Bloque | Texto |
 |---|---|
-| 1 · Gancho G1 | «Si diriges una inmobiliaria, contéstame a esto sin preguntarle a nadie de tu equipo: ¿cuántas visitas habéis hecho esta semana?» |
-| 1 · Gancho G4 | «Si diriges una inmobiliaria, contéstame a esto sin preguntarle a nadie de tu equipo: ¿cuántas consultas ha tenido hoy tu mejor propiedad?» |
+G1 habla del **equipo** (quién hace qué); G4, de la **cartera** (qué propiedades funcionan). Desde el 12/11/2026 solo
+comparten el gancho («Si diriges una inmobiliaria…») y la frase final de la llamada a la acción.
+
+**G1 · equipo**
+
+| Bloque | Texto |
+|---|---|
+| 1 · Gancho | «Si diriges una inmobiliaria, contéstame a esto sin preguntarle a nadie de tu equipo: ¿cuántas visitas habéis hecho esta semana?» |
 | 2 · Remate + móvil | (pausa 1 s) «Si has tenido que pensarlo, es normal: ese dato lo tiene tu equipo, no tú. Con ImperiOS, el CRM recoge automáticamente lo que hace tu equipo. Tú solo abres el móvil y ves cómo va tu inmobiliaria, estés donde estés.» (gira el móvil en «abres el móvil») |
-| 3 · Embudo G1 | «Las visitas de cada comercial, las consultas de cada propiedad… y cuántas acaban en oferta.» |
-| 3 · Embudo G4 | «Cuántas consultas ha tenido cada propiedad, cuántas acaban en visita… y cuántas en oferta.» |
+| 3 · Embudo | «Las visitas de cada comercial, las consultas de cada propiedad… y cuántas acaban en oferta.» |
 | 4 · Detalle ✂ | «Quién capta más, quién cierra más, y en qué es mejor cada uno. Y si haces campañas, ves lo que inviertes, los clics y los leads que entran, en directo. Sin esperar a la reunión de fin de mes.» |
 | 5 · Cierre | «Porque si puedes medirlo… puedes escalarlo. Déjame tus datos, reviso tu caso personalmente y te asesoro gratis. Sin ningún compromiso.» |
+
+**G4 · cartera**
+
+| Bloque | Texto |
+|---|---|
+| 1 · Gancho | «Si diriges una inmobiliaria, contéstame a esto sin preguntarle a nadie de tu equipo: ¿cuántas consultas ha tenido hoy tu mejor propiedad?» |
+| 2 · Remate + móvil | (pausa 1 s) «Y si no sabes eso, tampoco sabes qué propiedades se te están quedando paradas. Con ImperiOS, cada consulta entra en el CRM con su propiedad y de dónde viene: portal, web, campaña o WhatsApp. Y tú lo ves todo desde el móvil.» (gira el móvil en «desde el móvil») |
+| 3 · Embudo | «Propiedad por propiedad: cuántas consultas tiene, cuántas acaban en visita… y cuántas en oferta.» |
+| 4 · Detalle ✂ | «Ves cuál tira y cuál se ha quedado parada. Y qué portal o qué campaña te trae los clientes de cada una, para poner tu dinero donde funciona.» |
+| 5 · Cierre | «Deja de adivinar qué propiedades funcionan. Déjame tus datos, reviso tu caso personalmente y te asesoro gratis. Sin ningún compromiso.» |
 
 ## Guion completo · G1 «visitas» (~34 s)
 
@@ -59,22 +74,22 @@ versión corta (~24 s).
 | 7 | «Porque si puedes medirlo… puedes escalarlo.» | Brian a cámara. Subrayado en **escalarlo** |
 | 8 | «Déjame tus datos, reviso tu caso personalmente y te asesoro gratis. Sin ningún compromiso.» | Brian a cámara → logo + «Asesoramiento gratuito · Sin compromiso» (≥ 2,5 s) |
 
-## Guion completo · G4 «consultas» (~34 s)
+## Guion completo · G4 «consultas» · cartera (~32 s)
 
 | # | Brian dice | En pantalla |
 |---|---|---|
 | 1 | «Si diriges una inmobiliaria, contéstame a esto sin preguntarle a nadie de tu equipo: ¿cuántas consultas ha tenido hoy tu mejor propiedad?» | Brian a cámara. Rótulo «Brian · fundador de ImperiOS». Subrayado en **consultas** |
-| 2 | (pausa de 1 s) «Si has tenido que pensarlo, es normal: ese dato lo tiene tu equipo, no tú.» | Brian a cámara |
-| 3 | «Con ImperiOS, el CRM recoge automáticamente lo que hace tu equipo. Tú solo abres el móvil y ves cómo va tu inmobiliaria, estés donde estés.» | Brian a cámara; en «abres el móvil» lo gira hacia cámara → inserto del panel |
-| 4 | «Cuántas consultas ha tenido cada propiedad, cuántas acaban en visita… y cuántas en oferta.» | Inserto: embudo consultas → visitas → ofertas |
-| 5 ✂ | «Qué comercial capta más, quién cierra más, y en qué es mejor cada uno.» | Inserto: ranking de comerciales |
-| 6 ✂ | «Y si haces campañas, ves lo que inviertes, los clics y los leads que entran, en directo. Sin esperar a la reunión de fin de mes.» | Inserto: gráfica de campañas + notificación de lead nuevo |
-| 7 | «Porque si puedes medirlo… puedes escalarlo.» | Brian a cámara. Subrayado en **escalarlo** |
+| 2 | (pausa de 1 s) «Y si no sabes eso, tampoco sabes qué propiedades se te están quedando paradas.» | Brian a cámara |
+| 3 | «Con ImperiOS, cada consulta entra en el CRM con su propiedad y de dónde viene: portal, web, campaña o WhatsApp. Y tú lo ves todo desde el móvil.» | Inserto: consultas entrando con su etiqueta de origen; en «desde el móvil» Brian gira el móvil a cámara |
+| 4 | «Propiedad por propiedad: cuántas consultas tiene, cuántas acaban en visita… y cuántas en oferta.» | Inserto: tabla por propiedad (consultas · visitas · ofertas) |
+| 5 ✂ | «Ves cuál tira y cuál se ha quedado parada.» | Inserto: una propiedad con barra llena y otra a cero, marcada «parada» |
+| 6 ✂ | «Y qué portal o qué campaña te trae los clientes de cada una, para poner tu dinero donde funciona.» | Inserto: origen de los clientes por propiedad / ranking de campañas |
+| 7 | «Deja de adivinar qué propiedades funcionan.» | Brian a cámara. Subrayado en **adivinar** |
 | 8 | «Déjame tus datos, reviso tu caso personalmente y te asesoro gratis. Sin ningún compromiso.» | Brian a cámara → logo + «Asesoramiento gratuito · Sin compromiso» (≥ 2,5 s) |
 
-Diferencia entre los dos: solo las líneas 1 y 4. En G1 la pregunta es por **visitas**, así que la línea 4 empieza por las
-visitas; en G4 es por **consultas**, así que la línea 4 sigue el orden del embudo desde las consultas. De la línea 5 en
-adelante se graba una sola vez y vale para los dos.
+Diferencia entre los dos (12/11/2026): G1 va del **equipo** (quién hace qué, rendimiento de cada comercial y de las
+campañas); G4 va de la **cartera** (qué propiedades reciben consultas, cuáles se paran y de dónde vienen sus clientes).
+Solo comparten el arranque del gancho y la línea 8, así que G4 se graba entero aparte (≈ 5 min más de grabación).
 
 Línea 3: decir «automáticamente» solo si ImperiOS registra esos datos sin que el equipo los apunte a mano; si no,
 «todo lo que hace tu equipo queda registrado en el CRM» (12/11/2026).
