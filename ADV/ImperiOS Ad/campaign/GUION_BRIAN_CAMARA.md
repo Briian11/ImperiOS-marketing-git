@@ -28,6 +28,21 @@ Variantes de la primera frase (sin nombrar herramientas, porque no todas las inm
 «…contéstame a esto en cinco segundos: …» · «…sin llamar a nadie ni revisar nada: …».
 Otra pregunta posible: «¿cuál de tus comerciales cierra más?».
 
+## Hoja de grabación (versión final, 12/11/2026)
+
+Grabar por bloques, sin parar la cámara entre tomas: frase, 2 s de silencio, repetir. 2–3 tomas por bloque
+(el gancho, más). Empezar y terminar cada toma mirando a cámara. Al final, una toma entera de principio a fin.
+
+| Bloque | Texto |
+|---|---|
+| 1 · Gancho G1 | «Si diriges una inmobiliaria, contéstame a esto sin preguntarle a nadie de tu equipo: ¿cuántas visitas habéis hecho esta semana?» |
+| 1 · Gancho G4 | «Si diriges una inmobiliaria, contéstame a esto sin preguntarle a nadie de tu equipo: ¿cuántas consultas ha tenido hoy tu mejor propiedad?» |
+| 2 · Remate + móvil | (pausa 1 s) «Si has tenido que pensarlo, es normal: ese dato lo tiene tu equipo, no tú. Con ImperiOS, el CRM recoge automáticamente lo que hace tu equipo. Tú solo abres el móvil y ves cómo va tu inmobiliaria, estés donde estés.» (gira el móvil en «abres el móvil») |
+| 3 · Embudo G1 | «Las visitas de cada comercial, las consultas de cada propiedad… y cuántas acaban en oferta.» |
+| 3 · Embudo G4 | «Cuántas consultas ha tenido cada propiedad, cuántas acaban en visita… y cuántas en oferta.» |
+| 4 · Detalle ✂ | «Quién capta más, quién cierra más, y en qué es mejor cada uno. Y si haces campañas, ves lo que inviertes, los clics y los leads que entran, en directo. Sin esperar a la reunión de fin de mes.» |
+| 5 · Cierre | «Porque si puedes medirlo… puedes escalarlo. Déjame tus datos, reviso tu caso personalmente y te asesoro gratis. Sin ningún compromiso.» |
+
 ## Guion completo · G1 «visitas» (~34 s)
 
 Texto para decir tal cual o con tus palabras. Entre corchetes, lo que se ve. Las líneas marcadas con ✂ se quitan en la
