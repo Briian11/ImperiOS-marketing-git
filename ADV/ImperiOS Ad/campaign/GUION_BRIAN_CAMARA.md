@@ -1,8 +1,11 @@
 # F1 · Brian a cámara — «El panel del CEO» contado por Brian (borrador para revisar, 10/11/2026)
 
-Objetivo: tercer anuncio de la campaña, junto a **v4 corto gancho A** y **R13-B**. Mismo mensaje que el R13
-(el director ve cómo va su negocio cuando quiere, y lo que se mide se puede escalar), pero contado por una persona real.
-El mensaje se repite, el formato no: para Meta es una creatividad distinta del R13 animado.
+Objetivo: tercer anuncio de la campaña, junto a **v4 corto gancho A** y **R11 «Falso interés»** (versiones con el
+cierre de asesoramiento, ver `CAMPANA.md`). Lleva el mensaje del R13 (el director ve cómo va su negocio cuando quiere,
+y lo que se mide se puede escalar), contado por una persona real; el R13 queda como Reel orgánico.
+
+Regla de montaje: Brian en pantalla al menos dos tercios del vídeo; insertos cortos (1–2 s) y mejor de la cuenta demo
+en su móvil que de la animación del R13; gancho, línea 2 y cierre siempre a cámara. Así no se parece al R13.
 
 Duración objetivo: 25–35 s. Frases cortas, con tus palabras. No hace falta memorizar: mejor natural que perfecto.
 Sin cifras ni testimonios sin verificar. El móvil que se enseña lleva la **cuenta demo con datos simulados**.
