@@ -61,3 +61,13 @@ Pasos:
   Los 6 vídeos de `preview/out/v4/` se regeneran con estas voces (prioridad: largo C, piloto Meta).
 - Requisitos ya aplicados en el motor: paleta #F7F7F3 / #FFD500 / brillos #FFC000, gancho legible desde el primer
   fotograma, «Pide tu demo · Gratis, sin compromiso» ≥2,5 s, 1080×1920 H.264 + AAC.
+
+## Estado 12/11/2026 — R6 con planos de Higgsfield (versión anuncio)
+
+- Planos de Seedance 2.0 en `assets_in/higgsfield/R6/` (descargados con `show_generations` del conector de Higgsfield; el CDN
+  `d8j0ntlcm91z4.cloudfront.net` está permitido en el entorno personal «ImperiOS-marketing-git»).
+- Guion y lista de cortes: `campaign/REEL_R6_higgsfield.md`. Voz: 5 frases nuevas de Cristina (`vo/starter/reel-r6h-frases.mp3`)
+  empalmadas con las tomas del R6 → `reel-r6h.wav`.
+- Montaje: `preview/build_r6h.sh` (recortes y etalonaje en `prep_r6h_clips.sh`, timeline `build_timeline_r6h.py`, motor
+  `src/reel-r6h.html`). Los fotogramas de `src/r6h/` no van al repo: se regeneran desde los mp4.
+- Render: `node render.js` necesita `PW=playwright` en este contenedor (no hay `node_modules`); `audio_mix.py` necesita `scipy`.

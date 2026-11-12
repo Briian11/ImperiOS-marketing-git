@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>ImperiOS Reel R6 — Antes / después (planos de Higgsfield)</title>
+<!-- Reel R6 «Antes / después», versión anuncio con planos de vídeo realistas (Higgsfield · Seedance 2.0).
+     ANTES: planos 1–3 en grises con cortes rápidos y texto cinético encima (oscurecido solo en la franja del texto).
+     Transición: los avisos estallan y se recogen en el portátil con ImperiOS (interfaz recreada, como en reel-r6.html).
+     DESPUÉS: escenas de la interfaz y, como cierre emocional, los planos 4 y 5 luminosos; luego logo y CTA.
+     Todo el texto dentro de la zona segura de Reels: y 270–1300. Los tiempos (B.*) vienen de build_timeline_r6h.py. -->
+<style>
+@font-face { font-family: "Manrope"; src: url("manrope-latin-variable.woff2") format("woff2"); font-weight: 200 800; }
+:root {
+  --ink-950:#0A0A0A; --ink-900:#1C1C1C; --ink-800:#333; --ink-700:#4A4A4A; --ink-600:#727272;
+  --ink-500:#B0B0B0; --ink-400:#C0C0C0; --ink-300:#D4D4D4; --ink-200:#EBEBEB; --ink-100:#F7F7F3; --ink-50:#FAFAFA;
+  --y:#FFD500;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ink-100); }
+body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-smoothing: antialiased; }
+#stage { position: absolute; inset: 0; overflow: hidden; background: var(--ink-100); }
+.abs { position: absolute; }
+.full { position: absolute; inset: 0; }
+.grid-l { background-image: linear-gradient(to right, rgba(10,10,10,.055) 1px, transparent 1px), linear-gradient(to bottom, rgba(10,10,10,.055) 1px, transparent 1px); background-size: 40px 40px; }
+.vig-l { background: radial-gradient(ellipse at 50% 45%, transparent 38%, rgba(247,247,243,.96) 82%); }
+.half { position: absolute; inset: 0; display: none; }
+.kt { position: absolute; left: 96px; right: 96px; font-weight: 700; letter-spacing: -.035em; line-height: 1.1; }
+.kt .w { display: inline-block; white-space: pre; will-change: transform, opacity, filter; }
+.it { font-style: italic; font-weight: 500; }
+.lt { color: #F7F7F3; text-shadow: 0 2px 30px rgba(10,10,10,.35); }
+.uline { position: absolute; height: 8px; border-radius: 4px; background: var(--y); transform-origin: 0 50%; opacity: 0; }
+.pill { position: absolute; left: 96px; top: 300px; display: inline-flex; align-items: center; gap: 14px; padding: 14px 28px; border-radius: 999px;
+  font-weight: 800; font-size: 28px; letter-spacing: .16em; }
+.card { position: absolute; background: var(--ink-50); border: 1.5px solid var(--ink-200); border-radius: 24px;
+  box-shadow: 0 30px 80px rgba(10,10,10,.10), 0 4px 14px rgba(10,10,10,.05); }
+.av { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 24px; flex: none; }
+.chip { position: absolute; padding: 16px 24px; border-radius: 16px; background: var(--ink-50); border: 1.5px solid var(--ink-200);
+  font-weight: 700; font-size: 30px; box-shadow: 0 16px 40px rgba(10,10,10,.08); white-space: nowrap; display: flex; align-items: center; gap: 12px; }
+.bdg { display: inline-grid; place-items: center; min-width: 36px; height: 36px; padding: 0 10px; border-radius: 18px; background: var(--ink-950); color: #fff; font-size: 20px; font-weight: 800; }
+.row { display: flex; align-items: center; gap: 22px; padding: 22px 26px; border-radius: 18px; }
+.meta { font-size: 21px; color: var(--ink-400); font-weight: 500; margin-top: 2px; }
+.src { margin-left: auto; font-size: 19px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 9px 14px; border-radius: 10px; background: var(--ink-800); color: var(--ink-400); }
+.bub { border-radius: 24px; padding: 18px 24px; font-size: 28px; font-weight: 600; box-shadow: 0 16px 40px rgba(0,0,0,.25); }
+.lbl { font-size: 20px; font-weight: 800; letter-spacing: .14em; color: var(--ink-600); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="full grid-l" id="lgrid"></div>
+  <div class="abs" id="lglow" style="width:1000px;height:1000px;border-radius:50%;background:radial-gradient(circle, rgba(255,192,0,.20), rgba(255,192,0,0) 65%);"></div>
+  <div class="full vig-l"></div>
+
+  <!-- ================= VÍDEO DE FONDO (planos de Higgsfield; fotogramas en r6h/<tramo>/, ver prep_r6h_clips.sh) ================= -->
+  <div class="full" id="vwrap" style="display:none;overflow:hidden;background:#0A0A0A">
+    <img id="vid" class="full" style="width:1080px;height:1920px;object-fit:cover" alt="">
+    <!-- oscurecido solo en la franja del texto (arriba), para que se lea -->
+    <div class="full" id="shade" style="background:linear-gradient(180deg, rgba(10,10,10,.66) 0%, rgba(10,10,10,.50) 30%, rgba(10,10,10,.18) 46%, rgba(10,10,10,0) 58%)"></div>
+  </div>
+
+  <!-- ================= GANCHO sobre el plano 1 (y el adelanto del plano 5): legible desde el fotograma 0 ================= -->
+  <div class="half" id="gancho">
+    <img id="hLogo" src="../../assets_in/brand-kit/assets/logo-imperios-navbar-blanco.svg" class="abs" style="left:96px;top:300px;height:84px" alt="ImperiOS">
+    <div class="abs" id="hTag" style="left:96px;top:430px"><span style="display:inline-flex;align-items:center;gap:14px;padding:14px 26px;border-radius:999px;background:rgba(10,10,10,.6);border:1.5px solid rgba(247,247,243,.25);color:#F7F7F3;font-weight:800;font-size:26px;letter-spacing:.14em"><span style="width:12px;height:14px;background:var(--y);border-radius:2px"></span>CRM PARA INMOBILIARIAS</span></div>
+    <div class="kt lt" id="kh" style="top:530px;font-size:118px;line-height:1.04"></div>
+  </div>
+
+  <!-- ================= ANTES sobre los planos 1–3 ================= -->
+  <div class="half" id="antesV">
+    <div class="pill" id="pA" style="background:rgba(247,247,243,.88);color:var(--ink-700)">ANTES</div>
+    <div class="kt lt" id="ka" style="top:400px;font-size:80px"></div>
+    <div class="abs" id="a5s" style="left:150px;top:1110px;padding:20px 36px;border:6px solid #F7F7F3;border-radius:14px;color:#F7F7F3;font-weight:800;font-size:52px;letter-spacing:.06em;transform:rotate(-6deg);text-shadow:0 4px 24px rgba(0,0,0,.45);box-shadow:0 4px 24px rgba(0,0,0,.25)">NO SE PRESENTÓ</div>
+  </div>
+
+  <!-- ================= DEL CAOS AL ORDEN: los avisos estallan sobre el plano 3 y se recogen en el portátil ================= -->
+  <div class="half" id="caos">
+    <div class="chip cx" style="left:110px;top:660px">Llamada perdida<span class="bdg">3</span></div>
+    <div class="chip cx" style="left:600px;top:640px">WhatsApp<span class="bdg">12</span></div>
+    <div class="chip cx" style="left:380px;top:760px">Email<span class="bdg">7</span></div>
+    <div class="chip cx" style="left:720px;top:850px">Chat<span class="bdg">5</span></div>
+    <div class="chip cx" style="left:96px;top:930px">Llamada perdida<span class="bdg">2</span></div>
+    <div class="chip cx" style="left:560px;top:1010px">Portal<span class="bdg">4</span></div>
+    <div class="chip cx" style="left:200px;top:1110px">Visita sin confirmar</div>
+    <div class="chip cx" style="left:640px;top:1200px">WhatsApp<span class="bdg">3</span></div>
+  </div>
+
+  <!-- ================= PORTÁTIL 2: ImperiOS en pantalla; la cámara entra en el panel de clientes (paso al DESPUÉS) ================= -->
+  <div class="half" id="lap2" style="transform-origin:540px 900px">
+    <div class="abs" style="left:110px;top:620px;width:860px;height:560px;border-radius:30px;background:#0A0A0A;box-shadow:0 60px 140px rgba(10,10,10,.35), inset 0 0 0 2px #333">
+      <div class="abs" id="lapScr2" style="left:22px;top:22px;width:816px;height:516px;border-radius:12px;overflow:hidden;background:var(--ink-100)">
+        <!-- réplica del fotograma 1080×1920 del ANTES, escalada 1/4,1 alrededor del centro de la pantalla (540, 900):
+             al terminar el zoom (×4,1) coincide con la escena real -->
+        <div class="abs" style="left:-132px;top:-642px;width:1080px;height:1920px;transform-origin:540px 900px;transform:scale(.2439)">
+          <!-- ImperiOS: barra superior y menú lateral (fuera del encuadre final; solo se ven durante el zoom) -->
+          <div class="abs" style="left:-1140px;top:-170px;width:3360px;height:150px;background:#FAFAFA;border-bottom:3px solid #EBEBEB;display:flex;align-items:center;gap:40px;padding:0 60px 0 1180px">
+            <span style="padding:20px 50px;border-radius:40px;background:#EBEBEB;color:#727272;font-weight:600;font-size:56px;width:1400px">Buscar cliente o propiedad…</span>
+            <span style="margin-left:auto;width:100px;height:100px;border-radius:50%;background:var(--y);display:grid;place-items:center;font-weight:800;font-size:44px">LS</span></div>
+          <div class="abs" style="left:-1140px;top:-170px;width:1100px;height:2150px;background:#0A0A0A;padding:60px 70px;display:flex;flex-direction:column;gap:50px;font-weight:700;font-size:68px;color:#C0C0C0">
+            <img src="../../assets_in/brand-kit/assets/logo-imperios-navbar-blanco.svg" style="height:150px;align-self:flex-start;margin-bottom:40px" alt="">
+            <div style="padding:26px 40px;border-radius:30px;background:var(--y);color:#0A0A0A">Clientes</div><div style="padding:0 40px">Propiedades</div><div style="padding:0 40px">Match con IA</div>
+            <div style="padding:0 40px">Agenda</div><div style="padding:0 40px">Campañas</div><div style="padding:0 40px">Equipo</div></div>
+          <div class="abs" style="left:1120px;top:-20px;width:1120px;height:2000px;background:#F7F7F3;padding:40px 50px;display:flex;flex-direction:column;gap:40px">
+            <div class="card" style="position:relative;padding:40px 44px"><div class="lbl" style="font-size:42px">MATCH CON IA</div><div style="font-size:60px;font-weight:800;margin-top:14px">Ático · Chamberí</div><div style="font-size:46px;color:#727272;margin-top:6px">encaja con A. M.</div></div>
+            <div class="card" style="position:relative;padding:40px 44px"><div class="lbl" style="font-size:42px">AGENDA · HOY</div><div style="margin-top:20px;padding:30px 36px;border-radius:24px;background:#0A0A0A;color:#fff;border-left:16px solid var(--y);font-size:52px;font-weight:800">17:00 · Visita</div></div>
+            <div class="card" style="position:relative;padding:40px 44px"><div class="lbl" style="font-size:42px">RECORDATORIOS</div><div style="font-size:56px;font-weight:700;margin-top:14px">Enviados automáticamente ✓</div></div></div>
+          <div class="abs" style="left:0;top:-20px;width:1080px;height:2000px;background:var(--ink-100)"></div>
+          <div class="full grid-l"></div>
+          <div class="pill" style="background:var(--y);color:var(--ink-950)">DESPUÉS</div>
+          <div class="abs"  style="left:80px;top:620px;width:920px">
+            <div style="background:var(--ink-950);border:1.5px solid var(--ink-800);border-radius:28px;color:#fff;padding:30px 26px;box-shadow:0 40px 100px rgba(10,10,10,.30)">
+              <div style="display:flex;align-items:center;gap:14px;font-weight:800;font-size:22px;letter-spacing:.16em;color:var(--y);margin:0 8px 18px"><span style="width:14px;height:14px;border-radius:50%;background:var(--y)"></span>TODOS TUS CLIENTES</div>
+              <div class="row d1rr" style="background:var(--ink-900);border:1.5px solid var(--ink-700)"><div class="av" style="background:var(--y);color:var(--ink-950)">AM</div><div><div style="font-size:30px;font-weight:700">Ático · Chamberí</div><div class="meta">3 hab · 350–400 k€</div></div><span class="src" style="color:#fff">Portal</span><span style="margin-left:12px;font-size:19px;font-weight:800;letter-spacing:.1em;color:var(--ink-950);background:var(--y);padding:9px 12px;border-radius:10px">NUEVO</span></div>
+              <div class="row d1rr"><div class="av" style="background:var(--ink-800)">LG</div><div><div style="font-size:28px;font-weight:700">Piso · Retiro</div><div class="meta">2 hab · 280–320 k€</div></div><span class="src">Portal</span></div>
+              <div class="row d1rr"><div class="av" style="background:var(--ink-800)">JR</div><div><div style="font-size:28px;font-weight:700">Chalet · Pozuelo</div><div class="meta">4 hab · 650–720 k€</div></div><span class="src">Web</span></div>
+              <div class="row d1rr"><div class="av" style="background:var(--ink-800)">SP</div><div><div style="font-size:28px;font-weight:700">Piso · Salamanca</div><div class="meta">2 hab · 450–500 k€</div></div><span class="src">WhatsApp</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="abs" style="left:422px;top:6px;width:16px;height:16px;border-radius:50%;background:#1C1C1C"></div>
+    </div>
+    <div class="abs" style="left:40px;top:1180px;width:1000px;height:34px;border-radius:0 0 26px 26px;background:linear-gradient(#E4E4E2,#B8B8B6);box-shadow:0 30px 60px rgba(10,10,10,.25)">
+      <div class="abs" style="left:430px;top:0;width:140px;height:12px;border-radius:0 0 12px 12px;background:#A6A6A4"></div>
+    </div>
+  </div>
+
+  <!-- ================= DESPUÉS ================= -->
+  <div class="half" id="despues">
+    <div class="pill" id="pD" style="background:var(--y);color:var(--ink-950)">DESPUÉS</div>
+    <div class="kt" id="kd" style="top:390px;font-size:80px"></div>
+    <!-- d1: todo centralizado en el panel -->
+    <div class="abs" id="d1" style="left:80px;top:620px;width:920px">
+      <div style="background:var(--ink-950);border:1.5px solid var(--ink-800);border-radius:28px;color:#fff;padding:30px 26px;box-shadow:0 40px 100px rgba(10,10,10,.30)">
+        <div style="display:flex;align-items:center;gap:14px;font-weight:800;font-size:22px;letter-spacing:.16em;color:var(--y);margin:0 8px 18px"><span style="width:14px;height:14px;border-radius:50%;background:var(--y)"></span>TODOS TUS CLIENTES</div>
+        <div class="row d1r" style="background:var(--ink-900);border:1.5px solid var(--ink-700)"><div class="av" style="background:var(--y);color:var(--ink-950)">AM</div><div><div style="font-size:30px;font-weight:700">Ático · Chamberí</div><div class="meta">3 hab · 350–400 k€</div></div><span class="src" style="color:#fff">Portal</span><span style="margin-left:12px;font-size:19px;font-weight:800;letter-spacing:.1em;color:var(--ink-950);background:var(--y);padding:9px 12px;border-radius:10px">NUEVO</span></div>
+        <div class="row d1r"><div class="av" style="background:var(--ink-800)">LG</div><div><div style="font-size:28px;font-weight:700">Piso · Retiro</div><div class="meta">2 hab · 280–320 k€</div></div><span class="src">Portal</span></div>
+        <div class="row d1r"><div class="av" style="background:var(--ink-800)">JR</div><div><div style="font-size:28px;font-weight:700">Chalet · Pozuelo</div><div class="meta">4 hab · 650–720 k€</div></div><span class="src">Web</span></div>
+        <div class="row d1r"><div class="av" style="background:var(--ink-800)">SP</div><div><div style="font-size:28px;font-weight:700">Piso · Salamanca</div><div class="meta">2 hab · 450–500 k€</div></div><span class="src">WhatsApp</span></div>
+      </div>
+    </div>
+    <!-- d2: respuesta automática por WhatsApp en menos de un minuto -->
+    <div class="abs" id="d2" style="left:96px;top:620px;width:888px;height:470px;border-radius:40px;background:#111;border:2px solid var(--ink-800);box-shadow:0 50px 120px rgba(0,0,0,.35);overflow:hidden">
+      <div style="display:flex;align-items:center;gap:20px;padding:26px 32px;border-bottom:1.5px solid var(--ink-800)">
+        <div class="av" style="background:var(--ink-800);color:#fff">AM</div>
+        <div style="color:#fff"><div style="font-size:28px;font-weight:800">A. M.</div><div style="font-size:20px;color:var(--ink-500);font-weight:600">Ático · Chamberí</div></div>
+        <div id="d2c" style="margin-left:auto;display:flex;align-items:center;gap:12px;padding:12px 18px;border-radius:14px;background:var(--y);color:var(--ink-950);font-weight:800;font-size:24px">
+          <svg width="28" height="28" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8" fill="none" stroke="#0A0A0A" stroke-width="2.4"/><path d="M12 9v4l2.5 1.5M10 3h4" stroke="#0A0A0A" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg><span id="d2ct">0:00</span></div>
+      </div>
+      <div style="padding:26px 30px">
+        <div class="bub" id="d2in" style="display:inline-block;background:var(--ink-800);color:#fff;border-radius:24px 24px 24px 6px">¿Sigue disponible el ático?</div>
+        <div class="bub" id="d2out" style="margin-left:auto;margin-top:20px;width:600px;background:var(--ink-50);color:var(--ink-950);border-radius:24px 24px 6px 24px">¡Hola! Sí, sigue disponible: 3 hab, terraza, 385 k€. ¿Te va bien verlo esta semana?</div>
+        <div id="d2s" style="display:flex;justify-content:flex-end;align-items:center;gap:12px;margin-top:14px;font-size:20px;font-weight:800;letter-spacing:.12em;color:var(--ink-400)">ENVIADO AUTOMÁTICAMENTE
+          <svg width="40" height="24" viewBox="0 0 40 24"><path d="M2 13l6 6 12-14M16 17l2 2 12-14" stroke="#FFD500" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </div>
+    <!-- d3: el cliente no se enfría -->
+    <div class="card" id="d3" style="left:96px;top:1120px;width:888px;padding:22px 28px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span class="lbl">INTERÉS DEL CLIENTE</span><span id="d3l" style="font-size:22px;font-weight:800;letter-spacing:.12em;padding:6px 14px;border-radius:10px;background:var(--y)">CALIENTE</span></div>
+      <div style="height:16px;border-radius:8px;background:var(--ink-200);margin-top:14px;overflow:hidden"><div id="d3b" style="height:100%;width:100%;border-radius:8px;background:linear-gradient(90deg,#FFE680,#FFC000);transform-origin:0 50%"></div></div>
+    </div>
+    <!-- d4: conversación y visita en la misma ficha -->
+    <div class="card" id="d4" style="left:96px;top:620px;width:888px;padding:28px 30px">
+      <div style="display:flex;align-items:center;gap:22px">
+        <div class="av" style="background:var(--y)">AM</div>
+        <div><div style="font-size:32px;font-weight:800">A. M.</div><div style="font-size:22px;color:var(--ink-600);font-weight:600">Busca ático · Chamberí · 350–400 k€</div></div>
+        <span style="margin-left:auto" class="lbl">FICHA</span>
+      </div>
+      <div style="margin-top:22px;display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:24px;color:var(--ink-700)"><b style="color:var(--ink-950)">Cliente:</b> ¿Sigue disponible el ático?</div>
+        <div style="font-size:24px;color:var(--ink-700)"><b style="color:var(--ink-950)">IA:</b> ¡Hola! Sí, sigue disponible…</div>
+      </div>
+      <div id="d4v" style="margin-top:22px;display:flex;align-items:center;gap:18px;padding:18px 22px;border-radius:16px;background:var(--ink-950);color:#fff;border-left:8px solid var(--y)">
+        <div style="font-size:30px;font-weight:800">JUE 17:00</div>
+        <div style="font-size:22px;color:var(--ink-400);font-weight:600">Visita · Ático Chamberí</div>
+        <span style="margin-left:auto;font-size:19px;font-weight:800;letter-spacing:.1em;padding:8px 12px;border-radius:10px;background:var(--y);color:var(--ink-950)">AGENTE · L. S.</span>
+      </div>
+    </div>
+    <!-- d5: el recordatorio le llega solo, con ubicación, día y hora -->
+    <div class="card" id="d5" style="left:180px;top:1000px;width:720px;padding:24px 28px">
+      <div class="lbl" style="display:flex;align-items:center;gap:10px"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 20a2 2 0 0 0 4 0" fill="none" stroke="#0A0A0A" stroke-width="2" stroke-linejoin="round"/><circle cx="18" cy="6" r="3.5" fill="#FFD500"/></svg>RECORDATORIO AUTOMÁTICO</div>
+      <div style="display:flex;gap:14px;margin-top:16px;flex-wrap:wrap">
+        <span class="chip d5c" style="position:relative;font-size:26px;padding:12px 18px"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 22s7-7 7-12a7 7 0 0 0-14 0c0 5 7 12 7 12z" fill="#FFD500" stroke="#0A0A0A" stroke-width="2"/><circle cx="12" cy="10" r="2.5" fill="#0A0A0A"/></svg>Chamberí, Madrid</span>
+        <span class="chip d5c" style="position:relative;font-size:26px;padding:12px 18px">Jueves</span>
+        <span class="chip d5c" style="position:relative;font-size:26px;padding:12px 18px">17:00</span>
+      </div>
+      <div id="d5ok" style="margin-top:16px;font-size:24px;font-weight:800;letter-spacing:.06em;color:var(--ink-950);display:flex;align-items:center;gap:10px">
+        <svg width="30" height="30" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#FFD500"/><path d="M7 12.5l3 3 7-7" stroke="#0A0A0A" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Visita confirmada</div>
+    </div>
+  </div>
+
+  <!-- ================= DESPUÉS sobre los planos 4 y 5 ================= -->
+  <div class="half" id="finV">
+    <div class="pill" id="pF" style="background:var(--y);color:var(--ink-950)">DESPUÉS</div>
+    <div class="kt lt" id="kf" style="top:400px;font-size:88px"></div>
+  </div>
+  <!-- ================= CIERRE ================= -->
+  <div class="half" id="cierre">
+    <div class="kt" id="kc" style="top:560px;font-size:96px;text-align:center"></div>
+    <img id="logo" src="../../assets_in/brand-kit/assets/logo-imperios-navbar.svg" class="abs" style="left:300px;top:330px;width:480px" alt="">
+    <!-- el mismo cliente, dos finales (como la portada) -->
+    <div class="card" id="cX" style="left:96px;top:540px;width:888px;padding:22px 26px;display:flex;align-items:center;gap:20px;background:var(--ink-200);border-color:var(--ink-300);box-shadow:none">
+      <span style="padding:8px 16px;border-radius:999px;background:var(--ink-300);color:var(--ink-700);font-weight:800;font-size:20px;letter-spacing:.14em">ANTES</span>
+      <div class="av" style="background:var(--ink-300);color:var(--ink-700);width:56px;height:56px">AM</div>
+      <div style="font-size:28px;font-weight:700;color:var(--ink-600)">Visita jueves 17:00</div>
+      <span style="margin-left:auto;font-size:21px;font-weight:800;letter-spacing:.1em;padding:9px 14px;border-radius:10px;background:var(--ink-300);color:var(--ink-700)">✕ NO SE PRESENTÓ</span></div>
+    <svg class="abs" id="cArr" style="left:520px;top:668px" width="40" height="60" viewBox="0 0 40 60"><path d="M20 2v50M6 38l14 14 14-14" stroke="#FFD500" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="card" id="cOk" style="left:96px;top:740px;width:888px;padding:22px 26px;display:flex;align-items:center;gap:20px;border-left:10px solid var(--y)">
+      <span style="padding:8px 16px;border-radius:999px;background:var(--y);color:var(--ink-950);font-weight:800;font-size:20px;letter-spacing:.14em">DESPUÉS</span>
+      <div class="av" style="background:var(--y);width:56px;height:56px">AM</div>
+      <div style="font-size:28px;font-weight:700">Visita jueves 17:00</div>
+      <span style="margin-left:auto;font-size:21px;font-weight:800;letter-spacing:.1em;padding:9px 14px;border-radius:10px;background:var(--y)">✓ CONFIRMADA</span></div>
+    <div class="abs" id="ctaBtn" style="left:0;right:0;top:900px;text-align:center">
+      <span style="display:inline-flex;align-items:center;gap:22px;padding:34px 60px;border-radius:999px;background:var(--y);color:var(--ink-950);font-weight:800;font-size:54px;letter-spacing:-.01em;box-shadow:0 20px 50px rgba(255,192,0,.35)">Pide tu demo gratis
+        <svg width="46" height="46" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6" stroke="#0A0A0A" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </div>
+    <div class="kt" id="kc2" style="top:1115px;font-size:52px;text-align:center;color:var(--ink-700)"></div>
+    <div class="abs" id="web" style="left:0;right:0;top:1205px;text-align:center;font-weight:700;font-size:30px;letter-spacing:.2em;color:var(--ink-600)">IMPERIOS.APP</div>
+  </div>
+
+  <div class="uline" id="ul"></div>
+</div>
+
+<script>
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const E = {
+  oc: p => 1 - Math.pow(1 - p, 3), ic: p => p * p * p,
+  ioc: p => p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2,
+  ob: p => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+  ob2: p => { const c1 = 2.4, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); },
+};
+const k = (t, t0, t1, e = E.oc) => e(clamp((t - t0) / (t1 - t0)));
+const css = (el, o) => { for (const key in o) el.style[key] = o[key]; };
+const rectOf = el => { const r = el.getBoundingClientRect(); return { x: r.left, y: r.top, w: r.width, h: r.height }; };
+
+// titulares: cada uno es un bloque de texto que aparece palabra a palabra y sale al llegar el siguiente
+function block(el, lines) {
+  el.innerHTML = '';
+  const out = [];
+  lines.forEach((ln, li) => {
+    ln.forEach(([txt, cls]) => { const s = document.createElement('span'); s.className = 'w' + (cls ? ' ' + cls : ''); s.textContent = txt; el.appendChild(s); out.push(s); el.appendChild(document.createTextNode(' ')); });
+    if (li < lines.length - 1) el.appendChild(document.createElement('br'));
+  });
+  return out;
+}
+const HA = [   // ANTES (sobre los planos; cada palabra cuando se dice)
+  [[['Mensajes'], ['y'], ['llamadas']], [['sin'], ['parar.', 'it']]],
+  [[['La'], ['visita,']], [['en'], ['papel.', 'it']]],
+  [[['Y'], ['el'], ['cliente']], [['no'], ['se'], ['presenta.', 'it']]],
+];
+const HD = [   // DESPUÉS (interfaz)
+  [[['Todo']], [['centralizado.', 'it']]],
+  [[['Respuesta'], ['en']], [['menos'], ['de'], ['1'], ['minuto.', 'it']]],
+  [[['El'], ['cliente'], ['no']], [['se'], ['enfría.', 'it']]],
+  [[['Todo'], ['en'], ['el']], [['mismo'], ['sitio.', 'it']]],
+  [[['Recordatorio']], [['automático.', 'it']]],
+];
+const HF = [   // DESPUÉS (planos 4 y 5)
+  [[['Menos'], ['caos.', 'it']]],
+  [[['Y'], ['esta'], ['vez,']], [['el'], ['cliente'], ['sí'], ['viene.', 'it']]],
+];
+let B = { h: [0.7, 2.6], a: [3.3, 6.3, 8.5], x: [10, 10.6], lap2: [10.6, 11.2, 12], d: [12, 17.8, 23, 24.8, 27.4], f: [32, 33.4], c0: 35.9, logo: 37.9, end: 43, v: [], vn: {}, wt: {} };
+window.setBeats = b => { B = Object.assign(B, b); };
+window.setVariant = () => {};
+
+let cur = { a: -1, d: -1, f: -1 }, curW = { a: [], d: [], f: [] };
+function headline(key, el, set, t, starts, wkey) {
+  let i = -1; starts.forEach((s, j) => { if (t >= s - .05) i = j; });
+  if (i !== cur[key]) { cur[key] = i; curW[key] = i >= 0 ? block(el, set[i]) : (el.innerHTML = '', []); }
+  if (i < 0) return null;
+  const t0 = starts[i], next = starts[i + 1] ?? 1e9;
+  const wt = (B.wt[wkey] && B.wt[wkey][i]) || curW[key].map((_, j) => .05 + j * .09);
+  curW[key].forEach((w, j) => { const p = k(t - t0, wt[j], wt[j] + .35); css(w, { opacity: p, transform: `translateY(${(1 - p) * 40}px)`, filter: p < 1 ? `blur(${(1 - p) * 9}px)` : 'none' }); });
+  const out = k(t, next - .25, next, E.ic);
+  css(el, { opacity: 1 - out, transform: `translateY(${-out * 40}px)`, filter: out > 0 ? `blur(${out * 10}px)` : 'none' });
+  // subrayado en la última palabra (cursiva) cuando ya se ha dicho
+  const last = curW[key][curW[key].length - 1], tl = t0 + wt[wt.length - 1] + .25;
+  const lim = key === 'a' ? B.x[1] - .3 : key === 'd' ? B.f[0] - .05 : B.c0 - .2;   // el subrayado no sobrevive a la salida de su bloque
+  if (t > tl && t < next - .25 && t < lim) { const r = rectOf(last); css($('#ul'), { opacity: 1, left: r.x + 'px', top: (r.y + r.h - 6) + 'px', width: r.w + 'px', transform: `scaleX(${k(t, tl, tl + .35)})` }); }
+  return i;
+}
+const show = (el, p, dy = 60, extra = '') => css(el, { opacity: p, transform: `translateY(${(1 - p) * dy}px) ${extra}`, filter: p < .98 ? `blur(${(1 - p) * 10}px)` : 'none' });
+
+// vídeo de fondo: el fotograma del tramo activo (24 fps) con un zoom lento; render() espera a que esté decodificado
+let pend = Promise.resolve();
+function video(t) {
+  const seg = B.v.find(s => t >= s[1] && t < s[2]), wrap = $('#vwrap'), vid = $('#vid');
+  wrap.style.display = seg ? 'block' : 'none';
+  if (!seg) return null;
+  const [id, t0, t1, z0, z1] = seg, n = B.vn[id] || 1;
+  const i = Math.max(0, Math.min(n - 1, Math.floor((t - t0) * 24 + 1e-6)));
+  const src = `r6h/${id}/${String(i).padStart(4, '0')}.jpg`;
+  if (vid.getAttribute('src') !== src) { vid.setAttribute('src', src); pend = vid.decode().catch(() => {}); }
+  const z = z0 + (z1 - z0) * clamp((t - t0) / (t1 - t0));
+  css(vid, { transform: `scale(${z})`, transformOrigin: id === 't5' ? '52% 42%' : '50% 45%' });
+  css(wrap, { opacity: 1, filter: 'none' });
+  return id;
+}
+
+function render(t) {
+  $('#lgrid').style.backgroundPosition = `${-t * 6}px ${-t * 9}px`;
+  css($('#lglow'), { left: (40 + Math.sin(t * .4) * 30) + 'px', top: (330 + Math.cos(t * .35) * 30) + 'px' });
+  $('#ul').style.opacity = 0;
+  const [a1, a2, a3] = B.a, [d1, d2, d3, d4, d5] = B.d, [X0, X1] = B.x, [f1, f2] = B.f;
+  const vidId = video(t);
+
+  // ===== GANCHO: completo desde el fotograma 0; «pierde» se apaga y «gana» se subraya al decirlos =====
+  const gan = $('#gancho'), gOut = k(t, a1 - .16, a1, E.ic);
+  gan.style.display = t < a1 ? 'block' : 'none';
+  if (t < a1) {
+    if (!gan.dataset.built) { gan.dataset.built = 1; window.KH = block($('#kh'), [[['Así'], ['se'], ['pierde', 'it']], [['un'], ['cliente…']], [['y'], ['así'], ['se'], ['gana.', 'it']]]); }
+    const [hp, hg] = B.h, gp = k(t, hp, hp + .4), g = Math.round(247 - 95 * gp);
+    KH.forEach((w, j) => css(w, { opacity: 1, transform: 'none', filter: 'none', color: j === 2 ? `rgb(${g},${g},${Math.round(243 - 91 * gp)})` : '' }));
+    [$('#kh'), $('#hLogo'), $('#hTag')].forEach(el => css(el, { opacity: 1 - gOut, transform: `translateY(${-gOut * 40}px)`, filter: gOut > 0 ? `blur(${gOut * 10}px)` : 'none' }));
+    if (t > hg + .1 && t < a1 - .16) { const r = rectOf(KH[8]); css($('#ul'), { opacity: 1, left: r.x + 'px', top: (r.y + r.h - 6) + 'px', width: r.w + 'px', transform: `scaleX(${k(t, hg + .1, hg + .45)})` }); }
+  }
+
+  // ===== ANTES sobre los planos: cortes secos, titular palabra a palabra =====
+  const av = $('#antesV'), aOut = k(t, X1 - .3, X1 + .05, E.ic);
+  av.style.display = t >= a1 && t < X1 + .1 ? 'block' : 'none';
+  if (av.style.display === 'block') {
+    css(av, { opacity: 1 - aOut, filter: aOut > 0 ? `blur(${aOut * 12}px)` : 'none' });
+    show($('#pA'), k(t, a1, a1 + .2), 20);
+    headline('a', $('#ka'), HA, t, B.a, 'ha');
+    // sello «NO SE PRESENTÓ» al decir «no se presenta»
+    const ns = a3 + (B.wt.a5n || 1.4), ps = k(t, ns, ns + .25, E.ob2);
+    const so = k(t, X0, X0 + .25, E.ic);   // se aparta cuando estallan los avisos
+    css($('#a5s'), { opacity: k(t, ns, ns + .05) * (1 - so), transform: `rotate(-6deg) scale(${(2.2 - 1.2 * ps) * (1 - .15 * so)})`, filter: so > 0 ? `blur(${so * 8}px)` : 'none' });
+  }
+
+  // ===== DEL CAOS AL ORDEN: los avisos estallan sobre el plano 3, el plano se apaga y todo se recoge en el portátil =====
+  const cx = $('#caos');
+  cx.style.display = t > X0 - .02 && t < X1 + .45 ? 'block' : 'none';
+  if (vidId === 't5') {
+    const vo = k(t, X1 - .2, X1 + .35, E.ic);
+    css($('#vwrap'), { opacity: 1 - vo, filter: vo > 0 ? `blur(${vo * 18}px)` : 'none' });
+  }
+  if (cx.style.display === 'block') {
+    $$('.cx').forEach((c, i) => {
+      const t0 = X0 + i * .055, p = k(t, t0, t0 + .3, E.ob2), g = k(t, X1 - .3 + i * .02, X1 + .2 + i * .02, E.ic);
+      const cxp = c.offsetLeft + c.offsetWidth / 2, cyp = c.offsetTop + c.offsetHeight / 2, jit = (1 - g) * 5;
+      css(c, { opacity: k(t, t0, t0 + .05) * (1 - k(t, X1 + .05 + i * .02, X1 + .25 + i * .02)),
+        transform: `translate(${(540 - cxp) * g + Math.sin(t * 31 + i) * jit}px, ${(900 - cyp) * g + Math.cos(t * 27 + i) * jit}px) scale(${(.5 + .5 * p) * (1 - .8 * g)}) rotate(${(i % 2 ? 1 : -1) * (3 + i) * (1 - g)}deg)`,
+        filter: g > .05 ? `blur(${g * 6}px)` : 'none' });
+    });
+  }
+
+  // ===== PORTÁTIL 2: ImperiOS en pantalla; la cámara entra en el panel de clientes =====
+  const [M0, M1, M2] = B.lap2, lap2 = $('#lap2');
+  lap2.style.display = t > M0 - .05 && t < M2 + .05 ? 'block' : 'none';
+  if (lap2.style.display === 'block') {
+    const up = k(t, M0, M0 + .5, E.oc), z = k(t, M1, M2, E.ioc);
+    { const rows = $$('.d1rr'), h = rows[1].offsetTop - rows[0].offsetTop; rows.forEach((r, i) => css(r, i ? { transform: `translateY(${-h}px)` } : { opacity: 0 })); }
+    css(lap2, { opacity: k(t, M0, M0 + .15), transform: `translateY(${(1 - up) * 900}px) scale(${(.85 + .15 * up) * (1 + 3.1 * z)})`,
+      filter: z > .02 && z < .98 ? `blur(${Math.sin(z * Math.PI) * 3}px)` : 'none' });
+  }
+
+  // ===== DESPUÉS en los planos 4 y 5 =====
+  const fv = $('#finV'), fOut = k(t, B.c0 - .2, B.c0 + .15, E.ic);
+  fv.style.display = t >= f1 && t < B.c0 + .2 ? 'block' : 'none';
+  if (fv.style.display === 'block') {
+    css(fv, { opacity: 1 - fOut, filter: fOut > 0 ? `blur(${fOut * 12}px)` : 'none' });
+    show($('#pF'), 1, 20);
+    headline('f', $('#kf'), HF, t, B.f, 'hf');
+  }
+  if (vidId === 't7') {
+    const vo = k(t, B.c0 - .15, B.c0 + .3, E.ic);
+    css($('#vwrap'), { opacity: 1 - vo, filter: vo > 0 ? `blur(${vo * 16}px)` : 'none' });
+  }
+
+  // ===== DESPUÉS: color, orden =====
+  const desp = $('#despues');
+  desp.style.display = t > M2 - .02 && t < B.f[0] ? 'block' : 'none';
+  if (desp.style.display === 'block') {
+    const dOut = 0;   // entra sin fundido (viene de la pantalla del portátil) y sale con un corte seco al plano 4
+    css(desp, { opacity: 1 - dOut, transform: `scale(${1 + dOut * .06})`, filter: dOut > 0 ? `blur(${dOut * 14}px)` : 'none' });
+    show($('#pD'), 1, 20);
+    headline('d', $('#kd'), HD, t, B.d, 'hd');
+    // d1: los clientes de todos los portales entran en el mismo panel
+    const p1 = 1, o1 = k(t, d2 - .25, d2 + .1, E.ic);   // ya visible al entrar en la pantalla del portátil
+    // el cliente nuevo entra arriba y empuja al resto; luego se iluminan los orígenes y el panel «confirma»
+    const [eT, pT, cT] = B.wt.d1 || [1.2, 2.4, 3.1];
+    const rows = $$('.d1r'), rowH = rows[1].offsetTop - rows[0].offsetTop;
+    const drop = k(t, d1 + eT, d1 + eT + .55, E.ob);
+    rows.forEach((r, i) => {
+      const glow = i === 0 ? Math.sin(k(t, d1 + eT + .3, d1 + eT + 1.4) * Math.PI) : 0;
+      const tag = r.querySelector('.src'), tp = k(t, d1 + pT + (i ? i - 1 : 3) * .22, d1 + pT + (i ? i - 1 : 3) * .22 + .5);
+      const lit = Math.sin(tp * Math.PI);
+      if (i === 0) css(r, { opacity: drop, transform: `translateY(${(1 - drop) * -70}px) scale(${.92 + .08 * drop})`, boxShadow: `0 20px 50px rgba(0,0,0,.5), 0 0 ${40 * glow}px rgba(255,192,0,${.6 * glow})` });
+      else css(r, { opacity: 1, transform: `translateY(${(1 - drop) * -rowH}px)` });
+      if (tag.dataset.c === undefined) { tag.dataset.c = tag.style.color; tag.dataset.b = tag.style.background; }
+      css(tag, { background: lit > .05 ? `rgba(255,213,0,${lit})` : tag.dataset.b, color: lit > .5 ? 'var(--ink-950)' : tag.dataset.c, transform: `scale(${1 + .12 * lit})` });
+    });
+    const cf = Math.sin(k(t, d1 + cT, d1 + cT + .45) * Math.PI);
+    show($('#d1'), p1 * (1 - o1), 80, `scale(${1 + .03 * cf})`);
+    // d2: chat; la IA responde y el cronómetro se para antes del minuto
+    const p2 = k(t, d2 - .05, d2 + .4, E.ob), o2 = k(t, d4 - .25, d4 + .1, E.ic);
+    show($('#d2'), p2 * (1 - o2), 80);
+    const rIn = d2 + .5, rOut = d2 + (B.wt.d2r || 2.6);
+    css($('#d2in'), { opacity: k(t, rIn, rIn + .1), transform: `scale(${.7 + .3 * k(t, rIn, rIn + .35, E.ob2)})`, transformOrigin: '0 100%' });
+    const secs = Math.round(k(t, rIn, rOut, p => p) * 38);
+    $('#d2ct').textContent = `0:${String(secs).padStart(2, '0')}`;
+    css($('#d2c'), { transform: `scale(${1 + .12 * Math.sin(k(t, rOut, rOut + .4) * Math.PI)})` });
+    const po = k(t, rOut, rOut + .45, E.ob2);
+    css($('#d2out'), { opacity: k(t, rOut, rOut + .08), transform: `translateY(${(1 - po) * -80}px) scale(${.8 + .2 * po})`, transformOrigin: '100% 100%' });
+    css($('#d2s'), { opacity: k(t, rOut + .5, rOut + .8) });
+    // d3: el interés del cliente se mantiene «caliente»
+    const p3 = k(t, d3 - .1, d3 + .4, E.ob), o3 = k(t, d4 - .25, d4 + .1, E.ic);
+    show($('#d3'), p3 * (1 - o3), 60);
+    css($('#d3b'), { transform: `scaleX(${.25 + .7 * k(t, d3 + .2, d3 + 1.0, E.oc)})` });
+    css($('#d3l'), { transform: `scale(${1 + .1 * Math.sin(k(t, d3 + 1.0, d3 + 1.4) * Math.PI)})` });
+    // d4: ficha con la conversación y la visita
+    const p4 = k(t, d4 - .05, d4 + .45, E.ob);
+    show($('#d4'), p4, 80);
+    const pv = k(t, d4 + (B.wt.d4v || .9), d4 + (B.wt.d4v || .9) + .4, E.ob2);
+    css($('#d4v'), { opacity: k(t, d4 + (B.wt.d4v || .9), d4 + (B.wt.d4v || .9) + .05), transform: `scale(${.8 + .2 * pv})` });
+    // d5: recordatorio automático con ubicación, día y hora → visita confirmada
+    const p5 = k(t, d5 + .1, d5 + .55, E.ob);
+    show($('#d5'), p5, 80);
+    const c5 = B.wt.d5c || [1.9, 2.8, 3.5];
+    $$('.d5c').forEach((c, i) => { const p = k(t, d5 + c5[i], d5 + c5[i] + .35, E.ob2); css(c, { opacity: k(t, d5 + c5[i], d5 + c5[i] + .05), transform: `scale(${.6 + .4 * p})` }); });
+    const okt = d5 + c5[2] + .5, pk = k(t, okt, okt + .4, E.ob2);
+    css($('#d5ok'), { opacity: k(t, okt, okt + .05), transform: `scale(${.7 + .3 * pk})`, transformOrigin: '0 50%' });
+  }
+
+  // ===== CIERRE =====
+  const cie = $('#cierre');
+  cie.style.display = t > B.c0 - .1 ? 'block' : 'none';
+  if (t > B.c0 - .1) {
+    const s = t - B.c0, w = B.wt.c || [0, .15, .8, 1.0, 1.08, 1.2, 2.0, 2.3, 2.5, 2.8, 3.0, 3.1, 3.2, 3.3];   // ¿Tu…antes? | Pide tu demo gratis | y pasa al después.
+    // «¿Tu inmobiliaria sigue en el antes?»
+    if (!cie.dataset.built) { cie.dataset.built = 1; window.KC = block($('#kc'), [[['¿Tu'], ['inmobiliaria']], [['sigue'], ['en'], ['el'], ['antes?', 'it']]]); window.KC2 = block($('#kc2'), [[['Y'], ['pasa'], ['al'], ['después.', 'it']]]); }
+    const lg = B.logo - B.c0, qo = k(s, lg - .2, lg + .2, E.ic);
+    KC.forEach((wd, j) => { const p = k(s, w[j], w[j] + .35); css(wd, { opacity: p, transform: `translateY(${(1 - p) * 40}px)`, filter: p < 1 ? `blur(${(1 - p) * 9}px)` : 'none' }); });
+    css($('#kc'), { opacity: 1 - qo, transform: `translateY(${-qo * 80}px)`, filter: qo > 0 ? `blur(${qo * 12}px)` : 'none' });
+    if (s > w[5] + .3 && s < lg - .25) { const r = rectOf(KC[5]); css($('#ul'), { opacity: 1, left: r.x + 'px', top: (r.y + r.h - 6) + 'px', width: r.w + 'px', transform: `scaleX(${k(s, w[5] + .3, w[5] + .65)})` }); }
+    const lp = k(s, lg, lg + .6, E.oc);
+    css($('#logo'), { opacity: lp, filter: lp < 1 ? `blur(${(1 - lp) * 12}px)` : 'none', transform: `scale(${1.06 - .06 * lp})`, clipPath: `inset(0 ${(1 - k(s, lg, lg + .65, E.ioc)) * 100}% 0 0)` });
+    // las dos fichas: el mismo cliente, antes (no se presentó) y después (confirmada)
+    const pX = k(s, lg + .15, lg + .5, E.ob), pO = k(s, lg + .45, lg + .8, E.ob2);
+    css($('#cX'), { opacity: k(s, lg + .15, lg + .2), transform: `translateY(${(1 - pX) * 40}px)` });
+    css($('#cArr'), { opacity: k(s, lg + .35, lg + .5) });
+    css($('#cOk'), { opacity: k(s, lg + .45, lg + .5), transform: `scale(${.85 + .15 * pO})`, boxShadow: `0 20px 60px rgba(255,192,0,${.35 * pO})` });
+    const cp = k(s, w[6] - .05, w[6] + .4, E.ob2), pulse = s > w[9] + .6 ? (s - w[9] - .6) % 1.2 / 1.2 : 0;
+    css($('#ctaBtn'), { opacity: k(s, w[6] - .05, w[6] + .05), transform: `translateY(${(1 - cp) * 60}px) scale(${(.7 + .3 * cp) * (1 + .04 * Math.sin(pulse * Math.PI))})` });
+    KC2.forEach((wd, j) => { const p = k(s, w[10 + j], w[10 + j] + .35); css(wd, { opacity: p, transform: `translateY(${(1 - p) * 40}px)`, filter: p < 1 ? `blur(${(1 - p) * 9}px)` : 'none' }); });
+    if (s > w[13] + .25) { const r = rectOf(KC2[3]); css($('#ul'), { opacity: 1, left: r.x + 'px', top: (r.y + r.h - 6) + 'px', width: r.w + 'px', transform: `scaleX(${k(s, w[13] + .25, w[13] + .6)})` }); }
+    css($('#web'), { opacity: k(s, w[13] + .4, w[13] + .8), letterSpacing: (.3 - .1 * k(s, w[13] + .4, w[13] + .8)) + 'em' });
+  }
+}
+const drawFrame = render;
+window.render = t => { drawFrame(t); return pend; };   // espera al fotograma de vídeo decodificado
+window.ready = document.fonts.ready.then(() => new Promise(r => { const i = $('#logo'); if (i.complete) r(); else i.onload = r; }));
+</script>
+</body>
+</html>
