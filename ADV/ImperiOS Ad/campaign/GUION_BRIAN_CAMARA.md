@@ -36,7 +36,7 @@ Elegido por Brian como el vídeo a cámara del anuncio. G1 y G4 quedan para Reel
 |---|---|---|
 | 1 · Gancho | «Si diriges una inmobiliaria, tu equipo está perdiendo horas cada semana en tareas que no venden.» | Brian a cámara desde el primer fotograma; el gancho escrito, subrayado en **horas**. Rótulo «Brian · fundador de ImperiOS» |
 | 2 · Qué tareas | «Revisar uno a uno los leads que te entran de cada portal inmobiliario, buscar qué piso encaja con cada cliente, recordarle a cada uno su visita…» | Cada tarea aparece y se tacha al decirla |
-| 3 · Solución | «Con ImperiOS, el CRM lo hace solo. Te ahorra más de 30 horas a la semana. Es como tener un comercial más… sin contratarlo.» | «+30 h / semana» en grande → «= 1 comercial más», subrayado amarillo |
+| 3 · Solución | «ImperiOS, nuestro CRM automatizado, lo hace solo. Te ahorra más de 30 horas a la semana. Horas que tu equipo dedica a lo que importa: vender.» | «+30 h / semana» en grande → subrayado amarillo en **vender** |
 | 4 · Para ti | «Y tú tienes toda tu inmobiliaria en una sola herramienta: captación, clientes, propiedades, visitas y campañas. Para ver qué funciona… y qué no.» | Brian gira el móvil a cámara → inserto del panel de la cuenta demo |
 | 5 · Cierre | «Déjame tus datos y revisamos tu caso. Gratis y sin compromiso.» | Brian a cámara → logo + «Asesoramiento gratuito · Sin compromiso» (≥ 2,5 s) |
 
