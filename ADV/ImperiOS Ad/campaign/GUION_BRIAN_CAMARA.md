@@ -38,10 +38,9 @@ Elegido por Brian como el vídeo a cámara del anuncio. G1 y G4 quedan para Reel
 | 2 · Qué tareas | «Revisar uno a uno los leads que te entran de cada portal inmobiliario, buscar qué piso encaja con cada cliente, recordarle a cada uno su visita…» | Cada tarea aparece y se tacha al decirla |
 | 3 · Solución | «Con ImperiOS, el CRM lo hace solo. Te ahorra más de 30 horas a la semana. Es como tener un comercial más… sin contratarlo.» | «+30 h / semana» en grande → «= 1 comercial más», subrayado amarillo |
 | 4 · Para ti | «Y tú tienes toda tu inmobiliaria en una sola herramienta: captación, clientes, propiedades, visitas y campañas. Para ver qué funciona… y qué no.» | Brian gira el móvil a cámara → inserto del panel de la cuenta demo |
-| 5 · Cierre | «Déjame tus datos, reviso tu caso personalmente y te llamo yo. Gratis y sin compromiso.» | Brian a cámara → logo + «Asesoramiento gratuito · Sin compromiso» (≥ 2,5 s) |
+| 5 · Cierre | «Déjame tus datos y revisamos tu caso. Gratis y sin compromiso.» | Brian a cámara → logo + «Asesoramiento gratuito · Sin compromiso» (≥ 2,5 s) |
 
 - **30 horas:** guardar cómo se ha calculado (tareas y tamaño de equipo); en publicidad la cifra tiene que poder justificarse.
-- **«Te llamo yo»:** solo si llama Brian; si no, «y te llamamos».
 - Las tareas del bloque 2 son funciones que ya enseña el v4 (leads que entran solos, match con IA, recordatorios automáticos).
 
 ## Alternativas no elegidas (12/11/2026) — reserva para renovar el anuncio
