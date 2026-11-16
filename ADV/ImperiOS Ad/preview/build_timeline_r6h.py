@@ -1,6 +1,8 @@
 """Reel R6 «Antes / después» con planos de vídeo de Higgsfield (versión anuncio): VO + timeline sincronizado (Scribe).
 
-Uso: python3 build_timeline_r6h.py <voz.words.json> <voz.wav> <out.json> <out_vo.wav>
+Uso: python3 build_timeline_r6h.py <voz.words.json> <voz.wav> <out.json> <out_vo.wav> [A|O]
+- A (por defecto): anuncio, cierre con «Pide tu demo gratis…» y botón. O: orgánico, la voz acaba en «¿…sigue en el antes?»
+  y el cierre es logo + fichas antes/después + IMPERIOS.APP, sin CTA.
 - La VO va a atempo TEMPO (sin cambiar el tono), tras PRE s de silencio; todos los tiempos se escalan igual.
 - B.v: tramos de vídeo de fondo [id, inicio, fin, zoom0, zoom1] (fotogramas en src/r6h/<id>/, 24 fps, ver prep_r6h_clips.sh).
 - B.a: titulares del ANTES (sobre los planos); B.x: «del caos al orden» (avisos que estallan y se recogen en el portátil);
@@ -15,9 +17,10 @@ from pathlib import Path
 
 TEMPO = 1.07
 PRE = 0.15     # el gancho está en pantalla desde el fotograma 0
-TAIL = 2.6     # CTA + IMPERIOS.APP tras la última palabra
+TAIL = 2.6     # CTA + IMPERIOS.APP tras la última palabra (anuncio)
 
 w_path, audio, out, vo_out = sys.argv[1:5]
+ORG = (sys.argv[5] if len(sys.argv) > 5 else "A").upper() == "O"
 W = json.load(open(w_path))
 subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", audio, "-af",
                 f"aresample=48000,aformat=channel_layouts=mono,atempo={TEMPO}", "-c:a", "pcm_f32le", vo_out], check=True)
@@ -60,7 +63,7 @@ mc = find("Menos", hor)
 y6 = find("Y", mc)
 vie = find("viene", y6)
 tu = find("Tu", vie)
-com = find("Pide", tu)            # cierre: «Pide tu demo gratis y pasa al después.»
+com = None if ORG else find("Pide", tu)   # anuncio: «Pide tu demo gratis y pasa al después.»
 
 c0 = S(tu) - .15
 B = {"h": [S(pie0), S(gan)], "a": [S(ant) - .05, S(la) - .06, S(y1) - .06]}
@@ -69,7 +72,7 @@ B["lap2"] = [B["x"][1], S(des) - .05, S(con) - .15]        # el portátil sube c
 B["d"] = [S(con) - .1, S(en_) - .1, S(el3) - .1, S(cnv - 1) - .1, S(y5) - .1]
 B["f"] = [S(hor) + 1.0, S(y6) - .06]                       # plano 4 tras «Visita confirmada»; plano 5 en «Y esta vez»
 B["c0"] = c0
-B["logo"] = S(com) - .3
+B["logo"] = E(len(W) - 1) + .35 if ORG else S(com) - .3   # orgánico: el logo entra tras la pregunta
 # vídeo de fondo: [id, inicio, fin, zoom inicial, zoom final]
 B["v"] = [["t1", 0.0, S(y0) - .04, 1.0, 1.035],
           ["t2", S(y0) - .04, B["a"][0], 1.0, 1.04],
@@ -77,9 +80,9 @@ B["v"] = [["t1", 0.0, S(y0) - .04, 1.0, 1.035],
           ["t4", B["a"][1], B["a"][2], 1.02, 1.08],
           ["t5", B["a"][2], B["lap2"][0] + .55, 1.0, 1.09],
           ["t6", B["f"][0], B["f"][1], 1.0, 1.04],
-          ["t7", B["f"][1], c0 + .3, 1.0, 1.035]]
+          ["t7", B["f"][1], c0, 1.0, 1.035]]   # el plano 5 se funde antes de «¿Tu…» (ver reel-r6h.html)
 B["vn"] = {v[0]: len(list((Path(__file__).parent / "src/r6h" / v[0]).glob("*.jpg"))) for v in B["v"]}   # fotogramas por tramo
-end = E(len(W) - 1) + TAIL
+end = B["logo"] + 3.6 if ORG else E(len(W) - 1) + TAIL   # orgánico: logo, fichas y firma ~3,6 s
 a, d, f = B["a"], B["d"], B["f"]
 B["wt"] = {
     # ANTES: cada palabra del titular aparece cuando se dice
@@ -128,8 +131,11 @@ cues += [(M0, "whoosh_long_02", -13, 0, 250), (M0 + .4, "click_ui_02", -15, 0, 0
 cues += [(f[0] - .08, "whoosh_long_01", -14, 0, 300), (f[0], "shimmer_glow", -15, 0, 600), (S(mc + 1), "hit_soft_02", -14, 0, 0),
          (f[1], "whoosh_short_04", -15, .2, 300), (S(vie), "pop_dock_02", -13, 0, 0), (S(vie) + .05, "shimmer_glow", -16, 0, 600)]
 cues += [(c0 - .2, "whoosh_long_01", -14, 0, 300), (lg - .35, "riser_grid", -19, 0, 300), (lg + .05, "sub_drop", -11, 0, 0),
-         (lg + .05, "logo_sting", -9, 0, 0), (S(com) - .05, "whoosh_short_04", -14, 0, 300), (S(com) + .3, "pop_dock_02", -9, 0, 0),
-         (S(com) + .35, "shimmer_glow", -15, 0, 600)]
+         (lg + .05, "logo_sting", -9, 0, 0)]
+if ORG:   # fichas antes/después (no se presentó → confirmada)
+    cues += [(lg + .15, "click_ui_01", -16, -.2, 0), (lg + .45, "pop_dock_02", -11, .2, 0), (lg + .5, "shimmer_glow", -15, 0, 600)]
+else:
+    cues += [(S(com) - .05, "whoosh_short_04", -14, 0, 300), (S(com) + .3, "pop_dock_02", -9, 0, 0), (S(com) + .35, "shimmer_glow", -15, 0, 600)]
 B["cues"] = [[round(x[0], 3), *x[1:]] for x in cues]
 # música: ANTES con el filtro oscuro y hats (tensión), groove desde el DESPUÉS, acorde final bajo el logo
 B.update({"s1": 0.0, "s2": M1, "s3": a[0], "s4": M1, "s5": M1, "s6": c0})
@@ -146,7 +152,7 @@ def rnd(v):
 B = {k: (v if k in ("wt", "cues", "vn") else rnd(v)) for k, v in B.items()}
 B["end"] = round(end, 2)
 tl = {"fps": 60, "duration": B["end"], "vo_offset": PRE, "beats": B,
-      "note": f"build_timeline_r6h.py: VO {w_path} a atempo {TEMPO}; offset {PRE} s."}
+      "note": f"build_timeline_r6h.py ({'orgánico' if ORG else 'anuncio'}): VO {w_path} a atempo {TEMPO}; offset {PRE} s."}
 json.dump(tl, open(out, "w"), ensure_ascii=False, indent=1)
 print(json.dumps({k: v for k, v in B.items() if k not in ("wt", "cues")}))
 print("tramos de vídeo (s):", [(v[0], round(v[2] - v[1], 2)) for v in B["v"]])

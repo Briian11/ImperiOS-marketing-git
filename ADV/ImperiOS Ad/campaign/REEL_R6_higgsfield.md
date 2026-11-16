@@ -32,3 +32,16 @@ Montaje: `preview/build_r6h.sh` → `preview/out/imperios-r6-higgsfield_9x16.mp4
 - Plano 2: de cerca, las notificaciones del móvil salen con palabras inventadas («Llanada parlida»…). Por eso solo se usan
   los primeros 2,6 s, donde manda la agenda escrita a mano y el móvil queda pequeño bajo el titular.
 - Plano 5: a partir de 3,5 s el marco de la puerta tapa medio encuadre, así que no se usa.
+
+## Versión orgánica (16/11/2026)
+
+`./build_r6h.sh O` → `preview/out/imperios-r6-higgsfield-organico_9x16.mp4` (~42 s). Mismo montaje, sin CTA: la voz acaba en
+«¿Tu inmobiliaria sigue en el antes?» y el cierre es logo + fichas «antes: no se presentó → después: confirmada» + IMPERIOS.APP.
+Ni «Pide tu demo» ni «enlace en la bio» en pantalla (regla de feed orgánico).
+
+## Mejoras v2 (16/11/2026, en las dos versiones)
+
+- La pregunta del cierre ya no entra sobre el plano 5 borroso: el plano se funde antes de «¿Tu…».
+- Los titulares sobre vídeo cambian justo en el corte; antes desaparecían 0,25 s antes y dejaban fotogramas sin texto.
+- Más oscurecido en el adelanto del plano 5 (el más luminoso) y un gris más claro para «pierde»: el gancho se lee mejor.
+- La etiqueta ANTES da un golpe de escala al decir «Antes:».

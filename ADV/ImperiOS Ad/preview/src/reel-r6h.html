@@ -55,6 +55,7 @@ body { font-family: "Manrope", sans-serif; color: var(--ink-950); -webkit-font-s
     <img id="vid" class="full" style="width:1080px;height:1920px;object-fit:cover" alt="">
     <!-- oscurecido solo en la franja del texto (arriba), para que se lea -->
     <div class="full" id="shade" style="background:linear-gradient(180deg, rgba(10,10,10,.66) 0%, rgba(10,10,10,.50) 30%, rgba(10,10,10,.18) 46%, rgba(10,10,10,0) 58%)"></div>
+    <div class="full" id="shade2" style="opacity:0;background:linear-gradient(180deg, rgba(10,10,10,.38) 0%, rgba(10,10,10,.30) 36%, rgba(10,10,10,0) 56%)"></div>
   </div>
 
   <!-- ================= GANCHO sobre el plano 1 (y el adelanto del plano 5): legible desde el fotograma 0 ================= -->
@@ -260,7 +261,8 @@ const HF = [   // DESPUÉS (planos 4 y 5)
 ];
 let B = { h: [0.7, 2.6], a: [3.3, 6.3, 8.5], x: [10, 10.6], lap2: [10.6, 11.2, 12], d: [12, 17.8, 23, 24.8, 27.4], f: [32, 33.4], c0: 35.9, logo: 37.9, end: 43, v: [], vn: {}, wt: {} };
 window.setBeats = b => { B = Object.assign(B, b); };
-window.setVariant = () => {};
+let ORG = false;   // VARIANT=O: versión orgánica, sin CTA en voz ni en pantalla
+window.setVariant = v => { ORG = v === 'O'; };
 
 let cur = { a: -1, d: -1, f: -1 }, curW = { a: [], d: [], f: [] };
 function headline(key, el, set, t, starts, wkey) {
@@ -270,12 +272,12 @@ function headline(key, el, set, t, starts, wkey) {
   const t0 = starts[i], next = starts[i + 1] ?? 1e9;
   const wt = (B.wt[wkey] && B.wt[wkey][i]) || curW[key].map((_, j) => .05 + j * .09);
   curW[key].forEach((w, j) => { const p = k(t - t0, wt[j], wt[j] + .35); css(w, { opacity: p, transform: `translateY(${(1 - p) * 40}px)`, filter: p < 1 ? `blur(${(1 - p) * 9}px)` : 'none' }); });
-  const out = k(t, next - .25, next, E.ic);
+  const ex = key === 'd' ? .25 : .06, out = k(t, next - ex, next, E.ic);
   css(el, { opacity: 1 - out, transform: `translateY(${-out * 40}px)`, filter: out > 0 ? `blur(${out * 10}px)` : 'none' });
   // subrayado en la última palabra (cursiva) cuando ya se ha dicho
   const last = curW[key][curW[key].length - 1], tl = t0 + wt[wt.length - 1] + .25;
   const lim = key === 'a' ? B.x[1] - .3 : key === 'd' ? B.f[0] - .05 : B.c0 - .2;   // el subrayado no sobrevive a la salida de su bloque
-  if (t > tl && t < next - .25 && t < lim) { const r = rectOf(last); css($('#ul'), { opacity: 1, left: r.x + 'px', top: (r.y + r.h - 6) + 'px', width: r.w + 'px', transform: `scaleX(${k(t, tl, tl + .35)})` }); }
+  if (t > tl && t < next - ex && t < lim) { const r = rectOf(last); css($('#ul'), { opacity: 1, left: r.x + 'px', top: (r.y + r.h - 6) + 'px', width: r.w + 'px', transform: `scaleX(${k(t, tl, tl + .35)})` }); }
   return i;
 }
 const show = (el, p, dy = 60, extra = '') => css(el, { opacity: p, transform: `translateY(${(1 - p) * dy}px) ${extra}`, filter: p < .98 ? `blur(${(1 - p) * 10}px)` : 'none' });
@@ -293,6 +295,7 @@ function video(t) {
   const z = z0 + (z1 - z0) * clamp((t - t0) / (t1 - t0));
   css(vid, { transform: `scale(${z})`, transformOrigin: id === 't5' ? '52% 42%' : '50% 45%' });
   css(wrap, { opacity: 1, filter: 'none' });
+  $('#shade2').style.opacity = id === 't2' ? 1 : 0;
   return id;
 }
 
@@ -308,8 +311,8 @@ function render(t) {
   gan.style.display = t < a1 ? 'block' : 'none';
   if (t < a1) {
     if (!gan.dataset.built) { gan.dataset.built = 1; window.KH = block($('#kh'), [[['Así'], ['se'], ['pierde', 'it']], [['un'], ['cliente…']], [['y'], ['así'], ['se'], ['gana.', 'it']]]); }
-    const [hp, hg] = B.h, gp = k(t, hp, hp + .4), g = Math.round(247 - 95 * gp);
-    KH.forEach((w, j) => css(w, { opacity: 1, transform: 'none', filter: 'none', color: j === 2 ? `rgb(${g},${g},${Math.round(243 - 91 * gp)})` : '' }));
+    const [hp, hg] = B.h, gp = k(t, hp, hp + .4), g = Math.round(247 - 72 * gp);
+    KH.forEach((w, j) => css(w, { opacity: 1, transform: 'none', filter: 'none', color: j === 2 ? `rgb(${g},${g},${Math.round(243 - 70 * gp)})` : '' }));
     [$('#kh'), $('#hLogo'), $('#hTag')].forEach(el => css(el, { opacity: 1 - gOut, transform: `translateY(${-gOut * 40}px)`, filter: gOut > 0 ? `blur(${gOut * 10}px)` : 'none' }));
     if (t > hg + .1 && t < a1 - .16) { const r = rectOf(KH[8]); css($('#ul'), { opacity: 1, left: r.x + 'px', top: (r.y + r.h - 6) + 'px', width: r.w + 'px', transform: `scaleX(${k(t, hg + .1, hg + .45)})` }); }
   }
@@ -319,7 +322,8 @@ function render(t) {
   av.style.display = t >= a1 && t < X1 + .1 ? 'block' : 'none';
   if (av.style.display === 'block') {
     css(av, { opacity: 1 - aOut, filter: aOut > 0 ? `blur(${aOut * 12}px)` : 'none' });
-    show($('#pA'), k(t, a1, a1 + .2), 20);
+    const pa = k(t, a1, a1 + .2);
+    css($('#pA'), { opacity: pa, transform: `translateY(${(1 - pa) * 20}px) scale(${1 + .22 * Math.sin(k(t, a1 + .05, a1 + .45) * Math.PI)})`, transformOrigin: '0 50%' });
     headline('a', $('#ka'), HA, t, B.a, 'ha');
     // sello «NO SE PRESENTÓ» al decir «no se presenta»
     const ns = a3 + (B.wt.a5n || 1.4), ps = k(t, ns, ns + .25, E.ob2);
@@ -355,7 +359,7 @@ function render(t) {
   }
 
   // ===== DESPUÉS en los planos 4 y 5 =====
-  const fv = $('#finV'), fOut = k(t, B.c0 - .2, B.c0 + .15, E.ic);
+  const fv = $('#finV'), fOut = k(t, B.c0 - .5, B.c0 - .15, E.ic);
   fv.style.display = t >= f1 && t < B.c0 + .2 ? 'block' : 'none';
   if (fv.style.display === 'block') {
     css(fv, { opacity: 1 - fOut, filter: fOut > 0 ? `blur(${fOut * 12}px)` : 'none' });
@@ -363,7 +367,7 @@ function render(t) {
     headline('f', $('#kf'), HF, t, B.f, 'hf');
   }
   if (vidId === 't7') {
-    const vo = k(t, B.c0 - .15, B.c0 + .3, E.ic);
+    const vo = k(t, B.c0 - .45, B.c0 - .02, E.ic);
     css($('#vwrap'), { opacity: 1 - vo, filter: vo > 0 ? `blur(${vo * 16}px)` : 'none' });
   }
 
@@ -440,6 +444,11 @@ function render(t) {
     css($('#cX'), { opacity: k(s, lg + .15, lg + .2), transform: `translateY(${(1 - pX) * 40}px)` });
     css($('#cArr'), { opacity: k(s, lg + .35, lg + .5) });
     css($('#cOk'), { opacity: k(s, lg + .45, lg + .5), transform: `scale(${.85 + .15 * pO})`, boxShadow: `0 20px 60px rgba(255,192,0,${.35 * pO})` });
+    if (ORG) {
+      $('#ctaBtn').style.opacity = 0; $('#kc2').style.opacity = 0;
+      css($('#web'), { top: '920px', opacity: k(s, lg + 1.0, lg + 1.4), letterSpacing: (.3 - .1 * k(s, lg + 1.0, lg + 1.4)) + 'em' });
+      return;
+    }
     const cp = k(s, w[6] - .05, w[6] + .4, E.ob2), pulse = s > w[9] + .6 ? (s - w[9] - .6) % 1.2 / 1.2 : 0;
     css($('#ctaBtn'), { opacity: k(s, w[6] - .05, w[6] + .05), transform: `translateY(${(1 - cp) * 60}px) scale(${(.7 + .3 * cp) * (1 + .04 * Math.sin(pulse * Math.PI))})` });
     KC2.forEach((wd, j) => { const p = k(s, w[10 + j], w[10 + j] + .35); css(wd, { opacity: p, transform: `translateY(${(1 - p) * 40}px)`, filter: p < 1 ? `blur(${(1 - p) * 9}px)` : 'none' }); });

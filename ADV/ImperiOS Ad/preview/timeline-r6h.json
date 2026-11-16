@@ -80,7 +80,7 @@
    [
     "t7",
     33.763,
-    36.538,
+    36.238,
     1.0,
     1.035
    ]
@@ -684,5 +684,5 @@
   "s6": 36.238,
   "end": 43.44
  },
- "note": "build_timeline_r6h.py: VO ../assets_in/vo/starter/reel-r6h.words.json a atempo 1.07; offset 0.15 s."
+ "note": "build_timeline_r6h.py (anuncio): VO ../assets_in/vo/starter/reel-r6h.words.json a atempo 1.07; offset 0.15 s."
 }
